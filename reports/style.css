@@ -35,3 +35,9 @@ td.author {
 td.message {
 	font-family: 'Consolas';
 }
+tr.ignored-hidden {
+	display: none;
+}
+tr.ignored-visible {
+	background-color: #ffaaaa;
+}

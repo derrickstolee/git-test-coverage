@@ -4,27 +4,6 @@
 	<title>Git Test Coverage Report (2018-01-25)</title>
 	<link rel="stylesheet" href="style.css"></link>
 	<script src="code.js"></script>
-function toggleCommit(commit)
-{
-	var rows = document.getElementsByTagName("tr");
-
-	var  il = rows.length;
-	for (var i = 0; i < il; i++)
-	{
-		if (rows[i].className == commit)
-		{
-			if (rows[i].style.background == 'rgb(200, 255, 255)')
-			{
-				rows[i].style.background = "#fff";
-			}
-			else
-			{
-				rows[i].style.background = 'rgb(200, 255, 255)';
-			}
-		}
-	}
-}
-	</script>
 </head>
 <body>
 
@@ -153,6 +132,27 @@ function toggleCommit(commit)
 			worktree: allow to (re)move worktrees with uninitialized submodules
 		</td>
 	</tr>
+	<tr class="ignored-hidden" onclick="toggleCommit('commit-2')">
+		<td class="author">
+				Nguyễn Thái Ngọc Duy
+		</td>
+		<td class="commit-id">
+			<a href="https://github.com/git/git/commit/07098b81a432cf19e3bbe3fe949e77a64aa970c6">07098b81a</a>
+		</td>
+		<td class="message">
+			HIDDEN
+		</td>
+	</tr>
+	<tr class="ignored-visible" onclick="toggleCommit('commit-2')">
+		<td class="author">
+				Nguyễn Thái Ngọc Duy
+		</td>
+		<td class="commit-id">
+			<a href="https://github.com/git/git/commit/07098b81a432cf19e3bbe3fe949e77a64aa970c6">07098b81a</a>
+		</td>
+		<td class="message">
+ 			VISIBLE		</td>
+	</tr>
 	<tr class="commit-3" onclick="toggleCommit('commit-3')">
 		<td class="author">
 				Nguyễn Thái Ngọc Duy
@@ -187,5 +187,8 @@ function toggleCommit(commit)
 		</td>
 	</tr>
 </table>
+<p>
+<button onClick="toggleIgnored()">Show/Hide Ignored Lines</button>
+</p>
 </body>
 </html>

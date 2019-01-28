@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace TestCoverageReport
 {
-    public class Renderer
+    public class HtmlRenderer : IRenderer
     {
         private readonly StreamWriter writer;
 
-        public Renderer(StreamWriter writer)
+        public HtmlRenderer(StreamWriter writer)
         {
             this.writer = writer;
         }
@@ -22,7 +23,24 @@ namespace TestCoverageReport
 	<link rel=""stylesheet"" href=""style.css""/>
     <script src = ""code.js""/>
 </head>
-<body>");
+<body>
+<p>
+<button onClick=""toggleIgnored()"">Show/Hide Ignored Lines</button>
+</p>");
+        }
+
+        public void WriteBranches(List<Tuple<string, string>> branches)
+        {
+            this.writer.WriteLine("<table>");
+            foreach (Tuple<string,string> branch in branches)
+            {
+                this.writer.WriteLine($@"
+<tr>
+    <td>{branch.Item1}</td>
+    <td>{branch.Item2}</td>
+</tr>");
+            }
+            this.writer.WriteLine("</table>");
         }
 
         public void WriteDiffSectionHeader(
@@ -66,20 +84,21 @@ namespace TestCoverageReport
 <table  class=""uncovered-lines"">");
         }
 
-        public void WriteFileLine(string file, string commitId, string lineNumber, string code)
+        public void WriteFileLine(FileReportLine line)
         {
+            string tr_class = line.Ignored ? "ignored-hidden" : $"commit-{line.GetShortCommitId()}";
             this.writer.WriteLine($@"
-    <tr class=""commit-{commitId}"">
+    <tr class=""{tr_class}"">
 		<td class=""commit-id"">
-            <a href=""https://github.com/git/git/tree/{commitId}/{file}#L{lineNumber}"">
-                {GetShortHash(commitId)}
+            <a href=""https://github.com/git/git/tree/{line.CommitId}/{line.FileName}#L{line.LineNumber}"">
+                {line.GetShortCommitId()}
             </a>
         </td>
         <td class=""line-number"">
-			{lineNumber}
+			{line.LineNumber}
 		</td>
 		<td class=""code"">
-			{code}
+			{line.LineContents}
 		</td>
 	</tr>");
         }
@@ -97,32 +116,35 @@ namespace TestCoverageReport
 <table class=""commits"">");
         }
 
-        public void WriteCommitLine(string commitId, string author, string message)
+        public void WriteCommitLine(CommitInfo info)
         {
             this.writer.WriteLine($@"
-	<tr class=""commit-{commitId}"" onclick=""toggleCommit('commit-{commitId}')"">
+	<tr class=""commit-{info.CommitId}"" onclick=""toggleCommit('commit-{info.CommitId}')"">
 		<td class=""author"">
-            {author}
+            {info.Author}
         </td>
         <td class=""commit-id"">
-			<a href=""https://github.com/git/git/commit/{commitId}"">{GetShortHash(commitId)}</a>
+			<a href=""https://github.com/git/git/commit/{info.CommitId}"">{info.GetShortCommitId()}</a>
 		</td>
 		<td class=""message"">
-			{message}
+			{info.Message}
         </td>
 	</tr>");
         }
 
-        public void WriteCommitsSectionFooter()
+        public void WriteCommitSectionFooter()
         {
             this.writer.WriteLine("</table>");
         }
 
         public void WriteFooter()
         {
-            this.writer.WriteLine("</body></html>");
+            this.writer.WriteLine(@"
+<p>
+<button onClick=""toggleIgnored()"">Show/Hide Ignored Lines</button>
+</p>
+</body>
+</html>");
         }
-
-        public static string GetShortHash(string commitId) => commitId.Substring(0, 10);
     }
 }
