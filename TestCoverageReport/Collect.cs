@@ -45,7 +45,7 @@ namespace TestCoverageReport
 
         public static List<string> ChangedFiles(string from, string to)
         {
-            string output = RunGitProcess($"diff --name-only {from} {to} -- \\*.c");
+            string output = RunGitProcess($"diff --name-only {from} {to} -- *.c");
 
             return new List<string>(output.Split('\n', StringSplitOptions.RemoveEmptyEntries));
         }

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace TestCoverageReport
@@ -10,6 +11,7 @@ namespace TestCoverageReport
         {
             CombinedReport reports = new CombinedReport();
             reports.ReportDate = DateTime.Now;
+            reports.Comparisons = new List<ComparisonReport>();
 
             for (int i = 1; i < args.Length; i++)
             {
