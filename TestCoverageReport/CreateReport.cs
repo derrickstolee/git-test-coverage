@@ -46,9 +46,18 @@ namespace TestCoverageReport
         {
             renderer.WriteHeader();
 
+            Dictionary<string,string> branchDict = new Dictionary<string,string>();
             foreach (ComparisonReport report in reports.Comparisons)
             {
-                renderer.WriteDiffSectionHeader(report.BaseBranch, report.TargetBranch, report.BaseCommitId, report.TargetCommitId);
+                branchDict[report.TargetBranch] = report.TargetCommitId;
+                branchDict[report.BaseBranch] = report.BaseCommitId;
+            }
+
+            renderer.WriteBranches(branchDict);
+
+            foreach (ComparisonReport report in reports.Comparisons)
+            {
+                renderer.WriteDiffSectionHeader(report.BaseBranch, report.TargetBranch, report.BaseCommitId, report.BaseCommitId);
                 
                 foreach (string file in report.Files.Keys)
                 {

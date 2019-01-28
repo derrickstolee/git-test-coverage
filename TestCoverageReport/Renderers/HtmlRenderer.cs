@@ -28,15 +28,15 @@ namespace TestCoverageReport
 </p>");
         }
 
-        public void WriteBranches(List<Tuple<string, string>> branches)
+        public void WriteBranches(Dictionary<string, string> branches)
         {
             this.writer.WriteLine("<table>");
-            foreach (Tuple<string,string> branch in branches)
+            foreach (KeyValuePair<string,string> branch in branches)
             {
                 this.writer.WriteLine($@"
 <tr>
-    <td>{branch.Item1}</td>
-    <td>{branch.Item2}</td>
+    <td>{branch.Key}</td>
+    <td>{branch.Value}</td>
 </tr>");
             }
             this.writer.WriteLine("</table>");

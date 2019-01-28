@@ -6,7 +6,7 @@ namespace TestCoverageReport
     public interface IRenderer
     {
         void WriteHeader();
-        void WriteBranches(List<Tuple<string, string>> branches);
+        void WriteBranches(Dictionary<string, string> branches);
         void WriteDiffSectionHeader(
             string baseBranch,
             string targetBranch,

@@ -60,11 +60,11 @@ Uncovered code in '{targetBranch}' not in '{baseBranch}'
         {
         }
 
-        public void WriteBranches(List<Tuple<string, string>> branches)
+        public void WriteBranches(Dictionary<string, string> branches)
         {
-            foreach (Tuple<string, string> branch in branches)
+            foreach (KeyValuePair<string, string> branch in branches)
             {
-                this.writer.WriteLine($"{branch.Item1}\t{branch.Item2}");
+                this.writer.WriteLine($"{branch.Key}\t{branch.Value}");
             }
             this.writer.WriteLine();
         }
