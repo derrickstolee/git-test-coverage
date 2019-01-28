@@ -102,33 +102,7 @@ namespace TestCoverageReport
 
             string blameOutput = RunGitProcess($"-c core.abbrev=40 blame -s {to} -- {file}");
 
-            int lineCount = 0;
-            Regex regex = new Regex(@"[0-9a-f]+ [0-9]+) .*", RegexOptions.IgnoreCase);
-            foreach (string blameLine in blameOutput.Split('\n'))
-            {
-                lineCount++;
-
-                if (uncoveredLines.Contains(lineCount))
-                {
-                    Match match = regex.Match(blameLine);
-
-                    if (!match.Success)
-                    {
-                        Console.Error.WriteLine($"Line doesn't match regex: {blameLine}");
-                        break;
-                    }
-
-                    FileReportLine line = new FileReportLine
-                    {
-                        FileName = file,
-                        CommitId = match.Groups[0].Value,
-                        LineNumber = lineCount,
-                        LineContents = match.Groups[2].Value
-                    };
-                }
-            }
-
-            return reportLines;
+            return GetBlameLines(file, uncoveredLines, blameOutput);
         }
 
         public static HashSet<int> GetUncoveredLines(string[] gcovOutput)
