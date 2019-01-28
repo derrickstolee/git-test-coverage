@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace TestCoverageReport
 {
@@ -87,7 +87,9 @@ namespace TestCoverageReport
 
             string blameOutput = RunGitProcess($"-c core.abbrev=40 blame -s {to} -- {file}");
 
-            return GetBlameLines(file, uncoveredLines, blameOutput);
+            return GetBlameLines(file,
+                                 newLines.Where(num => uncoveredLines.Contains(num)).ToHashSet(),
+                                 blameOutput);
         }
 
         public static List<int> GetNewLines(string diff)
@@ -98,8 +100,8 @@ namespace TestCoverageReport
             {
                 if (line.StartsWith("@@"))
                 {
-                    int skip = "@@ -".Length;
-                    curLine = int.Parse(line.Substring(skip, line.IndexOf(',') - skip));
+                    int skip = line.IndexOf('-') + 1;
+                    curLine = int.Parse(line.Substring(skip, line.IndexOf(',', skip) - skip));
                     continue;
                 }
 
