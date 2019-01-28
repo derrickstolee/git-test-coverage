@@ -25,9 +25,16 @@ namespace TestCoverageReport
 
             foreach (string file in ChangedFiles(report.BaseCommitId, report.TargetCommitId))
             {
-                report.Files[file] = GetUncoveredLines(file, report.BaseCommitId, report.TargetCommitId);
+                List<FileReportLine> lines = GetUncoveredLines(file, report.BaseCommitId, report.TargetCommitId);
 
-                foreach (FileReportLine line in report.Files[file])
+		if (lines.Count == 0)
+		{
+			continue;
+		}
+
+		report.Files[file] = lines;
+
+                foreach (FileReportLine line in lines)
                 {
                     commits.Add(line.CommitId);
                 }
@@ -156,7 +163,7 @@ namespace TestCoverageReport
 
         public static CommitInfo GetCommitInfo(string commitId)
         {
-            string info = RunGitProcess("log --pretty=format:'%an|%m'");
+            string info = RunGitProcess($"log --pretty=format:\"%an|%s\" -1 {commitId}");
 
             string[] split = info.Split('|', 2);
 
@@ -173,15 +180,21 @@ namespace TestCoverageReport
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.Arguments = arguments;
             startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
             startInfo.FileName = "git";
 
             Process process = new Process();
             process.StartInfo = startInfo;
+
+            Console.Error.Write($"Running 'git {arguments}'...");
+
             process.Start();
 
             string result = process.StandardOutput.ReadToEnd();
 
             process.WaitForExit();
+
+            Console.Error.WriteLine("...done");
 
             return result;
         }

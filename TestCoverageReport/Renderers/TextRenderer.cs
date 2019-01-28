@@ -15,7 +15,7 @@ namespace TestCoverageReport
 
         public void WriteCommitLine(CommitInfo info)
         {
-            writer.Write($"{info.Author}\t{info.CommitId} {info.Message}");
+            writer.WriteLine($"{info.Author}\t{info.GetShortCommitId()} {info.Message}");
         }
 
         public void WriteCommitSectionFooter()
@@ -38,7 +38,7 @@ Uncovered code in '{targetBranch}' not in '{baseBranch}'
 
         public void WriteFileLine(FileReportLine line)
         {
-            writer.WriteLine($"{line.CommitId} {line.FileName} {line.LineNumber}) {line.LineContents.TrimStart('\t')}");
+            writer.WriteLine($"{line.GetShortCommitId()} {line.FileName} {line.LineNumber}) {line.LineContents.TrimStart('\t')}");
         }
 
         public void WriteFileSectionFooter()
