@@ -85,7 +85,7 @@ namespace TestCoverageReport
 
         public void WriteFileLine(FileReportLine line)
         {
-            string tr_class = line.Ignored ? "ignored-hidden" : $"commit-{line.GetShortCommitId()}";
+            string tr_class = line.Ignored ? "ignored-hidden" : $"commit-{line.CommitId}";
             this.writer.WriteLine($@"
     <tr class=""{tr_class}"">
 		<td class=""commit-id"">
