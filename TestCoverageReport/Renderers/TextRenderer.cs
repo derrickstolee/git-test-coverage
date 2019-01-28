@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace TestCoverageReport
@@ -38,7 +37,10 @@ Uncovered code in '{targetBranch}' not in '{baseBranch}'
 
         public void WriteFileLine(FileReportLine line)
         {
-            writer.WriteLine($"{line.GetShortCommitId()} {line.FileName} {line.LineNumber}) {line.LineContents.TrimStart('\t')}");
+            if (!line.Ignored)
+            {
+                writer.WriteLine($"{line.GetShortCommitId()} {line.FileName} {line.LineNumber}) {line.LineContents.TrimStart('\t')}");
+            }
         }
 
         public void WriteFileSectionFooter()

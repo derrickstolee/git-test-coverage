@@ -46,7 +46,7 @@ namespace TestCoverageReport
         {
             renderer.WriteHeader();
 
-            Dictionary<string,string> branchDict = new Dictionary<string,string>();
+            Dictionary<string, string> branchDict = new Dictionary<string, string>();
             foreach (ComparisonReport report in reports.Comparisons)
             {
                 branchDict[report.TargetBranch] = report.TargetCommitId;
@@ -58,7 +58,7 @@ namespace TestCoverageReport
             foreach (ComparisonReport report in reports.Comparisons)
             {
                 renderer.WriteDiffSectionHeader(report.BaseBranch, report.TargetBranch, report.BaseCommitId, report.BaseCommitId);
-                
+
                 foreach (string file in report.Files.Keys)
                 {
                     renderer.WriteFileSectionHeader(file);

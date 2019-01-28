@@ -11,12 +11,18 @@ namespace TestCoverageReport
     {
         public static void Execute(string[] args)
         {
+            string ignoredDirectory = null;
             ComparisonReport report = new ComparisonReport();
 
             report.TargetBranch = args[1];
             report.TargetCommitId = args[2];
             report.BaseBranch = args[3];
             report.BaseCommitId = args[4];
+
+            if (args.Length > 5)
+            {
+                ignoredDirectory = args[5];
+            }
 
             report.Files = new Dictionary<string, List<FileReportLine>>();
             report.Commits = new List<CommitInfo>();
@@ -25,14 +31,14 @@ namespace TestCoverageReport
 
             foreach (string file in ChangedFiles(report.BaseCommitId, report.TargetCommitId))
             {
-                List<FileReportLine> lines = GetUncoveredLines(file, report.BaseCommitId, report.TargetCommitId);
+                List<FileReportLine> lines = GetUncoveredLines(file, report.BaseCommitId, report.TargetCommitId, ignoredDirectory);
 
-		if (lines.Count == 0)
-		{
-			continue;
-		}
+                if (lines.Count == 0)
+                {
+                    continue;
+                }
 
-		report.Files[file] = lines;
+                report.Files[file] = lines;
 
                 foreach (FileReportLine line in lines)
                 {
@@ -57,7 +63,7 @@ namespace TestCoverageReport
             return new List<string>(output.Split('\n', StringSplitOptions.RemoveEmptyEntries));
         }
 
-        public static List<FileReportLine> GetUncoveredLines(string file, string from, string to)
+        public static List<FileReportLine> GetUncoveredLines(string file, string from, string to, string ignoredDirectory)
         {
             string hashFile = file.Replace('/', '#') + ".gcov";
             List<FileReportLine> reportLines = new List<FileReportLine>(); ;
@@ -87,9 +93,27 @@ namespace TestCoverageReport
 
             string blameOutput = RunGitProcess($"-c core.abbrev=40 blame -s {to} -- {file}");
 
-            return GetBlameLines(file,
-                                 newLines.Where(num => uncoveredLines.Contains(num)).ToHashSet(),
-                                 blameOutput);
+            reportLines = GetBlameLines(file,
+                                        newLines.Where(num => uncoveredLines.Contains(num)).ToHashSet(),
+                                        blameOutput);
+
+            HashSet<string> ignoredLines = GetIgnoredLines(ignoredDirectory, file);
+            if (ignoredLines.Count == 0)
+            {
+                return reportLines;
+            }
+
+            foreach (FileReportLine line in reportLines)
+            {
+                string ignoreLine = $"{line.LineNumber}:{line.LineContents.Trim()}";
+
+                if (ignoredLines.Contains(ignoreLine))
+                {
+                    line.Ignored = true;
+                }
+            }
+
+            return reportLines;
         }
 
         public static List<int> GetNewLines(string diff)
@@ -175,6 +199,18 @@ namespace TestCoverageReport
                 CommitId = commitId,
                 Message = split[1]
             };
+        }
+
+        public static HashSet<string> GetIgnoredLines(string ignoredDirectory, string file)
+        {
+            if (string.IsNullOrEmpty(ignoredDirectory))
+            {
+                return new HashSet<string>();
+            }
+
+            return new HashSet<string>(File.ReadLines(Path.Combine(ignoredDirectory, file))
+                                        .Select(line => line.Trim()));
+
         }
 
         private static string RunGitProcess(string arguments)

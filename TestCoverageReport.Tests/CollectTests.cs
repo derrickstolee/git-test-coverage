@@ -162,7 +162,7 @@ d6538246d3d4edbfbc9b0af6a2aa38552d35f7f1   82)
             List<FileReportLine> lines = Collect.GetBlameLines("commit-graph.c", uncoveredLines, blameOutput);
 
             Assert.AreEqual(uncoveredLines.Count, lines.Count);
-            
+
             Assert.AreEqual(50, lines[0].LineNumber);
             Assert.AreEqual(" return 1;", lines[0].LineContents);
             Assert.AreEqual("c166599862d10a273f61b834559eaa567c3dbfd9", lines[0].CommitId);
