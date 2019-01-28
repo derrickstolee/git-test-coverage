@@ -168,5 +168,85 @@ d6538246d3d4edbfbc9b0af6a2aa38552d35f7f1   82)
             Assert.AreEqual("c166599862d10a273f61b834559eaa567c3dbfd9", lines[0].CommitId);
             Assert.AreEqual("commit-graph.c", lines[0].FileName);
         }
+
+        [TestMethod]
+        public void GetNewLines()
+        {
+            string diffOutput = @"@@ -43,13 +38,18 @@
+ #define GRAPH_FANOUT_SIZE (4 * 256)
+ #define GRAPH_CHUNKLOOKUP_WIDTH 12
+ #define GRAPH_MIN_SIZE (GRAPH_HEADER_SIZE + 4 * GRAPH_CHUNKLOOKUP_WIDTH \
+-                       + GRAPH_FANOUT_SIZE + GRAPH_OID_LEN)
++                       + GRAPH_FANOUT_SIZE + the_hash_algo->rawsz)
+
+ char *get_commit_graph_filename(const char *obj_dir)
+ {
+        return xstrfmt(""%s/info/commit-graph"", obj_dir);
+ }
+
++static uint8_t oid_version(void)
++{
++       return 1;
++}
++
+ static struct commit_graph *alloc_commit_graph(void)
+ {
+        struct commit_graph *g = xcalloc(1, sizeof(*g));
+@@ -124,15 +124,15 @@ struct commit_graph *load_commit_graph_one(const char *graph_file)
+        }
+
+        hash_version = *(unsigned char*)(data + 5);
+-       if (hash_version != GRAPH_OID_VERSION) {
++       if (hash_version != oid_version()) {
+                error(_(""hash version %X does not match version %X""),
+-                     hash_version, GRAPH_OID_VERSION);
++                     hash_version, oid_version());
+                goto cleanup_fail;
+        }
+
+        graph = alloc_commit_graph();
+
+-       graph->hash_len = GRAPH_OID_LEN;
++       graph->hash_len = the_hash_algo->rawsz;
+        graph->num_chunks = *(unsigned char*)(data + 6);
+        graph->graph_fd = fd;
+        graph->data = graph_map;
+@@ -148,7 +148,7 @@ struct commit_graph *load_commit_graph_one(const char *graph_file)
+
+                chunk_lookup += GRAPH_CHUNKLOOKUP_WIDTH;
+
+-               if (chunk_offset > graph_size - GIT_MAX_RAWSZ) {
++               if (chunk_offset > graph_size - the_hash_algo->rawsz) {
+                        error(_(""improper chunk offset %08x%08x""), (uint32_t)(chunk_offset >> 32),
+                              (uint32_t)chunk_offset);
+                        goto cleanup_fail;
+@@ -288,7 +288,8 @@ static int bsearch_graph(struct commit_graph *g, struct object_id *oid, uint32_t
+                            g->chunk_oid_lookup, g->hash_len, pos);
+ }
+
+-static struct commit_list **insert_parent_or_die(struct commit_graph *g,
++static struct commit_list **insert_parent_or_die(struct repository *r,
++                                                struct commit_graph *g,
+                                                 uint64_t pos,
+                                                 struct commit_list **pptr)
+ {
+";
+
+            List<int> newLines = Collect.GetNewLines(diffOutput);
+
+            Assert.AreEqual(12, newLines.Count);
+            Assert.AreEqual(46, newLines[0]);
+            Assert.AreEqual(53, newLines[1]);
+            Assert.AreEqual(54, newLines[2]);
+            Assert.AreEqual(55, newLines[3]);
+            Assert.AreEqual(56, newLines[4]);
+            Assert.AreEqual(57, newLines[5]);
+            Assert.AreEqual(127, newLines[6]);
+            Assert.AreEqual(129, newLines[7]);
+            Assert.AreEqual(135, newLines[8]);
+            Assert.AreEqual(151, newLines[9]);
+            Assert.AreEqual(291, newLines[10]);
+            Assert.AreEqual(292, newLines[11]);
+        }
     }
 }

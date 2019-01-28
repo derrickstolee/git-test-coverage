@@ -52,7 +52,7 @@ namespace TestCoverageReport
 
         public static List<FileReportLine> GetUncoveredLines(string file, string from, string to)
         {
-            string hashFile = file.Replace('/', '#');
+            string hashFile = file.Replace('/', '#') + ".gcov";
             List<FileReportLine> reportLines = new List<FileReportLine>(); ;
 
             if (!File.Exists(hashFile))
@@ -62,8 +62,31 @@ namespace TestCoverageReport
 
             string diff = RunGitProcess($"diff {from} {to} -- {file}");
 
-            int curLine = 0;
+            List<int> newLines = GetNewLines(diff);
+
+            if (newLines.Count == 0)
+            {
+                return reportLines;
+            }
+
+            string[] gcovOutput = File.ReadAllLines(hashFile);
+
+            HashSet<int> uncoveredLines = GetUncoveredLines(gcovOutput);
+
+            if (uncoveredLines.Count == 0)
+            {
+                return reportLines;
+            }
+
+            string blameOutput = RunGitProcess($"-c core.abbrev=40 blame -s {to} -- {file}");
+
+            return GetBlameLines(file, uncoveredLines, blameOutput);
+        }
+
+        public static List<int> GetNewLines(string diff)
+        {
             List<int> newLines = new List<int>();
+            int curLine = 0;
             foreach (string line in diff.Split('\n'))
             {
                 if (line.StartsWith("@@"))
@@ -86,23 +109,7 @@ namespace TestCoverageReport
                 curLine++;
             }
 
-            if (newLines.Count == 0)
-            {
-                return reportLines;
-            }
-
-            string[] gcovOutput = File.ReadAllLines(hashFile);
-
-            HashSet<int> uncoveredLines = GetUncoveredLines(gcovOutput);
-
-            if (uncoveredLines.Count == 0)
-            {
-                return reportLines;
-            }
-
-            string blameOutput = RunGitProcess($"-c core.abbrev=40 blame -s {to} -- {file}");
-
-            return GetBlameLines(file, uncoveredLines, blameOutput);
+            return newLines;
         }
 
         public static HashSet<int> GetUncoveredLines(string[] gcovOutput)
