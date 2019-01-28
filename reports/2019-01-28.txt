@@ -6,9 +6,6 @@ Uncovered code in 'next' not in 'master'
 --------------------------------------------------------
 
 builtin/checkout.c
-e8a8a4d7 builtin/checkout.c 256) die(_("make_cache_entry failed for path '%s'"), path);
-091e04bc builtin/checkout.c 302) return;
-e923a8ab builtin/checkout.c 355) return error(_("index file corrupt"));
 
 builtin/fetch-pack.c
 8f6982b4 builtin/fetch-pack.c 225) case protocol_v2:
@@ -30,7 +27,6 @@ commit-reach.c
 5227c385 commit-reach.c 326) return ret;
 
 commit.c
-bd2c39f5 commit.c 474) return error("Object %s not a commit",
 
 diff.c
 b73bcbac diff.c 308) ret = 0;
@@ -195,6 +191,12 @@ Shawn O. Pearce	de1a2fdd Smart push over HTTP: client side
 Stefan Beller	161b1cf3 sha1-array: provide oid_array_filter
 Takuto Ikuta	024aa469 fetch-pack.c: use oidset to check existence of loose object
 Thomas Gummerer	536ec183 entry: support CE_WT_REMOVE flag in checkout_entry
+Thomas Gummerer	091e04bc checkout: introduce --{,no-}overlay option
+Torsten Bögershausen	cb8010bb remote-curl.c: xcurl_off_t is not portable (on 32 bit platfoms)
+Vasco Almeida	e923a8ab i18n: standardise messages
+
+
+ry: support CE_WT_REMOVE flag in checkout_entry
 Thomas Gummerer	091e04bc checkout: introduce --{,no-}overlay option
 Torsten Bögershausen	cb8010bb remote-curl.c: xcurl_off_t is not portable (on 32 bit platfoms)
 Vasco Almeida	e923a8ab i18n: standardise messages
