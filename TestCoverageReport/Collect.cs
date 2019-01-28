@@ -203,7 +203,8 @@ namespace TestCoverageReport
 
         public static HashSet<string> GetIgnoredLines(string ignoredDirectory, string file)
         {
-            if (string.IsNullOrEmpty(ignoredDirectory))
+            if (string.IsNullOrEmpty(ignoredDirectory) ||
+                !File.Exists(Path.Combine(ignoredDirectory, file)))
             {
                 return new HashSet<string>();
             }
