@@ -1,0 +1,37 @@
+body {
+	font-size: 12;
+	font-family: Helvetica, Arial, sans-serif;
+}
+h3 {
+}
+table.uncovered-lines {
+	font-family: 'Consolas';
+}
+td.branch {
+	font-weight: bold;
+	align-content: right;
+}
+td.commit-id {
+	color: #5555ff;
+	font-family: 'Consolas';
+	width:100px;
+}
+td.full-commit-id {
+	font-family: 'Consolas';
+	color: #5555ff;
+}
+td.line-number {
+	color: #3333aa;
+	width:100px;
+	align-content: right;
+}
+td.code {
+	color: #333333;
+}
+td.author {
+	color: #005500;
+	width: 200px;
+}
+td.message {
+	font-family: 'Consolas';
+}

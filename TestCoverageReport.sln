@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28515.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCoverageReport", "TestCoverageReport\TestCoverageReport.csproj", "{286003C5-E320-4C93-B9D9-5FFD2CD2F62C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{286003C5-E320-4C93-B9D9-5FFD2CD2F62C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{286003C5-E320-4C93-B9D9-5FFD2CD2F62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{286003C5-E320-4C93-B9D9-5FFD2CD2F62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{286003C5-E320-4C93-B9D9-5FFD2CD2F62C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5CDBA1D5-4E67-4398-9358-1D77C97AE805}
+	EndGlobalSection
+EndGlobal

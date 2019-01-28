@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Git Test Coverage Report (2018-01-25)</title>
+	<link rel="stylesheet" href="style.css"></link>
+	<script src="code.js"></script>
+function toggleCommit(commit)
+{
+	var rows = document.getElementsByTagName("tr");
+
+	var  il = rows.length;
+	for (var i = 0; i < il; i++)
+	{
+		if (rows[i].className == commit)
+		{
+			if (rows[i].style.background == 'rgb(200, 255, 255)')
+			{
+				rows[i].style.background = "#fff";
+			}
+			else
+			{
+				rows[i].style.background = 'rgb(200, 255, 255)';
+			}
+		}
+	}
+}
+	</script>
+</head>
+<body>
+
+<h2>Uncovered code in 'master' not in 'master@{1}'</h2>
+
+<table class="">
+	<tr>
+		<td class="branch">
+			master
+		</td>
+		<td class="full-commit-id">
+			<a href="https://github.com/git/git/tree/16a465bc018d09e9d7bbbdc5f40a7fb99c21f8ef">
+				16a465bc018d09e9d7bbbdc5f40a7fb99c21f8ef
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td class="branch">
+			master@{1}
+		</td>
+		<td class="full-commit-id">
+			<a href="https://github.com/git/git/tree/77556354bb7ac50450e3b28999e3576969869068">
+				77556354bb7ac50450e3b28999e3576969869068
+			</a>
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/worktree.c</h3>
+
+<table  class="uncovered-lines">
+	<tr  class="commit-5">
+		<td class="commit-id">
+			<a href="https://github.com/git/git/tree/00a6d4d1d2260a07ca1372acfae692d9821f165f/builtin/worktree.c#L752">
+				00a6d4d1d2
+			</a>
+		</td>
+		<td class="line-number">
+			752
+		</td>
+		<td class="code">
+			found_submodules = 1;
+		</td>
+	</tr>
+	<tr class="commit-2">
+		<td class="commit-id">
+			<a href="https://github.com/git/git/tree/00a6d4d1d2260a07ca1372acfae692d9821f165f/builtin/worktree.c#L753">
+				00a6d4d1d2
+			</a>
+		</td>
+		<td class="line-number">
+			753
+		</td>
+		<td class="code">
+			break;
+		</td>
+	</tr>
+</table>
+
+<h3>ref-filter.c</h3>
+
+<table class="uncovered-lines">
+	<tr  class="commit-3">
+		<td class="commit-id">
+			<a href="https://github.com/git/git/commit/1867ce6cbec9c8f23f958cb675de129fcd6471a4">
+				00a6d4d1d2
+			</a>
+		</td>
+		<td class="line-number">
+			236
+		</td>
+		<td class="code">
+			oi_deref.info.sizep = &oi_deref.size;
+		</td>
+	</tr>
+	<tr  class="commit-1">
+		<td class="commit-id">
+			<a href="https://github.com/git/git/commit/1867ce6cbec9c8f23f958cb675de129fcd6471a4">
+				00a6d4d1d2
+			</a>
+		</td>
+		<td class="line-number">
+			236
+		</td>
+		<td class="code">
+			return strbuf_addf_ret(err, -1, _("unrecognized %%(objectsize) argument: %s"), arg);
+		</td>
+	</tr>
+	<tr  class="commit-1">
+		<td class="commit-id">
+			<a href="https://github.com/git/git/commit/1867ce6cbec9c8f23f958cb675de129fcd6471a4#diff-8858448bb49332d353febc078ce4a3abcc962efeR253">
+				00a6d4d1d2
+			</a>
+		</td>
+		<td class="line-number">
+			236
+		</td>
+		<td class="code">
+				return strbuf_addf_ret(err, -1, _("%%(deltabase) does not take arguments"));;
+		</td>
+	</tr>
+</table>
+
+<h3>Commits introducing uncovered code:</h3>
+
+<table class="commits">
+	<tr class="commit-1" onclick="toggleCommit('commit-1')">
+		<td class="author">
+			Erin Dahlgren
+		</td>
+		<td class="commit-id">
+			<a href="https://github.com/git/git/commit/07098b81a432cf19e3bbe3fe949e77a64aa970c6">07098b81a</a>
+		</td>
+		<td class="message">
+			Simplify handling of setup_git_directory_gently() failure cases.
+		</td>
+	</tr>
+	<tr class="commit-2" onclick="toggleCommit('commit-2')">
+		<td class="author">
+				Nguyễn Thái Ngọc Duy
+		</td>
+		<td class="commit-id">
+			<a href="https://github.com/git/git/commit/07098b81a432cf19e3bbe3fe949e77a64aa970c6">07098b81a</a>
+		</td>
+		<td class="message">
+			worktree: allow to (re)move worktrees with uninitialized submodules
+		</td>
+	</tr>
+	<tr class="commit-3" onclick="toggleCommit('commit-3')">
+		<td class="author">
+				Nguyễn Thái Ngọc Duy
+		</td>
+		<td class="commit-id">
+			<a href="https://github.com/git/git/commit/07098b81a432cf19e3bbe3fe949e77a64aa970c6">07098b81a</a>
+		</td>
+		<td class="message">
+			style: the opening '{' of a function is in a separate line
+		</td>
+	</tr>
+	<tr class="commit-4" onclick="toggleCommit('commit-4')">
+		<td class="author">
+			Olga Telezhnaya
+		</td>
+		<td class="commit-id">
+			<a href="https://github.com/git/git/commit/07098b81a432cf19e3bbe3fe949e77a64aa970c6">07098b81a</a>
+		</td>
+		<td class="message">
+			ref-filter: add objectsize:disk option
+		</td>
+	</tr>
+	<tr class="commit-5" onclick="toggleCommit('commit-5')">
+		<td class="author">
+			Olga Telezhnaya
+		</td>
+		<td class="commit-id">
+			<a href="https://github.com/git/git/commit/07098b81a432cf19e3bbe3fe949e77a64aa970c6">07098b81a</a>
+		</td>
+		<td class="message">
+			ref-filter: add deltabase option
+		</td>
+	</tr>
+</table>
+</body>
+</html>
