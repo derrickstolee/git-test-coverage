@@ -15,13 +15,12 @@ namespace TestCoverageReport
 
         public void WriteHeader()
         {
-            this.writer.WriteLine($@"
-<!DOCTYPE html>
+            this.writer.WriteLine($@"<!DOCTYPE html>
 <html>
 <head>
 	<title>Git Test Coverage Report ({DateTime.Now.ToShortDateString()})</title>
 	<link rel=""stylesheet"" href=""style.css""/>
-    <script src = ""code.js""/>
+    <script src = ""code.js""></script>
 </head>
 <body>
 <p>
