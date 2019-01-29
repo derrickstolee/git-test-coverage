@@ -14,7 +14,10 @@ namespace TestCoverageReport
 
         public void WriteCommitLine(CommitInfo info)
         {
-            writer.WriteLine($"{info.Author}\t{info.GetShortCommitId()} {info.Message}");
+		if (!info.AllIgnored)
+		{
+        		writer.WriteLine($"{info.Author}\t{info.GetShortCommitId()} {info.Message}");
+		}
         }
 
         public void WriteCommitSectionFooter()

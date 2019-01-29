@@ -7,6 +7,7 @@ namespace TestCoverageReport
         public string Author { get; set; }
         public string CommitId { get; set; }
         public string Message { get; set; }
+        public bool AllIgnored { get; set; }
 
         public string GetShortCommitId()
         {

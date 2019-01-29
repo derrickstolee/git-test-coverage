@@ -28,6 +28,7 @@ namespace TestCoverageReport
             report.Commits = new List<CommitInfo>();
 
             HashSet<string> commits = new HashSet<string>();
+            HashSet<string> ignoredCommits = new HashSet<string>();
 
             foreach (string file in ChangedFiles(report.BaseCommitId, report.TargetCommitId))
             {
@@ -42,13 +43,30 @@ namespace TestCoverageReport
 
                 foreach (FileReportLine line in lines)
                 {
-                    commits.Add(line.CommitId);
+                    if (line.Ignored)
+                    {
+                        ignoredCommits.Add(line.CommitId);
+                    }
+                    else
+                    {
+                        commits.Add(line.CommitId);
+                    }
                 }
             }
 
             foreach (string commitId in commits)
             {
                 report.Commits.Add(GetCommitInfo(commitId));
+            }
+
+            foreach (string commitId in ignoredCommits)
+            {
+                if (!commits.Contains(commitId))
+                {
+                    CommitInfo info = GetCommitInfo(commitId);
+                    info.AllIgnored = true;
+                    report.Commits.Add(info);
+                }
             }
 
             report.Commits.Sort();

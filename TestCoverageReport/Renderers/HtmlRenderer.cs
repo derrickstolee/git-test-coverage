@@ -117,8 +117,9 @@ namespace TestCoverageReport
 
         public void WriteCommitLine(CommitInfo info)
         {
+            string tr_class = info.AllIgnored ? "ignored-hidden" : $"commit-{info.CommitId}";
             this.writer.WriteLine($@"
-	<tr class=""commit-{info.CommitId}"" onclick=""toggleCommit('commit-{info.CommitId}')"">
+	<tr class=""{tr_class}"" onclick=""toggleCommit('commit-{info.CommitId}')"">
 		<td class=""author"">
             {info.Author}
         </td>
