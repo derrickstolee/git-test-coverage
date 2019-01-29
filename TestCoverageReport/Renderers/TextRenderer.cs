@@ -39,7 +39,7 @@ Uncovered code in '{targetBranch}' not in '{baseBranch}'
         {
             if (!line.Ignored)
             {
-                writer.WriteLine($"{line.GetShortCommitId()} {line.FileName} {line.LineNumber}) {line.LineContents.TrimStart('\t')}");
+                writer.WriteLine($"{line.GetShortCommitId()} {line.LineNumber}) {line.LineContents.TrimStart('\t')}");
             }
         }
 
