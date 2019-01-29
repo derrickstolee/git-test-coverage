@@ -1,0 +1,1 @@
+570:BUG("missing parent %s for commit %s",

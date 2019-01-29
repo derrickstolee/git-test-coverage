@@ -1,0 +1,1 @@
+1107:BUG("unhandled setup_git_directory_1() result");
