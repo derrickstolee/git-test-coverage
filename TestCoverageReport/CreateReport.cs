@@ -57,7 +57,7 @@ namespace TestCoverageReport
 
             foreach (ComparisonReport report in reports.Comparisons)
             {
-                renderer.WriteDiffSectionHeader(report.BaseBranch, report.TargetBranch, report.BaseCommitId, report.BaseCommitId);
+                renderer.WriteDiffSectionHeader(report.BaseBranch, report.TargetBranch, report.BaseCommitId, report.TargetCommitId);
 
                 foreach (string file in report.Files.Keys)
                 {
