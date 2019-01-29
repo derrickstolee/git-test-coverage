@@ -97,9 +97,14 @@ namespace TestCoverageReport
 			{line.LineNumber}
 		</td>
 		<td class=""code"">
-			{line.LineContents}
+			{Sanitize(line.LineContents)}
 		</td>
 	</tr>");
+        }
+
+        public string Sanitize(string code)
+        {
+            return code.Replace(">", "&gt;").Replace("<", "&lt;");
         }
 
         public void WriteFileSectionFooter()
