@@ -1,0 +1,11 @@
+1588:return -1;
+1594:return -1;
+1597:return -1;
+1664:return -1;
+1667:return -1;
+1703:return -1;
+2742:BUG("ren1_dst != ren2_dst");
+3206:free(new_path);
+3207:return -1;
+3278:clean_merge = -1;
+3283:clean_merge = -1;
