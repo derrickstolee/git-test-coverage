@@ -142,7 +142,7 @@ namespace TestCoverageReport
             {
                 if (line.StartsWith("@@"))
                 {
-                    int skip = line.IndexOf('-') + 1;
+                    int skip = line.IndexOf('+') + 1;
                     curLine = int.Parse(line.Substring(skip, line.IndexOf(',', skip) - skip));
                     continue;
                 }
