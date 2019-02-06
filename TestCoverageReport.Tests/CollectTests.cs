@@ -235,12 +235,12 @@ d6538246d3d4edbfbc9b0af6a2aa38552d35f7f1   82)
             List<int> newLines = Collect.GetNewLines(diffOutput);
 
             Assert.AreEqual(12, newLines.Count);
-            Assert.AreEqual(46, newLines[0]);
-            Assert.AreEqual(53, newLines[1]);
-            Assert.AreEqual(54, newLines[2]);
-            Assert.AreEqual(55, newLines[3]);
-            Assert.AreEqual(56, newLines[4]);
-            Assert.AreEqual(57, newLines[5]);
+            Assert.AreEqual(41, newLines[0]);
+            Assert.AreEqual(48, newLines[1]);
+            Assert.AreEqual(49, newLines[2]);
+            Assert.AreEqual(50, newLines[3]);
+            Assert.AreEqual(51, newLines[4]);
+            Assert.AreEqual(52, newLines[5]);
             Assert.AreEqual(127, newLines[6]);
             Assert.AreEqual(129, newLines[7]);
             Assert.AreEqual(135, newLines[8]);
