@@ -14,30 +14,38 @@ builtin/commit.c
 builtin/config.c
 a12c1ff3 110) die(_("$HOME not set"));
 a12c1ff3 122) given_config_source.file = git_etc_gitconfig();
-1d28ff4c 401) error(_("invalid key pattern: %s"), key_);
-6a83d902 402) FREE_AND_NULL(key_regexp);
-9409c7a5 403) ret = CONFIG_INVALID_PATTERN;
-1d28ff4c 421) error(_("invalid pattern: %s"), regex_);
-6a83d902 422) FREE_AND_NULL(regexp);
-9409c7a5 423) ret = CONFIG_INVALID_PATTERN;
-5f1a63e0 424) goto free_strings;
+6f11fd5e 489) BUG("action %d cannot get here", actions);
+6f11fd5e 503) die(_("unknown config source"));
+6f11fd5e 509) die(_("invalid key pattern: %s"), key);
 
 builtin/gc.c
 8e7e6c05 670) return 1;
 
-builtin/pack-redundant.c
-c283ab21 539) p = p->next;
-
 builtin/rebase.c
-f9573628 1243) die(_("Cannot read HEAD"));
+34fed676 1224) if (is_interactive(&options))
+34fed676 1225) trace2_cmd_mode("interactive");
+34fed676 1226) else if (exec.nr)
+34fed676 1227) trace2_cmd_mode("interactive-exec");
+34fed676 1229) trace2_cmd_mode(action_names[action]);
 
 commit-graph.c
-aa658574 125) return NULL;
-3258c663 810) current->generation = GENERATION_NUMBER_MAX;
-d9b1b309 988) display_progress(oids.progress, approx_nr_objects);
+b1beb050 877) error(_("unsupported commit-graph version %d"),
+b1beb050 879) return 1;
+8e7e6c05 929) error(_("error adding pack %s"), packname.buf);
+8e7e6c05 930) res = 1;
+8e7e6c05 931) goto cleanup;
+8e7e6c05 934) error(_("error opening index for %s"), packname.buf);
+8e7e6c05 935) res = 1;
+8e7e6c05 936) goto cleanup;
 8e7e6c05 1009) error(_("the commit graph format cannot write %d commits"), count_distinct);
 8e7e6c05 1010) res = 1;
 8e7e6c05 1011) goto cleanup;
+8e7e6c05 1045) error(_("too many commits to write graph"));
+8e7e6c05 1046) res = 1;
+8e7e6c05 1047) goto cleanup;
+8e7e6c05 1055) error(_("unable to create leading directories of %s"),
+8e7e6c05 1057) res = errno;
+8e7e6c05 1058) goto cleanup;
 
 config.c
 8f7c7f55 2143) int repo_config_set_gently(struct repository *r,
@@ -57,19 +65,12 @@ config.c
 8f7c7f55 2170) return CONFIG_INVALID_FILE;
 8f7c7f55 2171) ret = git_config_set_multivar_in_file_gently(path, key, value, NULL, 0);
 8f7c7f55 2172) free(path);
-93c1e079 2916) goto write_err_out;
-93c1e079 2919) goto write_err_out;
-
-connect.c
-aad6fddb 1299) die(_("unable to fork"));
+8f7c7f55 2173) return ret;
 
 git.c
 3c543ab3 155) trace2_cmd_name("_query_");
 3c543ab3 159) trace2_cmd_name("_query_");
 3c543ab3 163) trace2_cmd_name("_query_");
-8aa8c140 372) die(_("recursive alias: %s"), alias_command);
-8aa8c140 679) die(_("%s doesn't support --super-prefix"), argv[0]);
-246f0ede 716) exit(128);
 
 http.c
 ba81921a 1999) if (fflush((FILE *)result)) {
@@ -82,33 +83,23 @@ pager.c
 protocol.c
 6da1f1a9 37) die(_("Unrecognized protocol version"));
 6da1f1a9 39) die(_("Unrecognized protocol_version"));
-373d70ef 49) die("unknown value for config 'protocol.version': %s",
 6da1f1a9 61) BUG("late attempt to register an allowed protocol version");
-
-read-cache.c
-78bde923 3103) return error_errno(_("could not stat '%s'"), shared_index_path);
 
 ref-filter.c
 358c9418 93) keydata_aka_refname ? keydata_aka_refname : k->wt->head_ref);
-5305a553 1533) BUG("Object size is less than zero.");
-aa46a0da 1538) if (!eaten)
-aa46a0da 1539) free(oi->content);
-aa46a0da 1540) return strbuf_addf_ret(err, -1, _("parse_object_buffer failed on %s for %s"),
-aa46a0da 1541)        oid_to_hex(&oi->oid), ref->refname);
 
 remote-curl.c
 6da1f1a9 404) return 0;
-a2d725b7 1393) return 1;
 
 run-command.c
 3c543ab3 239) int ec = errno;
 3c543ab3 240) trace2_exec_result(exec_id, ec);
 3c543ab3 241) errno = ec;
-0ac77ec3 715) failed_errno = errno;
-507d7804 995) int finish_command_in_signal(struct child_process *cmd)
 3c543ab3 997) int ret = wait_or_whine(cmd->pid, cmd->argv[0], 1);
 3c543ab3 998) trace2_child_exit(cmd, ret);
 3c543ab3 999) return ret;
+3c543ab3 1021) int run_command_v_opt_tr2(const char **argv, int opt, const char *tr2_class)
+3c543ab3 1023) return run_command_v_opt_cd_env_tr2(argv, opt, NULL, NULL, tr2_class);
 
 t/helper/test-trace2.c
 7bc0969b 24) return MyError;
@@ -251,6 +242,7 @@ trace2/tr2_cfg.c
 3c543ab3 86) struct tr2_cfg_data data = { file, line };
 3c543ab3 88) if (tr2_cfg_load_patterns() > 0)
 3c543ab3 89) tr2_cfg_cb(key, value, &data);
+3c543ab3 90) }
 
 trace2/tr2_dst.c
 3c543ab3 15) static int tr2_dst_want_warning(void)
@@ -721,36 +713,19 @@ wrapper.c
 5efde212 73) error("Out of memory, malloc failed (tried to allocate %" PRIuMAX " bytes)",
 
 Commits introducting uncovered code:
-Ævar Arnfjörð Bjarmason	6a83d902 coccinelle: make use of the "type" FREE_AND_NULL() rule
-Ævar Arnfjörð Bjarmason	d9b1b309 commit-graph write: show progress for object search
-Brandon Williams	373d70ef protocol: introduce protocol extension mechanisms
 Dan McGregor	ba81921a http: cast result to FILE *
-Daniel Barkalow	a2d725b7 Use an external program to implement fetching with curl
 Derrick Stolee	8e7e6c05 commit-graph: return with errors during write
-Derrick Stolee	3258c663 commit-graph: compute generation numbers
+Derrick Stolee	b1beb050 commit-graph: create new version flags
+Jeff Hostetler	34fed676 trace2:data: add subverb for rebase
+Jeff Hostetler	3c543ab3 trace2: create new combined trace facility
 Jeff Hostetler	3507f837 trace2:data: add editor/pager child classification
 Jeff Hostetler	7bc0969b trace2: t/helper/test-trace2, t0210.sh, t0211.sh, t0212.sh
-Jeff Hostetler	3c543ab3 trace2: create new combined trace facility
-Jeff King	246f0ede execv_dashed_external: stop exiting with negative code
-Johannes Schindelin	5f1a63e0 Read configuration also from $HOME/.gitconfig
-Johannes Sixt	0ac77ec3 run_command: report system call errors instead of returning error codes
 Josh Steadmon	6da1f1a9 protocol: advertise multiple supported versions
-Josh Steadmon	aa658574 commit-graph, fuzz: add fuzzer for commit-graph
-Junio C Hamano	93c1e079 config-set: check write-in-full returns in set_multivar
-Junio C Hamano	9409c7a5 config: "git config baa" should exit with status 1
-Lukas_Sandström	c283ab21 Add git-pack-intersect
 Martin Koegler	5efde212 zlib.c: use size_t for size
-Nguyễn Thái Ngọc Duy	aad6fddb connect.c: mark more strings for translation
-Nguyễn Thái Ngọc Duy	1d28ff4c builtin/config.c: mark more strings for translation
 Nguyễn Thái Ngọc Duy	a12c1ff3 config: factor out set_config_source_file()
+Nguyễn Thái Ngọc Duy	6f11fd5e config: add --move-to
 Nguyễn Thái Ngọc Duy	8f7c7f55 config.c: add repo_config_set_worktree_gently()
-Nguyễn Thái Ngọc Duy	8aa8c140 git.c: mark more strings for translation
 Nickolai Belakovski	358c9418 ref-filter: add worktreepath atom
-Olga Telezhnaya	5305a553 ref-filter: add check for negative file size
-Olga Telezhnaya	aa46a0da ref-filter: use oid_object_info() to get object
-Peter Krefting	78bde923 i18n: read-cache: typofix
-Pratik Karki	f9573628 builtin rebase: support --continue
-Takashi Iwai	507d7804 pager: don't use unsafe functions in signal handlers
 
 
 Uncovered code in 'jch' not in 'next'
@@ -758,39 +733,46 @@ Uncovered code in 'jch' not in 'next'
 
 blame.c
 07d04b91 483)     ent->s_lno + ent->num_lines == next->s_lno &&
+07d04b91 484)     ent->ignored == next->ignored) {
 e7973c85 941) blame_origin_decref(e->suspect);
 e7973c85 942) e->suspect = blame_origin_incref(parent);
 e7973c85 943) e->s_lno += offset;
 07d04b91 944) e->ignored = 1;
+e7973c85 945) e->next = ignoredp;
 e7973c85 946) ignoredp = e;
-b543bb1c 1504) blame_origin_decref(porigin);
+e7973c85 954) **dstq = reverse_blame(ignoredp, **dstq);
+e7973c85 955) *dstq = &ignoredp->next;
+e7973c85 1528) for (i = 0, sg = first_scapegoat(revs, commit, sb->reverse);
+e7973c85 1529)      i < num_sg && sg;
+e7973c85 1530)      sg = sg->next, i++) {
+e7973c85 1531) struct blame_origin *porigin = sg_origin[i];
+e7973c85 1533) if (!porigin)
+e7973c85 1534) continue;
+e7973c85 1535) pass_blame_to_parent(sb, origin, porigin, 1);
+e7973c85 1536) if (!origin->suspects)
+e7973c85 1537) goto finish;
 
 builtin/blame.c
 07d04b91 485) length--;
-31653c1a 699) if (!value)
-31653c1a 700) return config_error_nonbool(var);
-a5481a6c 701) parse_date_format(value, &blame_date_mode);
-31653c1a 702) return 0;
-5817da01 777) return 0;
-3f8d5204 1002) argv[2] = "--";
+07d04b91 486) putchar('*');
+e7973c85 705) return git_config_pathname(&ignore_revs_file, var, value);
+07d04b91 707) mark_ignored_lines = git_config_bool(var, value);
+07d04b91 708) return 0;
+e7973c85 797) oidset_parse_file(&sb->ignore_list, ignore_revs_file);
+e7973c85 799) if (get_oid_committish(i->string, &oid))
+e7973c85 800) die(_("Can't find revision '%s' to ignore"), i->string);
+e7973c85 801) oidset_insert(&sb->ignore_list, &oid);
 
 builtin/branch.c
 0ecb1fc7 452) die(_("could not resolve HEAD"));
 0ecb1fc7 458) die(_("HEAD (%s) points outside of refs/heads/"), refname);
-b7200e83 584) return -1;
-49df4b02 673) die(_("Failed to resolve HEAD as a valid ref."));
 
-builtin/commit.c
-b64c1e07 740) die_errno(_("could not read SQUASH_MSG"));
-8a6179bc 747) die_errno(_("could not read MERGE_MSG"));
-
-builtin/merge.c
-66f4b98a 800) error("%s", err_msg);
-62dc42b9 822) BUG("the control must not reach here under --squash");
-1c7b76be 1393) usage_with_options(builtin_merge_usage,
+builtin/multi-pack-index.c
+467ae6f9 49) die(_("--batch-size option is only for 'repack' subcommand"));
+467ae6f9 58) die(_("unrecognized subcommand: %s"), argv[0]);
 
 builtin/pull.c
-11b6d178 644) argv_array_push(&args, opt_commit);
+a3b994b7 648) argv_array_push(&args, opt_cleanup);
 
 builtin/rebase--interactive.c
 c0108d5c 24) return error_errno(_("could not read '%s'."), todo_file);
@@ -799,8 +781,12 @@ c0108d5c 31) return error_errno(_("could not write '%s'"), todo_file);
 30faf278 50) todo_list_release(&todo_list);
 30faf278 51) return error(_("unusable todo list: '%s'"), todo_file);
 30faf278 59) return error_errno(_("could not write '%s'."), todo_file);
+1f4d9b1b 157) BUG("unusable todo list");
+acabb2aa 313) ret = rearrange_squash_in_todo_file(the_repository);
+6d3f180e 316) ret = sequencer_add_exec_commands(the_repository, &commands);
 
 builtin/remote.c
+f39a9c65 1551) die(_("--save-to-push cannot be used with other options"));
 f39a9c65 1575) die(_("--save-to-push can only be used when only one url is defined"));
 
 builtin/stash.c
@@ -910,44 +896,44 @@ bec65d5b 1527) return env;
 51809c70 1630) continue;
 
 combine-diff.c
-7c978a06 963) if (elem->parent[i].status !=
-7c978a06 965) added = 0;
-7c978a06 966) if (added)
-41ee2ad6 967) printf("%s%snew file mode %06o",
-7c978a06 970) if (deleted)
-41ee2ad6 971) printf("%s%sdeleted file ",
-7c978a06 973) printf("mode ");
-7c978a06 974) for (i = 0; i < num_parent; i++) {
-7c978a06 975) printf("%s%06o", i ? "," : "",
-7c978a06 978) if (elem->mode)
-7c978a06 979) printf("..%06o", elem->mode);
-7c978a06 981) printf("%s\n", c_reset);
+26c64cee 89)     filename_changed(p->parent[j].status))
+26c64cee 90) strbuf_release(&p->parent[j].path);
+26c64cee 992) dump_quoted_path("--- ", "", "/dev/null",
+26c64cee 1000) dump_quoted_path("--- ", "", "/dev/null",
+26c64cee 1273) write_name_quoted(p->path, stdout,
 
 ident.c
-862e80a4 383) fputs(_(env_hint), stderr);
-862e80a4 384) die(_("unable to auto-detect email address (got '%s')"), email);
-afb6c30b 436) die(_("invalid date format: %s"), date_str);
-d6991cee 506) int author_ident_sufficiently_given(void)
-d6991cee 508) return ident_is_sufficient(author_ident_explicitly_given);
+39ab4d09 452) break;
+39ab4d09 454) name = getenv("GIT_AUTHOR_NAME");
+39ab4d09 455) email = getenv("GIT_AUTHOR_EMAIL");
+39ab4d09 456) break;
 39ab4d09 515) return config_error_nonbool(var);
 39ab4d09 525) return config_error_nonbool(var);
 39ab4d09 535) return config_error_nonbool(var);
+39ab4d09 545) return config_error_nonbool(var);
 
 midx.c
+5bf52fbc 428) close_pack(packs->info[packs->nr].p);
+5bf52fbc 429) FREE_AND_NULL(packs->info[packs->nr].p);
+3c9e7185 688) BUG("object %s is in an expired pack with int-id %d",
+3c9e7185 815) error(_("did not see pack-file %s to drop"),
 3c9e7185 817) drop_index++;
 3c9e7185 818) missing_drops++;
 3c9e7185 819) i--;
 3c9e7185 826) result = 1;
 3c9e7185 827) goto cleanup;
-cc6af73c 1053) midx_report(_("failed to load pack-index for packfile %s"),
-cc6af73c 1054)     e.p->pack_name);
-cc6af73c 1055) break;
 3c9e7185 1079) return 0;
 3c9e7185 1094) continue;
 467ae6f9 1133) return 0;
 19c239d4 1148) return 0;
 19c239d4 1157) continue;
 19c239d4 1170) continue;
+19c239d4 1193) error(_("could not start pack-objects"));
+19c239d4 1194) result = 1;
+19c239d4 1195) goto cleanup;
+19c239d4 1212) error(_("could not finish pack-objects"));
+19c239d4 1213) result = 1;
+19c239d4 1214) goto cleanup;
 
 oidset.c
 ef644c41 69) die_errno("Could not read '%s'", path);
@@ -967,32 +953,49 @@ ee70c128 1736) advise(_("This is likely due to the file having been written by a
 
 rebase-interactive.c
 6ca89c6f 26) warning(_("unrecognized setting %s for option "
+c0108d5c 102) return error(_("could not copy '%s' to '%s'."), todo_file,
+6ca89c6f 164) goto leave_check;
 
 remote-curl.c
 34a9469d 360) die("invalid server response; expected service, got flush packet");
 
+revision.c
+26c64cee 2654) die("--combined-all-names makes no sense without -c or --cc");
+
 sequencer.c
-d0aaa46f 1019) eol = sb->len;
-6e98de72 2166) return error(_("cannot '%s' without a previous commit"),
 6d3f180e 4606) int sequencer_add_exec_commands(struct repository *r,
-3546c8d9 4609) const char *todo_file = rebase_path_todo();
-8dccc7a6 4613) if (strbuf_read_file(&todo_list.buf, todo_file, 0) < 0)
 6d3f180e 4614) return error_errno(_("could not read '%s'."), todo_file);
 6d3f180e 4616) if (todo_list_parse_insn_buffer(r, todo_list.buf.buf, &todo_list)) {
-3546c8d9 4617) todo_list_release(&todo_list);
 6d3f180e 4621) todo_list_add_exec_commands(&todo_list, commands);
+6d3f180e 4622) res = todo_list_write_to_file(r, &todo_list, todo_file, NULL, NULL, -1, 0);
+0cce4a27 4623) todo_list_release(&todo_list);
+6d3f180e 4625) if (res)
 6d3f180e 4626) return error_errno(_("could not write '%s'."), todo_file);
+6d3f180e 4627) return 0;
 616d7740 4661) strbuf_addstr(buf, " -c");
+87805600 4708) res = -1;
 6ca89c6f 4709) goto out;
-87805600 4713) res = -1;
 6ca89c6f 4714) goto out;
+6ca89c6f 4723) fprintf(stderr, _(edit_todo_list_advice));
+ce193960 4841) todo_list_release(&new_todo);
+1f4d9b1b 4847) todo_list_release(&new_todo);
 1f4d9b1b 4848) return error_errno(_("could not write '%s'"), todo_file);
-3cc0287b 4924) clear_commit_todo_item(&commit_todo);
-c44a4c65 4925) return error(_("the script was already rearranged."));
+acabb2aa 5025) int rearrange_squash_in_todo_file(struct repository *r)
 acabb2aa 5027) const char *todo_file = rebase_path_todo();
 acabb2aa 5028) struct todo_list todo_list = TODO_LIST_INIT;
 acabb2aa 5029) int res = 0;
+acabb2aa 5031) if (strbuf_read_file_or_whine(&todo_list.buf, todo_file) < 0)
 acabb2aa 5032) return -1;
+acabb2aa 5033) if (todo_list_parse_insn_buffer(r, todo_list.buf.buf, &todo_list) < 0) {
+acabb2aa 5034) todo_list_release(&todo_list);
+acabb2aa 5035) return -1;
+acabb2aa 5038) res = todo_list_rearrange_squash(&todo_list);
+acabb2aa 5039) if (!res)
+acabb2aa 5040) res = todo_list_write_to_file(r, &todo_list, todo_file, NULL, NULL, -1, 0);
+acabb2aa 5042) todo_list_release(&todo_list);
+acabb2aa 5044) if (res)
+acabb2aa 5045) return error_errno(_("could not write '%s'."), todo_file);
+acabb2aa 5046) return 0;
 
 strbuf.c
 bfc3fe33 259) die("`pos' is too far after the end of the buffer");
@@ -1000,72 +1003,51 @@ bfc3fe33 264) BUG("your vsnprintf is broken (returned %d)", len);
 bfc3fe33 266) return; /* nothing to do */
 bfc3fe33 268) die("you want to use way too much memory");
 bfc3fe33 276) BUG("your vsnprintf is broken (returns inconsistent lengths)");
-033abf97 397) BUG("your vsnprintf is broken (returned %d)", len);
-033abf97 402) BUG("your vsnprintf is broken (insatiable)");
+fd2015b3 448) return 0;
 
 worktree.c
 e0c4a731 465) clear_repository_format(&format);
 
 Commits introducting uncovered code:
-Ævar Arnfjörð Bjarmason	8a6179bc i18n: git-commit basic messages
-Ævar Arnfjörð Bjarmason	49df4b02 i18n: git-branch basic messages
-Alban Gruin	30faf278 rebase--interactive: move transform_todo_file() to rebase--interactive.c
+Alban Gruin	ce193960 sequencer: refactor skip_unnecessary_picks() to work on a todo_list
 Alban Gruin	6ca89c6f sequencer: refactor check_todo_list() to work on a todo_list
-Alban Gruin	c0108d5c rebase-interactive: rewrite edit_todo_list() to handle the initial edit
-Alban Gruin	acabb2aa sequencer: refactor rearrange_squash() to work on a todo_list
-Alban Gruin	6d3f180e sequencer: refactor sequencer_add_exec_commands() to work on a todo_list
-Alban Gruin	1f4d9b1b sequencer: change complete_action() to use the refactored functions
 Alban Gruin	616d7740 sequencer: introduce todo_list_write_to_file()
+Alban Gruin	6d3f180e sequencer: refactor sequencer_add_exec_commands() to work on a todo_list
+Alban Gruin	c0108d5c rebase-interactive: rewrite edit_todo_list() to handle the initial edit
+Alban Gruin	30faf278 rebase--interactive: move transform_todo_file() to rebase--interactive.c
+Alban Gruin	1f4d9b1b sequencer: change complete_action() to use the refactored functions
+Alban Gruin	acabb2aa sequencer: refactor rearrange_squash() to work on a todo_list
+Anders Waldenborg	fd2015b3 strbuf: separate callback for strbuf_expand:ing literals
 Anders Waldenborg	4f732e0f pretty: allow %(trailers) options with explicit value
+Barret Rhoden	e7973c85 blame: add the ability to ignore commits and their changes
 Barret Rhoden	ef644c41 Move init_skiplist() outside of fsck
 Barret Rhoden	07d04b91 blame: add a config option to mark ignored lines
-Barret Rhoden	e7973c85 blame: add the ability to ignore commits and their changes
 Daniels Umanovskis	0ecb1fc7 branch: introduce --show-current display option
 Denton Liu	f39a9c65 remote: add --save-to-push option to git remote set-url
-Derrick Stolee	3c9e7185 multi-pack-index: implement 'expire' subcommand
-Derrick Stolee	cc6af73c multi-pack-index: verify object offsets
+Denton Liu	a3b994b7 merge: cleanup messages like commit
+Derrick Stolee	91336887 repack: refactor pack deletion for future use
 Derrick Stolee	467ae6f9 multi-pack-index: prepare 'repack' subcommand
 Derrick Stolee	19c239d4 midx: implement midx_repack()
-Derrick Stolee	91336887 repack: refactor pack deletion for future use
-Eugene Letuchy	31653c1a Make git blame's date output format configurable, like git log
-Jay Soffian	66f4b98a Teach merge the '[-e|--edit]' option
+Derrick Stolee	3c9e7185 multi-pack-index: implement 'expire' subcommand
+Derrick Stolee	5bf52fbc midx: refactor permutation logic and pack sorting
+Elijah Newren	26c64cee log,diff-tree: add --combined-all-names option
 Jeff King	34a9469d remote-curl: refactor smart-http discovery
-Jeff King	afb6c30b ident: mark error messages for translation
-Jeff King	a5481a6c convert "enum date_mode" into a struct
-Jeff King	7c978a06 combine-diff: split header printing into its own function
-Jeff King	862e80a4 ident: handle NULL email when complaining of empty name
-Jeff King	d6991cee ident: keep separate "explicit" flags for author and committer
-Jeff Smith	b543bb1c blame: move scoreboard-related methods to libgit
-Joel Teichroeb	cdca49bc stash: convert drop and clear to builtin
 Joel Teichroeb	f6bbd781 stash: convert apply to builtin
 Joel Teichroeb	e1d01876 stash: convert pop to builtin
-Johannes Schindelin	6e98de72 sequencer (rebase -i): add support for the 'fixup' and 'squash' commands
-Johannes Schindelin	c44a4c65 rebase -i: rearrange fixup/squash lines using the rebase--helper
-Johannes Schindelin	3546c8d9 rebase -i: also expand/collapse the SHA-1s via the rebase--helper
-Johannes Schindelin	26799a20 stash: optionally use the scripted version again
-Johannes Schindelin	033abf97 Replace all die("BUG: ...") calls by BUG() ones
+Joel Teichroeb	cdca49bc stash: convert drop and clear to builtin
 Johannes Schindelin	bec65d5b tests: add a special setup where stash.useBuiltin is off
-John Keeping	41ee2ad6 combine-diff.c: teach combined diffs about line prefix
+Johannes Schindelin	26799a20 stash: optionally use the scripted version again
 Jonathan Nieder	ee70c128 index: offer advice for unknown index extensions
-Junio C Hamano	b7200e83 branch: teach --edit-description option
-Liam Beguin	8dccc7a6 rebase -i: refactor transform_todo_ids
+Liam Beguin	0cce4a27 rebase -i -x: add exec commands via the rebase--helper
 Martin Ågren	e0c4a731 setup: fix memory leaks with `struct repository_format`
-Michael J Gruber	62dc42b9 merge: clarify call chain
-Miklos Vajna	1c7b76be Build in merge
-Nguyễn Thái Ngọc Duy	3cc0287b sequencer.c: use commit-slab to associate todo items to commits
-Paul Tan	11b6d178 pull: pass git-merge's options to git-merge
+Paul-Sebastian Ungureanu	9a95010a stash: make push -q quiet
+Paul-Sebastian Ungureanu	1f5a011d stash: convert create to builtin
+Paul-Sebastian Ungureanu	847eb0b0 stash: convert store to builtin
+Paul-Sebastian Ungureanu	51809c70 stash: convert `stash--helper.c` into `stash.c`
+Paul-Sebastian Ungureanu	b4493f26 stash: convert show to builtin
 Paul-Sebastian Ungureanu	bfc3fe33 strbuf.c: add `strbuf_insertf()` and `strbuf_vinsertf()`
 Paul-Sebastian Ungureanu	fa38428f stash: convert push to builtin
-Paul-Sebastian Ungureanu	847eb0b0 stash: convert store to builtin
-Paul-Sebastian Ungureanu	1f5a011d stash: convert create to builtin
-Paul-Sebastian Ungureanu	b4493f26 stash: convert show to builtin
-Paul-Sebastian Ungureanu	51809c70 stash: convert `stash--helper.c` into `stash.c`
-Paul-Sebastian Ungureanu	9a95010a stash: make push -q quiet
-Phillip Wood	d0aaa46f commit: move empty message checks to libgit
-Pierre Habouzit	3f8d5204 git-blame: migrate to incremental parse-option [2/2]
-Pierre Habouzit	5817da01 git-blame: migrate to incremental parse-option [1/2]
 René Scharfe	87805600 sequencer: factor out strbuf_read_file_or_whine()
-Sven Strickroth	b64c1e07 commit: do not lose SQUASH_MSG contents
 William Hubbs	39ab4d09 config: allow giving separate author and committer idents
 
 
@@ -1075,12 +1057,7 @@ Uncovered code in 'next' not in 'master'
 bisect.c
 4f6d26b1 661) mark_edges_uninteresting(revs, NULL, 0);
 
-builtin/am.c
-7ff26832 1834) write_index_patch(state);
-
 builtin/bisect--helper.c
-ecb3f373 111) return error(_("please use two different terms"));
-ecb3f373 118) return error_errno(_("could not open the file BISECT_TERMS"));
 5e82c3dd 162) if (get_oid_commit(commit, &oid))
 5e82c3dd 163) return error(_("'%s' is not a valid commit"), commit);
 5e82c3dd 164) strbuf_addstr(&branch, commit);
@@ -1116,21 +1093,27 @@ ecb3f373 118) return error_errno(_("could not open the file BISECT_TERMS"));
 06f5608c 558) return -1;
 06f5608c 576) retval = -1;
 06f5608c 577) goto finish;
+06f5608c 588) retval = -1;
+06f5608c 589) goto finish;
+06f5608c 600) retval = -1;
+5e82c3dd 677) return error(_("--bisect-reset requires either no argument or a commit"));
+0f30233a 681) return error(_("--bisect-write requires either 4 or 5 arguments"));
+4fbdbd5b 687) return error(_("--check-and-set-terms requires 3 arguments"));
+129a6cf3 693) return error(_("--bisect-next-check requires 2 or 3 arguments"));
 
 builtin/blame.c
 acdd3776 930) blame_date_width = sizeof("Thu Oct 19 16:00");
 acdd3776 931) break;
 
 builtin/checkout.c
-e8a8a4d7 253) die(_("Unable to add merge result for '%s'"), path);
-e8a8a4d7 257) die(_("make_cache_entry failed for path '%s'"), path);
 091e04bc 303) return;
+091e04bc 1271) die(_("'%s' cannot be used with switching branches"),
 
 builtin/diff-tree.c
-ff7fe37b 168) if (!the_index.cache)
+e1ff0a32 169) repo_read_index(the_repository);
 
-builtin/notes.c
-033abf97 556) BUG("combine_notes_overwrite failed");
+builtin/pack-objects.c
+33de80b1 2225) const uint32_t tail = (idx + window - count) % window;
 
 builtin/pack-redundant.c
 33de80b1 169) const int cmp = oidcmp(l->oid, oid);
@@ -1157,33 +1140,39 @@ c5233708 448) ret = error(_("could not write index"));
 c5233708 449) goto leave_reset_head;
 c5233708 467) } else if (old_orig)
 c5233708 468) delete_ref(NULL, "ORIG_HEAD", old_orig, 0);
-ac7f467f 828) remove_dir_recursively(&dir, 0);
-ac7f467f 829) strbuf_release(&dir);
-ac7f467f 830) die("Nothing to do");
-55071ea2 1172) BUG("sane_execvp() returned???");
-5e5d9619 1293) exit(1);
-ba1905a5 1418) die(_("--strategy requires --merge or --interactive"));
-ba1905a5 1428) BUG("unhandled rebase type (%d)", options.type);
-
-builtin/update-index.c
-309be813 905) return error("option '%s' must be the last argument", opt->long_name);
-309be813 922) prefix, prefix ? strlen(prefix) : 0);
-309be813 924) active_cache_changed = 0;
+21853626 507) BUG("move_to_original_branch without onto");
+21853626 543) argv_array_push(&am.args, opts->gpg_sign_opt);
+21853626 575) status = error_errno(_("could not open '%s' for writing"),
+21853626 577) free(rebased_patches);
+21853626 578) argv_array_clear(&am.args);
+21853626 579) return status;
+21853626 588) argv_array_split(&format_patch.args,
+21853626 589)  opts->git_format_patch_opt.buf);
+21853626 597) unlink(rebased_patches);
+21853626 598) free(rebased_patches);
+21853626 599) argv_array_clear(&am.args);
+21853626 601) reset_head(&opts->orig_head, "checkout", opts->head_name, 0,
+21853626 603) error(_("\ngit encountered an error while preparing the "
+21853626 610) strbuf_release(&revisions);
+21853626 611) return status;
+21853626 617) status = error_errno(_("could not open '%s' for reading"),
+21853626 619) free(rebased_patches);
+21853626 620) argv_array_clear(&am.args);
+21853626 621) return status;
 
 date.c
 acdd3776 113) die("Timestamp too large for this system: %"PRItime, time);
-7d29afd4 137) strbuf_addstr(timebuf, _("in the future"));
-7d29afd4 138) return;
-033abf97 209) BUG("cannot create anonymous strftime date_mode struct");
 acdd3776 236) hide.date = 1;
+acdd3776 917) return DATE_HUMAN;
+2fd7c229 934) if (isatty(1) || pager_in_use())
+2fd7c229 935) format = p;
+2fd7c229 937) format = "default";
 
 diff.c
-dd63f169 4639) die(_("--follow requires exactly one pathspec"));
 d473e2e0 4946) return error(_("%s expects a numerical value"), "--unified");
 
 entry.c
 536ec183 450) BUG("Can't remove entry to a path");
-12dccc16 517) return 0;
 
 http-walker.c
 514c5fdd 550) loose_object_path(the_repository, &buf, &req->oid);
@@ -1197,63 +1186,69 @@ list-objects.c
 4f6d26b1 288) show_edge(commit);
 
 merge-recursive.c
-c43ba42e 436) fprintf(stderr, "BUG: %d %.*s\n", ce_stage(ce),
-19c6a4f8 437) (int)ce_namelen(ce), ce->name);
-033abf97 439) BUG("unmerged index entries in merge-recursive.c");
-9047ebbc 728) return -1;
-6003303a 925) if (status == SCLD_EXISTS)
-18cfc088 1206) return 0;
-73118f89 3632) return NULL;
-d90e759f 3655)    oid_to_hex(base_list[i]));
+0d6caa2d 433) for (i = 0; i < istate->cache_nr; i++) {
+0d6caa2d 434) const struct cache_entry *ce = istate->cache[i];
+0d6caa2d 443) istate->cache_tree = cache_tree();
+0d6caa2d 733) ce = index_file_exists(o->repo->index, path, strlen(path),
+0d6caa2d 3193) remove_file_from_index(o->repo->index, path);
 
 object.c
 01f8d594 278) error(_("hash mismatch %s"), oid_to_hex(repl));
 
 parse-options.c
 f62470c6 116) BUG("BITOP can't have unset form");
-df217ed6 155) *(const char **)opt->value = (const char *)opt->defval;
-2a514ed8 204) *(unsigned long *)opt->value = 0;
-2a514ed8 205) return 0;
-1e5ce570 405) err |= optbug(opts, "uses incompatible flags "
-af465af8 409) err |= optbug(opts, "invalid short name");
-af465af8 411) err |= optbug(opts, "short name already used");
+3ebbe289 183) return (*opt->ll_callback)(p, opt, p_arg, p_unset);
+3ebbe289 255) rc = (*numopt->ll_callback)(p, numopt, arg, 0);
 3ebbe289 432) BUG("OPTION_CALLBACK needs one callback");
 3ebbe289 434) BUG("OPTION_CALLBACK can't have two callbacks");
-b9d7f4b4 540) switch (opts->type) {
-b9d7f4b4 542) continue;
-ebc4a04e 559) if (opts->flags & PARSE_OPT_COMP_ARG)
-b221b5ab 561) if (starts_with(opts->long_name, "no-"))
-b9d7f4b4 567) fputc('\n', stdout);
-a92ec7ef 568) return PARSE_OPT_COMPLETE;
-b9d7f4b4 606) return show_gitcomp(ctx, options);
+bf3ff338 438) BUG("OPTION_LOWLEVEL_CALLBACK needs a callback");
+bf3ff338 440) BUG("OPTION_LOWLEVEL_CALLBACK needs no high level callback");
+202fbb33 475) BUG("Can't keep argv0 if you don't have it");
+f41179f1 622) BUG("parse_short_opt() cannot return these");
+f41179f1 647) BUG("parse_short_opt() cannot return these");
+f41179f1 676) BUG("parse_long_opt() cannot return these");
+
+repository.c
+3a95f31d 272) BUG("the repo hasn't been setup");
 
 revision.c
 d5d2e935 169) return;
 d5d2e935 172) return;
 d5d2e935 195) break;
 f1f5de44 218) continue;
-be489d02 1547) return;
 
 sequencer.c
 899b49c4 2395) opts->quiet = 1;
+e1ff0a32 3991) res = error_dirty_index(r, opts);
 
 sha1-file.c
-d21f8426 1084) return -1;
 514c5fdd 1291) status = error(_("unable to parse %s header"), oid_to_hex(oid));
-3e8b7d3c 1830) return 0;
+2c319886 1595) return error_errno(_("unable to write file %s"), filename);
+76011357 1626) fsync_or_die(fd, "loose object file");
+76011357 1628) die_errno(_("error when closing loose object file"));
+76011357 1719) die(_("unable to write loose object file"));
+2c319886 1818) return error(_("cannot read object for %s"), oid_to_hex(oid));
+00a7760e 2297) the_hash_algo->final_fn(real_oid.hash, &c);
+00a7760e 2298) if (!oideq(expected_oid, &real_oid)) {
+01f8d594 2299) error(_("hash mismatch for %s (expected %s)"), path,
 
 sha1-name.c
 d1dd94b3 926) return MISSING_OBJECT;
 
 t/helper/test-date.c
+4419de91 95) static void getnanos(const char **argv, struct timeval *now)
+4419de91 97) double seconds = getnanotime() / 1.0e9;
 4419de91 99) if (*argv)
+4419de91 100) seconds -= strtod(*argv, NULL);
+4419de91 101) printf("%lf\n", seconds);
+4419de91 102) }
+4419de91 133) getnanos(argv+1, &now);
 
 t/helper/test-path-utils.c
 b819f1d2 180) static int cmp_by_st_size(const void *a, const void *b)
 b819f1d2 182) intptr_t x = (intptr_t)((struct string_list_item *)a)->util;
 b819f1d2 183) intptr_t y = (intptr_t)((struct string_list_item *)b)->util;
 b819f1d2 185) return x > y ? -1 : (x < y ? +1 : 0);
-dc2d9ba3 294) res = error("'%s' is %s.gitmodules", argv[i],
 5868bd86 308) res = error_errno("Cannot stat '%s'", argv[i]);
 af9912ef 314) if (argc == 4 && !strcmp(argv[1], "skip-n-bytes")) {
 af9912ef 315) int fd = open(argv[2], O_RDONLY), offset = atoi(argv[3]);
@@ -1282,6 +1277,11 @@ b819f1d2 345) for (i = 4; i < argc; i++)
 b819f1d2 346) if (stat(argv[i], &st))
 b819f1d2 347) res = error_errno("Cannot stat '%s'", argv[i]);
 b819f1d2 349) string_list_append(&list, argv[i])->util =
+b819f1d2 350) (void *)(intptr_t)st.st_size;
+b819f1d2 351) QSORT(list.items, list.nr, cmp_by_st_size);
+b819f1d2 352) for (i = offset; i < list.nr; i+= stride)
+b819f1d2 353) printf("%s\n", list.items[i].string);
+b819f1d2 355) return !!res;
 
 t/helper/test-xml-encode.c
 22231908 9) int cmd__xml_encode(int argc, const char **argv)
@@ -1339,72 +1339,53 @@ t/helper/test-xml-encode.c
 22231908 77) }
 
 utf8.c
-76759c7d 553) return NULL;
+aab2a1ae 568) bom_str = utf16_be_bom;
+aab2a1ae 569) bom_len = sizeof(utf16_be_bom);
+aab2a1ae 570) out_encoding = "UTF-16BE";
 
 wrapper.c
 e3b1e3bd 701) die_errno(_("could not stat %s"), filename);
 
 Commits introducting uncovered code:
-Ævar Arnfjörð Bjarmason	e8a8a4d7 i18n: git-checkout basic messages
-Charles Bailey	2a514ed8 parse-options: move unsigned long option parsing out of pack-objects.c
 David Turner	d1dd94b3 Do not print 'dangling' for cat-file in case of ambiguity
 Derrick Stolee	4f6d26b1 list-objects: consume sparse tree walk
 Derrick Stolee	d5d2e935 revision: implement sparse algorithm
 Derrick Stolee	f1f5de44 revision: add mark_tree_uninteresting_sparse
-Elijah Newren	c43ba42e merge-recursive: Make BUG message more legible by adding a newline
-Elijah Newren	d90e759f merge-recursive: fix numerous argument alignment issues
 Elijah Newren	899b49c4 git-rebase, sequencer: extend --quiet option for the interactive machinery
-Jeff King	514c5fdd sha1-file: modernize loose object file functions
 Jeff King	01f8d594 prefer "hash mismatch" to "sha1 mismatch"
-Jeff King	dd63f169 move "--follow needs one pathspec" rule to diff_setup_done
+Jeff King	514c5fdd sha1-file: modernize loose object file functions
+Jeff King	76011357 sha1-file: prefer "loose object file" to "sha1 file" in messages
+Jeff King	2c319886 sha1-file: avoid "sha1 file" for generic use in messages
+Jeff King	00a7760e sha1-file: modernize loose header/stream functions
 Johannes Schindelin	21853626 built-in rebase: call `git am` directly
 Johannes Schindelin	c5233708 rebase: move `reset_head()` into a better spot
-Johannes Schindelin	b819f1d2 ci: parallelize testing on Windows
-Johannes Schindelin	22231908 tests: optionally write results as JUnit-style .xml
-Johannes Schindelin	af9912ef tests: include detailed trace logs with --write-junit-xml upon failure
-Johannes Schindelin	5868bd86 tests: avoid calling Perl just to determine file sizes
-Johannes Schindelin	dc2d9ba3 is_{hfs,ntfs}_dotgitmodules: add tests
-Johannes Schindelin	033abf97 Replace all die("BUG: ...") calls by BUG() ones
-Johannes Schindelin	6003303a merge-recursive: switch to returning errors instead of dying
 Johannes Schindelin	4419de91 test-date: add a subcommand to measure times in shell scripts
-Jonathan Nieder	7d29afd4 i18n: mark relative dates for translation
-Jonathan Nieder	1e5ce570 parse-options: clearer reporting of API misuse
-Jonathan Nieder	3e8b7d3c has_sha1_file: don't bother if we are not in a repository
-Jonathan Nieder	309be813 update-index: migrate to parse-options API
-Junio C Hamano	af465af8 parse-options: detect attempt to add a duplicate short option name
-Junio C Hamano	19c6a4f8 merge-recursive: do not return NULL only to cause segfault
-Junio C Hamano	d21f8426 unpack_sha1_header(): detect malformed object header
-Linus Torvalds	12dccc16 Make fiel checkout function available to the git library
+Johannes Schindelin	b819f1d2 ci: parallelize testing on Windows
+Johannes Schindelin	5868bd86 tests: avoid calling Perl just to determine file sizes
+Johannes Schindelin	af9912ef tests: include detailed trace logs with --write-junit-xml upon failure
+Johannes Schindelin	22231908 tests: optionally write results as JUnit-style .xml
 Linus Torvalds	acdd3776 Add 'human' date format
-Miklos Vajna	9047ebbc Split out merge_recursive() to merge-recursive.c
-Nguyễn Thái Ngọc Duy	3ebbe289 parse-options: allow ll_callback with OPTION_CALLBACK
-Nguyễn Thái Ngọc Duy	a92ec7ef parse-options: fix SunCC compiler warning
-Nguyễn Thái Ngọc Duy	b221b5ab completion: collapse extra --no-.. options
-Nguyễn Thái Ngọc Duy	ebc4a04e remote: force completing --mirror= instead of --mirror
-Nguyễn Thái Ngọc Duy	b9d7f4b4 parse-options: support --git-completion-helper
-Nguyễn Thái Ngọc Duy	be489d02 revision.c: --indexed-objects add objects from all worktrees
-Nguyễn Thái Ngọc Duy	ff7fe37b diff.c: move read_index() code back to the caller
-Nguyễn Thái Ngọc Duy	d473e2e0 diff.c: convert -U|--unified
+Nguyễn Thái Ngọc Duy	f41179f1 parse-options: avoid magic return codes
+Nguyễn Thái Ngọc Duy	3a95f31d repository.c: replace hold_locked_index() with repo_hold_locked_index()
+Nguyễn Thái Ngọc Duy	202fbb33 parse-options: add one-shot mode
 Nguyễn Thái Ngọc Duy	f62470c6 parse-options: add OPT_BITOP()
-Paul Tan	7ff26832 builtin-am: implement -i/--interactive
-Pranit Bauva	129a6cf3 bisect--helper: `bisect_next_check` shell function in C
+Nguyễn Thái Ngọc Duy	3ebbe289 parse-options: allow ll_callback with OPTION_CALLBACK
+Nguyễn Thái Ngọc Duy	0d6caa2d merge-recursive.c: remove implicit dependency on the_index
+Nguyễn Thái Ngọc Duy	d473e2e0 diff.c: convert -U|--unified
+Nguyễn Thái Ngọc Duy	e1ff0a32 read-cache.c: kill read_index()
+Nguyễn Thái Ngọc Duy	bf3ff338 parse-options: stop abusing 'callback' for lowlevel callbacks
 Pranit Bauva	5e82c3dd bisect--helper: `bisect_reset` shell function in C
-Pranit Bauva	ecb3f373 bisect--helper: `write_terms` shell function in C
+Pranit Bauva	0f30233a bisect--helper: `bisect_write` shell function in C
+Pranit Bauva	129a6cf3 bisect--helper: `bisect_next_check` shell function in C
 Pranit Bauva	450ebb73 bisect--helper: `get_terms` & `bisect_terms` shell function in C
 Pranit Bauva	06f5608c bisect--helper: `bisect_start` shell function partially in C
-Pranit Bauva	0f30233a bisect--helper: `bisect_write` shell function in C
 Pranit Bauva	e3b1e3bd wrapper: move is_empty_file() and rename it as is_empty_or_missing_file()
-Pratik Karki	55071ea2 rebase: start implementing it as a builtin
-Pratik Karki	ac7f467f builtin/rebase: support running "git rebase <upstream>"
-Pratik Karki	5e5d9619 builtin rebase: support --abort
-Pratik Karki	ba1905a5 builtin rebase: add support for custom merge strategies
+Pranit Bauva	4fbdbd5b bisect--helper: `check_and_set_terms` shell function in C
 Shahzad Lone	33de80b1 various: tighten constness of some local variables
-Stefan Beller	18cfc088 submodule.c: move submodule merging to merge-recursive.c
-Stephan Beyer	73118f89 merge-recursive.c: Add more generic merge_recursive_generic()
-Stephen Boyd	df217ed6 parse-opts: add OPT_FILENAME and transition builtins
-Thomas Gummerer	091e04bc checkout: introduce --{,no-}overlay option
+Stephen P. Smith	2fd7c229 Replace the proposed 'auto' mode with 'auto:'
 Thomas Gummerer	536ec183 entry: support CE_WT_REMOVE flag in checkout_entry
-Torsten Bögershausen	76759c7d git on Mac OS and precomposed unicode
+Thomas Gummerer	091e04bc checkout: introduce --{,no-}overlay option
+Torsten Bögershausen	aab2a1ae Support working-tree-encoding "UTF-16LE-BOM"
 
 
 Uncovered code in 'master' not in 'master@{1}'
@@ -1416,54 +1397,57 @@ builtin/archive.c
 
 builtin/fetch-pack.c
 4316ff30 227) get_remote_refs(fd[1], &reader, &ref, 0, NULL, NULL);
-ad6ac124 234) BUG("unknown protocol version");
+4316ff30 228) break;
 
 builtin/fetch.c
-aa57b871 1482) if (filter_options.choice)
-
-builtin/grep.c
-f9ee2fcd 428) return 0;
+e0137875 1483) die(_("--filter can only be used with the remote "
+e0137875 1652) die(_("--filter can only be used with the remote "
 
 builtin/pack-objects.c
-ac77d0c3 2008) die(_("unable to parse object header of %s"),
-ca473cef 2081) die(_("object %s inconsistent object length (%"PRIuMAX" vs %"PRIuMAX")"),
-f616db6a 2094) warning(_("object %s cannot be read"),
+edb673cf 2335) packing_data_lock(&to_pack);
+edb673cf 2337) packing_data_unlock(&to_pack);
+
+builtin/rebase.c
+81ef8ee7 774) return -1;
+d421afa0 1259) die(_("--reschedule-failed-exec requires an interactive rebase"));
+d421afa0 1297) die(_("error: cannot combine '--preserve-merges' with "
 
 builtin/receive-pack.c
 01f9ec64 1587)     reader->line + 8);
-a85b377d 1617) true_flush = 1;
 01f9ec64 1621) die("protocol error: got an unexpected packet");
 
 commit-graph.c
 aa658574 127) return NULL;
 aa658574 130) return NULL;
-7b8a21db 455) return c->maybe_tree;
-0cbef8f8 457) BUG("get_commit_tree_in_graph_one called from non-commit-graph commit");
-4f5b532d 884) die(_("error opening index for %s"), packname.buf);
-08fd81c9 956) die(_("the commit graph format cannot write %d commits"), count_distinct);
-
-commit-reach.c
-5227c385 326) return ret;
-
-commit.c
+aa658574 186) free(graph);
+aa658574 187) return NULL;
+aa658574 222) free(graph);
+aa658574 223) return NULL;
+d9b1b309 935) display_progress(oids.progress, approx_nr_objects);
 
 diff.c
 b73bcbac 308) ret = 0;
 21536d07 812)        (s[off] == '\r' && off < len - 1))
 21536d07 813) off++;
+b73bcbac 5112) options->color_moved_ws_handling = 0;
 
 fetch-pack.c
 01f9ec64 154) die(_("git fetch-pack: expected a flush packet after shallow list"));
-1dd73e20 256) die(_("--stateless-rpc requires multi_ack_detailed"));
+01f9ec64 358) die(_("invalid shallow line: %s"), reader.line);
 01f9ec64 364) die(_("invalid unshallow line: %s"), reader.line);
-f7e20501 1011) timestamp_t max_age = approxidate(args->deepen_since);
+01f9ec64 366) die(_("object not found: %s"), reader.line);
+01f9ec64 369) die(_("error in object: %s"), reader.line);
+01f9ec64 371) die(_("no shallow found: %s"), reader.line);
+01f9ec64 374) die(_("expected shallow/unshallow, got %s"), reader.line);
 0bbc0bc5 1128) packet_buf_write(&req_buf, "sideband-all");
-bbb19a8b 1320) die(_("error processing wanted refs: %d"), reader->status);
+0bbc0bc5 1350) reader.use_sideband = 1;
+0bbc0bc5 1351) reader.me = "fetch-pack";
 
 hex.c
 47edb649 93) char *sha1_to_hex_r(char *buffer, const unsigned char *sha1)
 47edb649 95) return hash_to_hex_algop_r(buffer, sha1, &hash_algos[GIT_HASH_SHA1]);
 47edb649 116) char *hash_to_hex(const unsigned char *hash)
+47edb649 118) return hash_to_hex_algop(hash, the_hash_algo);
 
 http-push.c
 ea82b2a0 1314) p = process_tree(lookup_tree(the_repository, &entry.oid),
@@ -1472,6 +1456,7 @@ http.c
 e6cf87b1 1999) if (fflush(result)) {
 e6cf87b1 2000) error_errno("unable to flush a file");
 e6cf87b1 2001) return HTTP_START_FAILED;
+e6cf87b1 2003) rewind(result);
 e6cf87b1 2004) if (ftruncate(fileno(result), 0) < 0) {
 e6cf87b1 2005) error_errno("unable to truncate a file");
 e6cf87b1 2006) return HTTP_START_FAILED;
@@ -1479,10 +1464,13 @@ e6cf87b1 2008) break;
 e6cf87b1 2010) BUG("Unknown http_request target");
 
 list-objects-filter.c
-bc5975d2 147) BUG("unknown filter_situation: %d", filter_situation);
+c813a7c3 199) return;
+
+match-trees.c
+f55ac431 231) hashcpy(tree_oid.hash, rewrite_here);
+f55ac431 232) status = splice_tree(&tree_oid, subpath, oid2, &subtree);
 
 pkt-line.c
-bb643d8b 436) strbuf_setlen(sb_out, orig_len);
 0bbc0bc5 505) if (demultiplex_sideband(reader->me, reader->buffer,
 0bbc0bc5 508) break;
 0bbc0bc5 509) }
@@ -1493,19 +1481,26 @@ ad6f028f 1204) return 0;
 remote-curl.c
 01f9ec64 427) die("invalid server response; got '%s'", reader.line);
 01f9ec64 439) }
-b725b270 549) error("unable to rewind rpc post data - try increasing http.postBuffer");
-6c81a990 550) return CURLIOE_FAILRESTART;
-6c81a990 553) return CURLIOE_UNKNOWNCMD;
+b79bdd8c 576) return size;
 
 send-pack.c
 01f9ec64 143) return error(_("unable to parse remote unpack status: %s"), reader->line);
 01f9ec64 162) error("invalid ref status from remote: %s", reader->line);
+01f9ec64 579) receive_unpack_status(&reader);
 
 sha1-file.c
-ac73cedf 114) static void git_hash_unknown_final(unsigned char *hash, git_hash_ctx *ctx)
-1a07e59c 116) BUG("trying to finalize unknown hash");
-024aa469 1358) return -1;
-ee1c6c34 1766) return 0;
+2f90b9d9 172) int hash_algo_by_name(const char *name)
+2f90b9d9 175) if (!name)
+2f90b9d9 176) return GIT_HASH_UNKNOWN;
+2f90b9d9 177) for (i = 1; i < GIT_HASH_NALGOS; i++)
+2f90b9d9 178) if (!strcmp(name, hash_algos[i].name))
+2f90b9d9 179) return i;
+2f90b9d9 180) return GIT_HASH_UNKNOWN;
+2f90b9d9 183) int hash_algo_by_id(uint32_t format_id)
+2f90b9d9 186) for (i = 1; i < GIT_HASH_NALGOS; i++)
+2f90b9d9 187) if (format_id == hash_algos[i].format_id)
+2f90b9d9 188) return i;
+2f90b9d9 189) return GIT_HASH_UNKNOWN;
 
 sideband.c
 fbd76cd4 128) suffix = ANSI_SUFFIX;
@@ -1519,6 +1514,12 @@ fbd76cd4 196)     scratch->len ? "\n" : "", me, band);
 fbd76cd4 197) *sideband_type = SIDEBAND_PROTOCOL_ERROR;
 fbd76cd4 198) break;
 0bbc0bc5 203) die("%s", scratch->buf);
+
+submodule.c
+26f80ccf 1398) strbuf_release(&gitdir);
+be76c212 1521) struct fetch_task *task = task_cb;
+be76c212 1525) fetch_task_release(task);
+be76c212 1551) BUG("callback cookie bogus");
 
 t/helper/test-hash-speed.c
 37649b7f 6) static inline void compute_hash(const struct git_hash_algo *algo, git_hash_ctx *ctx, uint8_t *final, const void *p, size_t len)
@@ -1567,55 +1568,45 @@ tree.c
 371820d5 104) commit = lookup_commit(r, &entry.oid);
 
 upload-pack.c
-0b6069fe 148) struct strbuf buf = STRBUF_INIT;
-ae2948f3 838) die("git upload-pack: ambiguous deepen-not: %s", line);
-1bd8c8f0 896) multi_ack = 1;
-05e95155 1058) keepalive = git_config_int(var, value);
-3145ea95 1335) die("oops (%s)", oid_to_hex(oid));
+87c2d9d3 149) sq_quote_buf(&buf, expanded_filter_spec.buf);
+01f9ec64 432) die("git upload-pack: expected SHA1 list, got '%s'", reader->line);
+0bbc0bc5 1066) allow_sideband_all = git_config_bool(var, value);
+07c3c2aa 1306)      allow_sideband_all) &&
+07c3c2aa 1307)     !strcmp(arg, "sideband-all")) {
+0bbc0bc5 1308) data->writer.use_sideband = 1;
+0bbc0bc5 1309) continue;
+bc2e795c 1441) deepen(&data->writer, INFINITE_DEPTH, data->deepen_relative,
+07c3c2aa 1544)    &allow_sideband_all_value) &&
 
 Commits introducting uncovered code:
-Brandon Williams	3145ea95 upload-pack: introduce fetch server command
-Brandon Williams	bbb19a8b fetch-pack: mark die strings for translation
-Brandon Williams	ae2948f3 upload-pack: factor out processing lines
-Brandon Williams	f9ee2fcd grep: recurse in-process using 'struct repository'
-Brandon Williams	f7e20501 fetch-pack: support shallow requests
-Brandon Williams	ad6ac124 connect: discover protocol version outside of get_remote_heads
-brian m. carlson	37649b7f t/helper: add a test helper to compute hash speed
-brian m. carlson	ea82b2a0 tree-walk: store object_id in a separate member
-brian m. carlson	50c817e0 t: make the sha1 test-tool helper generic
-brian m. carlson	ac73cedf hash: create union for hash context allocation
+Ævar Arnfjörð Bjarmason	d9b1b309 commit-graph write: show progress for object search
 brian m. carlson	0a3faa45 tree-walk: copy object ID before use
+brian m. carlson	37649b7f t/helper: add a test helper to compute hash speed
+brian m. carlson	f55ac431 match-trees: use hashcpy to splice trees
+brian m. carlson	2f90b9d9 sha1-file: provide functions to look up hash algorithms
+brian m. carlson	50c817e0 t: make the sha1 test-tool helper generic
 brian m. carlson	47edb649 hex: introduce functions to print arbitrary hashes
-Derrick Stolee	7b8a21db commit-graph: lazy-load trees for commits
-Derrick Stolee	0cbef8f8 commit-graph: load a root tree from specific graph
-Derrick Stolee	08fd81c9 commit-graph: implement write_commit_graph()
-Derrick Stolee	5227c385 commit-reach: move walk methods from commit.c
+brian m. carlson	ea82b2a0 tree-walk: store object_id in a separate member
+Christian Couder	e0137875 fetch: fix extensions.partialclone name in error message
 Issac Trotts	ad6f028f log: add %S option (like --source) to log --format
-Jeff Hostetler	aa57b871 fetch: inherit filter-spec from partial clone
-Jeff King	b725b270 remote-curl: use error instead of fprintf(stderr)
-Jeff King	ee1c6c34 sha1_file: only freshen packs once per run
-Jeff King	05e95155 upload-pack: send keepalive packets during pack computation
-Johannes Schindelin	1bd8c8f0 git-upload-pack: Support the multi_ack protocol
-Jonathan Tan	0b6069fe fetch-pack: test support excluding large blobs
-Jonathan Tan	fbd76cd4 sideband: reverse its dependency on pkt-line
+Johannes Schindelin	81ef8ee7 rebase: introduce a shortcut for --reschedule-failed-exec
+Johannes Schindelin	d421afa0 rebase: introduce --reschedule-failed-exec
+Jonathan Tan	07c3c2aa tests: define GIT_TEST_SIDEBAND_ALL
+Jonathan Tan	bc2e795c pkt-line: introduce struct packet_writer
 Jonathan Tan	4316ff30 fetch-pack: support protocol version 2
 Jonathan Tan	0bbc0bc5 {fetch,upload}-pack: sideband v2 fetch response
+Jonathan Tan	fbd76cd4 sideband: reverse its dependency on pkt-line
 Josh Steadmon	aa658574 commit-graph, fuzz: add fuzzer for commit-graph
-Junio C Hamano	a85b377d push: the beginning of "git push --signed"
+Josh Steadmon	87c2d9d3 filter-options: expand scaled numbers
 Junio C Hamano	371820d5 Merge branch 'bc/tree-walk-oid'
-Lars Schneider	bb643d8b pkt-line: add functions to read/write flush terminated packet streams
-Martin Storsjö	6c81a990 Allow curl to rewind the RPC read buffer
 Masaya Suzuki	01f9ec64 Use packet_reader instead of packet_read_line
+Masaya Suzuki	b79bdd8c remote-curl: unset CURLOPT_FAILONERROR
 Masaya Suzuki	e6cf87b1 http: enable keep_error for HTTP requests
-Matthew DeVore	bc5975d2 list-objects-filter: implement filter tree:0
-Nguyễn Thái Ngọc Duy	1a07e59c Update messages in preparation for i18n
-Nguyễn Thái Ngọc Duy	1dd73e20 fetch-pack.c: mark strings for translating
-Nguyễn Thái Ngọc Duy	4f5b532d commit-graph.c: mark more strings for translation
-Nguyễn Thái Ngọc Duy	f616db6a builtin/pack-objects.c: mark more strings for translation
-Nguyễn Thái Ngọc Duy	ac77d0c3 pack-objects: shrink size field in struct object_entry
+Matthew DeVore	c813a7c3 list-objects-filter: teach tree:# how to handle >0
+Patrick Hogg	edb673cf pack-objects: merge read_lock and lock in packing_data struct
 Phillip Wood	21536d07 diff --color-moved-ws: modify allow-indentation-change
 Phillip Wood	b73bcbac diff: allow --no-color-moved-ws
-Takuto Ikuta	024aa469 fetch-pack.c: use oidset to check existence of loose object
-Torsten Bögershausen	ca473cef Upcast size_t variables to uintmax_t when printing
+Stefan Beller	be76c212 fetch: ensure submodule objects fetched
+Stefan Beller	26f80ccf submodule: migrate get_next_submodule to use repository structs
 
 
