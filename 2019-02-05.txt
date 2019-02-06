@@ -1,0 +1,1621 @@
+pu	6e9ee141a1008e2fa8374f008861cd8100bbf922
+jch	0dcb92d596127ce52eb144229b8a848ea28433b6
+next	b4d0f1c61aafd6cb5c3d9e6ee6bd99a036e3f21d
+master	8feddda32cc50e928404788d7b9377c0b5f73f50
+master@{1}	16a465bc018d09e9d7bbbdc5f40a7fb99c21f8ef
+
+
+Uncovered code in 'pu' not in 'jch'
+--------------------------------------------------------
+
+builtin/commit.c
+8e7e6c05 1668) return 1;
+
+builtin/config.c
+a12c1ff3 110) die(_("$HOME not set"));
+a12c1ff3 122) given_config_source.file = git_etc_gitconfig();
+1d28ff4c 401) error(_("invalid key pattern: %s"), key_);
+6a83d902 402) FREE_AND_NULL(key_regexp);
+9409c7a5 403) ret = CONFIG_INVALID_PATTERN;
+1d28ff4c 421) error(_("invalid pattern: %s"), regex_);
+6a83d902 422) FREE_AND_NULL(regexp);
+9409c7a5 423) ret = CONFIG_INVALID_PATTERN;
+5f1a63e0 424) goto free_strings;
+
+builtin/gc.c
+8e7e6c05 670) return 1;
+
+builtin/pack-redundant.c
+c283ab21 539) p = p->next;
+
+builtin/rebase.c
+f9573628 1243) die(_("Cannot read HEAD"));
+
+commit-graph.c
+aa658574 125) return NULL;
+3258c663 810) current->generation = GENERATION_NUMBER_MAX;
+d9b1b309 988) display_progress(oids.progress, approx_nr_objects);
+8e7e6c05 1009) error(_("the commit graph format cannot write %d commits"), count_distinct);
+8e7e6c05 1010) res = 1;
+8e7e6c05 1011) goto cleanup;
+
+config.c
+8f7c7f55 2143) int repo_config_set_gently(struct repository *r,
+8f7c7f55 2146) char *path = repo_git_path(r, "config");
+8f7c7f55 2147) int ret = git_config_set_multivar_in_file_gently(path, key, value, NULL, 0);
+8f7c7f55 2148) free(path);
+8f7c7f55 2149) return ret;
+8f7c7f55 2152) void repo_config_set(struct repository *r, const char *key, const char *value)
+8f7c7f55 2154) if (!repo_config_set_gently(r, key, value))
+8f7c7f55 2155) return;
+8f7c7f55 2156) if (value)
+8f7c7f55 2157) die(_("could not set '%s' to '%s'"), key, value);
+8f7c7f55 2159) die(_("could not unset '%s'"), key);
+8f7c7f55 2162) int repo_config_set_worktree_gently(struct repository *r,
+8f7c7f55 2168) path = get_worktree_config(r);
+8f7c7f55 2169) if (!path)
+8f7c7f55 2170) return CONFIG_INVALID_FILE;
+8f7c7f55 2171) ret = git_config_set_multivar_in_file_gently(path, key, value, NULL, 0);
+8f7c7f55 2172) free(path);
+93c1e079 2916) goto write_err_out;
+93c1e079 2919) goto write_err_out;
+
+connect.c
+aad6fddb 1299) die(_("unable to fork"));
+
+git.c
+3c543ab3 155) trace2_cmd_name("_query_");
+3c543ab3 159) trace2_cmd_name("_query_");
+3c543ab3 163) trace2_cmd_name("_query_");
+8aa8c140 372) die(_("recursive alias: %s"), alias_command);
+8aa8c140 679) die(_("%s doesn't support --super-prefix"), argv[0]);
+246f0ede 716) exit(128);
+
+http.c
+ba81921a 1999) if (fflush((FILE *)result)) {
+ba81921a 2003) rewind((FILE *)result);
+ba81921a 2004) if (ftruncate(fileno((FILE *)result), 0) < 0) {
+
+pager.c
+3507f837 103) pager_process->trace2_child_class = "pager";
+
+protocol.c
+6da1f1a9 37) die(_("Unrecognized protocol version"));
+6da1f1a9 39) die(_("Unrecognized protocol_version"));
+373d70ef 49) die("unknown value for config 'protocol.version': %s",
+6da1f1a9 61) BUG("late attempt to register an allowed protocol version");
+
+read-cache.c
+78bde923 3103) return error_errno(_("could not stat '%s'"), shared_index_path);
+
+ref-filter.c
+358c9418 93) keydata_aka_refname ? keydata_aka_refname : k->wt->head_ref);
+5305a553 1533) BUG("Object size is less than zero.");
+aa46a0da 1538) if (!eaten)
+aa46a0da 1539) free(oi->content);
+aa46a0da 1540) return strbuf_addf_ret(err, -1, _("parse_object_buffer failed on %s for %s"),
+aa46a0da 1541)        oid_to_hex(&oi->oid), ref->refname);
+
+remote-curl.c
+6da1f1a9 404) return 0;
+a2d725b7 1393) return 1;
+
+run-command.c
+3c543ab3 239) int ec = errno;
+3c543ab3 240) trace2_exec_result(exec_id, ec);
+3c543ab3 241) errno = ec;
+0ac77ec3 715) failed_errno = errno;
+507d7804 995) int finish_command_in_signal(struct child_process *cmd)
+3c543ab3 997) int ret = wait_or_whine(cmd->pid, cmd->argv[0], 1);
+3c543ab3 998) trace2_child_exit(cmd, ret);
+3c543ab3 999) return ret;
+
+t/helper/test-trace2.c
+7bc0969b 24) return MyError;
+7bc0969b 28) return MyError;
+7bc0969b 52) die("expect <exit_code>");
+7bc0969b 72) die("expect <exit_code>");
+7bc0969b 92) die("expect <error_message>");
+7bc0969b 142) return 0;
+7bc0969b 169) static int ut_005exec(int argc, const char **argv)
+7bc0969b 173) if (!argc)
+7bc0969b 174) return 0;
+7bc0969b 176) result = execv_git_cmd(argv);
+7bc0969b 177) return result;
+7bc0969b 186) die("%s", usage_error);
+7bc0969b 191) die("%s", usage_error);
+7bc0969b 227) static int print_usage(void)
+7bc0969b 232) fprintf(stderr, "usage:\n");
+7bc0969b 233) for_each_ut (k, ut_k)
+7bc0969b 234) fprintf(stderr, "\t%s %s %s\n", USAGE_PREFIX, ut_k->ut_name,
+7bc0969b 237) return 129;
+7bc0969b 272) return print_usage();
+
+trace2.c
+3c543ab3 127) static void tr2main_signal_handler(int signo)
+3c543ab3 134) us_now = getnanotime() / 1000;
+3c543ab3 135) us_elapsed_absolute = tr2tls_absolute_elapsed(us_now);
+3c543ab3 137) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 138) if (tgt_j->pfn_signal)
+3c543ab3 139) tgt_j->pfn_signal(us_elapsed_absolute, signo);
+3c543ab3 141) sigchain_pop(signo);
+3c543ab3 142) raise(signo);
+3c543ab3 143) }
+3c543ab3 151) return;
+3c543ab3 232) void trace2_cmd_path_fl(const char *file, int line, const char *pathname)
+3c543ab3 237) if (!trace2_enabled)
+3c543ab3 238) return;
+3c543ab3 240) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 241) if (tgt_j->pfn_command_path_fl)
+3c543ab3 242) tgt_j->pfn_command_path_fl(file, line, pathname);
+3c543ab3 271) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 272) if (tgt_j->pfn_command_mode_fl)
+3c543ab3 273) tgt_j->pfn_command_mode_fl(file, line, mode);
+3c543ab3 285) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 286) if (tgt_j->pfn_alias_fl)
+3c543ab3 287) tgt_j->pfn_alias_fl(file, line, alias, argv);
+3c543ab3 304) tr2_cfg_set_fl(file, line, key, value);
+3c543ab3 348) us_elapsed_child = 0;
+3c543ab3 371) us_now = getnanotime() / 1000;
+3c543ab3 372) us_elapsed_absolute = tr2tls_absolute_elapsed(us_now);
+3c543ab3 374) exec_id = tr2tls_locked_increment(&tr2_next_exec_id);
+3c543ab3 376) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 377) if (tgt_j->pfn_exec_fl)
+3c543ab3 378) tgt_j->pfn_exec_fl(file, line, us_elapsed_absolute,
+3c543ab3 381) return exec_id;
+3c543ab3 384) void trace2_exec_result_fl(const char *file, int line, int exec_id, int code)
+3c543ab3 391) if (!trace2_enabled)
+3c543ab3 392) return;
+3c543ab3 394) us_now = getnanotime() / 1000;
+3c543ab3 395) us_elapsed_absolute = tr2tls_absolute_elapsed(us_now);
+3c543ab3 397) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 398) if (tgt_j->pfn_exec_result_fl)
+3c543ab3 399) tgt_j->pfn_exec_result_fl(
+3c543ab3 403) void trace2_thread_start_fl(const char *file, int line, const char *thread_name)
+3c543ab3 410) if (!trace2_enabled)
+3c543ab3 411) return;
+3c543ab3 413) if (tr2tls_is_main_thread()) {
+3c543ab3 423) trace2_region_enter_printf_fl(file, line, NULL, NULL, NULL,
+3c543ab3 426) return;
+3c543ab3 429) us_now = getnanotime() / 1000;
+3c543ab3 430) us_elapsed_absolute = tr2tls_absolute_elapsed(us_now);
+3c543ab3 432) tr2tls_create_self(thread_name);
+3c543ab3 434) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 435) if (tgt_j->pfn_thread_start_fl)
+3c543ab3 436) tgt_j->pfn_thread_start_fl(file, line,
+3c543ab3 440) void trace2_thread_exit_fl(const char *file, int line)
+3c543ab3 448) if (!trace2_enabled)
+3c543ab3 449) return;
+3c543ab3 451) if (tr2tls_is_main_thread()) {
+3c543ab3 462) trace2_region_leave_printf_fl(file, line, NULL, NULL, NULL,
+3c543ab3 464) return;
+3c543ab3 467) us_now = getnanotime() / 1000;
+3c543ab3 468) us_elapsed_absolute = tr2tls_absolute_elapsed(us_now);
+3c543ab3 475) tr2tls_pop_unwind_self();
+3c543ab3 476) us_elapsed_thread = tr2tls_region_elasped_self(us_now);
+3c543ab3 478) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 479) if (tgt_j->pfn_thread_exit_fl)
+3c543ab3 480) tgt_j->pfn_thread_exit_fl(file, line,
+3c543ab3 484) tr2tls_unset_self();
+3c543ab3 494) return;
+3c543ab3 509) if (repo->trace2_repo_id)
+3c543ab3 510) return;
+3c543ab3 512) repo->trace2_repo_id = tr2tls_locked_increment(&tr2_next_repo_id);
+3c543ab3 514) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 515) if (tgt_j->pfn_repo_fl)
+3c543ab3 516) tgt_j->pfn_repo_fl(file, line, repo);
+3c543ab3 532) us_now = getnanotime() / 1000;
+3c543ab3 533) us_elapsed_absolute = tr2tls_absolute_elapsed(us_now);
+3c543ab3 542) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 543) if (tgt_j->pfn_region_enter_printf_va_fl)
+3c543ab3 544) tgt_j->pfn_region_enter_printf_va_fl(
+3c543ab3 548) tr2tls_push_self(us_now);
+3c543ab3 599) us_now = getnanotime() / 1000;
+3c543ab3 600) us_elapsed_absolute = tr2tls_absolute_elapsed(us_now);
+3c543ab3 608) us_elapsed_region = tr2tls_region_elasped_self(us_now);
+3c543ab3 610) tr2tls_pop_self();
+3c543ab3 616) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 617) if (tgt_j->pfn_region_leave_printf_va_fl)
+3c543ab3 618) tgt_j->pfn_region_leave_printf_va_fl(
+3c543ab3 669) return;
+3c543ab3 691) strbuf_addf(&buf_string, "%" PRIdMAX, value);
+3c543ab3 692) trace2_data_string_fl(file, line, category, repo, key, buf_string.buf);
+3c543ab3 693) strbuf_release(&buf_string);
+3c543ab3 696) void trace2_data_json_fl(const char *file, int line, const char *category,
+3c543ab3 706) if (!trace2_enabled)
+3c543ab3 707) return;
+3c543ab3 709) us_now = getnanotime() / 1000;
+3c543ab3 710) us_elapsed_absolute = tr2tls_absolute_elapsed(us_now);
+3c543ab3 711) us_elapsed_region = tr2tls_region_elasped_self(us_now);
+3c543ab3 713) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 714) if (tgt_j->pfn_data_fl)
+3c543ab3 715) tgt_j->pfn_data_json_fl(file, line, us_elapsed_absolute,
+3c543ab3 720) void trace2_printf_va_fl(const char *file, int line, const char *fmt,
+3c543ab3 728) if (!trace2_enabled)
+3c543ab3 729) return;
+3c543ab3 731) us_now = getnanotime() / 1000;
+3c543ab3 732) us_elapsed_absolute = tr2tls_absolute_elapsed(us_now);
+3c543ab3 738) for_each_wanted_builtin (j, tgt_j)
+3c543ab3 739) if (tgt_j->pfn_printf_va_fl)
+3c543ab3 740) tgt_j->pfn_printf_va_fl(file, line, us_elapsed_absolute,
+3c543ab3 744) void trace2_printf_fl(const char *file, int line, const char *fmt, ...)
+3c543ab3 748) va_start(ap, fmt);
+3c543ab3 749) trace2_printf_va_fl(file, line, fmt, ap);
+3c543ab3 750) va_end(ap);
+3c543ab3 751) }
+
+trace2/tr2_cfg.c
+3c543ab3 21) return tr2_cfg_count_patterns;
+3c543ab3 33) strbuf_setlen(buf, buf->len - 1);
+3c543ab3 83) void tr2_cfg_set_fl(const char *file, int line, const char *key,
+3c543ab3 86) struct tr2_cfg_data data = { file, line };
+3c543ab3 88) if (tr2_cfg_load_patterns() > 0)
+3c543ab3 89) tr2_cfg_cb(key, value, &data);
+
+trace2/tr2_dst.c
+3c543ab3 15) static int tr2_dst_want_warning(void)
+3c543ab3 19) if (tr2env_dst_debug == -1) {
+3c543ab3 20) const char *env_value = getenv(TR2_ENVVAR_DST_DEBUG);
+3c543ab3 21) if (!env_value || !*env_value)
+3c543ab3 22) tr2env_dst_debug = 0;
+3c543ab3 24) tr2env_dst_debug = atoi(env_value) > 0;
+3c543ab3 27) return tr2env_dst_debug;
+3c543ab3 43) if (tr2_dst_want_warning())
+3c543ab3 44) warning("trace2: could not open '%s' for '%s' tracing: %s",
+3c543ab3 45) tgt_value, dst->env_var_name, strerror(errno));
+3c543ab3 47) tr2_dst_trace_disable(dst);
+3c543ab3 48) return 0;
+3c543ab3 62) static int tr2_dst_try_unix_domain_socket(struct tr2_dst *dst,
+3c543ab3 67) const char *path = tgt_value + PREFIX_AF_UNIX_LEN;
+3c543ab3 68) int path_len = strlen(path);
+3c543ab3 70) if (!is_absolute_path(path) || path_len >= sizeof(sa.sun_path)) {
+3c543ab3 71) if (tr2_dst_want_warning())
+3c543ab3 72) warning("trace2: invalid AF_UNIX path '%s' for '%s' tracing",
+3c543ab3 75) tr2_dst_trace_disable(dst);
+3c543ab3 76) return 0;
+3c543ab3 79) sa.sun_family = AF_UNIX;
+3c543ab3 80) strlcpy(sa.sun_path, path, sizeof(sa.sun_path));
+3c543ab3 81) if ((fd = socket(AF_UNIX, SOCK_STREAM, 0)) == -1 ||
+3c543ab3 82)     connect(fd, (struct sockaddr *)&sa, sizeof(sa)) == -1) {
+3c543ab3 83) if (tr2_dst_want_warning())
+3c543ab3 84) warning("trace2: could not connect to socket '%s' for '%s' tracing: %s",
+3c543ab3 85) path, dst->env_var_name, strerror(errno));
+3c543ab3 87) tr2_dst_trace_disable(dst);
+3c543ab3 88) return 0;
+3c543ab3 91) dst->fd = fd;
+3c543ab3 92) dst->need_close = 1;
+3c543ab3 93) dst->initialized = 1;
+3c543ab3 95) return dst->fd;
+3c543ab3 99) static void tr2_dst_malformed_warning(struct tr2_dst *dst,
+3c543ab3 102) struct strbuf buf = STRBUF_INIT;
+3c543ab3 104) strbuf_addf(&buf, "trace2: unknown trace value for '%s': '%s'",
+3c543ab3 106) strbuf_addstr(
+3c543ab3 111) strbuf_addstr(
+3c543ab3 117) warning("%s", buf.buf);
+3c543ab3 119) strbuf_release(&buf);
+3c543ab3 120) }
+3c543ab3 141) dst->fd = STDERR_FILENO;
+3c543ab3 142) return dst->fd;
+3c543ab3 146) dst->fd = atoi(tgt_value);
+3c543ab3 147) return dst->fd;
+3c543ab3 154) if (!strncmp(tgt_value, PREFIX_AF_UNIX, PREFIX_AF_UNIX_LEN))
+3c543ab3 155) return tr2_dst_try_unix_domain_socket(dst, tgt_value);
+3c543ab3 159) tr2_dst_malformed_warning(dst, tgt_value);
+3c543ab3 160) tr2_dst_trace_disable(dst);
+3c543ab3 161) return 0;
+3c543ab3 193) if (tr2_dst_want_warning())
+3c543ab3 194) warning("unable to write trace to '%s': %s", dst->env_var_name,
+3c543ab3 195) strerror(errno));
+3c543ab3 196) tr2_dst_trace_disable(dst);
+
+trace2/tr2_sid.c
+3c543ab3 27) return;
+3c543ab3 59) tr2_sid_compute();
+
+trace2/tr2_tgt_event.c
+3c543ab3 57) tr2env_event_nesting_wanted = want_nesting;
+3c543ab3 61) tr2env_event_brief = want_brief;
+3c543ab3 96)     !strcmp(event_name, "atexit")) {
+3c543ab3 158) static void fn_signal(uint64_t us_elapsed_absolute, int signo)
+3c543ab3 160) const char *event_name = "signal";
+3c543ab3 161) struct json_writer jw = JSON_WRITER_INIT;
+3c543ab3 162) double t_abs = (double)us_elapsed_absolute / 1000000.0;
+3c543ab3 164) jw_object_begin(&jw, 0);
+3c543ab3 165) event_fmt_prepare(event_name, __FILE__, __LINE__, NULL, &jw);
+3c543ab3 166) jw_object_double(&jw, "t_abs", 6, t_abs);
+3c543ab3 167) jw_object_intmax(&jw, "signo", signo);
+3c543ab3 168) jw_end(&jw);
+3c543ab3 170) tr2_dst_write_line(&tr2dst_event, &jw.json);
+3c543ab3 171) jw_release(&jw);
+3c543ab3 172) }
+3c543ab3 206) if (fmt && *fmt) {
+3c543ab3 207) jw_object_string(jw, field_name, fmt);
+3c543ab3 208) return;
+3c543ab3 235) static void fn_command_path_fl(const char *file, int line, const char *pathname)
+3c543ab3 237) const char *event_name = "cmd_path";
+3c543ab3 238) struct json_writer jw = JSON_WRITER_INIT;
+3c543ab3 240) jw_object_begin(&jw, 0);
+3c543ab3 241) event_fmt_prepare(event_name, file, line, NULL, &jw);
+3c543ab3 242) jw_object_string(&jw, "path", pathname);
+3c543ab3 243) jw_end(&jw);
+3c543ab3 245) tr2_dst_write_line(&tr2dst_event, &jw.json);
+3c543ab3 246) jw_release(&jw);
+3c543ab3 247) }
+3c543ab3 267) static void fn_command_mode_fl(const char *file, int line, const char *mode)
+3c543ab3 269) const char *event_name = "cmd_mode";
+3c543ab3 270) struct json_writer jw = JSON_WRITER_INIT;
+3c543ab3 272) jw_object_begin(&jw, 0);
+3c543ab3 273) event_fmt_prepare(event_name, file, line, NULL, &jw);
+3c543ab3 274) jw_object_string(&jw, "name", mode);
+3c543ab3 275) jw_end(&jw);
+3c543ab3 277) tr2_dst_write_line(&tr2dst_event, &jw.json);
+3c543ab3 278) jw_release(&jw);
+3c543ab3 279) }
+3c543ab3 281) static void fn_alias_fl(const char *file, int line, const char *alias,
+3c543ab3 284) const char *event_name = "alias";
+3c543ab3 285) struct json_writer jw = JSON_WRITER_INIT;
+3c543ab3 287) jw_object_begin(&jw, 0);
+3c543ab3 288) event_fmt_prepare(event_name, file, line, NULL, &jw);
+3c543ab3 289) jw_object_string(&jw, "alias", alias);
+3c543ab3 290) jw_object_inline_begin_array(&jw, "argv");
+3c543ab3 291) jw_array_argv(&jw, argv);
+3c543ab3 292) jw_end(&jw);
+3c543ab3 293) jw_end(&jw);
+3c543ab3 295) tr2_dst_write_line(&tr2dst_event, &jw.json);
+3c543ab3 296) jw_release(&jw);
+3c543ab3 297) }
+3c543ab3 310) jw_object_string(&jw, "child_class", "hook");
+3c543ab3 311) jw_object_string(&jw, "hook_name", cmd->trace2_hook_name);
+3c543ab3 318) jw_object_string(&jw, "cd", cmd->dir);
+3c543ab3 322) jw_array_string(&jw, "git");
+3c543ab3 352) static void fn_thread_start_fl(const char *file, int line,
+3c543ab3 355) const char *event_name = "thread_start";
+3c543ab3 356) struct json_writer jw = JSON_WRITER_INIT;
+3c543ab3 358) jw_object_begin(&jw, 0);
+3c543ab3 359) event_fmt_prepare(event_name, file, line, NULL, &jw);
+3c543ab3 360) jw_end(&jw);
+3c543ab3 362) tr2_dst_write_line(&tr2dst_event, &jw.json);
+3c543ab3 363) jw_release(&jw);
+3c543ab3 364) }
+3c543ab3 366) static void fn_thread_exit_fl(const char *file, int line,
+3c543ab3 370) const char *event_name = "thread_exit";
+3c543ab3 371) struct json_writer jw = JSON_WRITER_INIT;
+3c543ab3 372) double t_rel = (double)us_elapsed_thread / 1000000.0;
+3c543ab3 374) jw_object_begin(&jw, 0);
+3c543ab3 375) event_fmt_prepare(event_name, file, line, NULL, &jw);
+3c543ab3 376) jw_object_double(&jw, "t_rel", 6, t_rel);
+3c543ab3 377) jw_end(&jw);
+3c543ab3 379) tr2_dst_write_line(&tr2dst_event, &jw.json);
+3c543ab3 380) jw_release(&jw);
+3c543ab3 381) }
+3c543ab3 383) static void fn_exec_fl(const char *file, int line, uint64_t us_elapsed_absolute,
+3c543ab3 386) const char *event_name = "exec";
+3c543ab3 387) struct json_writer jw = JSON_WRITER_INIT;
+3c543ab3 389) jw_object_begin(&jw, 0);
+3c543ab3 390) event_fmt_prepare(event_name, file, line, NULL, &jw);
+3c543ab3 391) jw_object_intmax(&jw, "exec_id", exec_id);
+3c543ab3 392) if (exe)
+3c543ab3 393) jw_object_string(&jw, "exe", exe);
+3c543ab3 394) jw_object_inline_begin_array(&jw, "argv");
+3c543ab3 395) jw_array_argv(&jw, argv);
+3c543ab3 396) jw_end(&jw);
+3c543ab3 397) jw_end(&jw);
+3c543ab3 399) tr2_dst_write_line(&tr2dst_event, &jw.json);
+3c543ab3 400) jw_release(&jw);
+3c543ab3 401) }
+3c543ab3 403) static void fn_exec_result_fl(const char *file, int line,
+3c543ab3 407) const char *event_name = "exec_result";
+3c543ab3 408) struct json_writer jw = JSON_WRITER_INIT;
+3c543ab3 410) jw_object_begin(&jw, 0);
+3c543ab3 411) event_fmt_prepare(event_name, file, line, NULL, &jw);
+3c543ab3 412) jw_object_intmax(&jw, "exec_id", exec_id);
+3c543ab3 413) jw_object_intmax(&jw, "code", code);
+3c543ab3 414) jw_end(&jw);
+3c543ab3 416) tr2_dst_write_line(&tr2dst_event, &jw.json);
+3c543ab3 417) jw_release(&jw);
+3c543ab3 418) }
+3c543ab3 436) static void fn_repo_fl(const char *file, int line,
+3c543ab3 439) const char *event_name = "def_repo";
+3c543ab3 440) struct json_writer jw = JSON_WRITER_INIT;
+3c543ab3 442) jw_object_begin(&jw, 0);
+3c543ab3 443) event_fmt_prepare(event_name, file, line, repo, &jw);
+3c543ab3 444) jw_object_string(&jw, "worktree", repo->worktree);
+3c543ab3 445) jw_end(&jw);
+3c543ab3 447) tr2_dst_write_line(&tr2dst_event, &jw.json);
+3c543ab3 448) jw_release(&jw);
+3c543ab3 449) }
+3c543ab3 451) static void fn_region_enter_printf_va_fl(const char *file, int line,
+3c543ab3 458) const char *event_name = "region_enter";
+3c543ab3 459) struct tr2tls_thread_ctx *ctx = tr2tls_get_self();
+3c543ab3 460) if (ctx->nr_open_regions <= tr2env_event_nesting_wanted) {
+3c543ab3 461) struct json_writer jw = JSON_WRITER_INIT;
+3c543ab3 463) jw_object_begin(&jw, 0);
+3c543ab3 464) event_fmt_prepare(event_name, file, line, repo, &jw);
+3c543ab3 465) jw_object_intmax(&jw, "nesting", ctx->nr_open_regions);
+3c543ab3 466) if (category)
+3c543ab3 467) jw_object_string(&jw, "category", category);
+3c543ab3 468) if (label)
+3c543ab3 469) jw_object_string(&jw, "label", label);
+3c543ab3 470) maybe_add_string_va(&jw, "msg", fmt, ap);
+3c543ab3 471) jw_end(&jw);
+3c543ab3 473) tr2_dst_write_line(&tr2dst_event, &jw.json);
+3c543ab3 474) jw_release(&jw);
+3c543ab3 476) }
+3c543ab3 478) static void fn_region_leave_printf_va_fl(
+3c543ab3 483) const char *event_name = "region_leave";
+3c543ab3 484) struct tr2tls_thread_ctx *ctx = tr2tls_get_self();
+3c543ab3 485) if (ctx->nr_open_regions <= tr2env_event_nesting_wanted) {
+3c543ab3 486) struct json_writer jw = JSON_WRITER_INIT;
+3c543ab3 487) double t_rel = (double)us_elapsed_region / 1000000.0;
+3c543ab3 489) jw_object_begin(&jw, 0);
+3c543ab3 490) event_fmt_prepare(event_name, file, line, repo, &jw);
+3c543ab3 491) jw_object_double(&jw, "t_rel", 6, t_rel);
+3c543ab3 492) jw_object_intmax(&jw, "nesting", ctx->nr_open_regions);
+3c543ab3 493) if (category)
+3c543ab3 494) jw_object_string(&jw, "category", category);
+3c543ab3 495) if (label)
+3c543ab3 496) jw_object_string(&jw, "label", label);
+3c543ab3 497) maybe_add_string_va(&jw, "msg", fmt, ap);
+3c543ab3 498) jw_end(&jw);
+3c543ab3 500) tr2_dst_write_line(&tr2dst_event, &jw.json);
+3c543ab3 501) jw_release(&jw);
+3c543ab3 503) }
+3c543ab3 532) static void fn_data_json_fl(const char *file, int line,
+3c543ab3 538) const char *event_name = "data_json";
+3c543ab3 539) struct tr2tls_thread_ctx *ctx = tr2tls_get_self();
+3c543ab3 540) if (ctx->nr_open_regions <= tr2env_event_nesting_wanted) {
+3c543ab3 541) struct json_writer jw = JSON_WRITER_INIT;
+3c543ab3 542) double t_abs = (double)us_elapsed_absolute / 1000000.0;
+3c543ab3 543) double t_rel = (double)us_elapsed_region / 1000000.0;
+3c543ab3 545) jw_object_begin(&jw, 0);
+3c543ab3 546) event_fmt_prepare(event_name, file, line, repo, &jw);
+3c543ab3 547) jw_object_double(&jw, "t_abs", 6, t_abs);
+3c543ab3 548) jw_object_double(&jw, "t_rel", 6, t_rel);
+3c543ab3 549) jw_object_intmax(&jw, "nesting", ctx->nr_open_regions);
+3c543ab3 550) jw_object_string(&jw, "category", category);
+3c543ab3 551) jw_object_string(&jw, "key", key);
+3c543ab3 552) jw_object_sub_jw(&jw, "value", value);
+3c543ab3 553) jw_end(&jw);
+3c543ab3 555) tr2_dst_write_line(&tr2dst_event, &jw.json);
+3c543ab3 556) jw_release(&jw);
+3c543ab3 558) }
+
+trace2/tr2_tgt_normal.c
+3c543ab3 105) static void fn_signal(uint64_t us_elapsed_absolute, int signo)
+3c543ab3 107) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 108) double elapsed = (double)us_elapsed_absolute / 1000000.0;
+3c543ab3 110) strbuf_addf(&buf_payload, "signal elapsed:%.6f code:%d", elapsed,
+3c543ab3 112) normal_io_write_fl(__FILE__, __LINE__, &buf_payload);
+3c543ab3 113) strbuf_release(&buf_payload);
+3c543ab3 114) }
+3c543ab3 138) if (fmt && *fmt) {
+3c543ab3 139) strbuf_addstr(buf, fmt);
+3c543ab3 140) return;
+3c543ab3 155) static void fn_command_path_fl(const char *file, int line, const char *pathname)
+3c543ab3 157) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 159) strbuf_addf(&buf_payload, "cmd_path %s", pathname);
+3c543ab3 160) normal_io_write_fl(file, line, &buf_payload);
+3c543ab3 161) strbuf_release(&buf_payload);
+3c543ab3 162) }
+3c543ab3 177) static void fn_command_mode_fl(const char *file, int line, const char *mode)
+3c543ab3 179) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 181) strbuf_addf(&buf_payload, "cmd_mode %s", mode);
+3c543ab3 182) normal_io_write_fl(file, line, &buf_payload);
+3c543ab3 183) strbuf_release(&buf_payload);
+3c543ab3 184) }
+3c543ab3 186) static void fn_alias_fl(const char *file, int line, const char *alias,
+3c543ab3 189) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 191) strbuf_addf(&buf_payload, "alias %s ->", alias);
+3c543ab3 192) sq_quote_argv_pretty(&buf_payload, argv);
+3c543ab3 193) normal_io_write_fl(file, line, &buf_payload);
+3c543ab3 194) strbuf_release(&buf_payload);
+3c543ab3 195) }
+3c543ab3 197) static void fn_child_start_fl(const char *file, int line,
+3c543ab3 201) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 203) strbuf_addf(&buf_payload, "child_start[%d] ", cmd->trace2_child_id);
+3c543ab3 205) if (cmd->dir) {
+3c543ab3 206) strbuf_addstr(&buf_payload, " cd");
+3c543ab3 207) sq_quote_buf_pretty(&buf_payload, cmd->dir);
+3c543ab3 208) strbuf_addstr(&buf_payload, "; ");
+3c543ab3 216) if (cmd->git_cmd)
+3c543ab3 217) strbuf_addstr(&buf_payload, "git");
+3c543ab3 218) sq_quote_argv_pretty(&buf_payload, cmd->argv);
+3c543ab3 220) normal_io_write_fl(file, line, &buf_payload);
+3c543ab3 221) strbuf_release(&buf_payload);
+3c543ab3 222) }
+3c543ab3 224) static void fn_child_exit_fl(const char *file, int line,
+3c543ab3 228) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 229) double elapsed = (double)us_elapsed_child / 1000000.0;
+3c543ab3 231) strbuf_addf(&buf_payload, "child_exit[%d] pid:%d code:%d elapsed:%.6f",
+3c543ab3 233) normal_io_write_fl(file, line, &buf_payload);
+3c543ab3 234) strbuf_release(&buf_payload);
+3c543ab3 235) }
+3c543ab3 237) static void fn_exec_fl(const char *file, int line, uint64_t us_elapsed_absolute,
+3c543ab3 240) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 242) strbuf_addf(&buf_payload, "exec[%d] ", exec_id);
+3c543ab3 243) if (exe)
+3c543ab3 244) strbuf_addstr(&buf_payload, exe);
+3c543ab3 245) sq_quote_argv_pretty(&buf_payload, argv);
+3c543ab3 246) normal_io_write_fl(file, line, &buf_payload);
+3c543ab3 247) strbuf_release(&buf_payload);
+3c543ab3 248) }
+3c543ab3 250) static void fn_exec_result_fl(const char *file, int line,
+3c543ab3 254) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 256) strbuf_addf(&buf_payload, "exec_result[%d] code:%d", exec_id, code);
+3c543ab3 257) if (code > 0)
+3c543ab3 258) strbuf_addf(&buf_payload, " err:%s", strerror(code));
+3c543ab3 259) normal_io_write_fl(file, line, &buf_payload);
+3c543ab3 260) strbuf_release(&buf_payload);
+3c543ab3 261) }
+3c543ab3 263) static void fn_param_fl(const char *file, int line, const char *param,
+3c543ab3 266) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 268) strbuf_addf(&buf_payload, "def_param %s=%s", param, value);
+3c543ab3 269) normal_io_write_fl(file, line, &buf_payload);
+3c543ab3 270) strbuf_release(&buf_payload);
+3c543ab3 271) }
+3c543ab3 273) static void fn_repo_fl(const char *file, int line,
+3c543ab3 276) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 278) strbuf_addstr(&buf_payload, "worktree ");
+3c543ab3 279) sq_quote_buf_pretty(&buf_payload, repo->worktree);
+3c543ab3 280) normal_io_write_fl(file, line, &buf_payload);
+3c543ab3 281) strbuf_release(&buf_payload);
+3c543ab3 282) }
+3c543ab3 284) static void fn_printf_va_fl(const char *file, int line,
+3c543ab3 288) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 290) maybe_append_string_va(&buf_payload, fmt, ap);
+3c543ab3 291) normal_io_write_fl(file, line, &buf_payload);
+3c543ab3 292) strbuf_release(&buf_payload);
+3c543ab3 293) }
+
+trace2/tr2_tgt_perf.c
+3c543ab3 102) strbuf_addf(buf, "r%d ", repo->trace2_repo_id);
+3c543ab3 125) strbuf_addbuf(buf, &dots);
+3c543ab3 126) len_indent -= dots.len;
+3c543ab3 187) static void fn_signal(uint64_t us_elapsed_absolute, int signo)
+3c543ab3 189) const char *event_name = "signal";
+3c543ab3 190) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 192) strbuf_addf(&buf_payload, "signo:%d", signo);
+3c543ab3 194) perf_io_write_fl(__FILE__, __LINE__, event_name, NULL,
+3c543ab3 196) strbuf_release(&buf_payload);
+3c543ab3 197) }
+3c543ab3 223) if (fmt && *fmt) {
+3c543ab3 224) strbuf_addstr(buf, fmt);
+3c543ab3 225) return;
+3c543ab3 242) static void fn_command_path_fl(const char *file, int line, const char *pathname)
+3c543ab3 244) const char *event_name = "cmd_path";
+3c543ab3 245) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 247) strbuf_addstr(&buf_payload, pathname);
+3c543ab3 249) perf_io_write_fl(file, line, event_name, NULL, NULL, NULL, NULL,
+3c543ab3 251) strbuf_release(&buf_payload);
+3c543ab3 252) }
+3c543ab3 270) static void fn_command_mode_fl(const char *file, int line, const char *mode)
+3c543ab3 272) const char *event_name = "cmd_mode";
+3c543ab3 273) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 275) strbuf_addstr(&buf_payload, mode);
+3c543ab3 277) perf_io_write_fl(file, line, event_name, NULL, NULL, NULL, NULL,
+3c543ab3 279) strbuf_release(&buf_payload);
+3c543ab3 280) }
+3c543ab3 282) static void fn_alias_fl(const char *file, int line, const char *alias,
+3c543ab3 285) const char *event_name = "alias";
+3c543ab3 286) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 288) strbuf_addf(&buf_payload, "alias:%s argv:", alias);
+3c543ab3 289) sq_quote_argv_pretty(&buf_payload, argv);
+3c543ab3 291) perf_io_write_fl(file, line, event_name, NULL, NULL, NULL, NULL,
+3c543ab3 293) strbuf_release(&buf_payload);
+3c543ab3 294) }
+3c543ab3 304) strbuf_addf(&buf_payload, "[ch%d] class:hook hook:%s",
+3c543ab3 314) strbuf_addstr(&buf_payload, " cd:");
+3c543ab3 315) sq_quote_buf_pretty(&buf_payload, cmd->dir);
+3c543ab3 320) strbuf_addstr(&buf_payload, " git");
+3c543ab3 342) static void fn_thread_start_fl(const char *file, int line,
+3c543ab3 345) const char *event_name = "thread_start";
+3c543ab3 346) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 348) perf_io_write_fl(file, line, event_name, NULL, &us_elapsed_absolute,
+3c543ab3 350) strbuf_release(&buf_payload);
+3c543ab3 351) }
+3c543ab3 353) static void fn_thread_exit_fl(const char *file, int line,
+3c543ab3 357) const char *event_name = "thread_exit";
+3c543ab3 358) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 360) perf_io_write_fl(file, line, event_name, NULL, &us_elapsed_absolute,
+3c543ab3 362) strbuf_release(&buf_payload);
+3c543ab3 363) }
+3c543ab3 365) static void fn_exec_fl(const char *file, int line, uint64_t us_elapsed_absolute,
+3c543ab3 368) const char *event_name = "exec";
+3c543ab3 369) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 371) strbuf_addf(&buf_payload, "id:%d ", exec_id);
+3c543ab3 372) strbuf_addstr(&buf_payload, "argv:");
+3c543ab3 373) if (exe)
+3c543ab3 374) strbuf_addf(&buf_payload, " %s", exe);
+3c543ab3 375) sq_quote_argv_pretty(&buf_payload, argv);
+3c543ab3 377) perf_io_write_fl(file, line, event_name, NULL, &us_elapsed_absolute,
+3c543ab3 379) strbuf_release(&buf_payload);
+3c543ab3 380) }
+3c543ab3 382) static void fn_exec_result_fl(const char *file, int line,
+3c543ab3 386) const char *event_name = "exec_result";
+3c543ab3 387) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 389) strbuf_addf(&buf_payload, "id:%d code:%d", exec_id, code);
+3c543ab3 390) if (code > 0)
+3c543ab3 391) strbuf_addf(&buf_payload, " err:%s", strerror(code));
+3c543ab3 393) perf_io_write_fl(file, line, event_name, NULL, &us_elapsed_absolute,
+3c543ab3 395) strbuf_release(&buf_payload);
+3c543ab3 396) }
+3c543ab3 398) static void fn_param_fl(const char *file, int line, const char *param,
+3c543ab3 401) const char *event_name = "def_param";
+3c543ab3 402) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 404) strbuf_addf(&buf_payload, "%s:%s", param, value);
+3c543ab3 406) perf_io_write_fl(file, line, event_name, NULL, NULL, NULL, NULL,
+3c543ab3 408) strbuf_release(&buf_payload);
+3c543ab3 409) }
+3c543ab3 411) static void fn_repo_fl(const char *file, int line,
+3c543ab3 414) const char *event_name = "def_repo";
+3c543ab3 415) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 417) strbuf_addstr(&buf_payload, "worktree:");
+3c543ab3 418) sq_quote_buf_pretty(&buf_payload, repo->worktree);
+3c543ab3 420) perf_io_write_fl(file, line, event_name, repo, NULL, NULL, NULL,
+3c543ab3 422) strbuf_release(&buf_payload);
+3c543ab3 423) }
+3c543ab3 425) static void fn_region_enter_printf_va_fl(const char *file, int line,
+3c543ab3 432) const char *event_name = "region_enter";
+3c543ab3 433) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 435) if (label)
+3c543ab3 436) strbuf_addf(&buf_payload, "label:%s ", label);
+3c543ab3 437) maybe_append_string_va(&buf_payload, fmt, ap);
+3c543ab3 439) perf_io_write_fl(file, line, event_name, repo, &us_elapsed_absolute,
+3c543ab3 441) strbuf_release(&buf_payload);
+3c543ab3 442) }
+3c543ab3 444) static void fn_region_leave_printf_va_fl(
+3c543ab3 449) const char *event_name = "region_leave";
+3c543ab3 450) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 452) if (label)
+3c543ab3 453) strbuf_addf(&buf_payload, "label:%s ", label);
+3c543ab3 454) maybe_append_string_va(&buf_payload, fmt, ap);
+3c543ab3 456) perf_io_write_fl(file, line, event_name, repo, &us_elapsed_absolute,
+3c543ab3 458) strbuf_release(&buf_payload);
+3c543ab3 459) }
+3c543ab3 461) static void fn_data_fl(const char *file, int line, uint64_t us_elapsed_absolute,
+3c543ab3 466) const char *event_name = "data";
+3c543ab3 467) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 469) strbuf_addf(&buf_payload, "%s:%s", key, value);
+3c543ab3 471) perf_io_write_fl(file, line, event_name, repo, &us_elapsed_absolute,
+3c543ab3 473) strbuf_release(&buf_payload);
+3c543ab3 474) }
+3c543ab3 476) static void fn_data_json_fl(const char *file, int line,
+3c543ab3 482) const char *event_name = "data_json";
+3c543ab3 483) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 485) strbuf_addf(&buf_payload, "%s:%s", key, value->json.buf);
+3c543ab3 487) perf_io_write_fl(file, line, event_name, repo, &us_elapsed_absolute,
+3c543ab3 489) strbuf_release(&buf_payload);
+3c543ab3 490) }
+3c543ab3 492) static void fn_printf_va_fl(const char *file, int line,
+3c543ab3 496) const char *event_name = "printf";
+3c543ab3 497) struct strbuf buf_payload = STRBUF_INIT;
+3c543ab3 499) maybe_append_string_va(&buf_payload, fmt, ap);
+3c543ab3 501) perf_io_write_fl(file, line, event_name, NULL, &us_elapsed_absolute,
+3c543ab3 503) strbuf_release(&buf_payload);
+3c543ab3 504) }
+
+trace2/tr2_tls.c
+3c543ab3 38) strbuf_addf(&ctx->thread_name, "th%02d:", ctx->thread_id);
+3c543ab3 41) strbuf_setlen(&ctx->thread_name, TR2_MAX_THREAD_NAME);
+3c543ab3 58) ctx = tr2tls_create_self("unknown");
+3c543ab3 63) int tr2tls_is_main_thread(void)
+3c543ab3 65) struct tr2tls_thread_ctx *ctx = pthread_getspecific(tr2tls_key);
+3c543ab3 67) return ctx == tr2tls_thread_main;
+3c543ab3 82) void tr2tls_push_self(uint64_t us_now)
+3c543ab3 84) struct tr2tls_thread_ctx *ctx = tr2tls_get_self();
+3c543ab3 86) ALLOC_GROW(ctx->array_us_start, ctx->nr_open_regions + 1, ctx->alloc);
+3c543ab3 87) ctx->array_us_start[ctx->nr_open_regions++] = us_now;
+3c543ab3 88) }
+3c543ab3 90) void tr2tls_pop_self(void)
+3c543ab3 92) struct tr2tls_thread_ctx *ctx = tr2tls_get_self();
+3c543ab3 94) if (!ctx->nr_open_regions)
+3c543ab3 95) BUG("no open regions in thread '%s'", ctx->thread_name.buf);
+3c543ab3 97) ctx->nr_open_regions--;
+3c543ab3 98) }
+3c543ab3 105) tr2tls_pop_self();
+3c543ab3 115) return 0;
+3c543ab3 125) return 0;
+
+wrapper.c
+5efde212 70) die("Out of memory, malloc failed (tried to allocate %" PRIuMAX " bytes)",
+5efde212 73) error("Out of memory, malloc failed (tried to allocate %" PRIuMAX " bytes)",
+
+Commits introducting uncovered code:
+Ævar Arnfjörð Bjarmason	6a83d902 coccinelle: make use of the "type" FREE_AND_NULL() rule
+Ævar Arnfjörð Bjarmason	d9b1b309 commit-graph write: show progress for object search
+Brandon Williams	373d70ef protocol: introduce protocol extension mechanisms
+Dan McGregor	ba81921a http: cast result to FILE *
+Daniel Barkalow	a2d725b7 Use an external program to implement fetching with curl
+Derrick Stolee	8e7e6c05 commit-graph: return with errors during write
+Derrick Stolee	3258c663 commit-graph: compute generation numbers
+Jeff Hostetler	3507f837 trace2:data: add editor/pager child classification
+Jeff Hostetler	7bc0969b trace2: t/helper/test-trace2, t0210.sh, t0211.sh, t0212.sh
+Jeff Hostetler	3c543ab3 trace2: create new combined trace facility
+Jeff King	246f0ede execv_dashed_external: stop exiting with negative code
+Johannes Schindelin	5f1a63e0 Read configuration also from $HOME/.gitconfig
+Johannes Sixt	0ac77ec3 run_command: report system call errors instead of returning error codes
+Josh Steadmon	6da1f1a9 protocol: advertise multiple supported versions
+Josh Steadmon	aa658574 commit-graph, fuzz: add fuzzer for commit-graph
+Junio C Hamano	93c1e079 config-set: check write-in-full returns in set_multivar
+Junio C Hamano	9409c7a5 config: "git config baa" should exit with status 1
+Lukas_Sandström	c283ab21 Add git-pack-intersect
+Martin Koegler	5efde212 zlib.c: use size_t for size
+Nguyễn Thái Ngọc Duy	aad6fddb connect.c: mark more strings for translation
+Nguyễn Thái Ngọc Duy	1d28ff4c builtin/config.c: mark more strings for translation
+Nguyễn Thái Ngọc Duy	a12c1ff3 config: factor out set_config_source_file()
+Nguyễn Thái Ngọc Duy	8f7c7f55 config.c: add repo_config_set_worktree_gently()
+Nguyễn Thái Ngọc Duy	8aa8c140 git.c: mark more strings for translation
+Nickolai Belakovski	358c9418 ref-filter: add worktreepath atom
+Olga Telezhnaya	5305a553 ref-filter: add check for negative file size
+Olga Telezhnaya	aa46a0da ref-filter: use oid_object_info() to get object
+Peter Krefting	78bde923 i18n: read-cache: typofix
+Pratik Karki	f9573628 builtin rebase: support --continue
+Takashi Iwai	507d7804 pager: don't use unsafe functions in signal handlers
+
+
+Uncovered code in 'jch' not in 'next'
+--------------------------------------------------------
+
+blame.c
+07d04b91 483)     ent->s_lno + ent->num_lines == next->s_lno &&
+e7973c85 941) blame_origin_decref(e->suspect);
+e7973c85 942) e->suspect = blame_origin_incref(parent);
+e7973c85 943) e->s_lno += offset;
+07d04b91 944) e->ignored = 1;
+e7973c85 946) ignoredp = e;
+b543bb1c 1504) blame_origin_decref(porigin);
+
+builtin/blame.c
+07d04b91 485) length--;
+31653c1a 699) if (!value)
+31653c1a 700) return config_error_nonbool(var);
+a5481a6c 701) parse_date_format(value, &blame_date_mode);
+31653c1a 702) return 0;
+5817da01 777) return 0;
+3f8d5204 1002) argv[2] = "--";
+
+builtin/branch.c
+0ecb1fc7 452) die(_("could not resolve HEAD"));
+0ecb1fc7 458) die(_("HEAD (%s) points outside of refs/heads/"), refname);
+b7200e83 584) return -1;
+49df4b02 673) die(_("Failed to resolve HEAD as a valid ref."));
+
+builtin/commit.c
+b64c1e07 740) die_errno(_("could not read SQUASH_MSG"));
+8a6179bc 747) die_errno(_("could not read MERGE_MSG"));
+
+builtin/merge.c
+66f4b98a 800) error("%s", err_msg);
+62dc42b9 822) BUG("the control must not reach here under --squash");
+1c7b76be 1393) usage_with_options(builtin_merge_usage,
+
+builtin/pull.c
+11b6d178 644) argv_array_push(&args, opt_commit);
+
+builtin/rebase--interactive.c
+c0108d5c 24) return error_errno(_("could not read '%s'."), todo_file);
+c0108d5c 31) return error_errno(_("could not write '%s'"), todo_file);
+30faf278 46) return error_errno(_("could not read '%s'."), todo_file);
+30faf278 50) todo_list_release(&todo_list);
+30faf278 51) return error(_("unusable todo list: '%s'"), todo_file);
+30faf278 59) return error_errno(_("could not write '%s'."), todo_file);
+
+builtin/remote.c
+f39a9c65 1575) die(_("--save-to-push can only be used when only one url is defined"));
+
+builtin/stash.c
+f6bbd781 128) die(_("'%s' is not a stash-like commit"), revision);
+f6bbd781 161) free_stash_info(info);
+f6bbd781 162) fprintf_ln(stderr, _("No stash entries found."));
+f6bbd781 163) return -1;
+f6bbd781 198) free_stash_info(info);
+cdca49bc 225) return error(_("git stash clear with parameters is "
+f6bbd781 241) return -1;
+f6bbd781 249) return -1;
+f6bbd781 265) return error(_("unable to write new index file"));
+f6bbd781 377) remove_path(stash_index_path.buf);
+f6bbd781 378) return -1;
+f6bbd781 405) return -1;
+f6bbd781 408) return error(_("cannot apply a stash in the middle of a merge"));
+f6bbd781 418) strbuf_release(&out);
+f6bbd781 419) return error(_("could not generate diff %s^!."),
+f6bbd781 426) return error(_("conflicts in index."
+f6bbd781 432) return error(_("could not save index tree"));
+f6bbd781 439) return error(_("could not restore untracked files from stash"));
+f6bbd781 470) return -1;
+f6bbd781 475) strbuf_release(&out);
+f6bbd781 480) strbuf_release(&out);
+f6bbd781 481) return -1;
+cdca49bc 557) return error(_("%s: Could not drop stash entry"),
+e1d01876 632) printf_ln(_("The stash entry is kept in case "
+b4493f26 766) free_stash_info(&info);
+51809c70 767) usage_with_options(git_stash_show_usage, options);
+847eb0b0 783) stash_msg = "Created via \"git stash store\".";
+847eb0b0 789) if (!quiet) {
+847eb0b0 790) fprintf_ln(stderr, _("Cannot update %s with %s"),
+847eb0b0 793) return -1;
+847eb0b0 817) if (!quiet)
+847eb0b0 818) fprintf_ln(stderr, _("\"git stash store\" requires one "
+847eb0b0 820) return -1;
+1f5a011d 903) return -1;
+1f5a011d 963) ret = -1;
+1f5a011d 964) goto done;
+1f5a011d 969) ret = -1;
+1f5a011d 970) goto done;
+1f5a011d 975) ret = -1;
+1f5a011d 976) goto done;
+1f5a011d 1002) ret = -1;
+1f5a011d 1003) goto done;
+1f5a011d 1014) ret = -1;
+1f5a011d 1015) goto done;
+1f5a011d 1021) ret = -1;
+1f5a011d 1022) goto done;
+1f5a011d 1029) ret = -1;
+1f5a011d 1030) goto done;
+1f5a011d 1068) ret = -1;
+1f5a011d 1069) goto done;
+1f5a011d 1075) ret = -1;
+1f5a011d 1076) goto done;
+1f5a011d 1087) ret = -1;
+1f5a011d 1088) goto done;
+1f5a011d 1093) ret = -1;
+1f5a011d 1094) goto done;
+9a95010a 1130) fprintf_ln(stderr, _("You do not have "
+1f5a011d 1139) ret = 1;
+1f5a011d 1140) goto done;
+9a95010a 1156) if (!quiet)
+9a95010a 1157) fprintf_ln(stderr, _("Cannot save the current "
+1f5a011d 1159) ret = -1;
+1f5a011d 1160) goto done;
+9a95010a 1165) if (!quiet)
+9a95010a 1166) fprintf_ln(stderr, _("Cannot save "
+1f5a011d 1168) ret = -1;
+1f5a011d 1169) goto done;
+9a95010a 1176) if (!quiet)
+9a95010a 1177) fprintf_ln(stderr, _("Cannot save the current "
+1f5a011d 1179) goto done;
+9a95010a 1213) if (!quiet)
+9a95010a 1214) fprintf_ln(stderr, _("Cannot record "
+1f5a011d 1216) ret = -1;
+1f5a011d 1217) goto done;
+fa38428f 1286) ret = -1;
+fa38428f 1287) goto done;
+fa38428f 1297) ret = -1;
+9a95010a 1298) if (!quiet)
+9a95010a 1299) fprintf_ln(stderr, _("Cannot initialize stash"));
+fa38428f 1300) goto done;
+fa38428f 1312) ret = -1;
+9a95010a 1313) if (!quiet)
+9a95010a 1314) fprintf_ln(stderr, _("Cannot save the current status"));
+fa38428f 1315) goto done;
+fa38428f 1332) ret = -1;
+fa38428f 1351) ret = -1;
+fa38428f 1352) goto done;
+fa38428f 1361) ret = -1;
+fa38428f 1362) goto done;
+fa38428f 1370) ret = -1;
+fa38428f 1379) ret = -1;
+fa38428f 1390) ret = -1;
+fa38428f 1391) goto done;
+fa38428f 1400) ret = -1;
+fa38428f 1401) goto done;
+fa38428f 1409) ret = -1;
+fa38428f 1435) ret = -1;
+bec65d5b 1527) return env;
+26799a20 1555) const char *path = mkpath("%s/git-legacy-stash",
+26799a20 1558) if (sane_execvp(path, (char **)argv) < 0)
+26799a20 1559) die_errno(_("could not exec %s"), path);
+26799a20 1561) BUG("sane_execvp() returned???");
+51809c70 1602) usage_msg_opt(xstrfmt(_("unknown subcommand: %s"), argv[0]),
+51809c70 1630) continue;
+
+combine-diff.c
+7c978a06 963) if (elem->parent[i].status !=
+7c978a06 965) added = 0;
+7c978a06 966) if (added)
+41ee2ad6 967) printf("%s%snew file mode %06o",
+7c978a06 970) if (deleted)
+41ee2ad6 971) printf("%s%sdeleted file ",
+7c978a06 973) printf("mode ");
+7c978a06 974) for (i = 0; i < num_parent; i++) {
+7c978a06 975) printf("%s%06o", i ? "," : "",
+7c978a06 978) if (elem->mode)
+7c978a06 979) printf("..%06o", elem->mode);
+7c978a06 981) printf("%s\n", c_reset);
+
+ident.c
+862e80a4 383) fputs(_(env_hint), stderr);
+862e80a4 384) die(_("unable to auto-detect email address (got '%s')"), email);
+afb6c30b 436) die(_("invalid date format: %s"), date_str);
+d6991cee 506) int author_ident_sufficiently_given(void)
+d6991cee 508) return ident_is_sufficient(author_ident_explicitly_given);
+39ab4d09 515) return config_error_nonbool(var);
+39ab4d09 525) return config_error_nonbool(var);
+39ab4d09 535) return config_error_nonbool(var);
+
+midx.c
+3c9e7185 817) drop_index++;
+3c9e7185 818) missing_drops++;
+3c9e7185 819) i--;
+3c9e7185 826) result = 1;
+3c9e7185 827) goto cleanup;
+cc6af73c 1053) midx_report(_("failed to load pack-index for packfile %s"),
+cc6af73c 1054)     e.p->pack_name);
+cc6af73c 1055) break;
+3c9e7185 1079) return 0;
+3c9e7185 1094) continue;
+467ae6f9 1133) return 0;
+19c239d4 1148) return 0;
+19c239d4 1157) continue;
+19c239d4 1170) continue;
+
+oidset.c
+ef644c41 69) die_errno("Could not read '%s'", path);
+
+packfile.c
+91336887 369) strbuf_release(&buf);
+91336887 370) return;
+
+pretty.c
+4f732e0f 1075) return 0;
+4f732e0f 1112) return 0;
+
+read-cache.c
+ee70c128 1734) if (advice_unknown_index_extension) {
+ee70c128 1735) warning(_("ignoring optional %.4s index extension"), ext);
+ee70c128 1736) advise(_("This is likely due to the file having been written by a newer\n"
+
+rebase-interactive.c
+6ca89c6f 26) warning(_("unrecognized setting %s for option "
+
+remote-curl.c
+34a9469d 360) die("invalid server response; expected service, got flush packet");
+
+sequencer.c
+d0aaa46f 1019) eol = sb->len;
+6e98de72 2166) return error(_("cannot '%s' without a previous commit"),
+6d3f180e 4606) int sequencer_add_exec_commands(struct repository *r,
+3546c8d9 4609) const char *todo_file = rebase_path_todo();
+8dccc7a6 4613) if (strbuf_read_file(&todo_list.buf, todo_file, 0) < 0)
+6d3f180e 4614) return error_errno(_("could not read '%s'."), todo_file);
+6d3f180e 4616) if (todo_list_parse_insn_buffer(r, todo_list.buf.buf, &todo_list)) {
+3546c8d9 4617) todo_list_release(&todo_list);
+6d3f180e 4621) todo_list_add_exec_commands(&todo_list, commands);
+6d3f180e 4626) return error_errno(_("could not write '%s'."), todo_file);
+616d7740 4661) strbuf_addstr(buf, " -c");
+6ca89c6f 4709) goto out;
+87805600 4713) res = -1;
+6ca89c6f 4714) goto out;
+1f4d9b1b 4848) return error_errno(_("could not write '%s'"), todo_file);
+3cc0287b 4924) clear_commit_todo_item(&commit_todo);
+c44a4c65 4925) return error(_("the script was already rearranged."));
+acabb2aa 5027) const char *todo_file = rebase_path_todo();
+acabb2aa 5028) struct todo_list todo_list = TODO_LIST_INIT;
+acabb2aa 5029) int res = 0;
+acabb2aa 5032) return -1;
+
+strbuf.c
+bfc3fe33 259) die("`pos' is too far after the end of the buffer");
+bfc3fe33 264) BUG("your vsnprintf is broken (returned %d)", len);
+bfc3fe33 266) return; /* nothing to do */
+bfc3fe33 268) die("you want to use way too much memory");
+bfc3fe33 276) BUG("your vsnprintf is broken (returns inconsistent lengths)");
+033abf97 397) BUG("your vsnprintf is broken (returned %d)", len);
+033abf97 402) BUG("your vsnprintf is broken (insatiable)");
+
+worktree.c
+e0c4a731 465) clear_repository_format(&format);
+
+Commits introducting uncovered code:
+Ævar Arnfjörð Bjarmason	8a6179bc i18n: git-commit basic messages
+Ævar Arnfjörð Bjarmason	49df4b02 i18n: git-branch basic messages
+Alban Gruin	30faf278 rebase--interactive: move transform_todo_file() to rebase--interactive.c
+Alban Gruin	6ca89c6f sequencer: refactor check_todo_list() to work on a todo_list
+Alban Gruin	c0108d5c rebase-interactive: rewrite edit_todo_list() to handle the initial edit
+Alban Gruin	acabb2aa sequencer: refactor rearrange_squash() to work on a todo_list
+Alban Gruin	6d3f180e sequencer: refactor sequencer_add_exec_commands() to work on a todo_list
+Alban Gruin	1f4d9b1b sequencer: change complete_action() to use the refactored functions
+Alban Gruin	616d7740 sequencer: introduce todo_list_write_to_file()
+Anders Waldenborg	4f732e0f pretty: allow %(trailers) options with explicit value
+Barret Rhoden	ef644c41 Move init_skiplist() outside of fsck
+Barret Rhoden	07d04b91 blame: add a config option to mark ignored lines
+Barret Rhoden	e7973c85 blame: add the ability to ignore commits and their changes
+Daniels Umanovskis	0ecb1fc7 branch: introduce --show-current display option
+Denton Liu	f39a9c65 remote: add --save-to-push option to git remote set-url
+Derrick Stolee	3c9e7185 multi-pack-index: implement 'expire' subcommand
+Derrick Stolee	cc6af73c multi-pack-index: verify object offsets
+Derrick Stolee	467ae6f9 multi-pack-index: prepare 'repack' subcommand
+Derrick Stolee	19c239d4 midx: implement midx_repack()
+Derrick Stolee	91336887 repack: refactor pack deletion for future use
+Eugene Letuchy	31653c1a Make git blame's date output format configurable, like git log
+Jay Soffian	66f4b98a Teach merge the '[-e|--edit]' option
+Jeff King	34a9469d remote-curl: refactor smart-http discovery
+Jeff King	afb6c30b ident: mark error messages for translation
+Jeff King	a5481a6c convert "enum date_mode" into a struct
+Jeff King	7c978a06 combine-diff: split header printing into its own function
+Jeff King	862e80a4 ident: handle NULL email when complaining of empty name
+Jeff King	d6991cee ident: keep separate "explicit" flags for author and committer
+Jeff Smith	b543bb1c blame: move scoreboard-related methods to libgit
+Joel Teichroeb	cdca49bc stash: convert drop and clear to builtin
+Joel Teichroeb	f6bbd781 stash: convert apply to builtin
+Joel Teichroeb	e1d01876 stash: convert pop to builtin
+Johannes Schindelin	6e98de72 sequencer (rebase -i): add support for the 'fixup' and 'squash' commands
+Johannes Schindelin	c44a4c65 rebase -i: rearrange fixup/squash lines using the rebase--helper
+Johannes Schindelin	3546c8d9 rebase -i: also expand/collapse the SHA-1s via the rebase--helper
+Johannes Schindelin	26799a20 stash: optionally use the scripted version again
+Johannes Schindelin	033abf97 Replace all die("BUG: ...") calls by BUG() ones
+Johannes Schindelin	bec65d5b tests: add a special setup where stash.useBuiltin is off
+John Keeping	41ee2ad6 combine-diff.c: teach combined diffs about line prefix
+Jonathan Nieder	ee70c128 index: offer advice for unknown index extensions
+Junio C Hamano	b7200e83 branch: teach --edit-description option
+Liam Beguin	8dccc7a6 rebase -i: refactor transform_todo_ids
+Martin Ågren	e0c4a731 setup: fix memory leaks with `struct repository_format`
+Michael J Gruber	62dc42b9 merge: clarify call chain
+Miklos Vajna	1c7b76be Build in merge
+Nguyễn Thái Ngọc Duy	3cc0287b sequencer.c: use commit-slab to associate todo items to commits
+Paul Tan	11b6d178 pull: pass git-merge's options to git-merge
+Paul-Sebastian Ungureanu	bfc3fe33 strbuf.c: add `strbuf_insertf()` and `strbuf_vinsertf()`
+Paul-Sebastian Ungureanu	fa38428f stash: convert push to builtin
+Paul-Sebastian Ungureanu	847eb0b0 stash: convert store to builtin
+Paul-Sebastian Ungureanu	1f5a011d stash: convert create to builtin
+Paul-Sebastian Ungureanu	b4493f26 stash: convert show to builtin
+Paul-Sebastian Ungureanu	51809c70 stash: convert `stash--helper.c` into `stash.c`
+Paul-Sebastian Ungureanu	9a95010a stash: make push -q quiet
+Phillip Wood	d0aaa46f commit: move empty message checks to libgit
+Pierre Habouzit	3f8d5204 git-blame: migrate to incremental parse-option [2/2]
+Pierre Habouzit	5817da01 git-blame: migrate to incremental parse-option [1/2]
+René Scharfe	87805600 sequencer: factor out strbuf_read_file_or_whine()
+Sven Strickroth	b64c1e07 commit: do not lose SQUASH_MSG contents
+William Hubbs	39ab4d09 config: allow giving separate author and committer idents
+
+
+Uncovered code in 'next' not in 'master'
+--------------------------------------------------------
+
+bisect.c
+4f6d26b1 661) mark_edges_uninteresting(revs, NULL, 0);
+
+builtin/am.c
+7ff26832 1834) write_index_patch(state);
+
+builtin/bisect--helper.c
+ecb3f373 111) return error(_("please use two different terms"));
+ecb3f373 118) return error_errno(_("could not open the file BISECT_TERMS"));
+5e82c3dd 162) if (get_oid_commit(commit, &oid))
+5e82c3dd 163) return error(_("'%s' is not a valid commit"), commit);
+5e82c3dd 164) strbuf_addstr(&branch, commit);
+5e82c3dd 172) strbuf_release(&branch);
+5e82c3dd 173) argv_array_clear(&argv);
+5e82c3dd 174) return error(_("could not check out original"
+0f30233a 215) retval = error(_("Bad bisect_write argument: %s"), state);
+0f30233a 216) goto finish;
+0f30233a 220) retval = error(_("couldn't get the oid of the rev '%s'"), rev);
+0f30233a 221) goto finish;
+0f30233a 226) retval = -1;
+0f30233a 227) goto finish;
+0f30233a 232) retval = error_errno(_("couldn't open the file '%s'"), git_path_bisect_log());
+0f30233a 233) goto finish;
+129a6cf3 329) yesno = git_prompt(_("Are you sure [Y/n]? "), PROMPT_ECHO);
+129a6cf3 330) if (starts_with(yesno, "N") || starts_with(yesno, "n"))
+129a6cf3 331) retval = -1;
+129a6cf3 332) goto finish;
+129a6cf3 338) retval = error(_(need_bisect_start_warning),
+450ebb73 389) return error(_("invalid argument %s for 'git bisect terms'.\n"
+06f5608c 404) return -1;
+06f5608c 407) retval = -1;
+06f5608c 408) goto finish;
+06f5608c 413) retval = -1;
+06f5608c 452) no_checkout = 1;
+06f5608c 474)  !one_of(arg, "--term-good", "--term-bad", NULL)) {
+06f5608c 475) return error(_("unrecognized option: '%s'"), arg);
+06f5608c 510) if (get_oid("HEAD", &head_oid))
+06f5608c 511) return error(_("bad HEAD - I need a HEAD"));
+06f5608c 526) retval = error(_("checking out '%s' failed."
+06f5608c 547) return error(_("won't bisect on cg-seek'ed tree"));
+06f5608c 550) return error(_("bad HEAD - strange symbolic ref"));
+06f5608c 558) return -1;
+06f5608c 576) retval = -1;
+06f5608c 577) goto finish;
+
+builtin/blame.c
+acdd3776 930) blame_date_width = sizeof("Thu Oct 19 16:00");
+acdd3776 931) break;
+
+builtin/checkout.c
+e8a8a4d7 253) die(_("Unable to add merge result for '%s'"), path);
+e8a8a4d7 257) die(_("make_cache_entry failed for path '%s'"), path);
+091e04bc 303) return;
+
+builtin/diff-tree.c
+ff7fe37b 168) if (!the_index.cache)
+
+builtin/notes.c
+033abf97 556) BUG("combine_notes_overwrite failed");
+
+builtin/pack-redundant.c
+33de80b1 169) const int cmp = oidcmp(l->oid, oid);
+33de80b1 267) const int cmp = hashcmp(p1_base + p1_off, p2_base + p2_off);
+
+builtin/rebase.c
+21853626 259) write_file(state_dir_path("verbose", opts), "%s", "");
+21853626 261) write_file(state_dir_path("strategy", opts), "%s",
+21853626 264) write_file(state_dir_path("strategy_opts", opts), "%s",
+21853626 271) write_file(state_dir_path("gpg_sign_opt", opts), "%s",
+21853626 274) write_file(state_dir_path("strategy", opts), "--signoff");
+c5233708 394) BUG("Not a fully qualified branch: '%s'", switch_to_branch);
+c5233708 397) ret = -1;
+c5233708 398) goto leave_reset_head;
+c5233708 402) ret = error(_("could not determine HEAD revision"));
+c5233708 403) goto leave_reset_head;
+c5233708 424) ret = error(_("could not read index"));
+c5233708 425) goto leave_reset_head;
+c5233708 429) ret = error(_("failed to find tree of %s"),
+c5233708 431) goto leave_reset_head;
+c5233708 435) ret = error(_("failed to find tree of %s"), oid_to_hex(oid));
+c5233708 436) goto leave_reset_head;
+c5233708 448) ret = error(_("could not write index"));
+c5233708 449) goto leave_reset_head;
+c5233708 467) } else if (old_orig)
+c5233708 468) delete_ref(NULL, "ORIG_HEAD", old_orig, 0);
+ac7f467f 828) remove_dir_recursively(&dir, 0);
+ac7f467f 829) strbuf_release(&dir);
+ac7f467f 830) die("Nothing to do");
+55071ea2 1172) BUG("sane_execvp() returned???");
+5e5d9619 1293) exit(1);
+ba1905a5 1418) die(_("--strategy requires --merge or --interactive"));
+ba1905a5 1428) BUG("unhandled rebase type (%d)", options.type);
+
+builtin/update-index.c
+309be813 905) return error("option '%s' must be the last argument", opt->long_name);
+309be813 922) prefix, prefix ? strlen(prefix) : 0);
+309be813 924) active_cache_changed = 0;
+
+date.c
+acdd3776 113) die("Timestamp too large for this system: %"PRItime, time);
+7d29afd4 137) strbuf_addstr(timebuf, _("in the future"));
+7d29afd4 138) return;
+033abf97 209) BUG("cannot create anonymous strftime date_mode struct");
+acdd3776 236) hide.date = 1;
+
+diff.c
+dd63f169 4639) die(_("--follow requires exactly one pathspec"));
+d473e2e0 4946) return error(_("%s expects a numerical value"), "--unified");
+
+entry.c
+536ec183 450) BUG("Can't remove entry to a path");
+12dccc16 517) return 0;
+
+http-walker.c
+514c5fdd 550) loose_object_path(the_repository, &buf, &req->oid);
+
+list-objects.c
+4f6d26b1 241) continue;
+4f6d26b1 250) parent->object.flags |= SHOWN;
+4f6d26b1 251) show_edge(parent);
+4f6d26b1 272) tree->object.flags |= UNINTERESTING;
+4f6d26b1 287) commit->object.flags |= SHOWN;
+4f6d26b1 288) show_edge(commit);
+
+merge-recursive.c
+c43ba42e 436) fprintf(stderr, "BUG: %d %.*s\n", ce_stage(ce),
+19c6a4f8 437) (int)ce_namelen(ce), ce->name);
+033abf97 439) BUG("unmerged index entries in merge-recursive.c");
+9047ebbc 728) return -1;
+6003303a 925) if (status == SCLD_EXISTS)
+18cfc088 1206) return 0;
+73118f89 3632) return NULL;
+d90e759f 3655)    oid_to_hex(base_list[i]));
+
+object.c
+01f8d594 278) error(_("hash mismatch %s"), oid_to_hex(repl));
+
+parse-options.c
+f62470c6 116) BUG("BITOP can't have unset form");
+df217ed6 155) *(const char **)opt->value = (const char *)opt->defval;
+2a514ed8 204) *(unsigned long *)opt->value = 0;
+2a514ed8 205) return 0;
+1e5ce570 405) err |= optbug(opts, "uses incompatible flags "
+af465af8 409) err |= optbug(opts, "invalid short name");
+af465af8 411) err |= optbug(opts, "short name already used");
+3ebbe289 432) BUG("OPTION_CALLBACK needs one callback");
+3ebbe289 434) BUG("OPTION_CALLBACK can't have two callbacks");
+b9d7f4b4 540) switch (opts->type) {
+b9d7f4b4 542) continue;
+ebc4a04e 559) if (opts->flags & PARSE_OPT_COMP_ARG)
+b221b5ab 561) if (starts_with(opts->long_name, "no-"))
+b9d7f4b4 567) fputc('\n', stdout);
+a92ec7ef 568) return PARSE_OPT_COMPLETE;
+b9d7f4b4 606) return show_gitcomp(ctx, options);
+
+revision.c
+d5d2e935 169) return;
+d5d2e935 172) return;
+d5d2e935 195) break;
+f1f5de44 218) continue;
+be489d02 1547) return;
+
+sequencer.c
+899b49c4 2395) opts->quiet = 1;
+
+sha1-file.c
+d21f8426 1084) return -1;
+514c5fdd 1291) status = error(_("unable to parse %s header"), oid_to_hex(oid));
+3e8b7d3c 1830) return 0;
+
+sha1-name.c
+d1dd94b3 926) return MISSING_OBJECT;
+
+t/helper/test-date.c
+4419de91 99) if (*argv)
+
+t/helper/test-path-utils.c
+b819f1d2 180) static int cmp_by_st_size(const void *a, const void *b)
+b819f1d2 182) intptr_t x = (intptr_t)((struct string_list_item *)a)->util;
+b819f1d2 183) intptr_t y = (intptr_t)((struct string_list_item *)b)->util;
+b819f1d2 185) return x > y ? -1 : (x < y ? +1 : 0);
+dc2d9ba3 294) res = error("'%s' is %s.gitmodules", argv[i],
+5868bd86 308) res = error_errno("Cannot stat '%s'", argv[i]);
+af9912ef 314) if (argc == 4 && !strcmp(argv[1], "skip-n-bytes")) {
+af9912ef 315) int fd = open(argv[2], O_RDONLY), offset = atoi(argv[3]);
+af9912ef 318) if (fd < 0)
+af9912ef 319) die_errno("could not open '%s'", argv[2]);
+af9912ef 320) if (lseek(fd, offset, SEEK_SET) < 0)
+af9912ef 321) die_errno("could not skip %d bytes", offset);
+af9912ef 323) ssize_t count = read(fd, buffer, sizeof(buffer));
+af9912ef 324) if (count < 0)
+af9912ef 325) die_errno("could not read '%s'", argv[2]);
+af9912ef 326) if (!count)
+af9912ef 327) break;
+af9912ef 328) if (write(1, buffer, count) < 0)
+af9912ef 329) die_errno("could not write to stdout");
+af9912ef 330) }
+af9912ef 331) close(fd);
+af9912ef 332) return 0;
+b819f1d2 335) if (argc > 5 && !strcmp(argv[1], "slice-tests")) {
+b819f1d2 336) int res = 0;
+b819f1d2 338) struct string_list list = STRING_LIST_INIT_NODUP;
+b819f1d2 341) offset = strtol(argv[2], NULL, 10);
+b819f1d2 342) stride = strtol(argv[3], NULL, 10);
+b819f1d2 343) if (stride < 1)
+b819f1d2 344) stride = 1;
+b819f1d2 345) for (i = 4; i < argc; i++)
+b819f1d2 346) if (stat(argv[i], &st))
+b819f1d2 347) res = error_errno("Cannot stat '%s'", argv[i]);
+b819f1d2 349) string_list_append(&list, argv[i])->util =
+
+t/helper/test-xml-encode.c
+22231908 9) int cmd__xml_encode(int argc, const char **argv)
+22231908 11) unsigned char buf[1024], tmp[4], *tmp2 = NULL;
+22231908 12) ssize_t cur = 0, len = 1, remaining = 0;
+22231908 16) if (++cur == len) {
+22231908 17) len = xread(0, buf, sizeof(buf));
+22231908 18) if (!len)
+22231908 19) return 0;
+22231908 20) if (len < 0)
+22231908 21) die_errno("Could not read <stdin>");
+22231908 22) cur = 0;
+22231908 24) ch = buf[cur];
+22231908 26) if (tmp2) {
+22231908 27) if ((ch & 0xc0) != 0x80) {
+22231908 28) fputs(utf8_replace_character, stdout);
+22231908 29) tmp2 = NULL;
+22231908 30) cur--;
+22231908 31) continue;
+22231908 33) *tmp2 = ch;
+22231908 34) tmp2++;
+22231908 35) if (--remaining == 0) {
+22231908 36) fwrite(tmp, tmp2 - tmp, 1, stdout);
+22231908 37) tmp2 = NULL;
+22231908 39) continue;
+22231908 42) if (!(ch & 0x80)) {
+22231908 44) if (ch == '&')
+22231908 45) fputs("&amp;", stdout);
+22231908 46) else if (ch == '\'')
+22231908 47) fputs("&apos;", stdout);
+22231908 48) else if (ch == '"')
+22231908 49) fputs("&quot;", stdout);
+22231908 50) else if (ch == '<')
+22231908 51) fputs("&lt;", stdout);
+22231908 52) else if (ch == '>')
+22231908 53) fputs("&gt;", stdout);
+22231908 54) else if (ch >= 0x20)
+22231908 55) fputc(ch, stdout);
+22231908 56) else if (ch == 0x09 || ch == 0x0a || ch == 0x0d)
+22231908 57) fprintf(stdout, "&#x%02x;", ch);
+22231908 59) fputs(utf8_replace_character, stdout);
+22231908 60) } else if ((ch & 0xe0) == 0xc0) {
+22231908 62) tmp[0] = ch;
+22231908 63) remaining = 1;
+22231908 64) tmp2 = tmp + 1;
+22231908 65) } else if ((ch & 0xf0) == 0xe0) {
+22231908 67) tmp[0] = ch;
+22231908 68) remaining = 2;
+22231908 69) tmp2 = tmp + 1;
+22231908 70) } else if ((ch & 0xf8) == 0xf0) {
+22231908 72) tmp[0] = ch;
+22231908 73) remaining = 3;
+22231908 74) tmp2 = tmp + 1;
+22231908 76) fputs(utf8_replace_character, stdout);
+22231908 77) }
+
+utf8.c
+76759c7d 553) return NULL;
+
+wrapper.c
+e3b1e3bd 701) die_errno(_("could not stat %s"), filename);
+
+Commits introducting uncovered code:
+Ævar Arnfjörð Bjarmason	e8a8a4d7 i18n: git-checkout basic messages
+Charles Bailey	2a514ed8 parse-options: move unsigned long option parsing out of pack-objects.c
+David Turner	d1dd94b3 Do not print 'dangling' for cat-file in case of ambiguity
+Derrick Stolee	4f6d26b1 list-objects: consume sparse tree walk
+Derrick Stolee	d5d2e935 revision: implement sparse algorithm
+Derrick Stolee	f1f5de44 revision: add mark_tree_uninteresting_sparse
+Elijah Newren	c43ba42e merge-recursive: Make BUG message more legible by adding a newline
+Elijah Newren	d90e759f merge-recursive: fix numerous argument alignment issues
+Elijah Newren	899b49c4 git-rebase, sequencer: extend --quiet option for the interactive machinery
+Jeff King	514c5fdd sha1-file: modernize loose object file functions
+Jeff King	01f8d594 prefer "hash mismatch" to "sha1 mismatch"
+Jeff King	dd63f169 move "--follow needs one pathspec" rule to diff_setup_done
+Johannes Schindelin	21853626 built-in rebase: call `git am` directly
+Johannes Schindelin	c5233708 rebase: move `reset_head()` into a better spot
+Johannes Schindelin	b819f1d2 ci: parallelize testing on Windows
+Johannes Schindelin	22231908 tests: optionally write results as JUnit-style .xml
+Johannes Schindelin	af9912ef tests: include detailed trace logs with --write-junit-xml upon failure
+Johannes Schindelin	5868bd86 tests: avoid calling Perl just to determine file sizes
+Johannes Schindelin	dc2d9ba3 is_{hfs,ntfs}_dotgitmodules: add tests
+Johannes Schindelin	033abf97 Replace all die("BUG: ...") calls by BUG() ones
+Johannes Schindelin	6003303a merge-recursive: switch to returning errors instead of dying
+Johannes Schindelin	4419de91 test-date: add a subcommand to measure times in shell scripts
+Jonathan Nieder	7d29afd4 i18n: mark relative dates for translation
+Jonathan Nieder	1e5ce570 parse-options: clearer reporting of API misuse
+Jonathan Nieder	3e8b7d3c has_sha1_file: don't bother if we are not in a repository
+Jonathan Nieder	309be813 update-index: migrate to parse-options API
+Junio C Hamano	af465af8 parse-options: detect attempt to add a duplicate short option name
+Junio C Hamano	19c6a4f8 merge-recursive: do not return NULL only to cause segfault
+Junio C Hamano	d21f8426 unpack_sha1_header(): detect malformed object header
+Linus Torvalds	12dccc16 Make fiel checkout function available to the git library
+Linus Torvalds	acdd3776 Add 'human' date format
+Miklos Vajna	9047ebbc Split out merge_recursive() to merge-recursive.c
+Nguyễn Thái Ngọc Duy	3ebbe289 parse-options: allow ll_callback with OPTION_CALLBACK
+Nguyễn Thái Ngọc Duy	a92ec7ef parse-options: fix SunCC compiler warning
+Nguyễn Thái Ngọc Duy	b221b5ab completion: collapse extra --no-.. options
+Nguyễn Thái Ngọc Duy	ebc4a04e remote: force completing --mirror= instead of --mirror
+Nguyễn Thái Ngọc Duy	b9d7f4b4 parse-options: support --git-completion-helper
+Nguyễn Thái Ngọc Duy	be489d02 revision.c: --indexed-objects add objects from all worktrees
+Nguyễn Thái Ngọc Duy	ff7fe37b diff.c: move read_index() code back to the caller
+Nguyễn Thái Ngọc Duy	d473e2e0 diff.c: convert -U|--unified
+Nguyễn Thái Ngọc Duy	f62470c6 parse-options: add OPT_BITOP()
+Paul Tan	7ff26832 builtin-am: implement -i/--interactive
+Pranit Bauva	129a6cf3 bisect--helper: `bisect_next_check` shell function in C
+Pranit Bauva	5e82c3dd bisect--helper: `bisect_reset` shell function in C
+Pranit Bauva	ecb3f373 bisect--helper: `write_terms` shell function in C
+Pranit Bauva	450ebb73 bisect--helper: `get_terms` & `bisect_terms` shell function in C
+Pranit Bauva	06f5608c bisect--helper: `bisect_start` shell function partially in C
+Pranit Bauva	0f30233a bisect--helper: `bisect_write` shell function in C
+Pranit Bauva	e3b1e3bd wrapper: move is_empty_file() and rename it as is_empty_or_missing_file()
+Pratik Karki	55071ea2 rebase: start implementing it as a builtin
+Pratik Karki	ac7f467f builtin/rebase: support running "git rebase <upstream>"
+Pratik Karki	5e5d9619 builtin rebase: support --abort
+Pratik Karki	ba1905a5 builtin rebase: add support for custom merge strategies
+Shahzad Lone	33de80b1 various: tighten constness of some local variables
+Stefan Beller	18cfc088 submodule.c: move submodule merging to merge-recursive.c
+Stephan Beyer	73118f89 merge-recursive.c: Add more generic merge_recursive_generic()
+Stephen Boyd	df217ed6 parse-opts: add OPT_FILENAME and transition builtins
+Thomas Gummerer	091e04bc checkout: introduce --{,no-}overlay option
+Thomas Gummerer	536ec183 entry: support CE_WT_REMOVE flag in checkout_entry
+Torsten Bögershausen	76759c7d git on Mac OS and precomposed unicode
+
+
+Uncovered code in 'master' not in 'master@{1}'
+--------------------------------------------------------
+
+builtin/archive.c
+01f9ec64 63) if (starts_with(reader.line, "NACK "))
+01f9ec64 64) die(_("git archive: NACK %s"), reader.line + 5);
+
+builtin/fetch-pack.c
+4316ff30 227) get_remote_refs(fd[1], &reader, &ref, 0, NULL, NULL);
+ad6ac124 234) BUG("unknown protocol version");
+
+builtin/fetch.c
+aa57b871 1482) if (filter_options.choice)
+
+builtin/grep.c
+f9ee2fcd 428) return 0;
+
+builtin/pack-objects.c
+ac77d0c3 2008) die(_("unable to parse object header of %s"),
+ca473cef 2081) die(_("object %s inconsistent object length (%"PRIuMAX" vs %"PRIuMAX")"),
+f616db6a 2094) warning(_("object %s cannot be read"),
+
+builtin/receive-pack.c
+01f9ec64 1587)     reader->line + 8);
+a85b377d 1617) true_flush = 1;
+01f9ec64 1621) die("protocol error: got an unexpected packet");
+
+commit-graph.c
+aa658574 127) return NULL;
+aa658574 130) return NULL;
+7b8a21db 455) return c->maybe_tree;
+0cbef8f8 457) BUG("get_commit_tree_in_graph_one called from non-commit-graph commit");
+4f5b532d 884) die(_("error opening index for %s"), packname.buf);
+08fd81c9 956) die(_("the commit graph format cannot write %d commits"), count_distinct);
+
+commit-reach.c
+5227c385 326) return ret;
+
+commit.c
+
+diff.c
+b73bcbac 308) ret = 0;
+21536d07 812)        (s[off] == '\r' && off < len - 1))
+21536d07 813) off++;
+
+fetch-pack.c
+01f9ec64 154) die(_("git fetch-pack: expected a flush packet after shallow list"));
+1dd73e20 256) die(_("--stateless-rpc requires multi_ack_detailed"));
+01f9ec64 364) die(_("invalid unshallow line: %s"), reader.line);
+f7e20501 1011) timestamp_t max_age = approxidate(args->deepen_since);
+0bbc0bc5 1128) packet_buf_write(&req_buf, "sideband-all");
+bbb19a8b 1320) die(_("error processing wanted refs: %d"), reader->status);
+
+hex.c
+47edb649 93) char *sha1_to_hex_r(char *buffer, const unsigned char *sha1)
+47edb649 95) return hash_to_hex_algop_r(buffer, sha1, &hash_algos[GIT_HASH_SHA1]);
+47edb649 116) char *hash_to_hex(const unsigned char *hash)
+
+http-push.c
+ea82b2a0 1314) p = process_tree(lookup_tree(the_repository, &entry.oid),
+
+http.c
+e6cf87b1 1999) if (fflush(result)) {
+e6cf87b1 2000) error_errno("unable to flush a file");
+e6cf87b1 2001) return HTTP_START_FAILED;
+e6cf87b1 2004) if (ftruncate(fileno(result), 0) < 0) {
+e6cf87b1 2005) error_errno("unable to truncate a file");
+e6cf87b1 2006) return HTTP_START_FAILED;
+e6cf87b1 2008) break;
+e6cf87b1 2010) BUG("Unknown http_request target");
+
+list-objects-filter.c
+bc5975d2 147) BUG("unknown filter_situation: %d", filter_situation);
+
+pkt-line.c
+bb643d8b 436) strbuf_setlen(sb_out, orig_len);
+0bbc0bc5 505) if (demultiplex_sideband(reader->me, reader->buffer,
+0bbc0bc5 508) break;
+0bbc0bc5 509) }
+
+pretty.c
+ad6f028f 1204) return 0;
+
+remote-curl.c
+01f9ec64 427) die("invalid server response; got '%s'", reader.line);
+01f9ec64 439) }
+b725b270 549) error("unable to rewind rpc post data - try increasing http.postBuffer");
+6c81a990 550) return CURLIOE_FAILRESTART;
+6c81a990 553) return CURLIOE_UNKNOWNCMD;
+
+send-pack.c
+01f9ec64 143) return error(_("unable to parse remote unpack status: %s"), reader->line);
+01f9ec64 162) error("invalid ref status from remote: %s", reader->line);
+
+sha1-file.c
+ac73cedf 114) static void git_hash_unknown_final(unsigned char *hash, git_hash_ctx *ctx)
+1a07e59c 116) BUG("trying to finalize unknown hash");
+024aa469 1358) return -1;
+ee1c6c34 1766) return 0;
+
+sideband.c
+fbd76cd4 128) suffix = ANSI_SUFFIX;
+fbd76cd4 138) strbuf_addf(scratch,
+fbd76cd4 140)     scratch->len ? "\n" : "", me);
+fbd76cd4 141) *sideband_type = SIDEBAND_PROTOCOL_ERROR;
+fbd76cd4 142) goto cleanup;
+0bbc0bc5 150) die("remote error: %s", buf + 1);
+fbd76cd4 195) strbuf_addf(scratch, "%s%s: protocol error: bad band #%d",
+fbd76cd4 196)     scratch->len ? "\n" : "", me, band);
+fbd76cd4 197) *sideband_type = SIDEBAND_PROTOCOL_ERROR;
+fbd76cd4 198) break;
+0bbc0bc5 203) die("%s", scratch->buf);
+
+t/helper/test-hash-speed.c
+37649b7f 6) static inline void compute_hash(const struct git_hash_algo *algo, git_hash_ctx *ctx, uint8_t *final, const void *p, size_t len)
+37649b7f 8) algo->init_fn(ctx);
+37649b7f 9) algo->update_fn(ctx, p, len);
+37649b7f 10) algo->final_fn(final, ctx);
+37649b7f 11) }
+37649b7f 13) int cmd__hash_speed(int ac, const char **av)
+37649b7f 18) unsigned bufsizes[] = { 64, 256, 1024, 8192, 16384 };
+37649b7f 21) const struct git_hash_algo *algo = NULL;
+37649b7f 23) if (ac == 2) {
+37649b7f 24) for (i = 1; i < GIT_HASH_NALGOS; i++) {
+37649b7f 25) if (!strcmp(av[1], hash_algos[i].name)) {
+37649b7f 26) algo = &hash_algos[i];
+37649b7f 27) break;
+37649b7f 31) if (!algo)
+37649b7f 32) die("usage: test-tool hash-speed algo_name");
+37649b7f 35) initial = clock();
+37649b7f 37) printf("algo: %s\n", algo->name);
+37649b7f 39) for (i = 0; i < ARRAY_SIZE(bufsizes); i++) {
+37649b7f 42) p = xcalloc(1, bufsizes[i]);
+37649b7f 43) start = end = clock() - initial;
+37649b7f 44) for (j = 0; ((end - start) / CLOCKS_PER_SEC) < NUM_SECONDS; j++) {
+37649b7f 45) compute_hash(algo, &ctx, hash, p, bufsizes[i]);
+37649b7f 51) if (!(j & 127))
+37649b7f 52) end = clock() - initial;
+37649b7f 54) kb = j * bufsizes[i];
+37649b7f 55) kb_per_sec = kb / (1024 * ((double)end - start) / CLOCKS_PER_SEC);
+37649b7f 56) printf("size %u: %lu iters; %lu KiB; %0.2f KiB/s\n", bufsizes[i], j, kb, kb_per_sec);
+37649b7f 57) free(p);
+37649b7f 60) exit(0);
+
+t/helper/test-hash.c
+50c817e0 17) bufsz = strtoul(av[1], NULL, 10) * 1024 * 1024;
+50c817e0 21) bufsz = 8192;
+50c817e0 24) fprintf(stderr, "bufsz %u is too big, halving...\n", bufsz);
+50c817e0 25) bufsz /= 2;
+50c817e0 26) if (bufsz < 1024)
+50c817e0 27) die("OOPS");
+50c817e0 42) die_errno("test-hash");
+
+tree-walk.c
+0a3faa45 530) oidcpy(result, &oid);
+
+tree.c
+371820d5 104) commit = lookup_commit(r, &entry.oid);
+
+upload-pack.c
+0b6069fe 148) struct strbuf buf = STRBUF_INIT;
+ae2948f3 838) die("git upload-pack: ambiguous deepen-not: %s", line);
+1bd8c8f0 896) multi_ack = 1;
+05e95155 1058) keepalive = git_config_int(var, value);
+3145ea95 1335) die("oops (%s)", oid_to_hex(oid));
+
+Commits introducting uncovered code:
+Brandon Williams	3145ea95 upload-pack: introduce fetch server command
+Brandon Williams	bbb19a8b fetch-pack: mark die strings for translation
+Brandon Williams	ae2948f3 upload-pack: factor out processing lines
+Brandon Williams	f9ee2fcd grep: recurse in-process using 'struct repository'
+Brandon Williams	f7e20501 fetch-pack: support shallow requests
+Brandon Williams	ad6ac124 connect: discover protocol version outside of get_remote_heads
+brian m. carlson	37649b7f t/helper: add a test helper to compute hash speed
+brian m. carlson	ea82b2a0 tree-walk: store object_id in a separate member
+brian m. carlson	50c817e0 t: make the sha1 test-tool helper generic
+brian m. carlson	ac73cedf hash: create union for hash context allocation
+brian m. carlson	0a3faa45 tree-walk: copy object ID before use
+brian m. carlson	47edb649 hex: introduce functions to print arbitrary hashes
+Derrick Stolee	7b8a21db commit-graph: lazy-load trees for commits
+Derrick Stolee	0cbef8f8 commit-graph: load a root tree from specific graph
+Derrick Stolee	08fd81c9 commit-graph: implement write_commit_graph()
+Derrick Stolee	5227c385 commit-reach: move walk methods from commit.c
+Issac Trotts	ad6f028f log: add %S option (like --source) to log --format
+Jeff Hostetler	aa57b871 fetch: inherit filter-spec from partial clone
+Jeff King	b725b270 remote-curl: use error instead of fprintf(stderr)
+Jeff King	ee1c6c34 sha1_file: only freshen packs once per run
+Jeff King	05e95155 upload-pack: send keepalive packets during pack computation
+Johannes Schindelin	1bd8c8f0 git-upload-pack: Support the multi_ack protocol
+Jonathan Tan	0b6069fe fetch-pack: test support excluding large blobs
+Jonathan Tan	fbd76cd4 sideband: reverse its dependency on pkt-line
+Jonathan Tan	4316ff30 fetch-pack: support protocol version 2
+Jonathan Tan	0bbc0bc5 {fetch,upload}-pack: sideband v2 fetch response
+Josh Steadmon	aa658574 commit-graph, fuzz: add fuzzer for commit-graph
+Junio C Hamano	a85b377d push: the beginning of "git push --signed"
+Junio C Hamano	371820d5 Merge branch 'bc/tree-walk-oid'
+Lars Schneider	bb643d8b pkt-line: add functions to read/write flush terminated packet streams
+Martin Storsjö	6c81a990 Allow curl to rewind the RPC read buffer
+Masaya Suzuki	01f9ec64 Use packet_reader instead of packet_read_line
+Masaya Suzuki	e6cf87b1 http: enable keep_error for HTTP requests
+Matthew DeVore	bc5975d2 list-objects-filter: implement filter tree:0
+Nguyễn Thái Ngọc Duy	1a07e59c Update messages in preparation for i18n
+Nguyễn Thái Ngọc Duy	1dd73e20 fetch-pack.c: mark strings for translating
+Nguyễn Thái Ngọc Duy	4f5b532d commit-graph.c: mark more strings for translation
+Nguyễn Thái Ngọc Duy	f616db6a builtin/pack-objects.c: mark more strings for translation
+Nguyễn Thái Ngọc Duy	ac77d0c3 pack-objects: shrink size field in struct object_entry
+Phillip Wood	21536d07 diff --color-moved-ws: modify allow-indentation-change
+Phillip Wood	b73bcbac diff: allow --no-color-moved-ws
+Takuto Ikuta	024aa469 fetch-pack.c: use oidset to check existence of loose object
+Torsten Bögershausen	ca473cef Upcast size_t variables to uintmax_t when printing
+
+
