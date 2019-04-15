@@ -65,6 +65,7 @@ namespace TestCoverageReport
 
                     foreach (FileReportLine line in report.Files[file])
                     {
+                        line.TargetCommitId = report.TargetCommitId;
                         renderer.WriteFileLine(line);
                     }
 

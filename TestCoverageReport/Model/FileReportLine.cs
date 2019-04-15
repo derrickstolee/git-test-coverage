@@ -7,6 +7,7 @@
         public int LineNumber { get; set; }
         public string LineContents { get; set; }
         public bool Ignored { get; set; }
+        public string TargetCommitId { get; set; }
 
         public string GetShortCommitId()
         {
