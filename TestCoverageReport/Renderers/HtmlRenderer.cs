@@ -89,12 +89,14 @@ namespace TestCoverageReport
             this.writer.WriteLine($@"
     <tr class=""{tr_class}"">
 		<td class=""commit-id"">
-            <a href=""https://github.com/git/git/tree/{line.CommitId}/{line.FileName}#L{line.LineNumber}"">
+            <a href=""https://github.com/git/git/commit/{line.CommitId}"">
                 {line.GetShortCommitId()}
             </a>
         </td>
         <td class=""line-number"">
-			{line.LineNumber}
+            <a href=""https://github.com/git/git/tree/{line.TargetCommitId}/{line.FileName}#L{line.LineNumber}"">
+			    {line.LineNumber}
+            </a>
 		</td>
 		<td class=""code"">
 			{Sanitize(line.LineContents)}
