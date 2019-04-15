@@ -57,7 +57,7 @@ namespace TestCoverageReport
             {targetBranch}
         </td>
         <td class=""full-commit-id"">
-			<a href=""https://github.com/git/git/tree/{baseCommitId}"">
+			<a href=""https://github.com/git/git/tree/{targetCommitId}"">
                 {targetCommitId}
             </a>
 		</td>
@@ -67,7 +67,7 @@ namespace TestCoverageReport
 		    {baseBranch}
 		</td>
 		<td class=""full-commit-id"">
-			<a href=""https://github.com/git/git/tree/{targetCommitId}"">
+			<a href=""https://github.com/git/git/tree/{baseCommitId}"">
                 {baseCommitId}
             </a>
 		</td>
