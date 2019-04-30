@@ -1,0 +1,1 @@
+69:die_errno("Could not read '%s'", path);
