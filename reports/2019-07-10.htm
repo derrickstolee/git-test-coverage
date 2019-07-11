@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Git Test Coverage Report (6/10/19)</title>
+	<link rel="stylesheet" href="style.css"/>
+    <script src = "code.js"></script>
+</head>
+<body>
+<p>
+<button onClick="toggleIgnored()">Show/Hide Ignored Lines</button>
+</p>
+<table>
+
+<tr>
+    <td>target</td>
+    <td>fork/midx-expire/upstream</td>
+</tr>
+
+<tr>
+    <td>base</td>
+    <td>af96fe3392fb078cb5447bcb94f2ed8d79d0a4a8</td>
+</tr>
+</table>
+
+<h2>Uncovered code in 'target' not in 'base'</h2>
+
+<table class="branches">
+	<tr>
+		<td class="branch">
+            target
+        </td>
+        <td class="full-commit-id">
+			<a href="https://github.com/git/git/tree/fork/midx-expire/upstream">
+                fork/midx-expire/upstream
+            </a>
+		</td>
+	</tr>
+	<tr>
+		<td class="branch">
+		    base
+		</td>
+		<td class="full-commit-id">
+			<a href="https://github.com/git/git/tree/af96fe3392fb078cb5447bcb94f2ed8d79d0a4a8">
+                af96fe3392fb078cb5447bcb94f2ed8d79d0a4a8
+            </a>
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/multi-pack-index.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1776e36f1952cb6ed7fea73e90167134285c331b">
+                1776e36f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/builtin/multi-pack-index.c#L52">
+			    52
+            </a>
+		</td>
+		<td class="code">
+					die(_("--batch-size option is only for 'repack' subcommand"));
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1776e36f1952cb6ed7fea73e90167134285c331b">
+                1776e36f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/builtin/multi-pack-index.c#L61">
+			    61
+            </a>
+		</td>
+		<td class="code">
+				die(_("unrecognized subcommand: %s"), argv[0]);
+		</td>
+	</tr>
+</table>
+
+<h3>midx.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-989d49d0b284980fc1b46bd8c309448ff538fd78">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/989d49d0b284980fc1b46bd8c309448ff538fd78">
+                989d49d0
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L478">
+			    478
+            </a>
+		</td>
+		<td class="code">
+						close_pack(packs-&gt;info[packs-&gt;nr].p);
+		</td>
+	</tr>
+
+    <tr class="commit-989d49d0b284980fc1b46bd8c309448ff538fd78">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/989d49d0b284980fc1b46bd8c309448ff538fd78">
+                989d49d0
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L479">
+			    479
+            </a>
+		</td>
+		<td class="code">
+						FREE_AND_NULL(packs-&gt;info[packs-&gt;nr].p);
+		</td>
+	</tr>
+
+    <tr class="commit-8213541052a7d040aad4352ee981c0de01cc6516">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8213541052a7d040aad4352ee981c0de01cc6516">
+                82135410
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L738">
+			    738
+            </a>
+		</td>
+		<td class="code">
+						BUG("object %s is in an expired pack with int-id %d",
+		</td>
+	</tr>
+
+    <tr class="commit-8213541052a7d040aad4352ee981c0de01cc6516">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8213541052a7d040aad4352ee981c0de01cc6516">
+                82135410
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L865">
+			    865
+            </a>
+		</td>
+		<td class="code">
+							error(_("did not see pack-file %s to drop"),
+		</td>
+	</tr>
+
+    <tr class="commit-8213541052a7d040aad4352ee981c0de01cc6516">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8213541052a7d040aad4352ee981c0de01cc6516">
+                82135410
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L867">
+			    867
+            </a>
+		</td>
+		<td class="code">
+							drop_index++;
+		</td>
+	</tr>
+
+    <tr class="commit-8213541052a7d040aad4352ee981c0de01cc6516">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8213541052a7d040aad4352ee981c0de01cc6516">
+                82135410
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L868">
+			    868
+            </a>
+		</td>
+		<td class="code">
+							missing_drops++;
+		</td>
+	</tr>
+
+    <tr class="commit-8213541052a7d040aad4352ee981c0de01cc6516">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8213541052a7d040aad4352ee981c0de01cc6516">
+                82135410
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L869">
+			    869
+            </a>
+		</td>
+		<td class="code">
+							i--;
+		</td>
+	</tr>
+
+    <tr class="commit-8213541052a7d040aad4352ee981c0de01cc6516">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8213541052a7d040aad4352ee981c0de01cc6516">
+                82135410
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L876">
+			    876
+            </a>
+		</td>
+		<td class="code">
+						result = 1;
+		</td>
+	</tr>
+
+    <tr class="commit-8213541052a7d040aad4352ee981c0de01cc6516">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8213541052a7d040aad4352ee981c0de01cc6516">
+                82135410
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L877">
+			    877
+            </a>
+		</td>
+		<td class="code">
+						goto cleanup;
+		</td>
+	</tr>
+
+    <tr class="commit-8213541052a7d040aad4352ee981c0de01cc6516">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8213541052a7d040aad4352ee981c0de01cc6516">
+                82135410
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1194">
+			    1194
+            </a>
+		</td>
+		<td class="code">
+					return 0;
+		</td>
+	</tr>
+
+    <tr class="commit-8213541052a7d040aad4352ee981c0de01cc6516">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8213541052a7d040aad4352ee981c0de01cc6516">
+                82135410
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1209">
+			    1209
+            </a>
+		</td>
+		<td class="code">
+						continue;
+		</td>
+	</tr>
+
+    <tr class="commit-ab77ce8afe186bee4c94463b832528fd2695996f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ab77ce8afe186bee4c94463b832528fd2695996f">
+                ab77ce8a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1248">
+			    1248
+            </a>
+		</td>
+		<td class="code">
+				return 0;
+		</td>
+	</tr>
+
+    <tr class="commit-ab77ce8afe186bee4c94463b832528fd2695996f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ab77ce8afe186bee4c94463b832528fd2695996f">
+                ab77ce8a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1275">
+			    1275
+            </a>
+		</td>
+		<td class="code">
+						continue;
+		</td>
+	</tr>
+
+    <tr class="commit-ab77ce8afe186bee4c94463b832528fd2695996f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ab77ce8afe186bee4c94463b832528fd2695996f">
+                ab77ce8a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1295">
+			    1295
+            </a>
+		</td>
+		<td class="code">
+						continue;
+		</td>
+	</tr>
+
+    <tr class="commit-ab77ce8afe186bee4c94463b832528fd2695996f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ab77ce8afe186bee4c94463b832528fd2695996f">
+                ab77ce8a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1297">
+			    1297
+            </a>
+		</td>
+		<td class="code">
+						continue;
+		</td>
+	</tr>
+
+    <tr class="commit-ab77ce8afe186bee4c94463b832528fd2695996f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ab77ce8afe186bee4c94463b832528fd2695996f">
+                ab77ce8a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1329">
+			    1329
+            </a>
+		</td>
+		<td class="code">
+					return 0;
+		</td>
+	</tr>
+
+    <tr class="commit-ab77ce8afe186bee4c94463b832528fd2695996f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ab77ce8afe186bee4c94463b832528fd2695996f">
+                ab77ce8a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1350">
+			    1350
+            </a>
+		</td>
+		<td class="code">
+					error(_("could not start pack-objects"));
+		</td>
+	</tr>
+
+    <tr class="commit-ab77ce8afe186bee4c94463b832528fd2695996f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ab77ce8afe186bee4c94463b832528fd2695996f">
+                ab77ce8a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1351">
+			    1351
+            </a>
+		</td>
+		<td class="code">
+					result = 1;
+		</td>
+	</tr>
+
+    <tr class="commit-ab77ce8afe186bee4c94463b832528fd2695996f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ab77ce8afe186bee4c94463b832528fd2695996f">
+                ab77ce8a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1352">
+			    1352
+            </a>
+		</td>
+		<td class="code">
+					goto cleanup;
+		</td>
+	</tr>
+
+    <tr class="commit-ab77ce8afe186bee4c94463b832528fd2695996f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ab77ce8afe186bee4c94463b832528fd2695996f">
+                ab77ce8a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1369">
+			    1369
+            </a>
+		</td>
+		<td class="code">
+					error(_("could not finish pack-objects"));
+		</td>
+	</tr>
+
+    <tr class="commit-ab77ce8afe186bee4c94463b832528fd2695996f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ab77ce8afe186bee4c94463b832528fd2695996f">
+                ab77ce8a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1370">
+			    1370
+            </a>
+		</td>
+		<td class="code">
+					result = 1;
+		</td>
+	</tr>
+
+    <tr class="commit-ab77ce8afe186bee4c94463b832528fd2695996f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ab77ce8afe186bee4c94463b832528fd2695996f">
+                ab77ce8a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/midx.c#L1371">
+			    1371
+            </a>
+		</td>
+		<td class="code">
+					goto cleanup;
+		</td>
+	</tr>
+</table>
+
+<h3>packfile.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-3b424f7c2acafb400284089b218d2fb57f3192f2">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/3b424f7c2acafb400284089b218d2fb57f3192f2">
+                3b424f7c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/packfile.c#L369">
+			    369
+            </a>
+		</td>
+		<td class="code">
+						strbuf_release(&buf);
+		</td>
+	</tr>
+
+    <tr class="commit-3b424f7c2acafb400284089b218d2fb57f3192f2">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/3b424f7c2acafb400284089b218d2fb57f3192f2">
+                3b424f7c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/midx-expire/upstream/packfile.c#L370">
+			    370
+            </a>
+		</td>
+		<td class="code">
+						return;
+		</td>
+	</tr>
+</table>
+
+<h3>Commits introducing uncovered code:</h3>
+
+<table class="commits">
+
+	<tr class="commit-989d49d0b284980fc1b46bd8c309448ff538fd78" onclick="toggleCommit('commit-989d49d0b284980fc1b46bd8c309448ff538fd78')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/989d49d0b284980fc1b46bd8c309448ff538fd78">989d49d0</a>
+		</td>
+		<td class="message">
+			midx: refactor permutation logic and pack sorting
+        </td>
+	</tr>
+
+	<tr class="commit-8213541052a7d040aad4352ee981c0de01cc6516" onclick="toggleCommit('commit-8213541052a7d040aad4352ee981c0de01cc6516')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/8213541052a7d040aad4352ee981c0de01cc6516">82135410</a>
+		</td>
+		<td class="message">
+			multi-pack-index: implement 'expire' subcommand
+        </td>
+	</tr>
+
+	<tr class="commit-ab77ce8afe186bee4c94463b832528fd2695996f" onclick="toggleCommit('commit-ab77ce8afe186bee4c94463b832528fd2695996f')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/ab77ce8afe186bee4c94463b832528fd2695996f">ab77ce8a</a>
+		</td>
+		<td class="message">
+			midx: implement midx_repack()
+        </td>
+	</tr>
+
+	<tr class="commit-3b424f7c2acafb400284089b218d2fb57f3192f2" onclick="toggleCommit('commit-3b424f7c2acafb400284089b218d2fb57f3192f2')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/3b424f7c2acafb400284089b218d2fb57f3192f2">3b424f7c</a>
+		</td>
+		<td class="message">
+			repack: refactor pack deletion for future use
+        </td>
+	</tr>
+
+	<tr class="ignored-hidden" onclick="toggleCommit('commit-1776e36f1952cb6ed7fea73e90167134285c331b')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/1776e36f1952cb6ed7fea73e90167134285c331b">1776e36f</a>
+		</td>
+		<td class="message">
+			multi-pack-index: prepare 'repack' subcommand
+        </td>
+	</tr>
+</table>
+
+<p>
+<button onClick="toggleIgnored()">Show/Hide Ignored Lines</button>
+</p>
+</body>
+</html>
