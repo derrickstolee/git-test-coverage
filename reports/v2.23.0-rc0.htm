@@ -1,0 +1,4911 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Git Test Coverage Report (7/30/19)</title>
+	<link rel="stylesheet" href="style.css"/>
+    <script src = "code.js"></script>
+</head>
+<body>
+<p>
+<button onClick="toggleIgnored()">Show/Hide Ignored Lines</button>
+</p>
+<table>
+
+<tr>
+    <td>target</td>
+    <td>fork/master</td>
+</tr>
+
+<tr>
+    <td>base</td>
+    <td>refs/tags/v2.22.0</td>
+</tr>
+</table>
+
+<h2>Uncovered code in 'target' not in 'base'</h2>
+
+<table class="branches">
+	<tr>
+		<td class="branch">
+            target
+        </td>
+        <td class="full-commit-id">
+			<a href="https://github.com/git/git/tree/fork/master">
+                fork/master
+            </a>
+		</td>
+	</tr>
+	<tr>
+		<td class="branch">
+		    base
+		</td>
+		<td class="full-commit-id">
+			<a href="https://github.com/git/git/tree/refs/tags/v2.22.0">
+                refs/tags/v2.22.0
+            </a>
+		</td>
+	</tr>
+</table>
+
+<h3>apply.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-85c3713df5a48bbc7807fe9710fe8a22e65ea76b">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/85c3713df5a48bbc7807fe9710fe8a22e65ea76b">
+                85c3713d
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/apply.c#L1187">
+			    1187
+            </a>
+		</td>
+		<td class="code">
+					cp = skip_tree_prefix(p_value, second, line + llen - second);
+		</td>
+	</tr>
+</table>
+
+<h3>archive.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-50ddb089ff68dfe1e3d9bd9a108d9015c176f761">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/50ddb089ff68dfe1e3d9bd9a108d9015c176f761">
+                50ddb089
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/archive.c#L421">
+			    421
+            </a>
+		</td>
+		<td class="code">
+					err = get_tree_entry(ar_args-&gt;repo,
+		</td>
+	</tr>
+
+    <tr class="commit-50ddb089ff68dfe1e3d9bd9a108d9015c176f761">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/50ddb089ff68dfe1e3d9bd9a108d9015c176f761">
+                50ddb089
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/archive.c#L422">
+			    422
+            </a>
+		</td>
+		<td class="code">
+							     &tree-&gt;object.oid,
+		</td>
+	</tr>
+</table>
+
+<h3>blame.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-1fc73384bac289b4907f0adba2a25d0644affa73">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1fc73384bac289b4907f0adba2a25d0644affa73">
+                1fc73384
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/blame.c#L990">
+			    990
+            </a>
+		</td>
+		<td class="code">
+					return;
+		</td>
+	</tr>
+
+    <tr class="commit-a07a97760cbf2e794600157a5a9f61a888a17941">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/a07a97760cbf2e794600157a5a9f61a888a17941">
+                a07a9776
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/blame.c#L1599">
+			    1599
+            </a>
+		</td>
+		<td class="code">
+						continue;
+		</td>
+	</tr>
+
+    <tr class="commit-ae3f36dea16e51041c56ba9ed6b38380c8421816">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ae3f36dea16e51041c56ba9ed6b38380c8421816">
+                ae3f36de
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/blame.c#L2416">
+			    2416
+            </a>
+		</td>
+		<td class="code">
+							continue;
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/am.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-97387c8bdd92596d79a84ce8a479c6b3c16d0cb7">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/97387c8bdd92596d79a84ce8a479c6b3c16d0cb7">
+                97387c8b
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/am.c#L1662">
+			    1662
+            </a>
+		</td>
+		<td class="code">
+						die("unable to read from stdin; aborting");
+		</td>
+	</tr>
+
+    <tr class="commit-6e7baf246a2d12480d4dbc04c47efb66408c1927">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6e7baf246a2d12480d4dbc04c47efb66408c1927">
+                6e7baf24
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/am.c#L2336">
+			    2336
+            </a>
+		</td>
+		<td class="code">
+						die(_("interactive mode requires patches on the command line"));
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/bisect--helper.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-7877ac3d7b8ae84981c9c2fa86a4f3701ade4510">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/7877ac3d7b8ae84981c9c2fa86a4f3701ade4510">
+                7877ac3d
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/bisect--helper.c#L574">
+			    574
+            </a>
+		</td>
+		<td class="code">
+						retval = error(_("invalid ref: '%s'"), start_head.buf);
+		</td>
+	</tr>
+
+    <tr class="commit-7877ac3d7b8ae84981c9c2fa86a4f3701ade4510">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/7877ac3d7b8ae84981c9c2fa86a4f3701ade4510">
+                7877ac3d
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/bisect--helper.c#L575">
+			    575
+            </a>
+		</td>
+		<td class="code">
+						goto finish;
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/blame.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ae3f36dea16e51041c56ba9ed6b38380c8421816">
+                ae3f36de
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/blame.c#L716">
+			    716
+            </a>
+		</td>
+		<td class="code">
+						return ret;
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/branch.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-1fde99cfc766353237ff1ca4829ba8d71ccebc87">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1fde99cfc766353237ff1ca4829ba8d71ccebc87">
+                1fde99cf
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/branch.c#L841">
+			    841
+            </a>
+		</td>
+		<td class="code">
+						die(_("The -a, and -r, options to 'git branch' do not take a branch name.\n"
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/checkout.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/a5e5f399ca89cea574d11704d625a7b28b53de76">
+                a5e5f399
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L415">
+			    415
+            </a>
+		</td>
+		<td class="code">
+					die(_("'%s' cannot be used with updating paths"),
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/a5e5f399ca89cea574d11704d625a7b28b53de76">
+                a5e5f399
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L425">
+			    425
+            </a>
+		</td>
+		<td class="code">
+					die(_("'%s' cannot be used with %s"),
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/183fb44fd234499ed76d72d745ccb480b25f6d15">
+                183fb44f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L433">
+			    433
+            </a>
+		</td>
+		<td class="code">
+					die(_("neither '%s' or '%s' is specified"),
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/183fb44fd234499ed76d72d745ccb480b25f6d15">
+                183fb44f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L437">
+			    437
+            </a>
+		</td>
+		<td class="code">
+					die(_("'%s' must be used when '%s' is not specified"),
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e3ddd3b5e583e62d874f56f8c88603ad0ebafd5e">
+                e3ddd3b5
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L442">
+			    442
+            </a>
+		</td>
+		<td class="code">
+					die(_("'%s' or '%s' cannot be used with %s"),
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e3ddd3b5e583e62d874f56f8c88603ad0ebafd5e">
+                e3ddd3b5
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L447">
+			    447
+            </a>
+		</td>
+		<td class="code">
+					die(_("'%s' or '%s' cannot be used with %s"),
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/183fb44fd234499ed76d72d745ccb480b25f6d15">
+                183fb44f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L456">
+			    456
+            </a>
+		</td>
+		<td class="code">
+						patch_mode = "--patch=reset";
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/2f0896ec3ad4731d970d22f61daf62046bc766a9">
+                2f0896ec
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L460">
+			    460
+            </a>
+		</td>
+		<td class="code">
+						BUG("either flag must have been set, worktree=%d, index=%d",
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/183fb44fd234499ed76d72d745ccb480b25f6d15">
+                183fb44f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L536">
+			    536
+            </a>
+		</td>
+		<td class="code">
+						die(_("unable to write new index file"));
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1806c29f2eb5f7e4b5952f4fcc75f2afe279f1a4">
+                1806c29f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L656">
+			    656
+            </a>
+		</td>
+		<td class="code">
+						BUG("'switch --orphan' should never accept a commit as starting point");
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1806c29f2eb5f7e4b5952f4fcc75f2afe279f1a4">
+                1806c29f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1039">
+			    1039
+            </a>
+		</td>
+		<td class="code">
+						BUG("'switch --orphan' should never accept a commit as starting point");
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/5c06e26903fd69cf7a71bf2cf8281a84868525b0">
+                5c06e269
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1176">
+			    1176
+            </a>
+		</td>
+		<td class="code">
+						die(_("only one reference expected"));
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/7968bef06b750fe9c59c1e1d0573bffc5b3cd94f">
+                7968bef0
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1300">
+			    1300
+            </a>
+		</td>
+		<td class="code">
+					const char *ref = to_free;
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/7968bef06b750fe9c59c1e1d0573bffc5b3cd94f">
+                7968bef0
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1302">
+			    1302
+            </a>
+		</td>
+		<td class="code">
+					if (skip_prefix(ref, "refs/tags/", &ref))
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/7968bef06b750fe9c59c1e1d0573bffc5b3cd94f">
+                7968bef0
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1303">
+			    1303
+            </a>
+		</td>
+		<td class="code">
+						die(_("a branch is expected, got tag '%s'"), ref);
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/7968bef06b750fe9c59c1e1d0573bffc5b3cd94f">
+                7968bef0
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1304">
+			    1304
+            </a>
+		</td>
+		<td class="code">
+					if (skip_prefix(ref, "refs/remotes/", &ref))
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/7968bef06b750fe9c59c1e1d0573bffc5b3cd94f">
+                7968bef0
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1305">
+			    1305
+            </a>
+		</td>
+		<td class="code">
+						die(_("a branch is expected, got remote branch '%s'"), ref);
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/7968bef06b750fe9c59c1e1d0573bffc5b3cd94f">
+                7968bef0
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1306">
+			    1306
+            </a>
+		</td>
+		<td class="code">
+					die(_("a branch is expected, got '%s'"), ref);
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/7968bef06b750fe9c59c1e1d0573bffc5b3cd94f">
+                7968bef0
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1314">
+			    1314
+            </a>
+		</td>
+		<td class="code">
+				die(_("a branch is expected, got '%s'"), branch_info-&gt;name);
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c45f0f525de4701b8ff031d5c2c58c0fa819038e">
+                c45f0f52
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1329">
+			    1329
+            </a>
+		</td>
+		<td class="code">
+					die(_("cannot switch branch in the middle of an am session\n"
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c45f0f525de4701b8ff031d5c2c58c0fa819038e">
+                c45f0f52
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1333">
+			    1333
+            </a>
+		</td>
+		<td class="code">
+					die(_("cannot switch branch while rebasing\n"
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c45f0f525de4701b8ff031d5c2c58c0fa819038e">
+                c45f0f52
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1337">
+			    1337
+            </a>
+		</td>
+		<td class="code">
+					die(_("cannot switch branch while cherry-picking\n"
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c45f0f525de4701b8ff031d5c2c58c0fa819038e">
+                c45f0f52
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1341">
+			    1341
+            </a>
+		</td>
+		<td class="code">
+					die(_("cannot switch branch while reverting\n"
+		</td>
+	</tr>
+
+    <tr class="commit-d16dc428b47837cebd231de1fad76d9c307f34b0">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/d16dc428b47837cebd231de1fad76d9c307f34b0">
+                d16dc428
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1345">
+			    1345
+            </a>
+		</td>
+		<td class="code">
+					warning(_("you are switching branch while bisecting"));
+		</td>
+	</tr>
+
+    <tr class="commit-3ec37ad13dea55f6a614753accc7fad84cb170be">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/3ec37ad13dea55f6a614753accc7fad84cb170be">
+                3ec37ad1
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1370">
+			    1370
+            </a>
+		</td>
+		<td class="code">
+					die(_("'%s' cannot be used with '%s'"), "--discard-changes", "--merge");
+		</td>
+	</tr>
+
+    <tr class="commit-c9c935f6d4519c53f27f50113bea2c17deb8b71e">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c9c935f6d4519c53f27f50113bea2c17deb8b71e">
+                c9c935f6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1508">
+			    1508
+            </a>
+		</td>
+		<td class="code">
+					BUG("make up your mind, you need to take _something_");
+		</td>
+	</tr>
+
+    <tr class="commit-183fb44fd234499ed76d72d745ccb480b25f6d15">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/183fb44fd234499ed76d72d745ccb480b25f6d15">
+                183fb44f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1540">
+			    1540
+            </a>
+		</td>
+		<td class="code">
+						opts-&gt;checkout_index = 0;
+		</td>
+	</tr>
+
+    <tr class="commit-183fb44fd234499ed76d72d745ccb480b25f6d15">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/183fb44fd234499ed76d72d745ccb480b25f6d15">
+                183fb44f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1550">
+			    1550
+            </a>
+		</td>
+		<td class="code">
+					BUG("these flags should be non-negative by now");
+		</td>
+	</tr>
+
+    <tr class="commit-c9c935f6d4519c53f27f50113bea2c17deb8b71e">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c9c935f6d4519c53f27f50113bea2c17deb8b71e">
+                c9c935f6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/checkout.c#L1611">
+			    1611
+            </a>
+		</td>
+		<td class="code">
+						die(_("could not resolve %s"), opts-&gt;from_treeish);
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/clean.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-b09364c47a015dee7735fd2c038d7d710417c2f2">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/b09364c47a015dee7735fd2c038d7d710417c2f2">
+                b09364c4
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/clean.c#L198">
+			    198
+            </a>
+		</td>
+		<td class="code">
+						warning_errno(_(msg_warn_lstat_failed), path-&gt;buf);
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/clone.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-14954b799f0bac76e500593c95d1f274cf0636e5">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/14954b799f0bac76e500593c95d1f274cf0636e5">
+                14954b79
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/clone.c#L407">
+			    407
+            </a>
+		</td>
+		<td class="code">
+					die_errno(_("failed to create directory '%s'"), pathname);
+		</td>
+	</tr>
+
+    <tr class="commit-14954b799f0bac76e500593c95d1f274cf0636e5">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/14954b799f0bac76e500593c95d1f274cf0636e5">
+                14954b79
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/clone.c#L409">
+			    409
+            </a>
+		</td>
+		<td class="code">
+					die_errno(_("failed to stat '%s'"), pathname);
+		</td>
+	</tr>
+
+    <tr class="commit-ff7ccc8c9a6e61a7225c161c743a49ac079f1425">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ff7ccc8c9a6e61a7225c161c743a49ac079f1425">
+                ff7ccc8c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/clone.c#L428">
+			    428
+            </a>
+		</td>
+		<td class="code">
+					die_errno(_("failed to start iterator over '%s'"), src-&gt;buf);
+		</td>
+	</tr>
+
+    <tr class="commit-ff7ccc8c9a6e61a7225c161c743a49ac079f1425">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ff7ccc8c9a6e61a7225c161c743a49ac079f1425">
+                ff7ccc8c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/clone.c#L466">
+			    466
+            </a>
+		</td>
+		<td class="code">
+					strbuf_setlen(src, src_len);
+		</td>
+	</tr>
+
+    <tr class="commit-ff7ccc8c9a6e61a7225c161c743a49ac079f1425">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ff7ccc8c9a6e61a7225c161c743a49ac079f1425">
+                ff7ccc8c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/clone.c#L467">
+			    467
+            </a>
+		</td>
+		<td class="code">
+					die(_("failed to iterate over '%s'"), src-&gt;buf);
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/commit-graph.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-c2bc6e6ab0ade70c475a73d06326e677e70840d2">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c2bc6e6ab0ade70c475a73d06326e677e70840d2">
+                c2bc6e6a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/commit-graph.c#L203">
+			    203
+            </a>
+		</td>
+		<td class="code">
+						return 1;
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/commit.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+                e103f727
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/commit.c#L1694">
+			    1694
+            </a>
+		</td>
+		<td class="code">
+					return 1;
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/env--helper.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-b4f207f339469e604260bdf6da8673db9c9c9105">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/b4f207f339469e604260bdf6da8673db9c9c9105">
+                b4f207f3
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/env--helper.c#L23">
+			    23
+            </a>
+		</td>
+		<td class="code">
+					die(_("unrecognized --type argument, %s"), arg);
+		</td>
+	</tr>
+
+    <tr class="commit-b4f207f339469e604260bdf6da8673db9c9c9105">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/b4f207f339469e604260bdf6da8673db9c9c9105">
+                b4f207f3
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/env--helper.c#L67">
+			    67
+            </a>
+		</td>
+		<td class="code">
+						default_int = 0;
+		</td>
+	</tr>
+
+    <tr class="commit-b4f207f339469e604260bdf6da8673db9c9c9105">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/b4f207f339469e604260bdf6da8673db9c9c9105">
+                b4f207f3
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/env--helper.c#L82">
+			    82
+            </a>
+		</td>
+		<td class="code">
+						default_ulong = 0;
+		</td>
+	</tr>
+
+    <tr class="commit-b4f207f339469e604260bdf6da8673db9c9c9105">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/b4f207f339469e604260bdf6da8673db9c9c9105">
+                b4f207f3
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/env--helper.c#L90">
+			    90
+            </a>
+		</td>
+		<td class="code">
+					BUG("unknown &lt;type&gt; value");
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/fast-export.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-e80001f8fd7f608c6d05ce0ab2ebfc90d724a307">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e80001f8fd7f608c6d05ce0ab2ebfc90d724a307">
+                e80001f8
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/fast-export.c#L85">
+			    85
+            </a>
+		</td>
+		<td class="code">
+					reencode_mode = REENCODE_ABORT;
+		</td>
+	</tr>
+
+    <tr class="commit-e80001f8fd7f608c6d05ce0ab2ebfc90d724a307">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e80001f8fd7f608c6d05ce0ab2ebfc90d724a307">
+                e80001f8
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/fast-export.c#L86">
+			    86
+            </a>
+		</td>
+		<td class="code">
+					return 0;
+		</td>
+	</tr>
+
+    <tr class="commit-e80001f8fd7f608c6d05ce0ab2ebfc90d724a307">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e80001f8fd7f608c6d05ce0ab2ebfc90d724a307">
+                e80001f8
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/fast-export.c#L100">
+			    100
+            </a>
+		</td>
+		<td class="code">
+						return error("Unknown reencoding mode: %s", arg);
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/fetch.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-cdbd70c43773d534aa81ea2c83905a45ff0e74e4">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/cdbd70c43773d534aa81ea2c83905a45ff0e74e4">
+                cdbd70c4
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/fetch.c#L88">
+			    88
+            </a>
+		</td>
+		<td class="code">
+					fetch_show_forced_updates = git_config_bool(k, v);
+		</td>
+	</tr>
+
+    <tr class="commit-cdbd70c43773d534aa81ea2c83905a45ff0e74e4">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/cdbd70c43773d534aa81ea2c83905a45ff0e74e4">
+                cdbd70c4
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/fetch.c#L89">
+			    89
+            </a>
+		</td>
+		<td class="code">
+					return 0;
+		</td>
+	</tr>
+
+    <tr class="commit-377444b440eab3b6ef636df092f7f8299acf75bb">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/377444b440eab3b6ef636df092f7f8299acf75bb">
+                377444b4
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/fetch.c#L1011">
+			    1011
+            </a>
+		</td>
+		<td class="code">
+						warning(_("It took %.2f seconds to check forced updates. You can use '--no-show-forced-updates'\n"),
+		</td>
+	</tr>
+
+    <tr class="commit-377444b440eab3b6ef636df092f7f8299acf75bb">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/377444b440eab3b6ef636df092f7f8299acf75bb">
+                377444b4
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/fetch.c#L1013">
+			    1013
+            </a>
+		</td>
+		<td class="code">
+						warning(_("or run 'git config fetch.showForcedUpdates false' to avoid this check.\n"));
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/gc.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+                e103f727
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/gc.c#L692">
+			    692
+            </a>
+		</td>
+		<td class="code">
+					return 1;
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/log.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-f0596ecc8de9bdbdfc394b2f153ff67f64fc4615">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/f0596ecc8de9bdbdfc394b2f153ff67f64fc4615">
+                f0596ecc
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/log.c#L219">
+			    219
+            </a>
+		</td>
+		<td class="code">
+						warning("%s\n", _(warn_unspecified_mailmap_msg));
+		</td>
+	</tr>
+
+    <tr class="commit-13cdf78094a5ba2968adb90707d27b98f53db1f7">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/13cdf78094a5ba2968adb90707d27b98f53db1f7">
+                13cdf780
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/log.c#L895">
+			    895
+            </a>
+		</td>
+		<td class="code">
+						return 0;
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/merge.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-f3f8311ec76f9bcdc7e26a125e585eb4e473a8d2">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/f3f8311ec76f9bcdc7e26a125e585eb4e473a8d2">
+                f3f8311e
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/merge.c#L1291">
+			    1291
+            </a>
+		</td>
+		<td class="code">
+						usage_msg_opt(_("--quit expects no arguments"),
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/multi-pack-index.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/2af890bb28013ae9edf8f5de7873fac849d39c32">
+                2af890bb
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/multi-pack-index.c#L52">
+			    52
+            </a>
+		</td>
+		<td class="code">
+					die(_("--batch-size option is only for 'repack' subcommand"));
+		</td>
+	</tr>
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/2af890bb28013ae9edf8f5de7873fac849d39c32">
+                2af890bb
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/multi-pack-index.c#L61">
+			    61
+            </a>
+		</td>
+		<td class="code">
+				die(_("unrecognized subcommand: %s"), argv[0]);
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/pull.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-3883c55138dcfbe2d9a24e3f93a2a4b1d376dde6">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/3883c55138dcfbe2d9a24e3f93a2a4b1d376dde6">
+                3883c551
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/pull.c#L556">
+			    556
+            </a>
+		</td>
+		<td class="code">
+					argv_array_push(&args, "--show-forced-updates");
+		</td>
+	</tr>
+
+    <tr class="commit-3883c55138dcfbe2d9a24e3f93a2a4b1d376dde6">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/3883c55138dcfbe2d9a24e3f93a2a4b1d376dde6">
+                3883c551
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/pull.c#L558">
+			    558
+            </a>
+		</td>
+		<td class="code">
+					argv_array_push(&args, "--no-show-forced-updates");
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/rebase.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-d559f502c59658ea1f360fd28d8909894e40a4fe">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/d559f502c59658ea1f360fd28d8909894e40a4fe">
+                d559f502
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/rebase.c#L759">
+			    759
+            </a>
+		</td>
+		<td class="code">
+						ret = error(_("could not remove '%s'"),
+		</td>
+	</tr>
+
+    <tr class="commit-d559f502c59658ea1f360fd28d8909894e40a4fe">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/d559f502c59658ea1f360fd28d8909894e40a4fe">
+                d559f502
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/rebase.c#L1645">
+			    1645
+            </a>
+		</td>
+		<td class="code">
+							error(_("could not remove '%s'"),
+		</td>
+	</tr>
+
+    <tr class="commit-906b63942ac7f0ff904228b03d5dbe1edc59f0fe">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/906b63942ac7f0ff904228b03d5dbe1edc59f0fe">
+                906b6394
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/rebase.c#L1797">
+			    1797
+            </a>
+		</td>
+		<td class="code">
+					die(_("--reschedule-failed-exec requires "
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/worktree.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-1de16aecf51daf5794aa074f6dd133e088a12690">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1de16aecf51daf5794aa074f6dd133e088a12690">
+                1de16aec
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/worktree.c#L297">
+			    297
+            </a>
+		</td>
+		<td class="code">
+					BUG("How come '%s' becomes empty after sanitization?", sb.buf);
+		</td>
+	</tr>
+</table>
+
+<h3>builtin/write-tree.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-76a7bc092efc2be59f1e42dc437154a9a1feed0a">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/76a7bc092efc2be59f1e42dc437154a9a1feed0a">
+                76a7bc09
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/builtin/write-tree.c#L53">
+			    53
+            </a>
+		</td>
+		<td class="code">
+					die("%s: prefix %s not found", me, tree_prefix);
+		</td>
+	</tr>
+</table>
+
+<h3>commit-graph.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-118bd570029f5610abdbf1a220e87d3a5c241f5f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/118bd570029f5610abdbf1a220e87d3a5c241f5f">
+                118bd570
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L277">
+			    277
+            </a>
+		</td>
+		<td class="code">
+							chunk_repeated = 1;
+		</td>
+	</tr>
+
+    <tr class="commit-118bd570029f5610abdbf1a220e87d3a5c241f5f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/118bd570029f5610abdbf1a220e87d3a5c241f5f">
+                118bd570
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L347">
+			    347
+            </a>
+		</td>
+		<td class="code">
+					warning(_("commit-graph has no base graphs chunk"));
+		</td>
+	</tr>
+
+    <tr class="commit-118bd570029f5610abdbf1a220e87d3a5c241f5f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/118bd570029f5610abdbf1a220e87d3a5c241f5f">
+                118bd570
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L348">
+			    348
+            </a>
+		</td>
+		<td class="code">
+					return 0;
+		</td>
+	</tr>
+
+    <tr class="commit-5c84b3396c73382eb49285b4e4bbb1bf82be3a9c">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/5c84b3396c73382eb49285b4e4bbb1bf82be3a9c">
+                5c84b339
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L401">
+			    401
+            </a>
+		</td>
+		<td class="code">
+						break;
+		</td>
+	</tr>
+
+    <tr class="commit-d4f4d60f6da8b93f768b2b4958c04cc1b3cea443">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/d4f4d60f6da8b93f768b2b4958c04cc1b3cea443">
+                d4f4d60f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L550">
+			    550
+            </a>
+		</td>
+		<td class="code">
+					BUG("NULL commit-graph");
+		</td>
+	</tr>
+
+    <tr class="commit-d4f4d60f6da8b93f768b2b4958c04cc1b3cea443">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/d4f4d60f6da8b93f768b2b4958c04cc1b3cea443">
+                d4f4d60f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L553">
+			    553
+            </a>
+		</td>
+		<td class="code">
+					die(_("invalid commit position. commit-graph is likely corrupt"));
+		</td>
+	</tr>
+
+    <tr class="commit-d4f4d60f6da8b93f768b2b4958c04cc1b3cea443">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/d4f4d60f6da8b93f768b2b4958c04cc1b3cea443">
+                d4f4d60f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L613">
+			    613
+            </a>
+		</td>
+		<td class="code">
+					die(_("invalid commit position. commit-graph is likely corrupt"));
+		</td>
+	</tr>
+
+    <tr class="commit-6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+                6c622f9f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1057">
+			    1057
+            </a>
+		</td>
+		<td class="code">
+						continue;
+		</td>
+	</tr>
+
+    <tr class="commit-ef5b83f2cfe11c2feb98b962881e9a8e6281e3ff">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ef5b83f2cfe11c2feb98b962881e9a8e6281e3ff">
+                ef5b83f2
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1179">
+			    1179
+            </a>
+		</td>
+		<td class="code">
+						error(_("error opening index for %s"), packname.buf);
+		</td>
+	</tr>
+
+    <tr class="commit-ef5b83f2cfe11c2feb98b962881e9a8e6281e3ff">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ef5b83f2cfe11c2feb98b962881e9a8e6281e3ff">
+                ef5b83f2
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1180">
+			    1180
+            </a>
+		</td>
+		<td class="code">
+						return -1;
+		</td>
+	</tr>
+
+    <tr class="commit-4c9efe850d75115a6deedd57072f1d7383bc03da">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/4c9efe850d75115a6deedd57072f1d7383bc03da">
+                4c9efe85
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1219">
+			    1219
+            </a>
+		</td>
+		<td class="code">
+						continue;
+		</td>
+	</tr>
+
+    <tr class="commit-b2c83060525e69f628fb32836e311978e3899e6e">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/b2c83060525e69f628fb32836e311978e3899e6e">
+                b2c83060
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1242">
+			    1242
+            </a>
+		</td>
+		<td class="code">
+					display_progress(ctx-&gt;progress, ctx-&gt;approx_nr_objects);
+		</td>
+	</tr>
+
+    <tr class="commit-6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+                6c622f9f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1331">
+			    1331
+            </a>
+		</td>
+		<td class="code">
+					error(_("failed to write correct number of base graph ids"));
+		</td>
+	</tr>
+
+    <tr class="commit-6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+                6c622f9f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1332">
+			    1332
+            </a>
+		</td>
+		<td class="code">
+					return -1;
+		</td>
+	</tr>
+
+    <tr class="commit-238def57fe7ba219c9e50094512fff1068ac5413">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/238def57fe7ba219c9e50094512fff1068ac5413">
+                238def57
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1364">
+			    1364
+            </a>
+		</td>
+		<td class="code">
+					error(_("unable to create leading directories of %s"),
+		</td>
+	</tr>
+
+    <tr class="commit-238def57fe7ba219c9e50094512fff1068ac5413">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/238def57fe7ba219c9e50094512fff1068ac5413">
+                238def57
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1366">
+			    1366
+            </a>
+		</td>
+		<td class="code">
+					return -1;
+		</td>
+	</tr>
+
+    <tr class="commit-6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+                6c622f9f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1376">
+			    1376
+            </a>
+		</td>
+		<td class="code">
+						error(_("unable to create '%s'"), ctx-&gt;graph_name);
+		</td>
+	</tr>
+
+    <tr class="commit-6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+                6c622f9f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1377">
+			    1377
+            </a>
+		</td>
+		<td class="code">
+						return -1;
+		</td>
+	</tr>
+
+    <tr class="commit-6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+                6c622f9f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1451">
+			    1451
+            </a>
+		</td>
+		<td class="code">
+					return -1;
+		</td>
+	</tr>
+
+    <tr class="commit-6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+                6c622f9f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1477">
+			    1477
+            </a>
+		</td>
+		<td class="code">
+						error(_("unable to open commit-graph chain file"));
+		</td>
+	</tr>
+
+    <tr class="commit-6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+                6c622f9f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1478">
+			    1478
+            </a>
+		</td>
+		<td class="code">
+						return -1;
+		</td>
+	</tr>
+
+    <tr class="commit-135a7123755bfdde05da18012bebd2776f82b26c">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/135a7123755bfdde05da18012bebd2776f82b26c">
+                135a7123
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1489">
+			    1489
+            </a>
+		</td>
+		<td class="code">
+								error(_("failed to rename base commit-graph file"));
+		</td>
+	</tr>
+
+    <tr class="commit-6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+                6c622f9f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1509">
+			    1509
+            </a>
+		</td>
+		<td class="code">
+						error(_("failed to rename temporary commit-graph file"));
+		</td>
+	</tr>
+
+    <tr class="commit-6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6c622f9f0bbb38a23341dc4294f56d0d909b3d50">
+                6c622f9f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1510">
+			    1510
+            </a>
+		</td>
+		<td class="code">
+						return -1;
+		</td>
+	</tr>
+
+    <tr class="commit-c523035cbd8515d095dc15e9661fd896733bedbc">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c523035cbd8515d095dc15e9661fd896733bedbc">
+                c523035c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1539">
+			    1539
+            </a>
+		</td>
+		<td class="code">
+						break;
+		</td>
+	</tr>
+
+    <tr class="commit-c523035cbd8515d095dc15e9661fd896733bedbc">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c523035cbd8515d095dc15e9661fd896733bedbc">
+                c523035c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1554">
+			    1554
+            </a>
+		</td>
+		<td class="code">
+						ctx-&gt;num_commit_graphs_after = 1;
+		</td>
+	</tr>
+
+    <tr class="commit-c523035cbd8515d095dc15e9661fd896733bedbc">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c523035cbd8515d095dc15e9661fd896733bedbc">
+                c523035c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1555">
+			    1555
+            </a>
+		</td>
+		<td class="code">
+						ctx-&gt;new_base_graph = NULL;
+		</td>
+	</tr>
+
+    <tr class="commit-1771be90c8e4797c2466296d1d570dbfa39d9743">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1771be90c8e4797c2466296d1d570dbfa39d9743">
+                1771be90
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1631">
+			    1631
+            </a>
+		</td>
+		<td class="code">
+						die(_("unexpected duplicate commit id %s"),
+		</td>
+	</tr>
+
+    <tr class="commit-1771be90c8e4797c2466296d1d570dbfa39d9743">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1771be90c8e4797c2466296d1d570dbfa39d9743">
+                1771be90
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1632">
+			    1632
+            </a>
+		</td>
+		<td class="code">
+						    oid_to_hex(&ctx-&gt;commits.list[i]-&gt;object.oid));
+		</td>
+	</tr>
+
+    <tr class="commit-c2bc6e6ab0ade70c475a73d06326e677e70840d2">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c2bc6e6ab0ade70c475a73d06326e677e70840d2">
+                c2bc6e6a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1806">
+			    1806
+            </a>
+		</td>
+		<td class="code">
+					ctx-&gt;oids.alloc = split_opts-&gt;max_commits;
+		</td>
+	</tr>
+
+    <tr class="commit-e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+                e103f727
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1842">
+			    1842
+            </a>
+		</td>
+		<td class="code">
+					error(_("the commit graph format cannot write %d commits"), count_distinct);
+		</td>
+	</tr>
+
+    <tr class="commit-e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+                e103f727
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1843">
+			    1843
+            </a>
+		</td>
+		<td class="code">
+					res = -1;
+		</td>
+	</tr>
+
+    <tr class="commit-e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+                e103f727
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1844">
+			    1844
+            </a>
+		</td>
+		<td class="code">
+					goto cleanup;
+		</td>
+	</tr>
+
+    <tr class="commit-e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+                e103f727
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1853">
+			    1853
+            </a>
+		</td>
+		<td class="code">
+					error(_("too many commits to write graph"));
+		</td>
+	</tr>
+
+    <tr class="commit-e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+                e103f727
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1854">
+			    1854
+            </a>
+		</td>
+		<td class="code">
+					res = -1;
+		</td>
+	</tr>
+
+    <tr class="commit-e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">
+                e103f727
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/commit-graph.c#L1855">
+			    1855
+            </a>
+		</td>
+		<td class="code">
+					goto cleanup;
+		</td>
+	</tr>
+</table>
+
+<h3>config.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-07b2c0eacac91c8db1a371667ed621cff443cf0d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/07b2c0eacac91c8db1a371667ed621cff443cf0d">
+                07b2c0ea
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/config.c#L283">
+			    283
+            </a>
+		</td>
+		<td class="code">
+					return 0;
+		</td>
+	</tr>
+
+    <tr class="commit-2e43cd4caa8ad9eb0c53adc1e00dcd027b8710fd">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/2e43cd4caa8ad9eb0c53adc1e00dcd027b8710fd">
+                2e43cd4c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/config.c#L998">
+			    998
+            </a>
+		</td>
+		<td class="code">
+					    value, name, cf-&gt;name, _(error_type));
+		</td>
+	</tr>
+
+    <tr class="commit-2e43cd4caa8ad9eb0c53adc1e00dcd027b8710fd">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/2e43cd4caa8ad9eb0c53adc1e00dcd027b8710fd">
+                2e43cd4c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/config.c#L1007">
+			    1007
+            </a>
+		</td>
+		<td class="code">
+					    value, name, cf-&gt;name, _(error_type));
+		</td>
+	</tr>
+
+    <tr class="commit-2e43cd4caa8ad9eb0c53adc1e00dcd027b8710fd">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/2e43cd4caa8ad9eb0c53adc1e00dcd027b8710fd">
+                2e43cd4c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/config.c#L1010">
+			    1010
+            </a>
+		</td>
+		<td class="code">
+					    value, name, cf-&gt;name, _(error_type));
+		</td>
+	</tr>
+
+    <tr class="commit-2e43cd4caa8ad9eb0c53adc1e00dcd027b8710fd">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/2e43cd4caa8ad9eb0c53adc1e00dcd027b8710fd">
+                2e43cd4c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/config.c#L1013">
+			    1013
+            </a>
+		</td>
+		<td class="code">
+					    value, name, cf-&gt;name, _(error_type));
+		</td>
+	</tr>
+</table>
+
+<h3>delta-islands.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-bdbdf42f8ab79374704b769157e7b080d525b73a">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/bdbdf42f8ab79374704b769157e7b080d525b73a">
+                bdbdf42f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/delta-islands.c#L467">
+			    467
+            </a>
+		</td>
+		<td class="code">
+					fprintf(stderr, _("Marked %d islands, done.\n"), island_counter);
+		</td>
+	</tr>
+</table>
+
+<h3>dir-iterator.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-3012397e0327f5e4dfd1d1183a792268429744ae">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/3012397e0327f5e4dfd1d1183a792268429744ae">
+                3012397e
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/dir-iterator.c#L88">
+			    88
+            </a>
+		</td>
+		<td class="code">
+					warning_errno("error closing directory '%s'",
+		</td>
+	</tr>
+
+    <tr class="commit-fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+                fa1da7d2
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/dir-iterator.c#L122">
+			    122
+            </a>
+		</td>
+		<td class="code">
+					warning_errno("failed to stat '%s'", iter-&gt;base.path.buf);
+		</td>
+	</tr>
+
+    <tr class="commit-fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+                fa1da7d2
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/dir-iterator.c#L137">
+			    137
+            </a>
+		</td>
+		<td class="code">
+						goto error_out;
+		</td>
+	</tr>
+
+    <tr class="commit-3012397e0327f5e4dfd1d1183a792268429744ae">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/3012397e0327f5e4dfd1d1183a792268429744ae">
+                3012397e
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/dir-iterator.c#L152">
+			    152
+            </a>
+		</td>
+		<td class="code">
+							warning_errno("error reading directory '%s'",
+		</td>
+	</tr>
+
+    <tr class="commit-fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+                fa1da7d2
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/dir-iterator.c#L154">
+			    154
+            </a>
+		</td>
+		<td class="code">
+							if (iter-&gt;flags & DIR_ITERATOR_PEDANTIC)
+		</td>
+	</tr>
+
+    <tr class="commit-fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+                fa1da7d2
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/dir-iterator.c#L155">
+			    155
+            </a>
+		</td>
+		<td class="code">
+								goto error_out;
+		</td>
+	</tr>
+
+    <tr class="commit-fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+                fa1da7d2
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/dir-iterator.c#L166">
+			    166
+            </a>
+		</td>
+		<td class="code">
+						if (errno != ENOENT && iter-&gt;flags & DIR_ITERATOR_PEDANTIC)
+		</td>
+	</tr>
+
+    <tr class="commit-fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+                fa1da7d2
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/dir-iterator.c#L167">
+			    167
+            </a>
+		</td>
+		<td class="code">
+							goto error_out;
+		</td>
+	</tr>
+
+    <tr class="commit-c9bba372ed9ee0c5ea1a4037c3c723a6c31f5921">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c9bba372ed9ee0c5ea1a4037c3c723a6c31f5921">
+                c9bba372
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/dir-iterator.c#L188">
+			    188
+            </a>
+		</td>
+		<td class="code">
+						int saved_errno = errno;
+		</td>
+	</tr>
+
+    <tr class="commit-c9bba372ed9ee0c5ea1a4037c3c723a6c31f5921">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c9bba372ed9ee0c5ea1a4037c3c723a6c31f5921">
+                c9bba372
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/dir-iterator.c#L190">
+			    190
+            </a>
+		</td>
+		<td class="code">
+						errno = saved_errno;
+		</td>
+	</tr>
+
+    <tr class="commit-c9bba372ed9ee0c5ea1a4037c3c723a6c31f5921">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/c9bba372ed9ee0c5ea1a4037c3c723a6c31f5921">
+                c9bba372
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/dir-iterator.c#L191">
+			    191
+            </a>
+		</td>
+		<td class="code">
+						warning_errno("error closing directory '%s'",
+		</td>
+	</tr>
+</table>
+
+<h3>fast-import.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-d3b4705ab81c01cb57dd356d96e981de78d65a5d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/d3b4705ab81c01cb57dd356d96e981de78d65a5d">
+                d3b4705a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/fast-import.c#L2565">
+			    2565
+            </a>
+		</td>
+		<td class="code">
+						char *buf = read_object_with_reference(the_repository,
+		</td>
+	</tr>
+
+    <tr class="commit-d3b4705ab81c01cb57dd356d96e981de78d65a5d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/d3b4705ab81c01cb57dd356d96e981de78d65a5d">
+                d3b4705a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/fast-import.c#L2566">
+			    2566
+            </a>
+		</td>
+		<td class="code">
+										       &n-&gt;oid,
+		</td>
+	</tr>
+</table>
+
+<h3>fetch-pack.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-5a88583b0b241c335b4baf2ccd9b04bc1650efcb">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/5a88583b0b241c335b4baf2ccd9b04bc1650efcb">
+                5a88583b
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/fetch-pack.c#L914">
+			    914
+            </a>
+		</td>
+		<td class="code">
+				else if (args-&gt;depth &gt; 0 || is_repository_shallow(the_repository))
+		</td>
+	</tr>
+
+    <tr class="commit-0778b2931c8d561b02046a80870af7c9f4d14d52">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/0778b2931c8d561b02046a80870af7c9f4d14d52">
+                0778b293
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/fetch-pack.c#L928">
+			    928
+            </a>
+		</td>
+		<td class="code">
+					print_verbose(args, _("Server supports %s"), "multi_ack");
+		</td>
+	</tr>
+
+    <tr class="commit-0778b2931c8d561b02046a80870af7c9f4d14d52">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/0778b2931c8d561b02046a80870af7c9f4d14d52">
+                0778b293
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/fetch-pack.c#L936">
+			    936
+            </a>
+		</td>
+		<td class="code">
+					print_verbose(args, _("Server supports %s"), "side-band");
+		</td>
+	</tr>
+
+    <tr class="commit-5a88583b0b241c335b4baf2ccd9b04bc1650efcb">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/5a88583b0b241c335b4baf2ccd9b04bc1650efcb">
+                5a88583b
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/fetch-pack.c#L974">
+			    974
+            </a>
+		</td>
+		<td class="code">
+				} else if (args-&gt;deepen_since)
+		</td>
+	</tr>
+
+    <tr class="commit-5a88583b0b241c335b4baf2ccd9b04bc1650efcb">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/5a88583b0b241c335b4baf2ccd9b04bc1650efcb">
+                5a88583b
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/fetch-pack.c#L979">
+			    979
+            </a>
+		</td>
+		<td class="code">
+				} else if (args-&gt;deepen_not)
+		</td>
+	</tr>
+
+    <tr class="commit-5a88583b0b241c335b4baf2ccd9b04bc1650efcb">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/5a88583b0b241c335b4baf2ccd9b04bc1650efcb">
+                5a88583b
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/fetch-pack.c#L983">
+			    983
+            </a>
+		</td>
+		<td class="code">
+				else if (args-&gt;deepen_relative)
+		</td>
+	</tr>
+</table>
+
+<h3>grep.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-de99eb0c24d96730de187edd37b9ca9d42b0b05d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/de99eb0c24d96730de187edd37b9ca9d42b0b05d">
+                de99eb0c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/grep.c#L1784">
+			    1784
+            </a>
+		</td>
+		<td class="code">
+					BUG("grep call which could print a name requires "
+		</td>
+	</tr>
+</table>
+
+<h3>kwset.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-08e0450690b8f4aa0f51d8c096520817f96de3dd">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/08e0450690b8f4aa0f51d8c096520817f96de3dd">
+                08e04506
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/kwset.c#L45">
+			    45
+            </a>
+		</td>
+		<td class="code">
+					BUG("Cannot allocate a negative amount: %ld", size);
+		</td>
+	</tr>
+</table>
+
+<h3>list-objects-filter-options.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-5c03bc8b1d1f992ebe43c567bb95cdb5e0273d28">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/5c03bc8b1d1f992ebe43c567bb95cdb5e0273d28">
+                5c03bc8b
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/list-objects-filter-options.c#L94">
+			    94
+            </a>
+		</td>
+		<td class="code">
+					strbuf_addf(errbuf, _("invalid filter-spec '%s'"), arg);
+		</td>
+	</tr>
+</table>
+
+<h3>match-trees.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-90d3405196cfe5d3c63185a33dcee57fb6ea7e8a">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/90d3405196cfe5d3c63185a33dcee57fb6ea7e8a">
+                90d34051
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/match-trees.c#L294">
+			    294
+            </a>
+		</td>
+		<td class="code">
+					if (get_tree_entry(r, hash2, del_prefix, shifted, &mode))
+		</td>
+	</tr>
+</table>
+
+<h3>midx.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-d01bf2e609bf792820023fc0f4ef5048bc689327">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/d01bf2e609bf792820023fc0f4ef5048bc689327">
+                d01bf2e6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L478">
+			    478
+            </a>
+		</td>
+		<td class="code">
+						close_pack(packs-&gt;info[packs-&gt;nr].p);
+		</td>
+	</tr>
+
+    <tr class="commit-d01bf2e609bf792820023fc0f4ef5048bc689327">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/d01bf2e609bf792820023fc0f4ef5048bc689327">
+                d01bf2e6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L479">
+			    479
+            </a>
+		</td>
+		<td class="code">
+						FREE_AND_NULL(packs-&gt;info[packs-&gt;nr].p);
+		</td>
+	</tr>
+
+    <tr class="commit-19575c7c8e60c95c6714e51039ee9a21721cc31d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/19575c7c8e60c95c6714e51039ee9a21721cc31d">
+                19575c7c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L738">
+			    738
+            </a>
+		</td>
+		<td class="code">
+						BUG("object %s is in an expired pack with int-id %d",
+		</td>
+	</tr>
+
+    <tr class="commit-19575c7c8e60c95c6714e51039ee9a21721cc31d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/19575c7c8e60c95c6714e51039ee9a21721cc31d">
+                19575c7c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L865">
+			    865
+            </a>
+		</td>
+		<td class="code">
+							error(_("did not see pack-file %s to drop"),
+		</td>
+	</tr>
+
+    <tr class="commit-19575c7c8e60c95c6714e51039ee9a21721cc31d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/19575c7c8e60c95c6714e51039ee9a21721cc31d">
+                19575c7c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L867">
+			    867
+            </a>
+		</td>
+		<td class="code">
+							drop_index++;
+		</td>
+	</tr>
+
+    <tr class="commit-19575c7c8e60c95c6714e51039ee9a21721cc31d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/19575c7c8e60c95c6714e51039ee9a21721cc31d">
+                19575c7c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L868">
+			    868
+            </a>
+		</td>
+		<td class="code">
+							missing_drops++;
+		</td>
+	</tr>
+
+    <tr class="commit-19575c7c8e60c95c6714e51039ee9a21721cc31d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/19575c7c8e60c95c6714e51039ee9a21721cc31d">
+                19575c7c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L869">
+			    869
+            </a>
+		</td>
+		<td class="code">
+							i--;
+		</td>
+	</tr>
+
+    <tr class="commit-19575c7c8e60c95c6714e51039ee9a21721cc31d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/19575c7c8e60c95c6714e51039ee9a21721cc31d">
+                19575c7c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L876">
+			    876
+            </a>
+		</td>
+		<td class="code">
+						result = 1;
+		</td>
+	</tr>
+
+    <tr class="commit-19575c7c8e60c95c6714e51039ee9a21721cc31d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/19575c7c8e60c95c6714e51039ee9a21721cc31d">
+                19575c7c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L877">
+			    877
+            </a>
+		</td>
+		<td class="code">
+						goto cleanup;
+		</td>
+	</tr>
+
+    <tr class="commit-19575c7c8e60c95c6714e51039ee9a21721cc31d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/19575c7c8e60c95c6714e51039ee9a21721cc31d">
+                19575c7c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1194">
+			    1194
+            </a>
+		</td>
+		<td class="code">
+					return 0;
+		</td>
+	</tr>
+
+    <tr class="commit-19575c7c8e60c95c6714e51039ee9a21721cc31d">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/19575c7c8e60c95c6714e51039ee9a21721cc31d">
+                19575c7c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1209">
+			    1209
+            </a>
+		</td>
+		<td class="code">
+						continue;
+		</td>
+	</tr>
+
+    <tr class="commit-ce1e4a105b4ff2457f2537bc703863175f9195c9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ce1e4a105b4ff2457f2537bc703863175f9195c9">
+                ce1e4a10
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1248">
+			    1248
+            </a>
+		</td>
+		<td class="code">
+				return 0;
+		</td>
+	</tr>
+
+    <tr class="commit-ce1e4a105b4ff2457f2537bc703863175f9195c9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ce1e4a105b4ff2457f2537bc703863175f9195c9">
+                ce1e4a10
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1275">
+			    1275
+            </a>
+		</td>
+		<td class="code">
+						continue;
+		</td>
+	</tr>
+
+    <tr class="commit-ce1e4a105b4ff2457f2537bc703863175f9195c9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ce1e4a105b4ff2457f2537bc703863175f9195c9">
+                ce1e4a10
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1295">
+			    1295
+            </a>
+		</td>
+		<td class="code">
+						continue;
+		</td>
+	</tr>
+
+    <tr class="commit-ce1e4a105b4ff2457f2537bc703863175f9195c9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ce1e4a105b4ff2457f2537bc703863175f9195c9">
+                ce1e4a10
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1297">
+			    1297
+            </a>
+		</td>
+		<td class="code">
+						continue;
+		</td>
+	</tr>
+
+    <tr class="commit-ce1e4a105b4ff2457f2537bc703863175f9195c9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ce1e4a105b4ff2457f2537bc703863175f9195c9">
+                ce1e4a10
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1329">
+			    1329
+            </a>
+		</td>
+		<td class="code">
+					return 0;
+		</td>
+	</tr>
+
+    <tr class="commit-ce1e4a105b4ff2457f2537bc703863175f9195c9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ce1e4a105b4ff2457f2537bc703863175f9195c9">
+                ce1e4a10
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1350">
+			    1350
+            </a>
+		</td>
+		<td class="code">
+					error(_("could not start pack-objects"));
+		</td>
+	</tr>
+
+    <tr class="commit-ce1e4a105b4ff2457f2537bc703863175f9195c9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ce1e4a105b4ff2457f2537bc703863175f9195c9">
+                ce1e4a10
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1351">
+			    1351
+            </a>
+		</td>
+		<td class="code">
+					result = 1;
+		</td>
+	</tr>
+
+    <tr class="commit-ce1e4a105b4ff2457f2537bc703863175f9195c9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ce1e4a105b4ff2457f2537bc703863175f9195c9">
+                ce1e4a10
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1352">
+			    1352
+            </a>
+		</td>
+		<td class="code">
+					goto cleanup;
+		</td>
+	</tr>
+
+    <tr class="commit-ce1e4a105b4ff2457f2537bc703863175f9195c9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ce1e4a105b4ff2457f2537bc703863175f9195c9">
+                ce1e4a10
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1369">
+			    1369
+            </a>
+		</td>
+		<td class="code">
+					error(_("could not finish pack-objects"));
+		</td>
+	</tr>
+
+    <tr class="commit-ce1e4a105b4ff2457f2537bc703863175f9195c9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ce1e4a105b4ff2457f2537bc703863175f9195c9">
+                ce1e4a10
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1370">
+			    1370
+            </a>
+		</td>
+		<td class="code">
+					result = 1;
+		</td>
+	</tr>
+
+    <tr class="commit-ce1e4a105b4ff2457f2537bc703863175f9195c9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ce1e4a105b4ff2457f2537bc703863175f9195c9">
+                ce1e4a10
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/midx.c#L1371">
+			    1371
+            </a>
+		</td>
+		<td class="code">
+					goto cleanup;
+		</td>
+	</tr>
+</table>
+
+<h3>name-hash.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-568a05c5ecb8e3a01fcb90d0f81857f49ef2add8">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/568a05c5ecb8e3a01fcb90d0f81857f49ef2add8">
+                568a05c5
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/name-hash.c#L348">
+			    348
+            </a>
+		</td>
+		<td class="code">
+					assert(begin &gt;= 0);
+		</td>
+	</tr>
+
+    <tr class="commit-568a05c5ecb8e3a01fcb90d0f81857f49ef2add8">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/568a05c5ecb8e3a01fcb90d0f81857f49ef2add8">
+                568a05c5
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/name-hash.c#L350">
+			    350
+            </a>
+		</td>
+		<td class="code">
+						int mid = begin + ((end - begin) &gt;&gt; 1);
+		</td>
+	</tr>
+</table>
+
+<h3>oidset.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="ignored-hidden">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/f93895f8fcf1a45e594cd28c03b88a057382dc6b">
+                f93895f8
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/oidset.c#L69">
+			    69
+            </a>
+		</td>
+		<td class="code">
+					die_errno("Could not read '%s'", path);
+		</td>
+	</tr>
+</table>
+
+<h3>packfile.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-8434e85d5f9602a82f6b34ba82a9cb9e559a2d3b">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8434e85d5f9602a82f6b34ba82a9cb9e559a2d3b">
+                8434e85d
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/packfile.c#L372">
+			    372
+            </a>
+		</td>
+		<td class="code">
+						strbuf_release(&buf);
+		</td>
+	</tr>
+
+    <tr class="commit-8434e85d5f9602a82f6b34ba82a9cb9e559a2d3b">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8434e85d5f9602a82f6b34ba82a9cb9e559a2d3b">
+                8434e85d
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/packfile.c#L373">
+			    373
+            </a>
+		</td>
+		<td class="code">
+						return;
+		</td>
+	</tr>
+
+    <tr class="commit-921d49be86bd44ca290c8db6cc6f419dac3ed442">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/921d49be86bd44ca290c8db6cc6f419dac3ed442">
+                921d49be
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/packfile.c#L1303">
+			    1303
+            </a>
+		</td>
+		<td class="code">
+						COPY_ARRAY(poi_stack, small_poi_stack, poi_stack_nr);
+		</td>
+	</tr>
+
+    <tr class="commit-921d49be86bd44ca290c8db6cc6f419dac3ed442">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/921d49be86bd44ca290c8db6cc6f419dac3ed442">
+                921d49be
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/packfile.c#L1713">
+			    1713
+            </a>
+		</td>
+		<td class="code">
+						COPY_ARRAY(delta_stack, small_delta_stack,
+		</td>
+	</tr>
+</table>
+
+<h3>pager.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-cd1096b2820d64d5fcb5da20613d5af290e42929">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/cd1096b2820d64d5fcb5da20613d5af290e42929">
+                cd1096b2
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/pager.c#L197">
+			    197
+            </a>
+		</td>
+		<td class="code">
+					fputs("\r\033[K", stderr);
+		</td>
+	</tr>
+</table>
+
+<h3>progress.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-5b12e3123b7b70e3875404a4ffe571ca079364fe">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/5b12e3123b7b70e3875404a4ffe571ca079364fe">
+                5b12e312
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/progress.c#L121">
+			    121
+            </a>
+		</td>
+		<td class="code">
+							fprintf(stderr, "  %s%s", counters_sb-&gt;buf,
+		</td>
+	</tr>
+
+    <tr class="commit-5b12e3123b7b70e3875404a4ffe571ca079364fe">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/5b12e3123b7b70e3875404a4ffe571ca079364fe">
+                5b12e312
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/progress.c#L127">
+			    127
+            </a>
+		</td>
+		<td class="code">
+							fprintf(stderr, "%s:\n  %s%s",
+		</td>
+	</tr>
+</table>
+
+<h3>range-diff.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-44b67cb62b339fdc6239ef6b72b8c75b559a574a">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/44b67cb62b339fdc6239ef6b72b8c75b559a574a">
+                44b67cb6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/range-diff.c#L33">
+			    33
+            </a>
+		</td>
+		<td class="code">
+					return size;
+		</td>
+	</tr>
+
+    <tr class="commit-44b67cb62b339fdc6239ef6b72b8c75b559a574a">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/44b67cb62b339fdc6239ef6b72b8c75b559a574a">
+                44b67cb6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/range-diff.c#L95">
+			    95
+            </a>
+		</td>
+		<td class="code">
+							strbuf_release(&contents);
+		</td>
+	</tr>
+
+    <tr class="commit-b66885a30cb84fc61986bc4eea805a31fdbea79a">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/b66885a30cb84fc61986bc4eea805a31fdbea79a">
+                b66885a3
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/range-diff.c#L117">
+			    117
+            </a>
+		</td>
+		<td class="code">
+							die(_("could not parse git header '%.*s'"), (int)len, line);
+		</td>
+	</tr>
+
+    <tr class="commit-b66885a30cb84fc61986bc4eea805a31fdbea79a">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/b66885a30cb84fc61986bc4eea805a31fdbea79a">
+                b66885a3
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/range-diff.c#L135">
+			    135
+            </a>
+		</td>
+		<td class="code">
+						    patch.old_mode != patch.new_mode)
+		</td>
+	</tr>
+
+    <tr class="commit-b66885a30cb84fc61986bc4eea805a31fdbea79a">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/b66885a30cb84fc61986bc4eea805a31fdbea79a">
+                b66885a3
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/range-diff.c#L136">
+			    136
+            </a>
+		</td>
+		<td class="code">
+							strbuf_addf(&buf, " (mode change %06o =&gt; %06o)",
+		</td>
+	</tr>
+
+    <tr class="commit-44b67cb62b339fdc6239ef6b72b8c75b559a574a">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/44b67cb62b339fdc6239ef6b72b8c75b559a574a">
+                44b67cb6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/range-diff.c#L181">
+			    181
+            </a>
+		</td>
+		<td class="code">
+						strbuf_addstr(&buf, line);
+		</td>
+	</tr>
+</table>
+
+<h3>read-cache.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-7bd9631bfc17f685f79093f11e1bbe01ab280b1c">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/7bd9631bfc17f685f79093f11e1bbe01ab280b1c">
+                7bd9631b
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/read-cache.c#L2201">
+			    2201
+            </a>
+		</td>
+		<td class="code">
+					src_offset += load_cache_entries_threaded(istate, mmap, mmap_size, nr_threads, ieot);
+		</td>
+	</tr>
+</table>
+
+<h3>ref-filter.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-2582083fa1830632e298727e973440907345267f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/2582083fa1830632e298727e973440907345267f">
+                2582083f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/ref-filter.c#L94">
+			    94
+            </a>
+		</td>
+		<td class="code">
+					keydata_aka_refname ? keydata_aka_refname : k-&gt;wt-&gt;head_ref);
+		</td>
+	</tr>
+
+    <tr class="commit-28438e84e046984afc76dc891a49bd0862d555f7">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/28438e84e046984afc76dc891a49bd0862d555f7">
+                28438e84
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/ref-filter.c#L1501">
+			    1501
+            </a>
+		</td>
+		<td class="code">
+					strbuf_addstr(&desc, _("no branch"));
+		</td>
+	</tr>
+
+    <tr class="commit-b31e2680c46c43ece716080040e90b3a787b0bad">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/b31e2680c46c43ece716080040e90b3a787b0bad">
+                b31e2680
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/ref-filter.c#L1967">
+			    1967
+            </a>
+		</td>
+		<td class="code">
+						break;
+		</td>
+	</tr>
+</table>
+
+<h3>refs.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-1de16aecf51daf5794aa074f6dd133e088a12690">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1de16aecf51daf5794aa074f6dd133e088a12690">
+                1de16aec
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/refs.c#L111">
+			    111
+            </a>
+		</td>
+		<td class="code">
+								sanitized-&gt;buf[sanitized-&gt;len-1] = '-';
+		</td>
+	</tr>
+
+    <tr class="commit-1de16aecf51daf5794aa074f6dd133e088a12690">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1de16aecf51daf5794aa074f6dd133e088a12690">
+                1de16aec
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/refs.c#L170">
+			    170
+            </a>
+		</td>
+		<td class="code">
+					if (sanitized)
+		</td>
+	</tr>
+
+    <tr class="commit-1de16aecf51daf5794aa074f6dd133e088a12690">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1de16aecf51daf5794aa074f6dd133e088a12690">
+                1de16aec
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/refs.c#L171">
+			    171
+            </a>
+		</td>
+		<td class="code">
+						strbuf_addch(sanitized, '-');
+		</td>
+	</tr>
+
+    <tr class="commit-1de16aecf51daf5794aa074f6dd133e088a12690">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1de16aecf51daf5794aa074f6dd133e088a12690">
+                1de16aec
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/refs.c#L173">
+			    173
+            </a>
+		</td>
+		<td class="code">
+						return -1;
+		</td>
+	</tr>
+
+    <tr class="commit-1de16aecf51daf5794aa074f6dd133e088a12690">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1de16aecf51daf5794aa074f6dd133e088a12690">
+                1de16aec
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/refs.c#L178">
+			    178
+            </a>
+		</td>
+		<td class="code">
+						strbuf_complete(sanitized, '/');
+		</td>
+	</tr>
+
+    <tr class="commit-1de16aecf51daf5794aa074f6dd133e088a12690">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/1de16aecf51daf5794aa074f6dd133e088a12690">
+                1de16aec
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/refs.c#L215">
+			    215
+            </a>
+		</td>
+		<td class="code">
+					BUG("sanitizing refname '%s' check returned error", refname);
+		</td>
+	</tr>
+</table>
+
+<h3>sequencer.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-37e9ee5cb90db0831d5d58bed82149ba67917d73">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/37e9ee5cb90db0831d5d58bed82149ba67917d73">
+                37e9ee5c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L293">
+			    293
+            </a>
+		</td>
+		<td class="code">
+							ret = -1;
+		</td>
+	</tr>
+
+    <tr class="commit-37e9ee5cb90db0831d5d58bed82149ba67917d73">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/37e9ee5cb90db0831d5d58bed82149ba67917d73">
+                37e9ee5c
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L311">
+			    311
+            </a>
+		</td>
+		<td class="code">
+					ret = error(_("could not remove '%s'"), buf.buf);
+		</td>
+	</tr>
+
+    <tr class="commit-ed5b1ca10b2644f1af3bdfa3da32c67f4df1aa46">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ed5b1ca10b2644f1af3bdfa3da32c67f4df1aa46">
+                ed5b1ca1
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L2198">
+			    2198
+            </a>
+		</td>
+		<td class="code">
+					 (*bol == ' ' || *bol == '\t'))
+		</td>
+	</tr>
+
+    <tr class="commit-ed5b1ca10b2644f1af3bdfa3da32c67f4df1aa46">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/ed5b1ca10b2644f1af3bdfa3da32c67f4df1aa46">
+                ed5b1ca1
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L2201">
+			    2201
+            </a>
+		</td>
+		<td class="code">
+					ret = -1;
+		</td>
+	</tr>
+
+    <tr class="commit-6a1f9046a40ad69eb00e5a83c6825972113f6e0f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6a1f9046a40ad69eb00e5a83c6825972113f6e0f">
+                6a1f9046
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L2668">
+			    2668
+            </a>
+		</td>
+		<td class="code">
+						in_progress_error = _("revert is already in progress");
+		</td>
+	</tr>
+
+    <tr class="commit-6a1f9046a40ad69eb00e5a83c6825972113f6e0f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6a1f9046a40ad69eb00e5a83c6825972113f6e0f">
+                6a1f9046
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L2669">
+			    2669
+            </a>
+		</td>
+		<td class="code">
+						in_progress_advice =
+		</td>
+	</tr>
+
+    <tr class="commit-6a1f9046a40ad69eb00e5a83c6825972113f6e0f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6a1f9046a40ad69eb00e5a83c6825972113f6e0f">
+                6a1f9046
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L2671">
+			    2671
+            </a>
+		</td>
+		<td class="code">
+						break;
+		</td>
+	</tr>
+
+    <tr class="commit-6a1f9046a40ad69eb00e5a83c6825972113f6e0f">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/6a1f9046a40ad69eb00e5a83c6825972113f6e0f">
+                6a1f9046
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L2678">
+			    2678
+            </a>
+		</td>
+		<td class="code">
+						BUG("unexpected action in create_seq_dir");
+		</td>
+	</tr>
+
+    <tr class="commit-de81ca3f36b0f1db8bd615c98f2a5c819092c275">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/de81ca3f36b0f1db8bd615c98f2a5c819092c275">
+                de81ca3f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L2777">
+			    2777
+            </a>
+		</td>
+		<td class="code">
+					return error(_("cannot resolve HEAD"));
+		</td>
+	</tr>
+
+    <tr class="commit-de81ca3f36b0f1db8bd615c98f2a5c819092c275">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/de81ca3f36b0f1db8bd615c98f2a5c819092c275">
+                de81ca3f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L2860">
+			    2860
+            </a>
+		</td>
+		<td class="code">
+						if (!rollback_is_safe())
+		</td>
+	</tr>
+
+    <tr class="commit-de81ca3f36b0f1db8bd615c98f2a5c819092c275">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/de81ca3f36b0f1db8bd615c98f2a5c819092c275">
+                de81ca3f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L2861">
+			    2861
+            </a>
+		</td>
+		<td class="code">
+							goto give_advice;
+		</td>
+	</tr>
+
+    <tr class="commit-de81ca3f36b0f1db8bd615c98f2a5c819092c275">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/de81ca3f36b0f1db8bd615c98f2a5c819092c275">
+                de81ca3f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L2873">
+			    2873
+            </a>
+		</td>
+		<td class="code">
+					BUG("unexpected action in sequencer_skip");
+		</td>
+	</tr>
+
+    <tr class="commit-de81ca3f36b0f1db8bd615c98f2a5c819092c275">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/de81ca3f36b0f1db8bd615c98f2a5c819092c275">
+                de81ca3f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sequencer.c#L2877">
+			    2877
+            </a>
+		</td>
+		<td class="code">
+					return error(_("failed to skip the commit"));
+		</td>
+	</tr>
+</table>
+
+<h3>server-info.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">
+                f4f476b6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/server-info.c#L110">
+			    110
+            </a>
+		</td>
+		<td class="code">
+						ret = -1;
+		</td>
+	</tr>
+
+    <tr class="commit-f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">
+                f4f476b6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/server-info.c#L111">
+			    111
+            </a>
+		</td>
+		<td class="code">
+						goto out;
+		</td>
+	</tr>
+
+    <tr class="commit-f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">
+                f4f476b6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/server-info.c#L123">
+			    123
+            </a>
+		</td>
+		<td class="code">
+						goto out;
+		</td>
+	</tr>
+
+    <tr class="commit-f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">
+                f4f476b6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/server-info.c#L125">
+			    125
+            </a>
+		</td>
+		<td class="code">
+						goto out;
+		</td>
+	</tr>
+
+    <tr class="commit-f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">
+                f4f476b6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/server-info.c#L134">
+			    134
+            </a>
+		</td>
+		<td class="code">
+					if (uic.cur_fp)
+		</td>
+	</tr>
+
+    <tr class="commit-f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">
+                f4f476b6
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/server-info.c#L135">
+			    135
+            </a>
+		</td>
+		<td class="code">
+						fclose(uic.cur_fp);
+		</td>
+	</tr>
+</table>
+
+<h3>sh-i18n--envsubst.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-568a05c5ecb8e3a01fcb90d0f81857f49ef2add8">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/568a05c5ecb8e3a01fcb90d0f81857f49ef2add8">
+                568a05c5
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sh-i18n--envsubst.c#L252">
+			    252
+            </a>
+		</td>
+		<td class="code">
+				  size_t j = j1 + ((j2 - j1) &gt;&gt; 1);
+		</td>
+	</tr>
+</table>
+
+<h3>sha1-file.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-709dfa69908c9448db91a9bcc96941549be6421e">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/709dfa69908c9448db91a9bcc96941549be6421e">
+                709dfa69
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sha1-file.c#L784">
+			    784
+            </a>
+		</td>
+		<td class="code">
+					return;
+		</td>
+	</tr>
+
+    <tr class="commit-709dfa69908c9448db91a9bcc96941549be6421e">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/709dfa69908c9448db91a9bcc96941549be6421e">
+                709dfa69
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sha1-file.c#L792">
+			    792
+            </a>
+		</td>
+		<td class="code">
+						warning(_("invalid line while parsing alternate refs: %s"),
+		</td>
+	</tr>
+
+    <tr class="commit-709dfa69908c9448db91a9bcc96941549be6421e">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/709dfa69908c9448db91a9bcc96941549be6421e">
+                709dfa69
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sha1-file.c#L794">
+			    794
+            </a>
+		</td>
+		<td class="code">
+						break;
+		</td>
+	</tr>
+
+    <tr class="commit-709dfa69908c9448db91a9bcc96941549be6421e">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/709dfa69908c9448db91a9bcc96941549be6421e">
+                709dfa69
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sha1-file.c#L817">
+			    817
+            </a>
+		</td>
+		<td class="code">
+					goto out;
+		</td>
+	</tr>
+
+    <tr class="commit-709dfa69908c9448db91a9bcc96941549be6421e">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/709dfa69908c9448db91a9bcc96941549be6421e">
+                709dfa69
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sha1-file.c#L819">
+			    819
+            </a>
+		</td>
+		<td class="code">
+					goto out;
+		</td>
+	</tr>
+
+    <tr class="commit-709dfa69908c9448db91a9bcc96941549be6421e">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/709dfa69908c9448db91a9bcc96941549be6421e">
+                709dfa69
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/sha1-file.c#L825">
+			    825
+            </a>
+		</td>
+		<td class="code">
+					goto out;
+		</td>
+	</tr>
+</table>
+
+<h3>strbuf.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-8f354a1faedba64daf5442c12cbc605441bb60b0">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8f354a1faedba64daf5442c12cbc605441bb60b0">
+                8f354a1f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/strbuf.c#L818">
+			    818
+            </a>
+		</td>
+		<td class="code">
+					strbuf_addf(buf,
+		</td>
+	</tr>
+
+    <tr class="commit-8f354a1faedba64daf5442c12cbc605441bb60b0">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/8f354a1faedba64daf5442c12cbc605441bb60b0">
+                8f354a1f
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/strbuf.c#L850">
+			    850
+            </a>
+		</td>
+		<td class="code">
+								Q_("%u byte/s", "%u bytes/s", (unsigned)bytes),
+		</td>
+	</tr>
+</table>
+
+<h3>t/helper/test-dir-iterator.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+                fa1da7d2
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/t/helper/test-dir-iterator.c#L24">
+			    24
+            </a>
+		</td>
+		<td class="code">
+						die("invalid option '%s'", *argv);
+		</td>
+	</tr>
+
+    <tr class="commit-fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/fa1da7d2eef0fedf0e5942028513912bf2bb64ed">
+                fa1da7d2
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/t/helper/test-dir-iterator.c#L28">
+			    28
+            </a>
+		</td>
+		<td class="code">
+					die("dir-iterator needs exactly one non-option argument");
+		</td>
+	</tr>
+
+    <tr class="commit-150791adbf1eb432af0b895d81eef5c2717aa6cc">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/150791adbf1eb432af0b895d81eef5c2717aa6cc">
+                150791ad
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/t/helper/test-dir-iterator.c#L46">
+			    46
+            </a>
+		</td>
+		<td class="code">
+						printf("[?] ");
+		</td>
+	</tr>
+</table>
+
+<h3>t/helper/test-match-trees.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-90d3405196cfe5d3c63185a33dcee57fb6ea7e8a">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/90d3405196cfe5d3c63185a33dcee57fb6ea7e8a">
+                90d34051
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/t/helper/test-match-trees.c#L23">
+			    23
+            </a>
+		</td>
+		<td class="code">
+				shift_tree(the_repository, &one-&gt;object.oid, &two-&gt;object.oid, &shifted, -1);
+		</td>
+	</tr>
+</table>
+
+<h3>upload-pack.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-62b89d43e2eab692aaa65393de901e4119eddbb8">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/62b89d43e2eab692aaa65393de901e4119eddbb8">
+                62b89d43
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/upload-pack.c#L534">
+			    534
+            </a>
+		</td>
+		<td class="code">
+					if (parse_oid_hex(namebuf, &oid, &p) || *p != '\n')
+		</td>
+	</tr>
+
+    <tr class="commit-d0229abd93e1115d935b0e55067e29bcc9815ce8">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/d0229abd93e1115d935b0e55067e29bcc9815ce8">
+                d0229abd
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/upload-pack.c#L537">
+			    537
+            </a>
+		</td>
+		<td class="code">
+					o = lookup_object(the_repository, &oid);
+		</td>
+	</tr>
+</table>
+
+<h3>wt-status.c</h3>
+
+<table  class="uncovered-lines">
+
+    <tr class="commit-0a53561a6221f989b210797e62e83fb7260fa42c">
+		<td class="commit-id">
+            <a href="https://github.com/git/git/commit/0a53561a6221f989b210797e62e83fb7260fa42c">
+                0a53561a
+            </a>
+        </td>
+        <td class="line-number">
+            <a href="https://github.com/git/git/tree/fork/master/wt-status.c#L1114">
+			    1114
+            </a>
+		</td>
+		<td class="code">
+						strbuf_addf(&sb, _("\n"
+		</td>
+	</tr>
+</table>
+
+<h3>Commits introducing uncovered code:</h3>
+
+<table class="commits">
+
+	<tr class="commit-b4f207f339469e604260bdf6da8673db9c9c9105" onclick="toggleCommit('commit-b4f207f339469e604260bdf6da8673db9c9c9105')">
+		<td class="author">
+            Ævar Arnfjörð Bjarmason
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/b4f207f339469e604260bdf6da8673db9c9c9105">b4f207f3</a>
+		</td>
+		<td class="message">
+			env--helper: new undocumented builtin wrapping git_env_*()
+        </td>
+	</tr>
+
+	<tr class="commit-2e43cd4caa8ad9eb0c53adc1e00dcd027b8710fd" onclick="toggleCommit('commit-2e43cd4caa8ad9eb0c53adc1e00dcd027b8710fd')">
+		<td class="author">
+            Ævar Arnfjörð Bjarmason
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/2e43cd4caa8ad9eb0c53adc1e00dcd027b8710fd">2e43cd4c</a>
+		</td>
+		<td class="message">
+			config.c: refactor die_bad_number() to not call gettext() early
+        </td>
+	</tr>
+
+	<tr class="commit-f0596ecc8de9bdbdfc394b2f153ff67f64fc4615" onclick="toggleCommit('commit-f0596ecc8de9bdbdfc394b2f153ff67f64fc4615')">
+		<td class="author">
+            Ariadne Conill
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/f0596ecc8de9bdbdfc394b2f153ff67f64fc4615">f0596ecc</a>
+		</td>
+		<td class="message">
+			log: add warning for unspecified log.mailmap setting
+        </td>
+	</tr>
+
+	<tr class="commit-ae3f36dea16e51041c56ba9ed6b38380c8421816" onclick="toggleCommit('commit-ae3f36dea16e51041c56ba9ed6b38380c8421816')">
+		<td class="author">
+            Barret Rhoden
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/ae3f36dea16e51041c56ba9ed6b38380c8421816">ae3f36de</a>
+		</td>
+		<td class="message">
+			blame: add the ability to ignore commits and their changes
+        </td>
+	</tr>
+
+	<tr class="ignored-hidden" onclick="toggleCommit('commit-f93895f8fcf1a45e594cd28c03b88a057382dc6b')">
+		<td class="author">
+            Barret Rhoden
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/f93895f8fcf1a45e594cd28c03b88a057382dc6b">f93895f8</a>
+		</td>
+		<td class="message">
+			Move oidset_parse_file() to oidset.c
+        </td>
+	</tr>
+
+	<tr class="commit-1fc73384bac289b4907f0adba2a25d0644affa73" onclick="toggleCommit('commit-1fc73384bac289b4907f0adba2a25d0644affa73')">
+		<td class="author">
+            Barret Rhoden
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/1fc73384bac289b4907f0adba2a25d0644affa73">1fc73384</a>
+		</td>
+		<td class="message">
+			blame: optionally track line fingerprints during fill_blame_origin()
+        </td>
+	</tr>
+
+	<tr class="commit-a07a97760cbf2e794600157a5a9f61a888a17941" onclick="toggleCommit('commit-a07a97760cbf2e794600157a5a9f61a888a17941')">
+		<td class="author">
+            Barret Rhoden
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/a07a97760cbf2e794600157a5a9f61a888a17941">a07a9776</a>
+		</td>
+		<td class="message">
+			blame: use the fingerprint heuristic to match ignored lines
+        </td>
+	</tr>
+
+	<tr class="commit-150791adbf1eb432af0b895d81eef5c2717aa6cc" onclick="toggleCommit('commit-150791adbf1eb432af0b895d81eef5c2717aa6cc')">
+		<td class="author">
+            Daniel Ferreira
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/150791adbf1eb432af0b895d81eef5c2717aa6cc">150791ad</a>
+		</td>
+		<td class="message">
+			dir-iterator: add tests for dir-iterator API
+        </td>
+	</tr>
+
+	<tr class="commit-13cdf78094a5ba2968adb90707d27b98f53db1f7" onclick="toggleCommit('commit-13cdf78094a5ba2968adb90707d27b98f53db1f7')">
+		<td class="author">
+            Denton Liu
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/13cdf78094a5ba2968adb90707d27b98f53db1f7">13cdf780</a>
+		</td>
+		<td class="message">
+			format-patch: teach format.notes config option
+        </td>
+	</tr>
+
+	<tr class="commit-07b2c0eacac91c8db1a371667ed621cff443cf0d" onclick="toggleCommit('commit-07b2c0eacac91c8db1a371667ed621cff443cf0d')">
+		<td class="author">
+            Denton Liu
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/07b2c0eacac91c8db1a371667ed621cff443cf0d">07b2c0ea</a>
+		</td>
+		<td class="message">
+			config: learn the "onbranch:" includeIf condition
+        </td>
+	</tr>
+
+	<tr class="commit-b2c83060525e69f628fb32836e311978e3899e6e" onclick="toggleCommit('commit-b2c83060525e69f628fb32836e311978e3899e6e')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/b2c83060525e69f628fb32836e311978e3899e6e">b2c83060</a>
+		</td>
+		<td class="message">
+			commit-graph: extract fill_oids_from_all_packs()
+        </td>
+	</tr>
+
+	<tr class="commit-4c9efe850d75115a6deedd57072f1d7383bc03da" onclick="toggleCommit('commit-4c9efe850d75115a6deedd57072f1d7383bc03da')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/4c9efe850d75115a6deedd57072f1d7383bc03da">4c9efe85</a>
+		</td>
+		<td class="message">
+			commit-graph: extract fill_oids_from_commit_hex()
+        </td>
+	</tr>
+
+	<tr class="commit-ef5b83f2cfe11c2feb98b962881e9a8e6281e3ff" onclick="toggleCommit('commit-ef5b83f2cfe11c2feb98b962881e9a8e6281e3ff')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/ef5b83f2cfe11c2feb98b962881e9a8e6281e3ff">ef5b83f2</a>
+		</td>
+		<td class="message">
+			commit-graph: extract fill_oids_from_packs()
+        </td>
+	</tr>
+
+	<tr class="commit-6c622f9f0bbb38a23341dc4294f56d0d909b3d50" onclick="toggleCommit('commit-6c622f9f0bbb38a23341dc4294f56d0d909b3d50')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/6c622f9f0bbb38a23341dc4294f56d0d909b3d50">6c622f9f</a>
+		</td>
+		<td class="message">
+			commit-graph: write commit-graph chains
+        </td>
+	</tr>
+
+	<tr class="commit-5c84b3396c73382eb49285b4e4bbb1bf82be3a9c" onclick="toggleCommit('commit-5c84b3396c73382eb49285b4e4bbb1bf82be3a9c')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/5c84b3396c73382eb49285b4e4bbb1bf82be3a9c">5c84b339</a>
+		</td>
+		<td class="message">
+			commit-graph: load commit-graph chains
+        </td>
+	</tr>
+
+	<tr class="commit-118bd570029f5610abdbf1a220e87d3a5c241f5f" onclick="toggleCommit('commit-118bd570029f5610abdbf1a220e87d3a5c241f5f')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/118bd570029f5610abdbf1a220e87d3a5c241f5f">118bd570</a>
+		</td>
+		<td class="message">
+			commit-graph: add base graphs chunk
+        </td>
+	</tr>
+
+	<tr class="commit-1771be90c8e4797c2466296d1d570dbfa39d9743" onclick="toggleCommit('commit-1771be90c8e4797c2466296d1d570dbfa39d9743')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/1771be90c8e4797c2466296d1d570dbfa39d9743">1771be90</a>
+		</td>
+		<td class="message">
+			commit-graph: merge commit-graph chains
+        </td>
+	</tr>
+
+	<tr class="ignored-hidden" onclick="toggleCommit('commit-2af890bb28013ae9edf8f5de7873fac849d39c32')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/2af890bb28013ae9edf8f5de7873fac849d39c32">2af890bb</a>
+		</td>
+		<td class="message">
+			multi-pack-index: prepare 'repack' subcommand
+        </td>
+	</tr>
+
+	<tr class="commit-3883c55138dcfbe2d9a24e3f93a2a4b1d376dde6" onclick="toggleCommit('commit-3883c55138dcfbe2d9a24e3f93a2a4b1d376dde6')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/3883c55138dcfbe2d9a24e3f93a2a4b1d376dde6">3883c551</a>
+		</td>
+		<td class="message">
+			pull: add --[no-]show-forced-updates passthrough
+        </td>
+	</tr>
+
+	<tr class="commit-238def57fe7ba219c9e50094512fff1068ac5413" onclick="toggleCommit('commit-238def57fe7ba219c9e50094512fff1068ac5413')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/238def57fe7ba219c9e50094512fff1068ac5413">238def57</a>
+		</td>
+		<td class="message">
+			commit-graph: extract write_commit_graph_file()
+        </td>
+	</tr>
+
+	<tr class="commit-d4f4d60f6da8b93f768b2b4958c04cc1b3cea443" onclick="toggleCommit('commit-d4f4d60f6da8b93f768b2b4958c04cc1b3cea443')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/d4f4d60f6da8b93f768b2b4958c04cc1b3cea443">d4f4d60f</a>
+		</td>
+		<td class="message">
+			commit-graph: prepare for commit-graph chains
+        </td>
+	</tr>
+
+	<tr class="commit-c523035cbd8515d095dc15e9661fd896733bedbc" onclick="toggleCommit('commit-c523035cbd8515d095dc15e9661fd896733bedbc')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/c523035cbd8515d095dc15e9661fd896733bedbc">c523035c</a>
+		</td>
+		<td class="message">
+			commit-graph: allow cross-alternate chains
+        </td>
+	</tr>
+
+	<tr class="commit-cdbd70c43773d534aa81ea2c83905a45ff0e74e4" onclick="toggleCommit('commit-cdbd70c43773d534aa81ea2c83905a45ff0e74e4')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/cdbd70c43773d534aa81ea2c83905a45ff0e74e4">cdbd70c4</a>
+		</td>
+		<td class="message">
+			fetch: add --[no-]show-forced-updates argument
+        </td>
+	</tr>
+
+	<tr class="commit-377444b440eab3b6ef636df092f7f8299acf75bb" onclick="toggleCommit('commit-377444b440eab3b6ef636df092f7f8299acf75bb')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/377444b440eab3b6ef636df092f7f8299acf75bb">377444b4</a>
+		</td>
+		<td class="message">
+			fetch: warn about forced updates in branch listing
+        </td>
+	</tr>
+
+	<tr class="commit-ce1e4a105b4ff2457f2537bc703863175f9195c9" onclick="toggleCommit('commit-ce1e4a105b4ff2457f2537bc703863175f9195c9')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/ce1e4a105b4ff2457f2537bc703863175f9195c9">ce1e4a10</a>
+		</td>
+		<td class="message">
+			midx: implement midx_repack()
+        </td>
+	</tr>
+
+	<tr class="commit-19575c7c8e60c95c6714e51039ee9a21721cc31d" onclick="toggleCommit('commit-19575c7c8e60c95c6714e51039ee9a21721cc31d')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/19575c7c8e60c95c6714e51039ee9a21721cc31d">19575c7c</a>
+		</td>
+		<td class="message">
+			multi-pack-index: implement 'expire' subcommand
+        </td>
+	</tr>
+
+	<tr class="commit-d01bf2e609bf792820023fc0f4ef5048bc689327" onclick="toggleCommit('commit-d01bf2e609bf792820023fc0f4ef5048bc689327')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/d01bf2e609bf792820023fc0f4ef5048bc689327">d01bf2e6</a>
+		</td>
+		<td class="message">
+			midx: refactor permutation logic and pack sorting
+        </td>
+	</tr>
+
+	<tr class="commit-8434e85d5f9602a82f6b34ba82a9cb9e559a2d3b" onclick="toggleCommit('commit-8434e85d5f9602a82f6b34ba82a9cb9e559a2d3b')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/8434e85d5f9602a82f6b34ba82a9cb9e559a2d3b">8434e85d</a>
+		</td>
+		<td class="message">
+			repack: refactor pack deletion for future use
+        </td>
+	</tr>
+
+	<tr class="commit-e103f7276f0d809c2935ebc1a3d68c6bbfaed23d" onclick="toggleCommit('commit-e103f7276f0d809c2935ebc1a3d68c6bbfaed23d')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/e103f7276f0d809c2935ebc1a3d68c6bbfaed23d">e103f727</a>
+		</td>
+		<td class="message">
+			commit-graph: return with errors during write
+        </td>
+	</tr>
+
+	<tr class="commit-135a7123755bfdde05da18012bebd2776f82b26c" onclick="toggleCommit('commit-135a7123755bfdde05da18012bebd2776f82b26c')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/135a7123755bfdde05da18012bebd2776f82b26c">135a7123</a>
+		</td>
+		<td class="message">
+			commit-graph: add --split option to builtin
+        </td>
+	</tr>
+
+	<tr class="commit-c2bc6e6ab0ade70c475a73d06326e677e70840d2" onclick="toggleCommit('commit-c2bc6e6ab0ade70c475a73d06326e677e70840d2')">
+		<td class="author">
+            Derrick Stolee
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/c2bc6e6ab0ade70c475a73d06326e677e70840d2">c2bc6e6a</a>
+		</td>
+		<td class="message">
+			commit-graph: create options for split files
+        </td>
+	</tr>
+
+	<tr class="commit-8f354a1faedba64daf5442c12cbc605441bb60b0" onclick="toggleCommit('commit-8f354a1faedba64daf5442c12cbc605441bb60b0')">
+		<td class="author">
+            Dimitriy Ryazantcev
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/8f354a1faedba64daf5442c12cbc605441bb60b0">8f354a1f</a>
+		</td>
+		<td class="message">
+			l10n: localizable upload progress messages
+        </td>
+	</tr>
+
+	<tr class="commit-e80001f8fd7f608c6d05ce0ab2ebfc90d724a307" onclick="toggleCommit('commit-e80001f8fd7f608c6d05ce0ab2ebfc90d724a307')">
+		<td class="author">
+            Elijah Newren
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/e80001f8fd7f608c6d05ce0ab2ebfc90d724a307">e80001f8</a>
+		</td>
+		<td class="message">
+			fast-export: do automatic reencoding of commit messages only if requested
+        </td>
+	</tr>
+
+	<tr class="commit-de99eb0c24d96730de187edd37b9ca9d42b0b05d" onclick="toggleCommit('commit-de99eb0c24d96730de187edd37b9ca9d42b0b05d')">
+		<td class="author">
+            Emily Shaffer
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/de99eb0c24d96730de187edd37b9ca9d42b0b05d">de99eb0c</a>
+		</td>
+		<td class="message">
+			grep: fail if call could output and name is null
+        </td>
+	</tr>
+
+	<tr class="commit-f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9" onclick="toggleCommit('commit-f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9')">
+		<td class="author">
+            Eric Wong
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/f4f476b6a19217b6ed3d5022422b3fa0f55a5ee9">f4f476b6</a>
+		</td>
+		<td class="message">
+			update-server-info: avoid needless overwrites
+        </td>
+	</tr>
+
+	<tr class="commit-0a53561a6221f989b210797e62e83fb7260fa42c" onclick="toggleCommit('commit-0a53561a6221f989b210797e62e83fb7260fa42c')">
+		<td class="author">
+            Jeff Hostetler
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/0a53561a6221f989b210797e62e83fb7260fa42c">0a53561a</a>
+		</td>
+		<td class="message">
+			status: warn when a/b calculation takes too long
+        </td>
+	</tr>
+
+	<tr class="commit-7bd9631bfc17f685f79093f11e1bbe01ab280b1c" onclick="toggleCommit('commit-7bd9631bfc17f685f79093f11e1bbe01ab280b1c')">
+		<td class="author">
+            Jeff King
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/7bd9631bfc17f685f79093f11e1bbe01ab280b1c">7bd9631b</a>
+		</td>
+		<td class="message">
+			read-cache: drop unused parameter from threaded load
+        </td>
+	</tr>
+
+	<tr class="commit-709dfa69908c9448db91a9bcc96941549be6421e" onclick="toggleCommit('commit-709dfa69908c9448db91a9bcc96941549be6421e')">
+		<td class="author">
+            Jeff King
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/709dfa69908c9448db91a9bcc96941549be6421e">709dfa69</a>
+		</td>
+		<td class="message">
+			object-store.h: move for_each_alternate_ref() from transport.h
+        </td>
+	</tr>
+
+	<tr class="commit-62b89d43e2eab692aaa65393de901e4119eddbb8" onclick="toggleCommit('commit-62b89d43e2eab692aaa65393de901e4119eddbb8')">
+		<td class="author">
+            Jeff King
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/62b89d43e2eab692aaa65393de901e4119eddbb8">62b89d43</a>
+		</td>
+		<td class="message">
+			upload-pack: rename a "sha1" variable to "oid"
+        </td>
+	</tr>
+
+	<tr class="commit-d0229abd93e1115d935b0e55067e29bcc9815ce8" onclick="toggleCommit('commit-d0229abd93e1115d935b0e55067e29bcc9815ce8')">
+		<td class="author">
+            Jeff King
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/d0229abd93e1115d935b0e55067e29bcc9815ce8">d0229abd</a>
+		</td>
+		<td class="message">
+			object: convert lookup_object() to use object_id
+        </td>
+	</tr>
+
+	<tr class="commit-bdbdf42f8ab79374704b769157e7b080d525b73a" onclick="toggleCommit('commit-bdbdf42f8ab79374704b769157e7b080d525b73a')">
+		<td class="author">
+            Jeff King
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/bdbdf42f8ab79374704b769157e7b080d525b73a">bdbdf42f</a>
+		</td>
+		<td class="message">
+			delta-islands: respect progress flag
+        </td>
+	</tr>
+
+	<tr class="commit-6e7baf246a2d12480d4dbc04c47efb66408c1927" onclick="toggleCommit('commit-6e7baf246a2d12480d4dbc04c47efb66408c1927')">
+		<td class="author">
+            Jeff King
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/6e7baf246a2d12480d4dbc04c47efb66408c1927">6e7baf24</a>
+		</td>
+		<td class="message">
+			am: drop tty requirement for --interactive
+        </td>
+	</tr>
+
+	<tr class="commit-97387c8bdd92596d79a84ce8a479c6b3c16d0cb7" onclick="toggleCommit('commit-97387c8bdd92596d79a84ce8a479c6b3c16d0cb7')">
+		<td class="author">
+            Jeff King
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/97387c8bdd92596d79a84ce8a479c6b3c16d0cb7">97387c8b</a>
+		</td>
+		<td class="message">
+			am: read interactive input from stdin
+        </td>
+	</tr>
+
+	<tr class="commit-76a7bc092efc2be59f1e42dc437154a9a1feed0a" onclick="toggleCommit('commit-76a7bc092efc2be59f1e42dc437154a9a1feed0a')">
+		<td class="author">
+            Jeff King
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/76a7bc092efc2be59f1e42dc437154a9a1feed0a">76a7bc09</a>
+		</td>
+		<td class="message">
+			cmd_{read,write}_tree: rename "unused" variable that is used
+        </td>
+	</tr>
+
+	<tr class="commit-906b63942ac7f0ff904228b03d5dbe1edc59f0fe" onclick="toggleCommit('commit-906b63942ac7f0ff904228b03d5dbe1edc59f0fe')">
+		<td class="author">
+            Johannes Schindelin
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/906b63942ac7f0ff904228b03d5dbe1edc59f0fe">906b6394</a>
+		</td>
+		<td class="message">
+			rebase --am: ignore rebase.rescheduleFailedExec
+        </td>
+	</tr>
+
+	<tr class="commit-7877ac3d7b8ae84981c9c2fa86a4f3701ade4510" onclick="toggleCommit('commit-7877ac3d7b8ae84981c9c2fa86a4f3701ade4510')">
+		<td class="author">
+            Johannes Schindelin
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/7877ac3d7b8ae84981c9c2fa86a4f3701ade4510">7877ac3d</a>
+		</td>
+		<td class="message">
+			bisect--helper: verify HEAD could be parsed before continuing
+        </td>
+	</tr>
+
+	<tr class="commit-b09364c47a015dee7735fd2c038d7d710417c2f2" onclick="toggleCommit('commit-b09364c47a015dee7735fd2c038d7d710417c2f2')">
+		<td class="author">
+            Johannes Schindelin
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/b09364c47a015dee7735fd2c038d7d710417c2f2">b09364c4</a>
+		</td>
+		<td class="message">
+			clean: show an error message when the path is too long
+        </td>
+	</tr>
+
+	<tr class="commit-08e0450690b8f4aa0f51d8c096520817f96de3dd" onclick="toggleCommit('commit-08e0450690b8f4aa0f51d8c096520817f96de3dd')">
+		<td class="author">
+            Johannes Schindelin
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/08e0450690b8f4aa0f51d8c096520817f96de3dd">08e04506</a>
+		</td>
+		<td class="message">
+			kwset: allow building with GCC 8
+        </td>
+	</tr>
+
+	<tr class="commit-14954b799f0bac76e500593c95d1f274cf0636e5" onclick="toggleCommit('commit-14954b799f0bac76e500593c95d1f274cf0636e5')">
+		<td class="author">
+            Matheus Tavares
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/14954b799f0bac76e500593c95d1f274cf0636e5">14954b79</a>
+		</td>
+		<td class="message">
+			clone: extract function from copy_or_link_directory
+        </td>
+	</tr>
+
+	<tr class="commit-3012397e0327f5e4dfd1d1183a792268429744ae" onclick="toggleCommit('commit-3012397e0327f5e4dfd1d1183a792268429744ae')">
+		<td class="author">
+            Matheus Tavares
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/3012397e0327f5e4dfd1d1183a792268429744ae">3012397e</a>
+		</td>
+		<td class="message">
+			dir-iterator: refactor state machine model
+        </td>
+	</tr>
+
+	<tr class="commit-fa1da7d2eef0fedf0e5942028513912bf2bb64ed" onclick="toggleCommit('commit-fa1da7d2eef0fedf0e5942028513912bf2bb64ed')">
+		<td class="author">
+            Matheus Tavares
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/fa1da7d2eef0fedf0e5942028513912bf2bb64ed">fa1da7d2</a>
+		</td>
+		<td class="message">
+			dir-iterator: add flags parameter to dir_iterator_begin
+        </td>
+	</tr>
+
+	<tr class="commit-c9bba372ed9ee0c5ea1a4037c3c723a6c31f5921" onclick="toggleCommit('commit-c9bba372ed9ee0c5ea1a4037c3c723a6c31f5921')">
+		<td class="author">
+            Matheus Tavares
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/c9bba372ed9ee0c5ea1a4037c3c723a6c31f5921">c9bba372</a>
+		</td>
+		<td class="message">
+			dir-iterator: use warning_errno when possible
+        </td>
+	</tr>
+
+	<tr class="commit-ff7ccc8c9a6e61a7225c161c743a49ac079f1425" onclick="toggleCommit('commit-ff7ccc8c9a6e61a7225c161c743a49ac079f1425')">
+		<td class="author">
+            Matheus Tavares
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/ff7ccc8c9a6e61a7225c161c743a49ac079f1425">ff7ccc8c</a>
+		</td>
+		<td class="message">
+			clone: use dir-iterator to avoid explicit dir traversal
+        </td>
+	</tr>
+
+	<tr class="commit-28438e84e046984afc76dc891a49bd0862d555f7" onclick="toggleCommit('commit-28438e84e046984afc76dc891a49bd0862d555f7')">
+		<td class="author">
+            Matthew DeVore
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/28438e84e046984afc76dc891a49bd0862d555f7">28438e84</a>
+		</td>
+		<td class="message">
+			ref-filter: sort detached HEAD lines firstly
+        </td>
+	</tr>
+
+	<tr class="commit-5c03bc8b1d1f992ebe43c567bb95cdb5e0273d28" onclick="toggleCommit('commit-5c03bc8b1d1f992ebe43c567bb95cdb5e0273d28')">
+		<td class="author">
+            Matthew DeVore
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/5c03bc8b1d1f992ebe43c567bb95cdb5e0273d28">5c03bc8b</a>
+		</td>
+		<td class="message">
+			list-objects-filter-options: error is localizeable
+        </td>
+	</tr>
+
+	<tr class="commit-d16dc428b47837cebd231de1fad76d9c307f34b0" onclick="toggleCommit('commit-d16dc428b47837cebd231de1fad76d9c307f34b0')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/d16dc428b47837cebd231de1fad76d9c307f34b0">d16dc428</a>
+		</td>
+		<td class="message">
+			switch: allow to switch in the middle of bisect
+        </td>
+	</tr>
+
+	<tr class="commit-3ec37ad13dea55f6a614753accc7fad84cb170be" onclick="toggleCommit('commit-3ec37ad13dea55f6a614753accc7fad84cb170be')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/3ec37ad13dea55f6a614753accc7fad84cb170be">3ec37ad1</a>
+		</td>
+		<td class="message">
+			switch: add --discard-changes
+        </td>
+	</tr>
+
+	<tr class="commit-50ddb089ff68dfe1e3d9bd9a108d9015c176f761" onclick="toggleCommit('commit-50ddb089ff68dfe1e3d9bd9a108d9015c176f761')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/50ddb089ff68dfe1e3d9bd9a108d9015c176f761">50ddb089</a>
+		</td>
+		<td class="message">
+			tree-walk.c: remove the_repo from get_tree_entry()
+        </td>
+	</tr>
+
+	<tr class="ignored-hidden" onclick="toggleCommit('commit-e3ddd3b5e583e62d874f56f8c88603ad0ebafd5e')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/e3ddd3b5e583e62d874f56f8c88603ad0ebafd5e">e3ddd3b5</a>
+		</td>
+		<td class="message">
+			restore: reject invalid combinations with --staged
+        </td>
+	</tr>
+
+	<tr class="ignored-hidden" onclick="toggleCommit('commit-2f0896ec3ad4731d970d22f61daf62046bc766a9')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/2f0896ec3ad4731d970d22f61daf62046bc766a9">2f0896ec</a>
+		</td>
+		<td class="message">
+			restore: support --patch
+        </td>
+	</tr>
+
+	<tr class="ignored-hidden" onclick="toggleCommit('commit-1806c29f2eb5f7e4b5952f4fcc75f2afe279f1a4')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/1806c29f2eb5f7e4b5952f4fcc75f2afe279f1a4">1806c29f</a>
+		</td>
+		<td class="message">
+			switch: make --orphan switch to an empty tree
+        </td>
+	</tr>
+
+	<tr class="ignored-hidden" onclick="toggleCommit('commit-5c06e26903fd69cf7a71bf2cf8281a84868525b0')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/5c06e26903fd69cf7a71bf2cf8281a84868525b0">5c06e269</a>
+		</td>
+		<td class="message">
+			switch: stop accepting pathspec
+        </td>
+	</tr>
+
+	<tr class="ignored-hidden" onclick="toggleCommit('commit-7968bef06b750fe9c59c1e1d0573bffc5b3cd94f')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/7968bef06b750fe9c59c1e1d0573bffc5b3cd94f">7968bef0</a>
+		</td>
+		<td class="message">
+			switch: only allow explicit detached HEAD
+        </td>
+	</tr>
+
+	<tr class="ignored-hidden" onclick="toggleCommit('commit-c45f0f525de4701b8ff031d5c2c58c0fa819038e')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/c45f0f525de4701b8ff031d5c2c58c0fa819038e">c45f0f52</a>
+		</td>
+		<td class="message">
+			switch: reject if some operation is in progress
+        </td>
+	</tr>
+
+	<tr class="ignored-hidden" onclick="toggleCommit('commit-a5e5f399ca89cea574d11704d625a7b28b53de76')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/a5e5f399ca89cea574d11704d625a7b28b53de76">a5e5f399</a>
+		</td>
+		<td class="message">
+			restore: replace --force with --ignore-unmerged
+        </td>
+	</tr>
+
+	<tr class="commit-1de16aecf51daf5794aa074f6dd133e088a12690" onclick="toggleCommit('commit-1de16aecf51daf5794aa074f6dd133e088a12690')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/1de16aecf51daf5794aa074f6dd133e088a12690">1de16aec</a>
+		</td>
+		<td class="message">
+			worktree add: sanitize worktree names
+        </td>
+	</tr>
+
+	<tr class="commit-c9c935f6d4519c53f27f50113bea2c17deb8b71e" onclick="toggleCommit('commit-c9c935f6d4519c53f27f50113bea2c17deb8b71e')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/c9c935f6d4519c53f27f50113bea2c17deb8b71e">c9c935f6</a>
+		</td>
+		<td class="message">
+			restore: take tree-ish from --source option instead
+        </td>
+	</tr>
+
+	<tr class="commit-5a88583b0b241c335b4baf2ccd9b04bc1650efcb" onclick="toggleCommit('commit-5a88583b0b241c335b4baf2ccd9b04bc1650efcb')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/5a88583b0b241c335b4baf2ccd9b04bc1650efcb">5a88583b</a>
+		</td>
+		<td class="message">
+			fetch-pack: print all relevant supported capabilities with -v -v
+        </td>
+	</tr>
+
+	<tr class="commit-f3f8311ec76f9bcdc7e26a125e585eb4e473a8d2" onclick="toggleCommit('commit-f3f8311ec76f9bcdc7e26a125e585eb4e473a8d2')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/f3f8311ec76f9bcdc7e26a125e585eb4e473a8d2">f3f8311e</a>
+		</td>
+		<td class="message">
+			merge: add --quit
+        </td>
+	</tr>
+
+	<tr class="commit-90d3405196cfe5d3c63185a33dcee57fb6ea7e8a" onclick="toggleCommit('commit-90d3405196cfe5d3c63185a33dcee57fb6ea7e8a')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/90d3405196cfe5d3c63185a33dcee57fb6ea7e8a">90d34051</a>
+		</td>
+		<td class="message">
+			match-trees.c: remove the_repo from shift_tree*()
+        </td>
+	</tr>
+
+	<tr class="commit-d3b4705ab81c01cb57dd356d96e981de78d65a5d" onclick="toggleCommit('commit-d3b4705ab81c01cb57dd356d96e981de78d65a5d')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/d3b4705ab81c01cb57dd356d96e981de78d65a5d">d3b4705a</a>
+		</td>
+		<td class="message">
+			sha1-file.c: remove the_repo from read_object_with_reference()
+        </td>
+	</tr>
+
+	<tr class="commit-0778b2931c8d561b02046a80870af7c9f4d14d52" onclick="toggleCommit('commit-0778b2931c8d561b02046a80870af7c9f4d14d52')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/0778b2931c8d561b02046a80870af7c9f4d14d52">0778b293</a>
+		</td>
+		<td class="message">
+			fetch-pack: move capability names out of i18n strings
+        </td>
+	</tr>
+
+	<tr class="commit-183fb44fd234499ed76d72d745ccb480b25f6d15" onclick="toggleCommit('commit-183fb44fd234499ed76d72d745ccb480b25f6d15')">
+		<td class="author">
+            Nguyễn Thái Ngọc Duy
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/183fb44fd234499ed76d72d745ccb480b25f6d15">183fb44f</a>
+		</td>
+		<td class="message">
+			restore: add --worktree and --staged
+        </td>
+	</tr>
+
+	<tr class="commit-2582083fa1830632e298727e973440907345267f" onclick="toggleCommit('commit-2582083fa1830632e298727e973440907345267f')">
+		<td class="author">
+            Nickolai Belakovski
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/2582083fa1830632e298727e973440907345267f">2582083f</a>
+		</td>
+		<td class="message">
+			ref-filter: add worktreepath atom
+        </td>
+	</tr>
+
+	<tr class="commit-1fde99cfc766353237ff1ca4829ba8d71ccebc87" onclick="toggleCommit('commit-1fde99cfc766353237ff1ca4829ba8d71ccebc87')">
+		<td class="author">
+            Philip Oakley
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/1fde99cfc766353237ff1ca4829ba8d71ccebc87">1fde99cf</a>
+		</td>
+		<td class="message">
+			doc branch: provide examples for listing remote tracking branches
+        </td>
+	</tr>
+
+	<tr class="commit-37e9ee5cb90db0831d5d58bed82149ba67917d73" onclick="toggleCommit('commit-37e9ee5cb90db0831d5d58bed82149ba67917d73')">
+		<td class="author">
+            Phillip Wood
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/37e9ee5cb90db0831d5d58bed82149ba67917d73">37e9ee5c</a>
+		</td>
+		<td class="message">
+			sequencer: return errors from sequencer_remove_state()
+        </td>
+	</tr>
+
+	<tr class="commit-ed5b1ca10b2644f1af3bdfa3da32c67f4df1aa46" onclick="toggleCommit('commit-ed5b1ca10b2644f1af3bdfa3da32c67f4df1aa46')">
+		<td class="author">
+            Phillip Wood
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/ed5b1ca10b2644f1af3bdfa3da32c67f4df1aa46">ed5b1ca1</a>
+		</td>
+		<td class="message">
+			status: do not report errors in sequencer/todo
+        </td>
+	</tr>
+
+	<tr class="commit-d559f502c59658ea1f360fd28d8909894e40a4fe" onclick="toggleCommit('commit-d559f502c59658ea1f360fd28d8909894e40a4fe')">
+		<td class="author">
+            Phillip Wood
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/d559f502c59658ea1f360fd28d8909894e40a4fe">d559f502</a>
+		</td>
+		<td class="message">
+			rebase --abort/--quit: cleanup refs/rewritten
+        </td>
+	</tr>
+
+	<tr class="commit-568a05c5ecb8e3a01fcb90d0f81857f49ef2add8" onclick="toggleCommit('commit-568a05c5ecb8e3a01fcb90d0f81857f49ef2add8')">
+		<td class="author">
+            René Scharfe
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/568a05c5ecb8e3a01fcb90d0f81857f49ef2add8">568a05c5</a>
+		</td>
+		<td class="message">
+			cleanup: fix possible overflow errors in binary search, part 2
+        </td>
+	</tr>
+
+	<tr class="commit-921d49be86bd44ca290c8db6cc6f419dac3ed442" onclick="toggleCommit('commit-921d49be86bd44ca290c8db6cc6f419dac3ed442')">
+		<td class="author">
+            René Scharfe
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/921d49be86bd44ca290c8db6cc6f419dac3ed442">921d49be</a>
+		</td>
+		<td class="message">
+			use COPY_ARRAY for copying arrays
+        </td>
+	</tr>
+
+	<tr class="commit-de81ca3f36b0f1db8bd615c98f2a5c819092c275" onclick="toggleCommit('commit-de81ca3f36b0f1db8bd615c98f2a5c819092c275')">
+		<td class="author">
+            Rohit Ashiwal
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/de81ca3f36b0f1db8bd615c98f2a5c819092c275">de81ca3f</a>
+		</td>
+		<td class="message">
+			cherry-pick/revert: add --skip option
+        </td>
+	</tr>
+
+	<tr class="commit-6a1f9046a40ad69eb00e5a83c6825972113f6e0f" onclick="toggleCommit('commit-6a1f9046a40ad69eb00e5a83c6825972113f6e0f')">
+		<td class="author">
+            Rohit Ashiwal
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/6a1f9046a40ad69eb00e5a83c6825972113f6e0f">6a1f9046</a>
+		</td>
+		<td class="message">
+			sequencer: add advice for revert
+        </td>
+	</tr>
+
+	<tr class="commit-cd1096b2820d64d5fcb5da20613d5af290e42929" onclick="toggleCommit('commit-cd1096b2820d64d5fcb5da20613d5af290e42929')">
+		<td class="author">
+            SZEDER Gábor
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/cd1096b2820d64d5fcb5da20613d5af290e42929">cd1096b2</a>
+		</td>
+		<td class="message">
+			pager: add a helper function to clear the last line in the terminal
+        </td>
+	</tr>
+
+	<tr class="commit-5b12e3123b7b70e3875404a4ffe571ca079364fe" onclick="toggleCommit('commit-5b12e3123b7b70e3875404a4ffe571ca079364fe')">
+		<td class="author">
+            SZEDER Gábor
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/5b12e3123b7b70e3875404a4ffe571ca079364fe">5b12e312</a>
+		</td>
+		<td class="message">
+			progress: use term_clear_line()
+        </td>
+	</tr>
+
+	<tr class="commit-b31e2680c46c43ece716080040e90b3a787b0bad" onclick="toggleCommit('commit-b31e2680c46c43ece716080040e90b3a787b0bad')">
+		<td class="author">
+            Taylor Blau
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/b31e2680c46c43ece716080040e90b3a787b0bad">b31e2680</a>
+		</td>
+		<td class="message">
+			ref-filter.c: find disjoint pattern prefixes
+        </td>
+	</tr>
+
+	<tr class="commit-b66885a30cb84fc61986bc4eea805a31fdbea79a" onclick="toggleCommit('commit-b66885a30cb84fc61986bc4eea805a31fdbea79a')">
+		<td class="author">
+            Thomas Gummerer
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/b66885a30cb84fc61986bc4eea805a31fdbea79a">b66885a3</a>
+		</td>
+		<td class="message">
+			range-diff: add section header instead of diff header
+        </td>
+	</tr>
+
+	<tr class="commit-44b67cb62b339fdc6239ef6b72b8c75b559a574a" onclick="toggleCommit('commit-44b67cb62b339fdc6239ef6b72b8c75b559a574a')">
+		<td class="author">
+            Thomas Gummerer
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/44b67cb62b339fdc6239ef6b72b8c75b559a574a">44b67cb6</a>
+		</td>
+		<td class="message">
+			range-diff: split lines manually
+        </td>
+	</tr>
+
+	<tr class="commit-85c3713df5a48bbc7807fe9710fe8a22e65ea76b" onclick="toggleCommit('commit-85c3713df5a48bbc7807fe9710fe8a22e65ea76b')">
+		<td class="author">
+            Thomas Gummerer
+        </td>
+        <td class="commit-id">
+			<a href="https://github.com/git/git/commit/85c3713df5a48bbc7807fe9710fe8a22e65ea76b">85c3713d</a>
+		</td>
+		<td class="message">
+			apply: only pass required data to git_header_name
+        </td>
+	</tr>
+</table>
+
+<p>
+<button onClick="toggleIgnored()">Show/Hide Ignored Lines</button>
+</p>
+</body>
+</html>
