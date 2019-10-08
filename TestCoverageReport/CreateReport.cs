@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace TestCoverageReport
 {
@@ -40,6 +41,20 @@ namespace TestCoverageReport
                 HtmlRenderer htmlRenderer = new HtmlRenderer(htmlWriter);
                 Render(htmlRenderer, reports);
             }
+
+            using (Stream textStream = File.OpenWrite("commit-report.txt"))
+            using (StreamWriter textWriter = new StreamWriter(textStream))
+            {
+                TextRenderer textRenderer = new TextRenderer(textWriter);
+                RenderCommitView(textRenderer, reports);
+            }
+
+            using (Stream htmlStream = File.OpenWrite("commit-report.htm"))
+            using (StreamWriter htmlWriter = new StreamWriter(htmlStream))
+            {
+                HtmlRenderer htmlRenderer = new HtmlRenderer(htmlWriter);
+                RenderCommitView(htmlRenderer, reports);
+            }
         }
 
         public static void Render(IRenderer renderer, CombinedReport reports)
@@ -77,6 +92,81 @@ namespace TestCoverageReport
                 {
                     renderer.WriteCommitLine(info);
                 }
+                renderer.WriteCommitSectionFooter();
+            }
+
+            renderer.WriteFooter();
+        }
+
+        public static void RenderCommitView(IRenderer renderer, CombinedReport reports)
+        {
+            renderer.WriteHeader();
+
+            Dictionary<string, string> branchDict = new Dictionary<string, string>();
+            foreach (ComparisonReport report in reports.Comparisons)
+            {
+                branchDict[report.TargetBranch] = report.TargetCommitId;
+                branchDict[report.BaseBranch] = report.BaseCommitId;
+            }
+
+            renderer.WriteBranches(branchDict);
+
+            foreach (ComparisonReport report in reports.Comparisons)
+            {
+                renderer.WriteDiffSectionHeader(report.BaseBranch, report.TargetBranch, report.BaseCommitId, report.TargetCommitId);
+
+                renderer.WriteCommitSectionHeader();
+
+                var commitToLines = new Dictionary<string, Dictionary<string, List<FileReportLine>>>();
+
+                foreach (string file in report.Files.Keys)
+                {
+                    List<FileReportLine> lineList = report.Files[file];
+
+                    foreach (FileReportLine line in lineList)
+                    {
+                        Dictionary<string, List<FileReportLine>> commitDict;
+                        List<FileReportLine> commitList;
+
+                        if (commitToLines.TryGetValue(line.TargetCommitId, out commitDict))
+                        {
+                            if (commitDict.TryGetValue(file, out commitList))
+                            {
+                                commitList.Add(line);
+                            }
+                            else
+                            {
+                                commitDict[file] = new List<FileReportLine>() { line };
+                            }
+                        }
+                        else
+                        {
+                            commitToLines[line.TargetCommitId] = new Dictionary<string, List<FileReportLine>>();
+                            commitToLines[line.TargetCommitId][file] = new List<FileReportLine>() { line };
+                        }
+                    }
+                }
+
+                foreach (CommitInfo info in report.Commits)
+                {
+                    if (commitToLines.TryGetValue(info.CommitId, out Dictionary<string, List<FileReportLine>> files))
+                    {
+                        renderer.WriteCommitLine(info);
+
+                        foreach (string file in files.Keys)
+                        {
+                            List<FileReportLine> lines = files[file];
+
+                            renderer.WriteFileSectionHeader(file);
+                            foreach (FileReportLine line in lines)
+                            {
+                                renderer.WriteFileLine(line);
+                            }
+                            renderer.WriteFileSectionFooter();
+                        }
+                    }
+                }
+
                 renderer.WriteCommitSectionFooter();
             }
 
