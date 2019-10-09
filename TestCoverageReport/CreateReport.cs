@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace TestCoverageReport
 {
@@ -128,7 +127,7 @@ namespace TestCoverageReport
                         Dictionary<string, List<FileReportLine>> commitDict;
                         List<FileReportLine> commitList;
 
-                        if (commitToLines.TryGetValue(line.TargetCommitId, out commitDict))
+                        if (commitToLines.TryGetValue(line.CommitId, out commitDict))
                         {
                             if (commitDict.TryGetValue(file, out commitList))
                             {
@@ -141,8 +140,8 @@ namespace TestCoverageReport
                         }
                         else
                         {
-                            commitToLines[line.TargetCommitId] = new Dictionary<string, List<FileReportLine>>();
-                            commitToLines[line.TargetCommitId][file] = new List<FileReportLine>() { line };
+                            commitToLines[line.CommitId] = new Dictionary<string, List<FileReportLine>>();
+                            commitToLines[line.CommitId][file] = new List<FileReportLine>() { line };
                         }
                     }
                 }
@@ -164,6 +163,10 @@ namespace TestCoverageReport
                             }
                             renderer.WriteFileSectionFooter();
                         }
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine($"Did not find commit id '{info.CommitId}'");
                     }
                 }
 
