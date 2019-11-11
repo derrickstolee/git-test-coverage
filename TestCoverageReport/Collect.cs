@@ -121,13 +121,35 @@ namespace TestCoverageReport
                 return reportLines;
             }
 
+            List<string> ignoredPhrases = new List<string>()
+            {
+                "BUG(",
+                "error(",
+                "die(",
+                "warning(",
+                "advise(",
+                "usage_with_options(",
+            };
+
             foreach (FileReportLine line in reportLines)
             {
-                string ignoreLine = $"{line.LineNumber}:{line.LineContents.Trim()}";
+                string ignoreLine = line.LineContents.Trim();
+                string ignoreLineWithNum = $"{line.LineNumber}:{ignoreLine}";
 
-                if (ignoredLines.Contains(ignoreLine))
+                if (ignoredLines.Contains(ignoreLine) ||
+                    ignoredLines.Contains(ignoreLineWithNum))
                 {
                     line.Ignored = true;
+                    continue;
+                }
+
+                foreach (string phrase in ignoredPhrases)
+                {
+                    if (line.LineContents.IndexOf(phrase) >= 0)
+                    {
+                        line.Ignored = true;
+                        break;
+                    }
                 }
             }
 
