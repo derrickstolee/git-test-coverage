@@ -79,6 +79,11 @@ namespace TestCoverageReport
 
                     foreach (FileReportLine line in report.Files[file])
                     {
+                        if (line.Ignored)
+                        {
+                            continue;
+                        }
+
                         line.TargetCommitId = report.TargetCommitId;
                         renderer.WriteFileLine(line);
                     }
@@ -124,6 +129,11 @@ namespace TestCoverageReport
 
                     foreach (FileReportLine line in lineList)
                     {
+                        if (line.Ignored)
+                        {
+                            continue;
+                        }
+
                         Dictionary<string, List<FileReportLine>> commitDict;
                         List<FileReportLine> commitList;
 
