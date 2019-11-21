@@ -1,11 +1,35 @@
-pu	d8127d8f9fc2d2d16c040996dba374cfe851c596
-jch	7a9a4598a9b45f31bb09905f001b8f9155ab2f7e
-next	d41fb660ee41b8501dbbebfa3cb0d29ecff929f1
+pu	8baf22419dc97d8b148f005bc3cf1dbf6f5cc72d
+jch	17aadd8971c6116e923cb31fab6a23399a960a05
+next	a6e4e5af0a9b9658e3add26e39643dac049beff2
 master	d9f6f3b6195a0ca35642561e530798ad1469bd41
-master@{1}	origin/maint
+master@{1}	v2.24.0
 
 
 Uncovered code in 'pu' not in 'jch'
+--------------------------------------------------------
+
+packfile.c
+beebb9d2 1464) return;
+
+protocol.c
+
+read-cache.c
+ee70c128 1745) if (advice_unknown_index_extension) {
+
+remote-curl.c
+6da1f1a9 354) return 0;
+
+sha1-file.c
+beebb9d2 1431) return;
+beebb9d2 1440) return;
+
+Commits introducting uncovered code:
+Jonathan Nieder	ee70c128 index: offer advice for unknown index extensions
+Josh Steadmon	6da1f1a9 protocol: advertise multiple supported versions
+Matheus Tavares	beebb9d2 object-store: allow threaded access to object reading
+
+
+Uncovered code in 'jch' not in 'next'
 --------------------------------------------------------
 
 add-interactive.c
@@ -19,7 +43,6 @@ d17e3a76 255) if (!singleton) {
 d17e3a76 256) free(items->selected);
 d17e3a76 257) CALLOC_ARRAY(items->selected, items->items.nr);
 d17e3a76 260) if (singleton && !immediate)
-d17e3a76 261) BUG("singleton requires immediate");
 d17e3a76 270) list(s, &items->items, items->selected, &opts->list_opts);
 d17e3a76 273) fputs(singleton ? "> " : ">> ", stdout);
 d17e3a76 278) if (immediate)
@@ -121,10 +144,8 @@ d17e3a76 618) printf("%c%2d: %s", selected ? '*' : ' ', i + 1, d->buf.buf);
 4ba7c22a 664) const char *name = files->items.items[i].string;
 4ba7c22a 665) if (files->selected[i] &&
 4ba7c22a 666)     add_file_to_index(s->r->index, name, 0) < 0) {
-4ba7c22a 667) res = error(_("could not stage '%s'"), name);
 4ba7c22a 668) break;
 4ba7c22a 672) if (!res && write_locked_index(s->r->index, &index_lock, COMMIT_LOCK) < 0)
-4ba7c22a 673) res = error(_("could not write index"));
 4ba7c22a 675) if (!res)
 4ba7c22a 676) printf(Q_("updated %d path\n",
 4ba7c22a 679) putchar('\n');
@@ -139,7 +160,6 @@ dea080c8 694) printf(_("note: %s is untracked now.\n"), one->path);
 dea080c8 696) ce = make_cache_entry(opt->repo->index, one->mode,
 dea080c8 697)       &one->oid, one->path, 0, 0);
 dea080c8 698) if (!ce)
-dea080c8 699) die(_("make_cache_entry failed for path '%s'"),
 dea080c8 701) add_index_entry(opt->repo->index, ce, add_flags);
 dea080c8 704) }
 dea080c8 706) static int run_revert(struct add_i_state *s, const struct pathspec *ps,
@@ -162,7 +182,6 @@ dea080c8 740) if (is_initial)
 dea080c8 741) oidcpy(&oid, s->r->hash_algo->empty_tree);
 dea080c8 743) tree = parse_tree_indirect(&oid);
 dea080c8 744) if (!tree) {
-dea080c8 745) res = error(_("Could not parse HEAD^{tree}"));
 dea080c8 746) goto finish_revert;
 dea080c8 748) oidcpy(&oid, &tree->object.oid);
 dea080c8 751) ALLOC_ARRAY(paths, count + 1);
@@ -191,7 +210,6 @@ daabf56b 791) static int get_untracked_files(struct repository *r,
 daabf56b 795) struct dir_struct dir = { 0 };
 daabf56b 797) struct strbuf buf = STRBUF_INIT;
 daabf56b 799) if (repo_read_index(r) < 0)
-daabf56b 800) return error(_("could not read index"));
 daabf56b 802) prefix_item_list_clear(files);
 daabf56b 803) setup_standard_excludes(&dir);
 daabf56b 804) add_pattern_list(&dir, EXC_CMDL, "--exclude option");
@@ -225,11 +243,9 @@ daabf56b 851) for (i = 0; i < files->items.nr; i++) {
 daabf56b 852) const char *name = files->items.items[i].string;
 daabf56b 853) if (files->selected[i] &&
 daabf56b 854)     add_file_to_index(s->r->index, name, 0) < 0) {
-daabf56b 855) res = error(_("could not stage '%s'"), name);
 daabf56b 856) break;
 daabf56b 860) if (!res &&
 daabf56b 861)     write_locked_index(s->r->index, &index_lock, COMMIT_LOCK) < 0)
-daabf56b 862) res = error(_("could not write index"));
 daabf56b 864) if (!res)
 daabf56b 865) printf(Q_("added %d path\n",
 daabf56b 869) putchar('\n');
@@ -317,16 +333,20 @@ d17e3a76 1025) static void print_command_item(int i, int selected,
 4ba7c22a 1141) prefix_item_list_clear(&files);
 4ba7c22a 1143) strbuf_release(&print_file_item_data.name);
 
-packfile.c
-beebb9d2 1464) return;
+builtin/commit.c
+116a408b 478) else if (whence == FROM_CHERRY_PICK) {
+116a408b 479) if (rebase_in_progress && !sequencer_in_use)
+116a408b 1186) else if (whence == FROM_CHERRY_PICK) {
+116a408b 1187) if (rebase_in_progress && !sequencer_in_use)
 
-protocol.c
+builtin/config.c
+3bf986d6 329) FREE_AND_NULL(cmd_line_value.regexp);
+3bcdd852 330) return CONFIG_INVALID_PATTERN;
+3bcdd852 375) goto free_strings;
 
-read-cache.c
-ee70c128 1745) if (advice_unknown_index_extension) {
+builtin/reset.c
 
-remote-curl.c
-6da1f1a9 354) return 0;
+pathspec.c
 
 sequencer.c
 c068bcc5 840) free(kv.items[date_i].util);
@@ -343,30 +363,30 @@ cbd8db17 2588) opts->committer_date_is_author_date = 1;
 08187b4c 2592) opts->allow_ff = 0;
 08187b4c 2593) opts->ignore_date = 1;
 08187b4c 3623) push_dates(&cmd, opts->committer_date_is_author_date);
-
-sha1-file.c
-beebb9d2 1431) return;
-beebb9d2 1440) return;
+b0537b0e 5254) goto cleanup;
 
 Commits introducting uncovered code:
+Alexandr Miloslavskiy	24e4750c pathspec: add new function to parse file
+Alexandr Miloslavskiy	64bac8df reset: support the `--pathspec-from-file` option
 Daniel Ferreira	5e82b9e4 built-in add -i: implement the `status` command
-Johannes Schindelin	d17e3a76 built-in add -i: prepare for multi-selection commands
-Johannes Schindelin	a5ced6db built-in add -i: allow filtering the modified files list
-Johannes Schindelin	9d86921e built-in add -i: implement the `patch` command
-Johannes Schindelin	4ba7c22a built-in add -i: implement the `update` command
-Johannes Schindelin	daabf56b built-in add -i: re-implement `add-untracked` in C
-Johannes Schindelin	dea080c8 built-in add -i: re-implement `revert` in C
-Johannes Schindelin	465a9699 built-in add -i: re-implement the `diff` command
 Johannes Schindelin	0de7b036 built-in add -i: offer the `quit` command
-Jonathan Nieder	ee70c128 index: offer advice for unknown index extensions
-Josh Steadmon	6da1f1a9 protocol: advertise multiple supported versions
-Matheus Tavares	beebb9d2 object-store: allow threaded access to object reading
+Johannes Schindelin	465a9699 built-in add -i: re-implement the `diff` command
+Johannes Schindelin	116a408b commit: give correct advice for empty commit during a rebase
+Johannes Schindelin	daabf56b built-in add -i: re-implement `add-untracked` in C
+Johannes Schindelin	4ba7c22a built-in add -i: implement the `update` command
+Johannes Schindelin	9d86921e built-in add -i: implement the `patch` command
+Johannes Schindelin	a5ced6db built-in add -i: allow filtering the modified files list
+Johannes Schindelin	dea080c8 built-in add -i: re-implement `revert` in C
+Johannes Schindelin	d17e3a76 built-in add -i: prepare for multi-selection commands
+Junio C Hamano	b0537b0e SQUASH??? tentative leakfix
+Martin Ågren	3bf986d6 builtin/config: collect "value_regexp" data in a struct
+Martin Ågren	3bcdd852 builtin/config: extract `handle_value_regex()` from `get_value()`
 Rohit Ashiwal	c068bcc5 sequencer: allow callers of read_author_script() to ignore fields
 Rohit Ashiwal	cbd8db17 rebase -i: support --committer-date-is-author-date
 Rohit Ashiwal	08187b4c rebase -i: support --ignore-date
 
 
-Uncovered code in 'jch' not in 'next'
+Uncovered code in 'next' not in 'master'
 --------------------------------------------------------
 
 add-interactive.c
@@ -435,7 +455,6 @@ add-interactive.c
 76b74323 157) static ssize_t find_unique(const char *string, struct prefix_item_list *list)
 76b74323 159) int index = string_list_find_insert_index(&list->sorted, string, 1);
 76b74323 162) if (list->items.nr != list->sorted.nr)
-76b74323 163) BUG("prefix_item_list in inconsistent state (%"PRIuMAX
 76b74323 167) if (index < 0)
 76b74323 168) item = list->sorted.items[-1 - index].util;
 76b74323 169) else if (index > 0 &&
@@ -548,7 +567,6 @@ add-interactive.c
 5e82b9e4 405) struct collection_status s = { FROM_WORKTREE };
 5e82b9e4 407) if (discard_index(r->index) < 0 ||
 5e82b9e4 408)     repo_read_index_preload(r, ps, 0) < 0)
-5e82b9e4 409) return error(_("could not read index"));
 5e82b9e4 411) string_list_clear(files, 1);
 5e82b9e4 412) s.files = files;
 5e82b9e4 413) hashmap_init(&s.file_map, pathname_entry_cmp, NULL, 0);
@@ -654,7 +672,6 @@ f83dff60 571) int run_add_i(struct repository *r, const struct pathspec *ps)
 5e82b9e4 622) if (discard_index(r->index) < 0 ||
 5e82b9e4 623)     repo_read_index(r) < 0 ||
 5e82b9e4 624)     repo_refresh_and_write_index(r, REFRESH_QUIET, 0, 1,
-5e82b9e4 626) warning(_("could not refresh index"));
 5e82b9e4 628) res = run_status(&s, ps, &files, &opts);
 6348bfba 631) i = list_and_choose(&s, &commands, &main_loop_opts);
 6348bfba 632) if (i == LIST_AND_CHOOSE_QUIT) {
@@ -677,61 +694,12 @@ f83dff60 571) int run_add_i(struct repository *r, const struct pathspec *ps)
 builtin/add.c
 f83dff60 197) return !!run_add_i(the_repository, pathspec);
 
-builtin/commit.c
-116a408b 478) else if (whence == FROM_CHERRY_PICK) {
-116a408b 479) if (rebase_in_progress && !sequencer_in_use)
-116a408b 1186) else if (whence == FROM_CHERRY_PICK) {
-116a408b 1187) if (rebase_in_progress && !sequencer_in_use)
-
-builtin/config.c
-3bf986d6 329) FREE_AND_NULL(cmd_line_value.regexp);
-3bcdd852 330) return CONFIG_INVALID_PATTERN;
-3bcdd852 375) goto free_strings;
-
-builtin/reset.c
-64bac8df 324) die(_("--pathspec-from-file is incompatible with --patch"));
-64bac8df 327) die(_("--pathspec-from-file is incompatible with pathspec arguments"));
-64bac8df 333) die(_("--pathspec-file-nul requires --pathspec-from-file"));
-
-pathspec.c
-24e4750c 638) die(_("line is badly quoted: %s"), buf.buf);
-
-sequencer.c
-cd552227 4505) strbuf_addstr(buf, "rev-");
-cd552227 4506) strbuf_add_unique_abbrev(buf, oid, default_abbrev);
-867bc1d2 4530) }
-b0537b0e 5129) goto cleanup;
-
-Commits introducting uncovered code:
-Alexandr Miloslavskiy	24e4750c pathspec: add new function to parse file
-Alexandr Miloslavskiy	64bac8df reset: support the `--pathspec-from-file` option
-Daniel Ferreira	5e82b9e4 built-in add -i: implement the `status` command
-Johannes Schindelin	867bc1d2 rebase-merges: move labels' whitespace mangling into `label_oid()`
-Johannes Schindelin	f83dff60 Start to implement a built-in version of `git add --interactive`
-Johannes Schindelin	116a408b commit: give correct advice for empty commit during a rebase
-Johannes Schindelin	6348bfba built-in add -i: implement the main loop
-Johannes Schindelin	76b74323 built-in add -i: show unique prefixes of the commands
-Johannes Schindelin	68db1cbf built-in add -i: support `?` (prompt help)
-Junio C Hamano	b0537b0e SQUASH??? tentative leakfix
-Martin Ågren	3bf986d6 builtin/config: collect "value_regexp" data in a struct
-Martin Ågren	3bcdd852 builtin/config: extract `handle_value_regex()` from `get_value()`
-Matthew Rogers	cd552227 rebase -r: let `label` generate safer labels
-Slavica Đukić	3d965c76 built-in add -i: use color in the main loop
-Slavica Đukić	8c159044 built-in add -i: implement the `help` command
-Slavica Đukić	1daaebca built-in add -i: color the header in the `status` command
-
-
-Uncovered code in 'next' not in 'master'
---------------------------------------------------------
-
 builtin/bundle.c
-73c3253d 54) usage_with_options(usagestr, options);
 79862b6b 85) else if (progress == 1)
 79862b6b 86) argv_array_push(&pack_opts, "--progress");
 79862b6b 87) else if (progress == 2)
 79862b6b 88) argv_array_push(&pack_opts, "--all-progress");
 79862b6b 90) argv_array_push(&pack_opts, "--all-progress-implied");
-73c3253d 93) die(_("Need a repository to create a bundle."));
 2e0afafe 115) return 1;
 73c3253d 138) return 1;
 73c3253d 143) static int cmd_bundle_unbundle(int argc, const char **argv, const char *prefix) {
@@ -742,18 +710,13 @@ builtin/bundle.c
 73c3253d 157) if ((bundle_fd = read_bundle_header(bundle_file, &header)) < 0)
 73c3253d 158) return 1;
 73c3253d 159) if (!startup_info->have_repository)
-73c3253d 160) die(_("Need a repository to unbundle."));
 73c3253d 161) return !!unbundle(the_repository, &header, bundle_fd, 0) ||
 73c3253d 162) list_bundle_refs(&header, argc, argv);
-73c3253d 179) usage_with_options(builtin_bundle_usage, options);
 73c3253d 187) else if (!strcmp(argv[0], "unbundle"))
 73c3253d 188) result = cmd_bundle_unbundle(argc, argv, prefix);
-73c3253d 190) error(_("Unknown subcommand: %s"), argv[0]);
-73c3253d 191) usage_with_options(builtin_bundle_usage, options);
 
 builtin/fsck.c
 82ef89b3 64) type = oid_object_info(the_repository, oid, NULL);
-5afc4b1d 125) BUG("%d (FSCK_IGNORE?) should never trigger this callback",
 82ef89b3 309) printf_ln(_("unreachable %s %s"),
 82ef89b3 310)   printable_type(&obj->oid, obj->type),
 82ef89b3 311)   describe_object(&obj->oid));
@@ -776,7 +739,6 @@ fsck.c
 73390290 469) fsck_put_object_name(options, oid, "%s^%d",
 73390290 472) fsck_put_object_name(options, oid, "%.*s~%d",
 73390290 495) fsck_put_object_name(options, &tag->tagged->oid, "%s", name);
-a59cfb32 517) error("Unknown object type for %s",
 b2f2039c 622) retval += report(options, oid, OBJ_TREE, FSCK_MSG_BAD_TREE, "cannot be parsed as a tree");
 b2f2039c 669) retval += report(options, oid, OBJ_TREE, FSCK_MSG_FULL_PATHNAME, "contains full pathnames");
 b2f2039c 671) retval += report(options, oid, OBJ_TREE, FSCK_MSG_EMPTY_NAME, "contains empty pathname");
@@ -825,11 +787,15 @@ pack-bitmap.c
 
 pack-objects.c
 f66e0401 122) if (pack->in_pack)
-f66e0401 123) BUG("packing_data has already been converted to pack array");
 f66e0401 125) ALLOC_ARRAY(pack->in_pack, pack->nr_alloc);
 
 send-pack.c
 ad7a4032 580) receive_status(&reader, remote_refs);
+
+sequencer.c
+cd552227 4498) strbuf_addstr(buf, "rev-");
+cd552227 4499) strbuf_add_unique_abbrev(buf, oid, default_abbrev);
+867bc1d2 4523) }
 
 t/helper/test-read-graph.c
 4bd0593e 23) die_errno(_("Could not open commit-graph '%s'"), graph_name);
@@ -837,7 +803,6 @@ t/helper/test-read-graph.c
 
 tag.c
 228c78fb 152) FREE_AND_NULL(item->tag);
-78d50148 179) return error("unknown tag type '%s' in %s",
 
 usage.c
 116d1fa6 16) fprintf(stderr, "BUG!!! too long a prefix '%s'\n", prefix);
@@ -845,512 +810,64 @@ usage.c
 116d1fa6 22) *p = '\0'; /* vsnprintf() failed, clip at prefix */
 
 Commits introducting uncovered code:
+Daniel Ferreira	5e82b9e4 built-in add -i: implement the `status` command
 Derrick Stolee	4bd0593e test-tool: use 'read-graph' helper
 James Coglan	fbccf255 graph: automatically track display width of graph lines
 James Coglan	0195285b graph: rename `new_mapping` to `old_mapping`
+Jeff King	c5b4269b fsck: accept an oid instead of a "struct commit" for fsck_commit()
 Jeff King	103fb6d4 fsck: accept an oid instead of a "struct tag" for fsck_tag()
-Jeff King	78d50148 parse_tag_buffer(): treat NULL tag pointer as parse error
-Jeff King	228c78fb commit, tag: don't set parsed bit for parse failures
-Jeff King	ad7a4032 send-pack: check remote ref status on pack-objects failure
-Jeff King	f66e0401 pack-objects: avoid pointless oe_map_new_pack() calls
-Jeff King	7b143c16 pack-bitmap: introduce bitmap_walk_contains()
-Jeff King	b8b00f16 fsck: drop blob struct from fsck_finish()
-Jeff King	38370253 fsck: don't require an object struct for report()
 Jeff King	6da40b22 fsck: accept an oid instead of a "struct blob" for fsck_blob()
-Jeff King	78543993 fsck: don't require an object struct for fsck_ident()
+Jeff King	38370253 fsck: don't require an object struct for report()
+Jeff King	b8b00f16 fsck: drop blob struct from fsck_finish()
 Jeff King	cc579000 fsck: don't require an object struct in verify_headers()
+Jeff King	7b143c16 pack-bitmap: introduce bitmap_walk_contains()
+Jeff King	f66e0401 pack-objects: avoid pointless oe_map_new_pack() calls
+Jeff King	ad7a4032 send-pack: check remote ref status on pack-objects failure
+Jeff King	228c78fb commit, tag: don't set parsed bit for parse failures
+Jeff King	78d50148 parse_tag_buffer(): treat NULL tag pointer as parse error
+Jeff King	78543993 fsck: don't require an object struct for fsck_ident()
 Jeff King	b2f2039c fsck: accept an oid instead of a "struct tree" for fsck_tree()
-Jeff King	a59cfb32 fsck: unify object-name code
 Jeff King	73390290 fsck: use oids rather than objects for object_name API
 Jeff King	7cb9754e pack-objects: introduce pack.allowPackReuse
 Jeff King	4f0bd8b9 pack-objects: improve partial packfile reuse
 Jeff King	5afc4b1d fsck: only provide oid/type in fsck_error callback
 Jeff King	82ef89b3 fsck: don't require object structs for display functions
-Jeff King	c5b4269b fsck: accept an oid instead of a "struct commit" for fsck_commit()
+Jeff King	a59cfb32 fsck: unify object-name code
 Johannes Schindelin	116d1fa6 vreportf(): avoid relying on stdio buffering
+Johannes Schindelin	68db1cbf built-in add -i: support `?` (prompt help)
+Johannes Schindelin	76b74323 built-in add -i: show unique prefixes of the commands
+Johannes Schindelin	867bc1d2 rebase-merges: move labels' whitespace mangling into `label_oid()`
+Johannes Schindelin	6348bfba built-in add -i: implement the main loop
 Johannes Schindelin	4d17fd25 remote-curl: unbreak http.extraHeader with custom allocators
+Johannes Schindelin	f83dff60 Start to implement a built-in version of `git add --interactive`
 Johannes Schindelin	2e0afafe Add git-bundle: move objects and references by archive
-Robin H. Johnson	79862b6b bundle-create: progress output control
+Matthew Rogers	cd552227 rebase -r: let `label` generate safer labels
 Robin H. Johnson	73c3253d bundle: framework for options before bundle file
+Robin H. Johnson	79862b6b bundle-create: progress output control
+Slavica Đukić	3d965c76 built-in add -i: use color in the main loop
+Slavica Đukić	8c159044 built-in add -i: implement the `help` command
+Slavica Đukić	1daaebca built-in add -i: color the header in the `status` command
 
 
 Uncovered code in 'master' not in 'master@{1}'
 --------------------------------------------------------
 
-archive-tar.c
-71d41ff6 161) BUG("pax extended header length miscalculated as %"PRIuMAX
-
-builtin/am.c
-0dfed92d 1262) die(_("missing author line in commit %s"),
-0dfed92d 1263)       oid_to_hex(&commit->object.oid));
-22184497 1695) die(_("unable to write index file"));
-
-builtin/cat-file.c
-
-builtin/checkout.c
-65c01c64 766) strbuf_add_unique_abbrev(&old_commit_shortname,
-65c01c64 767)  &old_branch_info->commit->object.oid,
-65c01c64 769) o.ancestor = old_commit_shortname.buf;
-
-builtin/fast-export.c
-941790d7 852) die(_("Error: Cannot export nested tags unless --mark-tags is specified."));
-941790d7 864) tagged_mark = get_object_mark(tagged);
-208d6924 1220) die(_("Cannot pass both --import-marks and --import-marks-if-exists"));
-
-builtin/fetch.c
-d54dea77 113) fetch_parallel_config = git_config_int(k, v);
-d54dea77 114) if (fetch_parallel_config < 0)
-d54dea77 115) die(_("fetch.parallel cannot be negative"));
-d54dea77 116) return 0;
-24bc1a12 1429) warning(_("not setting upstream for a remote remote-tracking branch"));
-d54dea77 1566) static int fetch_failed_to_start(struct strbuf *out, void *cb, void *task_cb)
-d54dea77 1568) struct parallel_fetch_state *state = cb;
-d54dea77 1569) const char *remote = task_cb;
-d54dea77 1571) state->result = error(_("Could not fetch %s"), remote);
-d54dea77 1573) return 0;
-
-builtin/log.c
-edefc318 1844) die(_("could not create leading directories "
-
-builtin/merge-recursive.c
-9822175d 68) die_resolve_conflict("merge");
-
-builtin/push.c
-8e4c8af0 611) die(_("bad repository '%s'"), repo);
-8e4c8af0 627) die(_("--all and --tags are incompatible"));
-8e4c8af0 629) die(_("--all can't be combined with refspecs"));
-8e4c8af0 633) die(_("--mirror and --tags are incompatible"));
-8e4c8af0 638) die(_("--all and --mirror are incompatible"));
-
-builtin/rebase.c
-2b318aa6 1273) goto done;
-c0efb4c1 1289) goto done;
-
-builtin/receive-pack.c
-fabec2c5 433) the_hash_algo->init_fn(&ctx);
-fabec2c5 434) the_hash_algo->update_fn(&ctx, key_in, key_len);
-fabec2c5 435) the_hash_algo->final_fn(key, &ctx);
-
-builtin/replace.c
-28ba1830 275) if (strbuf_read(&result, cmd.out, the_hash_algo->hexsz + 1) < 0) {
-
-builtin/rev-parse.c
-7e0d029f 735) abbrev = hexsz;
-
-builtin/stash.c
-34933d0e 1140) ret = -1;
-34933d0e 1141) goto done;
-
-builtin/submodule--helper.c
-8d4d86b0 427) printf("%06o %s U\t", ce->ce_mode, oid_to_hex(&null_oid));
-
-cache-tree.c
-724dd767 619) cache_tree_free(&index_state->cache_tree);
-724dd767 620) cache_tree_valid = 0;
-724dd767 633) return WRITE_TREE_PREFIX_ERROR;
-724dd767 653) fprintf(stderr, "BUG: There are unmerged index entries:\n");
-724dd767 654) for (i = 0; i < index_state->cache_nr; i++) {
-724dd767 655) const struct cache_entry *ce = index_state->cache[i];
-724dd767 656) if (ce_stage(ce))
-724dd767 657) fprintf(stderr, "BUG: %d %.*s\n", ce_stage(ce),
-724dd767 658) (int)ce_namelen(ce), ce->name);
-724dd767 660) BUG("unmerged index entries when writing inmemory index");
-
-commit-graph.c
-
-connect.c
-
-diffcore-break.c
-baed6bbb 295) diff_q(&outq, p);
-
-dir.c
-89a1f4aa 374) return MATCHED_RECURSIVELY_LEADING_PATHSPEC;
-
-fast-import.c
-b8f50e5b 2528) die("Invalid ref name or SHA1 expression: %s", objectish);
-b8f50e5b 2554) return 0;
-3164e6bd 2835) first_tag = t->next_tag;
-b8f50e5b 3118) die(_("Expected 'mark' command, got %s"), command_buf.buf);
-b8f50e5b 3123) die(_("Expected 'to' command, got %s"), command_buf.buf);
-
 fetch-pack.c
-aaf633c2 952) else if (args->depth > 0 || is_repository_shallow(r))
-
-fsmonitor.c
-3444ec2e 20) BUG("fsmonitor_dirty has more entries than the index (%"PRIuMAX" >= %u)",
-3444ec2e 59) BUG("fsmonitor_dirty has more entries than the index (%"PRIuMAX" > %u)",
-3444ec2e 87) BUG("fsmonitor_dirty has more entries than the index (%"PRIuMAX" > %u)",
-3444ec2e 256) BUG("fsmonitor_dirty has more entries than the index (%"PRIuMAX" > %u)",
-
-http-push.c
-5cc6a4be 984) prev->next = lock->next;
-
-list-objects-filter-options.c
-f56f7642 44) BUG("filter_options already populated");
-f56f7642 226) die(_("multiple filter-specs cannot be combined"));
-cf9ceb5a 276) BUG("no filter_spec available for this filter");
-e987df5f 311) return;
-
-list-objects-filter.c
-e987df5f 594) BUG("expected oidset to be cleared already");
-
-list-objects.c
-9430147c 210) ctx->show_object(obj, base->buf, ctx->show_data);
-
-merge-recursive.c
-f836bf39 960) ret = err(opt, _("cannot read object %s '%s'"),
-f836bf39 962) goto free_buf;
-98a1d3d8 3750) return -1;
-ff1bfa2c 3815)    oid_to_hex(merge_bases[i]));
 
 midx.c
 840cef0c 973) progress = start_progress(_("Writing chunks to multi-pack-index"),
 
-name-hash.c
-28ee7941 100) hashmap_remove(&istate->dir_hash, &dir->ent, NULL);
-
-pack-bitmap.c
-
-pack-objects.c
-3a37876b 185) BUG("duplicate object inserted into hash");
-
 path.c
 c72fc40d 380) for (p = common_list; p->path; p++) {
 c72fc40d 381) const char *path = p->path;
-ce17feb1 1246) return -1;
-ce17feb1 1250) return -1;
-ce17feb1 1259) return -1;
-
-promisor-remote.c
-db27dca5 25) die(_("Remote with no URL"));
-48de3158 61) warning(_("promisor remote name cannot begin with '/': %s"),
-48de3158 63) return NULL;
-faf2abf4 95) if (previous)
-faf2abf4 96) previous->next = r->next;
-faf2abf4 98) promisors = r->next ? r->next : r;
-faf2abf4 99) r->next = NULL;
-faf2abf4 100) *promisors_tail = r;
-faf2abf4 101) promisors_tail = &r->next;
-4ca9474e 111) return git_config_string(&core_partial_clone_filter_default,
-fa3d1b63 142) return 0;
-9e27beaa 205) static int remove_fetched_oids(struct repository *repo,
-9e27beaa 209) int i, remaining_nr = 0;
-9e27beaa 210) int *remaining = xcalloc(oid_nr, sizeof(*remaining));
-9e27beaa 211) struct object_id *old_oids = *oids;
-9e27beaa 214) for (i = 0; i < oid_nr; i++)
-9e27beaa 215) if (oid_object_info_extended(repo, &old_oids[i], NULL,
-9e27beaa 217) remaining[i] = 1;
-9e27beaa 218) remaining_nr++;
-9e27beaa 221) if (remaining_nr) {
-9e27beaa 222) int j = 0;
-9e27beaa 223) new_oids = xcalloc(remaining_nr, sizeof(*new_oids));
-9e27beaa 224) for (i = 0; i < oid_nr; i++)
-9e27beaa 225) if (remaining[i])
-9e27beaa 226) oidcpy(&new_oids[j++], &old_oids[i]);
-9e27beaa 227) *oids = new_oids;
-9e27beaa 228) if (to_free)
-9e27beaa 229) free(old_oids);
-9e27beaa 232) free(remaining);
-9e27beaa 234) return remaining_nr;
-9e27beaa 251) if (remaining_nr == 1)
-9e27beaa 252) continue;
-9e27beaa 253) remaining_nr = remove_fetched_oids(repo, &remaining_oids,
-9e27beaa 255) if (remaining_nr) {
-9e27beaa 256) to_free = 1;
-9e27beaa 257) continue;
-9e27beaa 265) free(remaining_oids);
-
-read-cache.c
-22184497 1487) return -1;
-22184497 1491) ret = -1;
-
-ref-filter.c
-8b3f33ef 1045) return xstrdup("");
-
-remote-curl.c
-6f119424 155) else if (!strcmp(value, "false"))
-6f119424 156) options.atomic = 0;
-6f119424 158) return -1;
-
-repo-settings.c
-aaf633c2 43) r->settings.fetch_negotiation_algorithm = FETCH_NEGOTIATION_DEFAULT;
-aaf633c2 55) UPDATE_DEFAULT_BOOL(r->settings.pack_use_sparse, 1);
-aaf633c2 56) UPDATE_DEFAULT_BOOL(r->settings.fetch_negotiation_algorithm, FETCH_NEGOTIATION_SKIPPING);
-50f26bd0 57) UPDATE_DEFAULT_BOOL(r->settings.fetch_write_commit_graph, 1);
 
 sequencer.c
 49697cb7 1137) arg1 = "commit";
 49697cb7 1138) arg2 = commit;
-e145d993 3304) (!opts->strategy || !strcmp(opts->strategy, "recursive")) ?
-a47ba3c7 3915) res = error_errno(_("could not stat '%s'"),
-a47ba3c7 3921) res = -1; /* message was printed */
-
-setup.c
-e2683d51 952)     !is_dir_sep(dir->buf[min_offset - 1])) {
-e2683d51 953) strbuf_addch(dir, '/');
-e2683d51 954) min_offset++;
-
-sha1-name.c
-59fa5f5a 1172) return MISSING_OBJECT;
-59fa5f5a 1178) return MISSING_OBJECT;
-
-shallow.c
-ddb3c856 157) continue;
-
-stable-qsort.c
-040a6551 58) char *tmp = xmalloc(size);
-43fe901b 59) msort_with_tmp(b, n, s, cmp, tmp);
-43fe901b 60) free(tmp);
-
-t/helper/test-hashmap.c
-d22245a2 109) hashmap_entry_init(&entries[i]->ent, hashes[i]);
-b94e5c1d 110) hashmap_add(&map, &entries[i]->ent);
-c8e424c9 113) hashmap_free(&map);
-d22245a2 122) hashmap_entry_init(&entries[i]->ent, hashes[i]);
-b94e5c1d 123) hashmap_add(&map, &entries[i]->ent);
-c8e424c9 133) hashmap_free(&map);
-
-t/helper/test-lazy-init-name-hash.c
-87571c3f 44) hashmap_for_each_entry(&the_index.dir_hash, &iter_dir, dir,
-87571c3f 48) hashmap_for_each_entry(&the_index.name_hash, &iter_cache, ce,
-
-t/helper/test-progress.c
-2bb74b53 48) die("need a title for the progress output");
-2bb74b53 59) die("invalid input: '%s'\n", line.buf);
-2bb74b53 67) die("invalid input: '%s'\n", line.buf);
-2bb74b53 70) die("invalid input: '%s'\n", line.buf);
-
-t/helper/test-run-command.c
-be5d88e1 66) static int next_test(struct child_process *cp, struct strbuf *err, void *cb,
-be5d88e1 69) struct testsuite *suite = cb;
-be5d88e1 71) if (suite->next >= suite->tests.nr)
-be5d88e1 72) return 0;
-be5d88e1 74) test = suite->tests.items[suite->next++].string;
-be5d88e1 75) argv_array_pushl(&cp->args, "sh", test, NULL);
-be5d88e1 76) if (suite->quiet)
-be5d88e1 77) argv_array_push(&cp->args, "--quiet");
-be5d88e1 78) if (suite->immediate)
-be5d88e1 79) argv_array_push(&cp->args, "-i");
-be5d88e1 80) if (suite->verbose)
-be5d88e1 81) argv_array_push(&cp->args, "-v");
-be5d88e1 82) if (suite->verbose_log)
-be5d88e1 83) argv_array_push(&cp->args, "-V");
-be5d88e1 84) if (suite->trace)
-be5d88e1 85) argv_array_push(&cp->args, "-x");
-be5d88e1 86) if (suite->write_junit_xml)
-be5d88e1 87) argv_array_push(&cp->args, "--write-junit-xml");
-be5d88e1 89) strbuf_addf(err, "Output of '%s':\n", test);
-be5d88e1 90) *task_cb = (void *)test;
-be5d88e1 92) return 1;
-be5d88e1 95) static int test_finished(int result, struct strbuf *err, void *cb,
-be5d88e1 98) struct testsuite *suite = cb;
-be5d88e1 99) const char *name = (const char *)task_cb;
-be5d88e1 101) if (result)
-be5d88e1 102) string_list_append(&suite->failed, name);
-be5d88e1 104) strbuf_addf(err, "%s: '%s'\n", result ? "FAIL" : "SUCCESS", name);
-be5d88e1 106) return 0;
-be5d88e1 109) static int test_failed(struct strbuf *out, void *cb, void *task_cb)
-be5d88e1 111) struct testsuite *suite = cb;
-be5d88e1 112) const char *name = (const char *)task_cb;
-be5d88e1 114) string_list_append(&suite->failed, name);
-be5d88e1 115) strbuf_addf(out, "FAILED TO START: '%s'\n", name);
-be5d88e1 117) return 0;
-be5d88e1 125) static int testsuite(int argc, const char **argv)
-be5d88e1 127) struct testsuite suite = TESTSUITE_INIT;
-be5d88e1 128) int max_jobs = 1, i, ret;
-be5d88e1 131) struct option options[] = {
-be5d88e1 145) memset(&suite, 0, sizeof(suite));
-be5d88e1 146) suite.tests.strdup_strings = suite.failed.strdup_strings = 1;
-be5d88e1 148) argc = parse_options(argc, argv, NULL, options,
-be5d88e1 151) if (max_jobs <= 0)
-be5d88e1 152) max_jobs = online_cpus();
-be5d88e1 154) dir = opendir(".");
-be5d88e1 155) if (!dir)
-be5d88e1 156) die("Could not open the current directory");
-be5d88e1 157) while ((d = readdir(dir))) {
-be5d88e1 158) const char *p = d->d_name;
-be5d88e1 160) if (*p != 't' || !isdigit(p[1]) || !isdigit(p[2]) ||
-be5d88e1 161)     !isdigit(p[3]) || !isdigit(p[4]) || p[5] != '-' ||
-be5d88e1 162)     !ends_with(p, ".sh"))
-be5d88e1 163) continue;
-be5d88e1 166) if (!argc) {
-be5d88e1 167) string_list_append(&suite.tests, p);
-be5d88e1 168) continue;
-be5d88e1 171) for (i = 0; i < argc; i++)
-be5d88e1 172) if (!wildmatch(argv[i], p, 0)) {
-be5d88e1 173) string_list_append(&suite.tests, p);
-be5d88e1 174) break;
-be5d88e1 177) closedir(dir);
-be5d88e1 179) if (!suite.tests.nr)
-be5d88e1 180) die("No tests match!");
-be5d88e1 181) if (max_jobs > suite.tests.nr)
-be5d88e1 182) max_jobs = suite.tests.nr;
-be5d88e1 184) fprintf(stderr, "Running %d tests (%d at a time)\n",
-be5d88e1 187) ret = run_processes_parallel(max_jobs, next_test, test_failed,
-be5d88e1 190) if (suite.failed.nr > 0) {
-be5d88e1 191) ret = 1;
-be5d88e1 192) fprintf(stderr, "%d tests failed:\n\n", suite.failed.nr);
-be5d88e1 193) for (i = 0; i < suite.failed.nr; i++)
-be5d88e1 194) fprintf(stderr, "\t%s\n", suite.failed.items[i].string);
-be5d88e1 197) string_list_clear(&suite.tests, 0);
-be5d88e1 198) string_list_clear(&suite.failed, 0);
-be5d88e1 200) return !!ret;
-be5d88e1 209) exit(testsuite(argc - 1, argv + 1));
-
-trace2/tr2_dst.c
-83e57b04 90) ret = 1;
-83e57b04 91) goto cleanup;
-87db61a4 136) strbuf_setlen(&path, base_path_len);
-87db61a4 137) strbuf_addf(&path, ".%d", attempt_count);
-83e57b04 145) strbuf_release(&path);
-83e57b04 146) if (tr2_dst_want_warning())
-83e57b04 147) warning("trace2: not opening %s trace file due to too "
-83e57b04 151) return 0;
-1fd881d4 307) warning("trace2: unknown value for '%s': '%s'",
-
-trace2/tr2_tgt_normal.c
-e3443055 189) strbuf_addf(&buf_payload, "alias %s -> ", alias);
-e3443055 190) sq_append_quote_argv_pretty(&buf_payload, argv);
-e3443055 201) strbuf_addf(&buf_payload, "child_start[%d]", cmd->trace2_child_id);
-e3443055 204) strbuf_addstr(&buf_payload, " cd ");
-e3443055 206) strbuf_addstr(&buf_payload, ";");
-e3443055 214) strbuf_addch(&buf_payload, ' ');
-e3443055 216) strbuf_addstr(&buf_payload, "git ");
-e3443055 217) sq_append_quote_argv_pretty(&buf_payload, cmd->argv);
-e3443055 242) if (exe) {
-e3443055 244) strbuf_addch(&buf_payload, ' ');
-e3443055 246) sq_append_quote_argv_pretty(&buf_payload, argv);
-
-trace2/tr2_tgt_perf.c
-371df1be 88) fl_end_col = buf->len + TR2FMT_PERF_FL_WIDTH;
-371df1be 90) if (file && *file) {
-371df1be 91) struct strbuf buf_fl = STRBUF_INIT;
-371df1be 93) strbuf_addf(&buf_fl, "%s:%d", file, line);
-371df1be 95) if (buf_fl.len <= TR2FMT_PERF_FL_WIDTH)
-371df1be 96) strbuf_addbuf(buf, &buf_fl);
-371df1be 98) size_t avail = TR2FMT_PERF_FL_WIDTH - 3;
-371df1be 99) strbuf_addstr(buf, "...");
-371df1be 100) strbuf_add(buf,
-371df1be 101)    &buf_fl.buf[buf_fl.len - avail],
-371df1be 105) strbuf_release(&buf_fl);
-371df1be 108) while (buf->len < fl_end_col)
-371df1be 111) strbuf_addstr(buf, " | ");
-742ed633 302) strbuf_addf(&buf_payload, "alias:%s argv:[", alias);
-742ed633 303) sq_append_quote_argv_pretty(&buf_payload, argv);
-742ed633 304) strbuf_addch(&buf_payload, ']');
-742ed633 335) strbuf_addstr(&buf_payload, "git");
-742ed633 336) if (cmd->argv[0])
-742ed633 337) strbuf_addch(&buf_payload, ' ');
-742ed633 391) strbuf_addstr(&buf_payload, "argv:[");
-742ed633 392) if (exe) {
-742ed633 393) strbuf_addstr(&buf_payload, exe);
-742ed633 394) if (argv[0])
-742ed633 395) strbuf_addch(&buf_payload, ' ');
-742ed633 397) sq_append_quote_argv_pretty(&buf_payload, argv);
-742ed633 398) strbuf_addch(&buf_payload, ']');
-da4589ce 459) strbuf_addf(&buf_payload, "label:%s", label);
-da4589ce 460) if (fmt && *fmt) {
-da4589ce 461) strbuf_addch(&buf_payload, ' ');
-da4589ce 462) maybe_append_string_va(&buf_payload, fmt, ap);
-da4589ce 479) strbuf_addf(&buf_payload, "label:%s", label);
-da4589ce 480) if (fmt && *fmt) {
-da4589ce 481) strbuf_addch(&buf_payload, ' ' );
-da4589ce 482) maybe_append_string_va(&buf_payload, fmt, ap);
-
-transport-helper.c
-6f119424 859) die(_("helper %s does not support --atomic"), name);
-
-transport.c
-360c7ba3 1200) trace2_region_leave("transport_push", "push_submodules", r);
-
-tree-walk.c
-5aa02f98 194) BUG("too small buffer passed to make_traverse_path");
-5aa02f98 199) BUG("traverse_info pathlen does not match strings");
-5aa02f98 208) BUG("traverse_info ran out of list items");
-
-unpack-trees.c
-90553847 1144) if (*info->prev->name)
-90553847 1147) printf("%s", info->name);
-
-upload-pack.c
-cf9ceb5a 148) sq_quote_buf(&buf, spec);
-
-wrapper.c
-9827d4c1 45) if (!gentle)
-9827d4c1 51) return NULL;
 
 Commits introducting uncovered code:
-Alex Henrie	baed6bbb diffcore-break: use a goto instead of a redundant if statement
-Ali Utku Selen	ddb3c856 shallow.c: don't free unallocated slabs
-Bert Wesarg	edefc318 format-patch: create leading components of output directory
-Brandon Casey	040a6551 cleanup: use internal memory allocation wrapper functions everywhere
-Brian Downing	43fe901b compat: Add simplified merge sort implementation from glibc
-brian m. carlson	ce17feb1 path: add a function to check for path suffix
-brian m. carlson	6f119424 remote-curl: pass on atomic capability to remote side
-brian m. carlson	7e0d029f builtin/rev-parse: switch to use the_hash_algo
-brian m. carlson	8d4d86b0 cache: remove null_sha1
-brian m. carlson	28ba1830 builtin/replace: make hash size independent
-brian m. carlson	fabec2c5 builtin/receive-pack: switch to use the_hash_algo
-Christian Couder	db27dca5 Remove fetch-object.{c,h} in favor of promisor-remote.{c,h}
-Christian Couder	4ca9474e Move core_partial_clone_filter_default to promisor-remote.c
-Christian Couder	fa3d1b63 promisor-remote: parse remote.*.partialclonefilter
-Christian Couder	9e27beaa promisor-remote: implement promisor_remote_get_direct()
-Christian Couder	48de3158 Add initial support for many promisor remotes
-Christian Couder	faf2abf4 promisor-remote: use repository_format_partial_clone
-Corentin BOMPARD	24bc1a12 pull, fetch: add --set-upstream option
-Denton Liu	c0efb4c1 rebase: fast-forward --onto in more cases
-Denton Liu	2b318aa6 rebase: refactor can_fast_forward into goto tower
-Derrick Stolee	50f26bd0 fetch: add fetch.writeCommitGraph config setting
-Derrick Stolee	aaf633c2 repo-settings: create feature.experimental setting
-Elijah Newren	ff1bfa2c merge-recursive: use common name for ancestors/common/base_list
-Elijah Newren	f836bf39 merge-recursive: future-proof update_file_flags() against memory leaks
-Elijah Newren	98a1d3d8 merge-recursive: exit early if index != head
-Elijah Newren	65c01c64 checkout: provide better conflict hunk description with detached HEAD
-Elijah Newren	941790d7 fast-export: handle nested tags
-Elijah Newren	3164e6bd fast-import: fix handling of deleted tags
-Elijah Newren	208d6924 fast-export: add support for --import-marks-if-exists
-Elijah Newren	9822175d Ensure index matches head before invoking merge machinery, round N
-Elijah Newren	b8f50e5b fast-import: add support for new 'alias' command
-Elijah Newren	724dd767 cache-tree: share code between functions writing an index as a tree
-Elijah Newren	89a1f4aa dir: if our pathspec might match files under a dir, recurse into it
-Eric Wong	b94e5c1d hashmap_add takes "struct hashmap_entry *"
-Eric Wong	c8e424c9 hashmap: introduce hashmap_free_entries
-Eric Wong	87571c3f hashmap: use *_entry APIs for iteration
-Eric Wong	28ee7941 hashmap_remove takes "const struct hashmap_entry *"
-Eric Wong	d22245a2 hashmap_entry_init takes "struct hashmap_entry *"
-Jeff Hostetler	742ed633 trace2: cleanup whitespace in perf format
-Jeff Hostetler	e3443055 trace2: cleanup whitespace in normal format
-Jeff Hostetler	da4589ce trace2: trim whitespace in region messages in perf target format
-Jeff Hostetler	371df1be trace2: cleanup column alignment in perf target format
-Jeff King	3a37876b pack-objects: drop packlist index_pos optimization
-Jeff King	5aa02f98 tree-walk: harden make_traverse_path() length computations
-Jeff King	90553847 tree-walk: drop oid from traverse_info
-Jeff King	0dfed92d git-am: handle missing "author" when parsing commit
-Jeff King	9827d4c1 packfile: drop release_pack_memory()
-Johannes Schindelin	d54dea77 fetch: let --jobs=<n> parallelize --multiple, too
-Johannes Schindelin	e145d993 rebase -r: support merge strategies other than `recursive`
-Johannes Schindelin	e2683d51 Fix .git/ discovery at the root of UNC shares
-Johannes Schindelin	be5d88e1 test-tool run-command: learn to run (parts of) the testsuite
-Josh Steadmon	87db61a4 trace2: write discard message to sentinel files
-Josh Steadmon	83e57b04 trace2: discard new traces if target directory has too many files
-Junio C Hamano	360c7ba3 transport: push codepath can take arbitrary repository
-Matthew DeVore	f56f7642 list-objects-filter-options: move error check up
-Matthew DeVore	9430147c list-objects-filter: encapsulate filter components
-Matthew DeVore	e987df5f list-objects-filter: implement composite filters
-Matthew DeVore	cf9ceb5a list-objects-filter-options: make filter_spec a string_list
-Mischa POSLAWSKY	8b3f33ef ref-filter: initialize empty name or email fields
 Phillip Wood	49697cb7 move run_commit_hook() to libgit and use it there
-Phillip Wood	a47ba3c7 rebase -i: check for updated todo after squash and reword
-René Scharfe	71d41ff6 archive-tar: turn length miscalculation warning into BUG
-René Scharfe	59fa5f5a sha1-name: check for overflow of N in "foo^N" and "foo~N"
-René Scharfe	5cc6a4be http-push: simplify deleting a list item
-René Scharfe	1fd881d4 trace2: use warning() directly in tr2_dst_malformed_warning()
-SZEDER Gábor	2bb74b53 Test the progress display
 SZEDER Gábor	c72fc40d path.c: clarify two field names in 'struct common_dir'
-Thomas Gummerer	34933d0e stash: make sure to write refreshed cache
-Thomas Gummerer	8e4c8af0 push: disallow --all and refspecs when remote.<name>.mirror is set
-Thomas Gummerer	22184497 factor out refresh_and_write_cache function
 William Baker	840cef0c midx: add progress to write_midx_file
-William Baker	3444ec2e fsmonitor: don't fill bitmap with entries to be removed
 
 
