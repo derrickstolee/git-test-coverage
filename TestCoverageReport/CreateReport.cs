@@ -20,6 +20,8 @@ namespace TestCoverageReport
                     ComparisonReport report = JsonConvert.DeserializeObject<ComparisonReport>(File.ReadAllText(args[i]));
 
                     reports.Comparisons.Add(report);
+
+                    FilterIgnoredLines(report);
                 }
                 catch (Exception e)
                 {
@@ -184,6 +186,33 @@ namespace TestCoverageReport
             }
 
             renderer.WriteFooter();
+        }
+
+        public static void FilterIgnoredLines(ComparisonReport report)
+        {
+            List<string> ignoredPhrases = new List<string>()
+            {
+                "BUG(",
+                "error(",
+                "die(",
+                "warning(",
+                "advise(",
+                "usage_with_options(",
+            };
+
+            foreach (List<FileReportLine> lines in report.Files.Values)
+            {
+                foreach (FileReportLine line in lines)
+                {
+                    foreach (string phrase in ignoredPhrases)
+                    {
+                        if (line.LineContents.IndexOf(phrase) >= 0)
+                        {
+                            line.Ignored = true;
+                        }
+                    }
+                }
+            }
         }
     }
 }

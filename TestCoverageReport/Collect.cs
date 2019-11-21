@@ -140,7 +140,6 @@ namespace TestCoverageReport
                     ignoredLines.Contains(ignoreLineWithNum))
                 {
                     line.Ignored = true;
-                    continue;
                 }
 
                 foreach (string phrase in ignoredPhrases)
@@ -148,7 +147,6 @@ namespace TestCoverageReport
                     if (line.LineContents.IndexOf(phrase) >= 0)
                     {
                         line.Ignored = true;
-                        break;
                     }
                 }
             }
