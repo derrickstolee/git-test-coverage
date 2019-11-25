@@ -27,7 +27,7 @@ namespace TestCoverageReport
 
         public void WriteCommitSectionHeader()
         {
-            writer.WriteLine("Commits introducting uncovered code:");
+            writer.WriteLine("Commits introducing uncovered code:");
         }
 
         public void WriteDiffSectionHeader(string baseBranch, string targetBranch, string baseCommitId, string targetCommitId)
