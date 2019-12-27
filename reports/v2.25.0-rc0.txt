@@ -1,0 +1,590 @@
+target	fork/test/v2.25.0-rc0
+base	fd4fd83863680621b7db186ebbb5cd9a88f36e34
+
+
+Uncovered code in 'target' not in 'base'
+--------------------------------------------------------
+
+add-interactive.c
+1daaebca 23)  color_parse(value, dst))
+1daaebca 38) s->use_color =
+1daaebca 39) git_config_colorbool("color.interactive", value);
+76b74323 98) char c = p->string[*len];
+76b74323 106) if (!c || ++*len > max_length || !isascii(c)) {
+76b74323 107) *len = 0;
+76b74323 108) break;
+76b74323 111) if (c != other_string[*len - 1])
+76b74323 112) break;
+76b74323 113) }
+76b74323 146) *len = 0;
+76b74323 147) break;
+76b74323 174) return -1;
+76b74323 177) return -1;
+76b74323 181) return -1;
+5e82b9e4 220) putchar('\n');
+68db1cbf 286) opts->print_help(s);
+68db1cbf 287) continue;
+6348bfba 300) p++;
+6348bfba 301) continue;
+f37c2264 306) choose = 0;
+f37c2264 307) p++;
+f37c2264 308) sep--;
+f37c2264 328) else if (*endp == '-') {
+f37c2264 329) to = strtoul(++endp, &endp, 10);
+f37c2264 331) if (endp != p + sep)
+6348bfba 337) p[sep++] = '\0';
+3d965c76 346) color_fprintf_ln(stdout, s->error_color,
+f37c2264 348) break;
+f37c2264 355) to = items->items.nr;
+5e82b9e4 431) return;
+c08171d1 446) continue;
+8746e072 466) if (!other_adddel->binary)
+8746e072 467) s->binary_count++;
+5e82b9e4 468) adddel->binary = 1;
+8746e072 471) if (!other_adddel->unmerged)
+8746e072 472) s->unmerged_count++;
+8746e072 473) adddel->unmerged = 1;
+5e82b9e4 555) strbuf_addstr(buf, _("binary"));
+ab1e1ccc 608) printf("%c%2d: %s", selected ? '*' : ' ', i + 1,
+ab1e1ccc 610) return;
+5e82b9e4 627) return -1;
+a8c45be9 644) return -1;
+a8c45be9 647) putchar('\n');
+a8c45be9 648) return 0;
+a8c45be9 654) putchar('\n');
+a8c45be9 655) return 0;
+a8c45be9 664) for (i = 0; i < files->items.nr; i++) {
+a8c45be9 665) const char *name = files->items.items[i].string;
+a8c45be9 666) if (files->selected[i] &&
+a8c45be9 667)     add_file_to_index(s->r->index, name, 0) < 0) {
+a8c45be9 669) break;
+a8c45be9 673) if (!res && write_locked_index(s->r->index, &index_lock, COMMIT_LOCK) < 0)
+a8c45be9 676) if (!res)
+a8c45be9 677) printf(Q_("updated %d path\n",
+a8c45be9 680) putchar('\n');
+c54ef5e4 723) return -1;
+c54ef5e4 726) putchar('\n');
+c54ef5e4 727) return 0;
+c54ef5e4 733) goto finish_revert;
+c54ef5e4 737) res = -1;
+c54ef5e4 738) goto finish_revert;
+c54ef5e4 747) goto finish_revert;
+c54ef5e4 768) res = -1;
+c54ef5e4 778) res = -1;
+ab1e1ccc 792) static int get_untracked_files(struct repository *r,
+ab1e1ccc 796) struct dir_struct dir = { 0 };
+ab1e1ccc 798) struct strbuf buf = STRBUF_INIT;
+ab1e1ccc 800) if (repo_read_index(r) < 0)
+ab1e1ccc 803) prefix_item_list_clear(files);
+ab1e1ccc 804) setup_standard_excludes(&dir);
+ab1e1ccc 805) add_pattern_list(&dir, EXC_CMDL, "--exclude option");
+ab1e1ccc 806) fill_directory(&dir, r->index, ps);
+ab1e1ccc 808) for (i = 0; i < dir.nr; i++) {
+ab1e1ccc 809) struct dir_entry *ent = dir.entries[i];
+ab1e1ccc 811) if (index_name_is_other(r->index, ent->name, ent->len)) {
+ab1e1ccc 812) strbuf_reset(&buf);
+ab1e1ccc 813) strbuf_add(&buf, ent->name, ent->len);
+ab1e1ccc 814) add_file_item(&files->items, buf.buf);
+ab1e1ccc 818) strbuf_release(&buf);
+ab1e1ccc 819) return 0;
+ab1e1ccc 822) static int run_add_untracked(struct add_i_state *s, const struct pathspec *ps,
+ab1e1ccc 826) struct print_file_item_data *d = opts->list_opts.print_item_data;
+ab1e1ccc 827) int res = 0, fd;
+ab1e1ccc 831) if (get_untracked_files(s->r, files, ps) < 0)
+ab1e1ccc 832) return -1;
+ab1e1ccc 834) if (!files->items.nr) {
+ab1e1ccc 835) printf(_("No untracked files.\n"));
+ab1e1ccc 836) goto finish_add_untracked;
+ab1e1ccc 839) opts->prompt = N_("Add untracked");
+ab1e1ccc 840) d->only_names = 1;
+ab1e1ccc 841) count = list_and_choose(s, files, opts);
+ab1e1ccc 842) d->only_names = 0;
+ab1e1ccc 843) if (count <= 0)
+ab1e1ccc 844) goto finish_add_untracked;
+ab1e1ccc 846) fd = repo_hold_locked_index(s->r, &index_lock, LOCK_REPORT_ON_ERROR);
+ab1e1ccc 847) if (fd < 0) {
+ab1e1ccc 848) res = -1;
+ab1e1ccc 849) goto finish_add_untracked;
+ab1e1ccc 852) for (i = 0; i < files->items.nr; i++) {
+ab1e1ccc 853) const char *name = files->items.items[i].string;
+ab1e1ccc 854) if (files->selected[i] &&
+ab1e1ccc 855)     add_file_to_index(s->r->index, name, 0) < 0) {
+ab1e1ccc 857) break;
+ab1e1ccc 861) if (!res &&
+ab1e1ccc 862)     write_locked_index(s->r->index, &index_lock, COMMIT_LOCK) < 0)
+ab1e1ccc 865) if (!res)
+ab1e1ccc 866) printf(Q_("added %d path\n",
+ab1e1ccc 870) putchar('\n');
+ab1e1ccc 871) return res;
+8746e072 884) return -1;
+8746e072 887) for (i = j = 0; i < files->items.nr; i++) {
+8746e072 888) struct file_item *item = files->items.items[i].util;
+8746e072 890) if (item->index.binary || item->worktree.binary) {
+8746e072 891) free(item);
+8746e072 892) free(files->items.items[i].string);
+8746e072 893) } else if (item->index.unmerged ||
+8746e072 895) color_fprintf_ln(stderr, s->error_color,
+8746e072 897)  files->items.items[i].string);
+8746e072 898) free(item);
+8746e072 899) free(files->items.items[i].string);
+8746e072 901) files->items.items[j++] = files->items.items[i];
+8746e072 903) files->items.nr = j;
+8746e072 907) if (binary_count)
+8746e072 908) fprintf(stderr, _("Only binary files changed.\n"));
+8746e072 910) fprintf(stderr, _("No changes.\n"));
+8746e072 911) return 0;
+d7633578 946) return -1;
+d7633578 949) putchar('\n');
+d7633578 950) return 0;
+a8c45be9 996) static void choose_prompt_help(struct add_i_state *s)
+a8c45be9 998) color_fprintf_ln(stdout, s->help_color, "%s",
+a8c45be9 1000) color_fprintf_ln(stdout, s->help_color, "1          - %s",
+a8c45be9 1002) color_fprintf_ln(stdout, s->help_color, "3-5        - %s",
+a8c45be9 1004) color_fprintf_ln(stdout, s->help_color, "2-3,6-9    - %s",
+a8c45be9 1006) color_fprintf_ln(stdout, s->help_color, "foo        - %s",
+a8c45be9 1008) color_fprintf_ln(stdout, s->help_color, "-...       - %s",
+a8c45be9 1010) color_fprintf_ln(stdout, s->help_color, "*          - %s",
+a8c45be9 1012) color_fprintf_ln(stdout, s->help_color, "           - %s",
+a8c45be9 1014) }
+76b74323 1038) printf(" %2d: %s", i + 1, item->string);
+68db1cbf 1045) static void command_prompt_help(struct add_i_state *s)
+68db1cbf 1047) const char *help_color = s->help_color;
+68db1cbf 1048) color_fprintf_ln(stdout, help_color, "%s", _("Prompt help:"));
+68db1cbf 1049) color_fprintf_ln(stdout, help_color, "1          - %s",
+68db1cbf 1051) color_fprintf_ln(stdout, help_color, "foo        - %s",
+68db1cbf 1053) color_fprintf_ln(stdout, help_color, "           - %s",
+68db1cbf 1055) }
+
+add-patch.c
+7584dd3c 52) static void err(struct add_p_state *s, const char *fmt, ...)
+7584dd3c 56) va_start(args, fmt);
+7584dd3c 57) fputs(s->s.error_color, stderr);
+7584dd3c 58) vfprintf(stderr, fmt, args);
+7584dd3c 59) fputs(s->s.reset_color, stderr);
+7584dd3c 60) fputc('\n', stderr);
+7584dd3c 61) va_end(args);
+7584dd3c 62) }
+25ea47af 87) return -1;
+25ea47af 104) eol = s->plain.buf + s->plain.len;
+25ea47af 127) eol = s->colored.buf + s->colored.len;
+5906d5de 146) return 0;
+5906d5de 150) return 0;
+e3bd11b4 175) argv_array_clear(&args);
+f6aa7ecc 209) eol = pend;
+510aeca1 235) hunk->splittable_into++;
+25ea47af 250) return -1;
+5906d5de 277) file_diff->hunk->colored_start =
+5906d5de 278) colored_p - colored->buf;
+e3bd11b4 320) colored_p = colored_pend;
+510aeca1 356) return sb->len;
+25ea47af 393) strbuf_addf(out, "%s\n", GIT_COLOR_RESET);
+5906d5de 425) const char *p = s->colored.buf;
+5906d5de 427) strbuf_add(out, p + head->colored_start,
+5906d5de 428)     first->colored_start - head->colored_start);
+5906d5de 429) strbuf_add(out, p + first->colored_end,
+5906d5de 430)     head->colored_end - first->colored_end);
+11f2c0da 449) return 0;
+510aeca1 618) return 0;
+510aeca1 629) memmove(file_diff->hunk + hunk_index + splittable_into,
+510aeca1 630) file_diff->hunk + hunk_index + 1,
+510aeca1 631) (file_diff->hunk_nr - hunk_index - splittable_into)
+510aeca1 642) colored_current = hunk->colored_start;
+510aeca1 660) hunk[1].colored_start = colored_current;
+510aeca1 675) ch = marker ? marker : ' ';
+510aeca1 689) colored_current =
+510aeca1 690) find_next_line(&s->colored,
+510aeca1 732) hunk->colored_end = colored_current;
+510aeca1 757) hunk->colored_end = colored_end;
+bcdd297b 770) hunk->colored_start = s->colored.len;
+bcdd297b 771) for (current = hunk->start; current < hunk->end; ) {
+bcdd297b 772) for (eol = current; eol < hunk->end; eol++)
+bcdd297b 773) if (plain[eol] == '\n')
+bcdd297b 774) break;
+bcdd297b 775) next = eol + (eol < hunk->end);
+bcdd297b 776) if (eol > current && plain[eol - 1] == '\r')
+bcdd297b 777) eol--;
+bcdd297b 779) strbuf_addstr(&s->colored,
+bcdd297b 780)       plain[current] == '-' ?
+bcdd297b 782)       plain[current] == '+' ?
+bcdd297b 785) strbuf_add(&s->colored, plain + current, eol - current);
+bcdd297b 786) strbuf_addstr(&s->colored, GIT_COLOR_RESET);
+bcdd297b 787) if (next > eol)
+bcdd297b 788) strbuf_add(&s->colored, plain + eol, next - eol);
+bcdd297b 789) current = next;
+bcdd297b 791) hunk->colored_end = s->colored.len;
+bcdd297b 825) return -1;
+bcdd297b 840) return 0;
+bcdd297b 906) return -1;
+bcdd297b 910) case 'y': return 1;
+bcdd297b 912) }
+bcdd297b 927) *hunk = backup;
+bcdd297b 928) return -1;
+9254bdfb 981) strbuf_setlen(out, len + SUMMARY_LINE_WIDTH);
+f6aa7ecc 1051) undecided_previous = i;
+f6aa7ecc 1052) break;
+f6aa7ecc 1073) strbuf_addstr(&s->buf, ",k");
+f6aa7ecc 1107) continue;
+80399aec 1118) for (; hunk_index < file_diff->hunk_nr; hunk_index++) {
+80399aec 1119) hunk = file_diff->hunk + hunk_index;
+f6aa7ecc 1120) if (hunk->use == UNDECIDED_HUNK)
+f6aa7ecc 1121) hunk->use = USE_HUNK;
+7584dd3c 1134) if (hunk_index)
+7584dd3c 1135) hunk_index--;
+7584dd3c 1137) err(s, _("No previous hunk"));
+80399aec 1139) if (hunk_index + 1 < file_diff->hunk_nr)
+7584dd3c 1140) hunk_index++;
+7584dd3c 1142) err(s, _("No next hunk"));
+7584dd3c 1144) if (undecided_previous >= 0)
+7584dd3c 1145) hunk_index = undecided_previous;
+7584dd3c 1147) err(s, _("No previous hunk"));
+7584dd3c 1149) if (undecided_next >= 0)
+7584dd3c 1150) hunk_index = undecided_next;
+7584dd3c 1152) err(s, _("No next hunk"));
+9254bdfb 1158) err(s, _("No other hunks to goto"));
+9254bdfb 1159) continue;
+9254bdfb 1174) break;
+9254bdfb 1181) err(s, _("Invalid number: '%s'"),
+9254bdfb 1189)     (int)file_diff->hunk_nr);
+d6cf8733 1195) err(s, _("No other hunks to search"));
+d6cf8733 1196) continue;
+d6cf8733 1201) printf("%s", _("search for regex? "));
+d6cf8733 1202) fflush(stdout);
+d6cf8733 1203) if (strbuf_getline(&s->answer,
+d6cf8733 1205) break;
+d6cf8733 1206) strbuf_trim_trailing_newline(&s->answer);
+d6cf8733 1207) if (s->answer.len == 0)
+d6cf8733 1208) continue;
+d6cf8733 1216) err(s, _("Malformed search regexp %s: %s"),
+d6cf8733 1218) continue;
+d6cf8733 1233) err(s, _("No hunk matches the given pattern"));
+d6cf8733 1234) break;
+510aeca1 1240) err(s, _("Sorry, cannot split this hunk"));
+bcdd297b 1248) err(s, _("Sorry, cannot edit this hunk"));
+54d9d9b2 1254) const char *p = _(help_patch_remainder), *eol = p;
+54d9d9b2 1256) color_fprintf(stdout, s->s.help_color, "%s",
+54d9d9b2 1263) for (; *p; p = eol + (*eol == '\n')) {
+54d9d9b2 1264) eol = strchrnul(p, '\n');
+54d9d9b2 1271) if (*p != '?' && !strchr(s->buf.buf, *p))
+54d9d9b2 1272) continue;
+54d9d9b2 1274) color_fprintf_ln(stdout, s->s.help_color,
+54d9d9b2 1275)  "%.*s", (int)(eol - p), p);
+25ea47af 1296) repo_refresh_and_write_index(s->s.r, REFRESH_QUIET, 0,
+f6aa7ecc 1317) strbuf_release(&s.plain);
+e3bd11b4 1318) strbuf_release(&s.colored);
+f6aa7ecc 1319) return -1;
+
+apply.c
+b4bbbbd5 2672) match_beginning = 0;
+
+builtin/add.c
+
+builtin/bisect--helper.c
+51a0a4ed 177) return -1;
+
+builtin/bundle.c
+79862b6b 85) else if (progress == 1)
+79862b6b 86) argv_array_push(&pack_opts, "--progress");
+79862b6b 87) else if (progress == 2)
+79862b6b 88) argv_array_push(&pack_opts, "--all-progress");
+79862b6b 90) argv_array_push(&pack_opts, "--all-progress-implied");
+2e0afafe 115) return 1;
+73c3253d 138) return 1;
+73c3253d 143) static int cmd_bundle_unbundle(int argc, const char **argv, const char *prefix) {
+73c3253d 145) int bundle_fd = -1;
+73c3253d 147) struct option options[] = {
+73c3253d 152) argc = parse_options_cmd_bundle(argc, argv, prefix,
+73c3253d 156) memset(&header, 0, sizeof(header));
+73c3253d 157) if ((bundle_fd = read_bundle_header(bundle_file, &header)) < 0)
+73c3253d 158) return 1;
+73c3253d 159) if (!startup_info->have_repository)
+73c3253d 161) return !!unbundle(the_repository, &header, bundle_fd, 0) ||
+73c3253d 162) list_bundle_refs(&header, argc, argv);
+73c3253d 187) else if (!strcmp(argv[0], "unbundle"))
+73c3253d 188) result = cmd_bundle_unbundle(argc, argv, prefix);
+
+builtin/checkout.c
+
+builtin/clone.c
+d89f09c8 753) result = 1;
+d89f09c8 1132) return 1;
+
+builtin/commit.c
+
+builtin/fmt-merge-msg.c
+72b006f4 511) strbuf_addstr(&sig, "gpg verification failed.\n");
+
+builtin/fsck.c
+82ef89b3 64) type = oid_object_info(the_repository, oid, NULL);
+82ef89b3 309) printf_ln(_("unreachable %s %s"),
+82ef89b3 310)   printable_type(&obj->oid, obj->type),
+82ef89b3 311)   describe_object(&obj->oid));
+82ef89b3 367) fprintf_ln(stderr, _("Checking %s"), describe_object(&obj->oid));
+82ef89b3 425)    printable_type(&obj->oid, obj->type),
+82ef89b3 426)    describe_object(&obj->oid));
+82ef89b3 439)   describe_object(&commit->object.oid));
+
+builtin/reset.c
+
+builtin/sparse-checkout.c
+e091228e 85) return 0;
+bab3c359 221) return 1;
+bab3c359 275) return 1;
+190a65f9 337)    strihash(e->pattern) :
+af09ce24 352) return;
+
+commit.c
+
+dir.c
+96cc8ab5 663) pl->use_cone_patterns = 0;
+96cc8ab5 665) goto clear_hashmaps;
+190a65f9 676)    strihash(translated->pattern) :
+96cc8ab5 689) hashmap_add(&pl->parent_hashmap, &translated->ent);
+96cc8ab5 690) hashmap_remove(&pl->recursive_hashmap, &translated->ent, &data);
+96cc8ab5 691) free(data);
+96cc8ab5 692) return;
+96cc8ab5 698) goto clear_hashmaps;
+190a65f9 707)    strihash(translated->pattern) :
+96cc8ab5 716) hashmap_remove(&pl->parent_hashmap, &translated->ent, &data);
+96cc8ab5 717) free(data);
+96cc8ab5 718) free(translated);
+96cc8ab5 1280) return MATCHED;
+
+fetch-pack.c
+
+fsck.c
+73390290 401) fsck_put_object_name(options, &entry.oid, "%s%s/",
+73390290 470) fsck_put_object_name(options, oid, "%s^%d",
+73390290 473) fsck_put_object_name(options, oid, "%.*s~%d",
+73390290 496) fsck_put_object_name(options, &tag->tagged->oid, "%s", name);
+7034cd09 630) retval += report(options, oid, OBJ_TREE,
+b2f2039c 639) retval += report(options, oid, OBJ_TREE, FSCK_MSG_BAD_TREE, "cannot be parsed as a tree");
+b2f2039c 686) retval += report(options, oid, OBJ_TREE, FSCK_MSG_FULL_PATHNAME, "contains full pathnames");
+b2f2039c 688) retval += report(options, oid, OBJ_TREE, FSCK_MSG_EMPTY_NAME, "contains empty pathname");
+b2f2039c 696) retval += report(options, oid, OBJ_TREE, FSCK_MSG_ZERO_PADDED_FILEMODE, "contains zero-padded file modes");
+b2f2039c 698) retval += report(options, oid, OBJ_TREE, FSCK_MSG_BAD_FILEMODE, "contains bad file modes");
+b2f2039c 702) retval += report(options, oid, OBJ_TREE, FSCK_MSG_TREE_NOT_SORTED, "not properly sorted");
+cc579000 734) return report(options, oid, type,
+78543993 750) return report(options, oid, type, FSCK_MSG_MISSING_NAME_BEFORE_EMAIL, "invalid author/committer line - missing space before email");
+78543993 757) return report(options, oid, type, FSCK_MSG_MISSING_SPACE_BEFORE_EMAIL, "invalid author/committer line - missing space before email");
+78543993 761) return report(options, oid, type, FSCK_MSG_BAD_EMAIL, "invalid author/committer line - bad email");
+78543993 767) return report(options, oid, type, FSCK_MSG_ZERO_PADDED_DATE, "invalid author/committer line - zero-padded date");
+78543993 771) return report(options, oid, type, FSCK_MSG_BAD_DATE, "invalid author/committer line - bad date");
+78543993 779) return report(options, oid, type, FSCK_MSG_BAD_TIMEZONE, "invalid author/committer line - bad time zone");
+c5b4269b 798) return report(options, oid, OBJ_COMMIT, FSCK_MSG_MISSING_TREE, "invalid format - expected 'tree' line");
+c5b4269b 800) err = report(options, oid, OBJ_COMMIT, FSCK_MSG_BAD_TREE_SHA1, "invalid 'tree' line format - bad sha1");
+c5b4269b 807) err = report(options, oid, OBJ_COMMIT, FSCK_MSG_BAD_PARENT_SHA1, "invalid 'parent' line format - bad sha1");
+c5b4269b 821) err = report(options, oid, OBJ_COMMIT, FSCK_MSG_MISSING_AUTHOR, "invalid format - expected 'author' line");
+c5b4269b 827) return report(options, oid, OBJ_COMMIT, FSCK_MSG_MISSING_COMMITTER, "invalid format - expected 'committer' line");
+103fb6d4 854) ret = report(options, oid, OBJ_TAG, FSCK_MSG_MISSING_OBJECT, "invalid format - expected 'object' line");
+103fb6d4 858) ret = report(options, oid, OBJ_TAG, FSCK_MSG_BAD_OBJECT_SHA1, "invalid 'object' line format - bad sha1");
+103fb6d4 865) ret = report(options, oid, OBJ_TAG, FSCK_MSG_MISSING_TYPE_ENTRY, "invalid format - expected 'type' line");
+103fb6d4 870) ret = report(options, oid, OBJ_TAG, FSCK_MSG_MISSING_TYPE, "invalid format - unexpected end after 'type' line");
+103fb6d4 874) ret = report(options, oid, OBJ_TAG, FSCK_MSG_BAD_TYPE, "invalid 'type' value");
+103fb6d4 880) ret = report(options, oid, OBJ_TAG, FSCK_MSG_MISSING_TAG_ENTRY, "invalid format - expected 'tag' line");
+103fb6d4 885) ret = report(options, oid, OBJ_TAG, FSCK_MSG_MISSING_TAG, "invalid format - unexpected end after 'type' line");
+6da40b22 981) return report(options, oid, OBJ_BLOB,
+38370253 1003) return report(options, NULL, OBJ_NONE, FSCK_MSG_BAD_OBJECT_SHA1, "no valid object to fsck");
+38370253 1014) return report(options, &obj->oid, obj->type,
+38370253 1017)       obj->type);
+b8b00f16 1050) if (is_promisor_object(oid))
+38370253 1052) ret |= report(options,
+
+gpg-interface.c
+392b862e 115) *field = NULL;
+67a6ea63 184) replace_cstring(field, NULL, NULL);
+72b006f4 223) return error_errno(_("could not create temporary file"));
+72b006f4 226) error_errno(_("failed writing detached signature to '%s'"),
+72b006f4 228) delete_tempfile(&temp);
+72b006f4 229) return -1;
+72b006f4 244) gpg_status = &buf;
+
+graph.c
+0195285b 422) REALLOC_ARRAY(graph->old_mapping, graph->column_capacity * 2);
+fbccf255 905) graph_line_write_column(line, col, '|');
+
+http.c
+4d17fd25 417) string_list_clear(&extra_http_headers, 0);
+
+log-tree.c
+72b006f4 461) show_sig_lines(opt, status, "No signature\n");
+72b006f4 535) } else if (verify_message.len <= gpg_message_offset)
+
+midx.c
+840cef0c 973) progress = start_progress(_("Writing chunks to multi-pack-index"),
+
+pack-objects.c
+f66e0401 122) if (pack->in_pack)
+f66e0401 125) ALLOC_ARRAY(pack->in_pack, pack->nr_alloc);
+
+path.c
+c72fc40d 386) for (p = common_list; p->path; p++) {
+c72fc40d 387) const char *path = p->path;
+
+pathspec.c
+
+progress.c
+44a4693b 308) return start_progress_delay(title, total, get_default_delay(), 1);
+
+revision.c
+0aa0c2b2 3202) static void reset_topo_walk(struct rev_info *revs)
+0aa0c2b2 3204) struct topo_walk_info *info = revs->topo_walk_info;
+0aa0c2b2 3206) clear_prio_queue(&info->explore_queue);
+0aa0c2b2 3207) clear_prio_queue(&info->indegree_queue);
+0aa0c2b2 3208) clear_prio_queue(&info->topo_queue);
+0aa0c2b2 3209) clear_indegree_slab(&info->indegree);
+0aa0c2b2 3210) clear_author_date_slab(&info->author_date);
+0aa0c2b2 3212) FREE_AND_NULL(revs->topo_walk_info);
+0aa0c2b2 3213) }
+0aa0c2b2 3220) reset_topo_walk(revs);
+
+send-pack.c
+ad7a4032 582) receive_status(&reader, remote_refs);
+
+sequencer.c
+c068bcc5 840) free(kv.items[date_i].util);
+cbd8db17 890) return NULL;
+08187b4c 903) return NULL;
+08187b4c 920) argv_array_pushf(&child->env_array, "GIT_COMMITTER_DATE=%s", date.buf);
+cbd8db17 989) return -1;
+49697cb7 1211) arg1 = "commit";
+49697cb7 1212) arg2 = commit;
+cbd8db17 1428) goto out;
+cbd8db17 1432) goto out;
+2d05ef27 1459) goto out;
+08187b4c 1508) res = -1;
+08187b4c 1509) goto out;
+cbd8db17 2603) opts->allow_ff = 0;
+cbd8db17 2604) opts->committer_date_is_author_date = 1;
+08187b4c 2608) opts->allow_ff = 0;
+08187b4c 2609) opts->ignore_date = 1;
+08187b4c 3639) push_dates(&cmd, opts->committer_date_is_author_date);
+cd552227 4648) strbuf_addstr(buf, "rev-");
+cd552227 4649) strbuf_add_unique_abbrev(buf, oid, default_abbrev);
+867bc1d2 4673) }
+393adf7a 5272) goto cleanup;
+
+strbuf.c
+b38dd9e7 1140) res = error_errno(_("could not open '%s' for writing"), path);
+b38dd9e7 1142) res = error_errno(_("could not write to '%s'"), path);
+b38dd9e7 1143) close(fd);
+b38dd9e7 1145) res = error_errno(_("could not close '%s'"), path);
+b38dd9e7 1149) res = error_errno(_("could not edit '%s'"), path);
+
+t/helper/test-read-graph.c
+4bd0593e 23) die_errno(_("Could not open commit-graph '%s'"), graph_name);
+4bd0593e 27) return 1;
+
+t/helper/test-run-command.c
+eea4a7f4 331) static int inherit_handle(const char *argv0)
+eea4a7f4 333) struct child_process cp = CHILD_PROCESS_INIT;
+eea4a7f4 338) xsnprintf(path, sizeof(path), "out-XXXXXX");
+eea4a7f4 339) tmp = xmkstemp(path);
+eea4a7f4 341) argv_array_pushl(&cp.args,
+eea4a7f4 343) cp.in = -1;
+eea4a7f4 344) cp.no_stdout = cp.no_stderr = 1;
+eea4a7f4 345) if (start_command(&cp) < 0)
+eea4a7f4 349) close(tmp);
+eea4a7f4 350) if (unlink(path))
+eea4a7f4 353) if (close(cp.in) < 0 || finish_command(&cp) < 0)
+eea4a7f4 356) return 0;
+eea4a7f4 359) static int inherit_handle_child(void)
+eea4a7f4 361) struct strbuf buf = STRBUF_INIT;
+eea4a7f4 363) if (strbuf_read(&buf, 0, 0) < 0)
+eea4a7f4 365) printf("Received %s\n", buf.buf);
+eea4a7f4 366) strbuf_release(&buf);
+eea4a7f4 368) return 0;
+eea4a7f4 379) exit(inherit_handle(argv[0]));
+eea4a7f4 381) exit(inherit_handle_child());
+
+tag.c
+228c78fb 152) FREE_AND_NULL(item->tag);
+
+usage.c
+116d1fa6 16) fprintf(stderr, "BUG!!! too long a prefix '%s'\n", prefix);
+116d1fa6 17) abort();
+116d1fa6 22) *p = '\0'; /* vsnprintf() failed, clip at prefix */
+
+Commits introducing uncovered code:
+Alban Gruin	393adf7a sequencer: directly call pick_commits() from complete_action()
+Alexandr Miloslavskiy	24e4750c pathspec: add new function to parse file
+Alexandr Miloslavskiy	bebb5d6d add: support the --pathspec-from-file option
+Alexandr Miloslavskiy	64bac8df reset: support the `--pathspec-from-file` option
+Daniel Ferreira	5e82b9e4 built-in add -i: implement the `status` command
+Derrick Stolee	94c0956b sparse-checkout: create builtin with 'list' subcommand
+Derrick Stolee	bab3c359 sparse-checkout: create 'init' subcommand
+Derrick Stolee	d89f09c8 clone: add --sparse mode
+Derrick Stolee	416adc87 sparse-checkout: update working directory in-process for 'init'
+Derrick Stolee	190a65f9 sparse-checkout: respect core.ignoreCase in cone mode
+Derrick Stolee	af09ce24 sparse-checkout: init and set in cone mode
+Derrick Stolee	72918c1a sparse-checkout: create 'disable' subcommand
+Derrick Stolee	96cc8ab5 sparse-checkout: use hashmaps for cone patterns
+Derrick Stolee	e091228e sparse-checkout: update working directory in-process
+Derrick Stolee	44a4693b progress: create GIT_PROGRESS_DELAY
+Derrick Stolee	4bd0593e test-tool: use 'read-graph' helper
+Hans Jerry Illikainen	392b862e gpg-interface: refactor the free-and-xmemdupz pattern
+Hans Jerry Illikainen	72b006f4 gpg-interface: prefer check_signature() for GPG verification
+Hans Jerry Illikainen	67a6ea63 gpg-interface: limit search for primary key fingerprint
+James Coglan	fbccf255 graph: automatically track display width of graph lines
+James Coglan	0195285b graph: rename `new_mapping` to `old_mapping`
+Jeff King	ad7a4032 send-pack: check remote ref status on pack-objects failure
+Jeff King	f66e0401 pack-objects: avoid pointless oe_map_new_pack() calls
+Jeff King	103fb6d4 fsck: accept an oid instead of a "struct tag" for fsck_tag()
+Jeff King	c5b4269b fsck: accept an oid instead of a "struct commit" for fsck_commit()
+Jeff King	38370253 fsck: don't require an object struct for report()
+Jeff King	73390290 fsck: use oids rather than objects for object_name API
+Jeff King	a59cfb32 fsck: unify object-name code
+Jeff King	228c78fb commit, tag: don't set parsed bit for parse failures
+Jeff King	b2f2039c fsck: accept an oid instead of a "struct tree" for fsck_tree()
+Jeff King	6da40b22 fsck: accept an oid instead of a "struct blob" for fsck_blob()
+Jeff King	78543993 fsck: don't require an object struct for fsck_ident()
+Jeff King	b8b00f16 fsck: drop blob struct from fsck_finish()
+Jeff King	cc579000 fsck: don't require an object struct in verify_headers()
+Jeff King	5afc4b1d fsck: only provide oid/type in fsck_error callback
+Jeff King	78d50148 parse_tag_buffer(): treat NULL tag pointer as parse error
+Jeff King	82ef89b3 fsck: don't require object structs for display functions
+Johannes Schindelin	2e0afafe Add git-bundle: move objects and references by archive
+Johannes Schindelin	76b74323 built-in add -i: show unique prefixes of the commands
+Johannes Schindelin	b38dd9e7 strbuf: add a helper function to call the editor "on an strbuf"
+Johannes Schindelin	f37c2264 built-in add -i: prepare for multi-selection commands
+Johannes Schindelin	68db1cbf built-in add -i: support `?` (prompt help)
+Johannes Schindelin	6348bfba built-in add -i: implement the main loop
+Johannes Schindelin	c08171d1 built-in add -i: allow filtering the modified files list
+Johannes Schindelin	eea4a7f4 mingw: demonstrate that all file handles are inherited by child processes
+Johannes Schindelin	4d17fd25 remote-curl: unbreak http.extraHeader with custom allocators
+Johannes Schindelin	8746e072 built-in add -i: implement the `patch` command
+Johannes Schindelin	ab1e1ccc built-in add -i: re-implement `add-untracked` in C
+Johannes Schindelin	a8c45be9 built-in add -i: implement the `update` command
+Johannes Schindelin	c54ef5e4 built-in add -i: re-implement `revert` in C
+Johannes Schindelin	d7633578 built-in add -i: re-implement the `diff` command
+Johannes Schindelin	7584dd3c built-in add -p: offer a helpful error message when hunk navigation failed
+Johannes Schindelin	5906d5de built-in app -p: allow selecting a mode change as a "hunk"
+Johannes Schindelin	e3bd11b4 built-in add -p: show colored hunks by default
+Johannes Schindelin	f6aa7ecc built-in add -i: start implementing the `patch` functionality in C
+Johannes Schindelin	510aeca1 built-in add -p: implement the hunk splitting feature
+Johannes Schindelin	11f2c0da built-in add -p: coalesce hunks after splitting them
+Johannes Schindelin	bcdd297b built-in add -p: implement hunk editing
+Johannes Schindelin	9254bdfb built-in add -p: implement the 'g' ("goto") command
+Johannes Schindelin	80399aec built-in add -p: support multi-file diffs
+Johannes Schindelin	d6cf8733 built-in add -p: implement the '/' ("search regex") command
+Johannes Schindelin	54d9d9b2 built-in add -p: only show the applicable parts of the help text
+Johannes Schindelin	b4bbbbd5 apply --allow-overlap: fix a corner case
+Johannes Schindelin	116d1fa6 vreportf(): avoid relying on stdio buffering
+Johannes Schindelin	25ea47af built-in add -p: adjust hunk headers as needed
+Johannes Schindelin	867bc1d2 rebase-merges: move labels' whitespace mangling into `label_oid()`
+Junio C Hamano	7034cd09 Sync with Git 2.24.1
+Matthew Rogers	cd552227 rebase -r: let `label` generate safer labels
+Mike Hommey	0aa0c2b2 revision: free topo_walk_info before creating a new one in init_topo_walk
+Phillip Wood	49697cb7 move run_commit_hook() to libgit and use it there
+Phillip Wood	2d05ef27 sequencer: fix empty commit check when amending
+Robin H. Johnson	79862b6b bundle-create: progress output control
+Robin H. Johnson	73c3253d bundle: framework for options before bundle file
+Rohit Ashiwal	cbd8db17 rebase -i: support --committer-date-is-author-date
+Rohit Ashiwal	c068bcc5 sequencer: allow callers of read_author_script() to ignore fields
+Rohit Ashiwal	08187b4c rebase -i: support --ignore-date
+Slavica Đukić	3d965c76 built-in add -i: use color in the main loop
+Slavica Đukić	1daaebca built-in add -i: color the header in the `status` command
+SZEDER Gábor	c72fc40d path.c: clarify two field names in 'struct common_dir'
+Tanushree Tumane	51a0a4ed bisect--helper: avoid use-after-free
+William Baker	840cef0c midx: add progress to write_midx_file
+
+
