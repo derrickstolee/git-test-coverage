@@ -1,0 +1,241 @@
+pu	d0ed4d6799b625ee919fd3f67184f372acec9a9c
+jch	7310a282c0dfc9aeb35993a60e43878295777eb9
+next	bab2e86ba084f1fa0dcbedeeaeed31da013036bb
+master	de93cc14ab7e8db7645d8dbe4fd2603f76d5851f
+master@{1}	232378479ee6c66206d47a9be175e3a39682aea6
+
+
+Uncovered code in 'pu' not in 'jch'
+--------------------------------------------------------
+
+Commits introducing uncovered code:
+
+
+Uncovered code in 'jch' not in 'next'
+--------------------------------------------------------
+
+builtin/config.c
+3bf986d6 345) FREE_AND_NULL(cmd_line_value.regexp);
+3bcdd852 346) return CONFIG_INVALID_PATTERN;
+3bcdd852 391) goto free_strings;
+3c25ad75 712) given_config_source.scope = CONFIG_SCOPE_SYSTEM;
+
+builtin/merge-base.c
+fed842f0 128) return 1;
+
+builtin/name-rev.c
+2d539754 102) free(name->tip_name);
+
+builtin/pack-objects.c
+92fb0db9 1133) return 1;
+92fb0db9 2690) (reuse_packfile_bitmap &&
+92fb0db9 2691)  bitmap_walk_contains(bitmap_git, reuse_packfile_bitmap, oid));
+e704fc79 2843) allow_pack_reuse = git_config_bool(k, v);
+e704fc79 2844) return 0;
+
+builtin/rebase.c
+81f5bc1c 706) write_file(state_dir_path("quiet", opts), "%s", "");
+
+builtin/sparse-checkout.c
+
+config.c
+3c25ad75 3310) return "system";
+3c25ad75 3316) return "worktree";
+3c25ad75 3320) return "submodule";
+3c25ad75 3322) return "unknown";
+
+connected.c
+50033772 70) continue;
+
+diff.c
+da806352 448) return -1;
+
+fsmonitor.c
+8da2c576 36) if (hook_version == HOOK_INTERFACE_VERSION1 ||
+8da2c576 37)     hook_version == HOOK_INTERFACE_VERSION2)
+8da2c576 38) return hook_version;
+56c69100 62) timestamp = get_be64(index);
+56c69100 63) strbuf_addf(&last_update, "%"PRIu64"", timestamp);
+56c69100 64) index += sizeof(uint64_t);
+8da2c576 199) strbuf_addf(&last_update_token, "%"PRIu64"", last_update);
+
+pack-bitmap.c
+bb514de3 808) return;
+bb514de3 811) return;
+bb514de3 823) return;
+bb514de3 861) i = bitmap_git->pack->num_objects / BITS_IN_EWORD;
+
+rebase-interactive.c
+
+refs.c
+
+sequencer.c
+8ef6c12e 1527) return originally_empty;
+91e0ed22 2519) opts->keep_redundant_commits = 1;
+
+streaming.c
+c8123e72 154) if (open_istream_incore(st, r, &oi, real, type)) {
+
+tree-walk.c
+
+Commits introducing uncovered code:
+Alex Torok	fed842f0 rebase: fix --fork-point with short refname
+Derrick Stolee	3c754067 sparse-checkout: create leading directories
+Derrick Stolee	bd64de42 sparse-checkout: unquote C-style strings over --stdin
+Elijah Newren	8ef6c12e rebase (interactive-backend): make --keep-empty the default
+Elijah Newren	81f5bc1c rebase, sequencer: remove the broken GIT_QUIET handling
+Elijah Newren	91e0ed22 rebase (interactive-backend): fix handling of commits that become empty
+Elijah Newren	8f10f8a0 rebase: make the backend configurable via config setting
+Jeff King	bb514de3 pack-objects: improve partial packfile reuse
+Jeff King	92fb0db9 pack-objects: add checks for duplicate objects
+Jeff King	e704fc79 pack-objects: introduce pack.allowPackReuse
+Jeff King	8dd40c04 traverse_trees(): use stack array for name entries
+Jeff King	da806352 diff: move diff.wsErrorHighlight to "basic" config
+Johannes Schindelin	26027625 rebase -i: also avoid SHA-1 collisions with missingCommitsCheck
+Jonathan Tan	50033772 connected: verify promisor-ness of partial clone
+Kevin Willford	8da2c576 fsmonitor: handle version 2 of the hooks that will use opaque token
+Kevin Willford	56c69100 fsmonitor: change last update timestamp on the index_state to opaque token
+Martin Ågren	3bcdd852 builtin/config: extract `handle_value_regex()` from `get_value()`
+Martin Ågren	3bf986d6 builtin/config: collect "value_regexp" data in a struct
+Matheus Tavares	c8123e72 streaming: allow open_istream() to handle any repo
+Matthew Rogers	3c25ad75 config: add '--show-scope' to print the scope of a config value
+René Scharfe	2d539754 name-rev: release unused name strings
+
+
+Uncovered code in 'next' not in 'master'
+--------------------------------------------------------
+
+xdiff-interface.c
+
+Commits introducing uncovered code:
+Jeff King	3cd309c1 xdiff: avoid computing non-zero offset from NULL pointer
+
+
+Uncovered code in 'master' not in 'master@{1}'
+--------------------------------------------------------
+
+add-patch.c
+180f48df 557) else if (p != pend)
+180f48df 559) goto mismatched_output;
+180f48df 590) return -1;
+04f816b1 1156) int res = read_key_without_echo(&s->answer);
+04f816b1 1157) printf("%s\n", res == EOF ? "" : s->answer.buf);
+04f816b1 1158) return res;
+52628f94 1272) fwrite(diff->buf, diff->len, 1, stderr);
+d2a233cb 1567)       _(s->mode->help_patch_text));
+
+builtin/add.c
+90a6bb98 450) parse_pathspec(&pathspec, 0,
+90a6bb98 456) return run_add_interactive(NULL, "--patch=stash", &pathspec);
+
+builtin/pull.c
+54887b46 374) return status;
+
+builtin/stash.c
+6610e462 1026) setenv(INDEX_ENVIRONMENT, old_index_env, 1);
+
+compat/terminal.c
+94ac3c31 38) static int disable_bits(tcflag_t bits)
+94ac3c31 49) t.c_lflag &= ~bits;
+94ac3c31 59) static int disable_echo(void)
+94ac3c31 61) return disable_bits(ECHO);
+a5e46e6b 64) static int enable_non_canonical(void)
+a5e46e6b 66) return disable_bits(ICANON | ECHO);
+12acdf57 255) static int sequence_entry_cmp(const void *hashmap_cmp_fn_data,
+12acdf57 260) return strcmp(e1->sequence, keydata ? keydata : e2->sequence);
+12acdf57 263) static int is_known_escape_sequence(const char *sequence)
+12acdf57 268) if (!initialized) {
+12acdf57 269) struct child_process cp = CHILD_PROCESS_INIT;
+12acdf57 270) struct strbuf buf = STRBUF_INIT;
+12acdf57 273) hashmap_init(&sequences, (hashmap_cmp_fn)sequence_entry_cmp,
+12acdf57 276) argv_array_pushl(&cp.args, "infocmp", "-L", "-1", NULL);
+12acdf57 277) if (pipe_command(&cp, NULL, 0, &buf, 0, NULL, 0))
+12acdf57 278) strbuf_setlen(&buf, 0);
+12acdf57 280) for (eol = p = buf.buf; *p; p = eol + 1) {
+12acdf57 281) p = strchr(p, '=');
+12acdf57 282) if (!p)
+12acdf57 283) break;
+12acdf57 284) p++;
+12acdf57 285) eol = strchrnul(p, '\n');
+12acdf57 287) if (starts_with(p, "\\E")) {
+12acdf57 288) char *comma = memchr(p, ',', eol - p);
+12acdf57 291) p[0] = '^';
+12acdf57 292) p[1] = '[';
+12acdf57 293) FLEX_ALLOC_MEM(e, sequence, p, comma - p);
+12acdf57 294) hashmap_entry_init(&e->entry,
+12acdf57 295)    strhash(e->sequence));
+12acdf57 296) hashmap_add(&sequences, &e->entry);
+12acdf57 298) if (!*eol)
+12acdf57 299) break;
+12acdf57 301) initialized = 1;
+12acdf57 304) return !!hashmap_get_from_hash(&sequences, strhash(sequence), sequence);
+a5e46e6b 307) int read_key_without_echo(struct strbuf *buf)
+a5e46e6b 312) if (warning_displayed || enable_non_canonical() < 0) {
+a5e46e6b 313) if (!warning_displayed) {
+a5e46e6b 316) warning_displayed = 1;
+a5e46e6b 319) return strbuf_getline(buf, stdin);
+a5e46e6b 322) strbuf_reset(buf);
+a5e46e6b 323) ch = getchar();
+a5e46e6b 324) if (ch == EOF) {
+a5e46e6b 325) restore_term();
+a5e46e6b 326) return EOF;
+a5e46e6b 328) strbuf_addch(buf, ch);
+e118f063 330) if (ch == '\033' /* ESC */) {
+e118f063 338) strbuf_splice(buf, buf->len - 1, 1, "^[", 2);
+12acdf57 345) while (!is_known_escape_sequence(buf->buf)) {
+e118f063 346) struct pollfd pfd = { .fd = 0, .events = POLLIN };
+e118f063 348) if (poll(&pfd, 1, 500) < 1)
+e118f063 349) break;
+e118f063 351) ch = getchar();
+e118f063 352) if (ch == EOF)
+e118f063 353) return 0;
+e118f063 354) strbuf_addch(buf, ch);
+a5e46e6b 358) restore_term();
+a5e46e6b 359) return 0;
+
+gpg-interface.c
+54887b46 143) return 1;
+54887b46 207) free(trust);
+54887b46 208) goto error;
+54887b46 397) return config_error_nonbool(var);
+
+pretty.c
+54887b46 1355) strbuf_addstr(sb, "never");
+54887b46 1356) break;
+54887b46 1358) strbuf_addstr(sb, "marginal");
+54887b46 1359) break;
+54887b46 1361) strbuf_addstr(sb, "fully");
+54887b46 1362) break;
+
+run-command.c
+63ab08fb 216) int found = r != NULL;
+63ab08fb 218) return found;
+
+sha1-file.c
+9c8a294a 1442) *(oi->disk_sizep) = 0;
+9c8a294a 1444) hashclr(oi->delta_base_sha1);
+9c8a294a 1446) strbuf_addstr(oi->type_name, type_name(co->type));
+
+submodule.c
+a4ffbbbb 1161) fprintf(stderr, _("Unable to push submodule '%s'\n"), path);
+
+unpack-trees.c
+
+Commits introducing uncovered code:
+brian m. carlson	63ab08fb run-command: avoid undefined behavior in exists_in_PATH
+Emily Shaffer	573117df unpack-trees: watch for out-of-range index position
+Hans Jerry Illikainen	54887b46 gpg-interface: add minTrustLevel as a configuration option
+Johannes Schindelin	180f48df built-in add -p: support interactive.diffFilter
+Johannes Schindelin	04f816b1 built-in add -p: respect the `interactive.singlekey` config setting
+Johannes Schindelin	52628f94 built-in add -p: implement the "checkout" patch modes
+Johannes Schindelin	d2a233cb built-in add -p: prepare for patch modes other than "stage"
+Johannes Schindelin	90a6bb98 legacy stash -p: respect the add.interactive.usebuiltin setting
+Johannes Schindelin	6610e462 built-in stash: use the built-in `git add -p` if so configured
+Johannes Schindelin	94ac3c31 terminal: make the code of disable_echo() reusable
+Johannes Schindelin	a5e46e6b terminal: add a new function to read a single keystroke
+Johannes Schindelin	12acdf57 built-in add -p: handle Escape sequences more efficiently
+Johannes Schindelin	e118f063 built-in add -p: handle Escape sequences in interactive.singlekey mode
+Jonathan Tan	9c8a294a sha1-file: remove OBJECT_INFO_SKIP_CACHED
+Ralf Thielow	a4ffbbbb submodule.c: mark more strings for translation
+
+
