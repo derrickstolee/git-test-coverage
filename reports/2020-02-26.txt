@@ -1,0 +1,349 @@
+pu	0499e6851714dfb1c1955459f7877dd0e19dfb87
+jch	f0fb2e280f2e7a3834e630326ef106d8fcccce21
+next	5900a2a8f925f2c0ac44ac71f8d2c1959bdec53b
+master	2d2118b814c11f509e1aa76cb07110f7231668dc
+master@{1}	51ebf55b9309824346a6589c9f3b130c6f371b8f
+
+
+Uncovered code in 'pu' not in 'jch'
+--------------------------------------------------------
+
+bloom.c
+b6d925e7 247) for (i = 0; i < diff_queued_diff.nr; i++)
+b6d925e7 248) diff_free_filepair(diff_queued_diff.queue[i]);
+b6d925e7 249) filter->data = NULL;
+b6d925e7 250) filter->len = 0;
+b6d925e7 267) return -1;
+
+bugreport.c
+7e925ee2 23)     strbuf_addstr(version_info, "'git-remote-https --build-info' not supported\n");
+8edf9c76 39) strbuf_addf(sys_info, "uname() failed with code %d\n", errno);
+6c0f5520 73) strbuf_addf(config_info, "%s:\n", bugreport_config_safelist[idx]);
+6c0f5520 74) for_each_string_list_item(it, list) {
+6c0f5520 75) kv_info = it->util;
+6c0f5520 76) strbuf_addf(config_info, "  %s (%s)\n", it->string,
+6c0f5520 77)     kv_info ? config_scope_name(kv_info->scope)
+13b1ca98 126) strbuf_addstr(hook_info, iter->string);
+13b1ca98 127) strbuf_complete_line(hook_info);
+7a4dc0e0 132) static int loose_object_cb(const struct object_id *oid, const char *path,
+7a4dc0e0 134) int *loose_object_count = data;
+7a4dc0e0 136) if (loose_object_count) {
+7a4dc0e0 137) (*loose_object_count)++;
+7a4dc0e0 138) return 0;
+7a4dc0e0 141) return 1;
+7a226a68 193) pack_count++;
+7a226a68 198) open_pack_index(pack);
+7a226a68 199) object_count += pack->num_objects;
+b1cdb5e9 216) return;
+b1cdb5e9 225) strbuf_addbuf(contents, dirpath);
+b1cdb5e9 226) strbuf_addstr(contents, d->d_name);
+b1cdb5e9 227) strbuf_complete_line(contents);
+b1cdb5e9 229) if (d->d_type == DT_DIR) {
+b1cdb5e9 230) strbuf_addstr(dirpath, d->d_name);
+b1cdb5e9 231) list_contents_of_dir_recursively(contents, dirpath);
+b1cdb5e9 233) strbuf_setlen(dirpath, path_len);
+54391444 282) while (strbuf_getline(&alternate, file) != EOF) {
+54391444 283) if (!access(alternate.buf, F_OK))
+54391444 284) exists++;
+54391444 286) broken++;
+54391444 289) strbuf_addf(alternates_info,
+54391444 295) fclose(file);
+54391444 296) strbuf_release(&alternate);
+54391444 297) strbuf_release(&alternates_path);
+679ab92c 406) strbuf_release(&report_path);
+
+builtin/am.c
+e8ef1e8d 2345) resume.mode = RESUME_APPLY;
+
+builtin/commit-graph.c
+a599e2c9 75) *to = 0;
+a599e2c9 76) return 0;
+a599e2c9 86) *to |= COMMIT_GRAPH_INPUT_APPEND;
+
+builtin/commit.c
+
+builtin/describe.c
+f1b15bc8 397) fprintf(stderr, _("finished search at %s\n"),
+f1b15bc8 398) oid_to_hex(&c->object.oid));
+
+builtin/help.c
+6bf7dba7 123) puts(var);
+6bf7dba7 124) continue;
+
+builtin/init-db.c
+efa7ae36 192) repo_version = GIT_REPO_VERSION_READ;
+efa7ae36 200) git_config_set("extensions.objectformat",
+8b8f7189 376) repo_fmt->hash_algo = hash;
+3c9331a1 378) int env_algo = hash_algo_by_name(env);
+3c9331a1 379) if (env_algo == GIT_HASH_UNKNOWN)
+3c9331a1 381) repo_fmt->hash_algo = env_algo;
+8b8f7189 599) hash_algo = hash_algo_by_name(object_format);
+8b8f7189 600) if (hash_algo == GIT_HASH_UNKNOWN)
+
+builtin/mktag.c
+9bf55b8e 148) !memcmp(tagger_line, "gpgsig-sha256 ", 14)) {
+9bf55b8e 149) char *p = strpbrk(tagger_line + 1, "\n");
+9bf55b8e 150) if (!p)
+9bf55b8e 153) tagger_line = p + 1;
+9bf55b8e 154) while (*tagger_line == ' ' && (p = strpbrk(tagger_line, "\n")))
+9bf55b8e 155) tagger_line = p + 1;
+9bf55b8e 156) if (!p)
+
+builtin/rebase.c
+186dbeed 618) } else if (!read_oneliner(&buf, state_dir_path("head", opts), 0, 1))
+06ebea5c 868) reset_head(the_repository, &opts->orig_head, "checkout",
+06ebea5c 869)    opts->head_name, 0,
+e71223c6 1028) apply_autostash(state_dir_path("autostash", opts));
+
+builtin/tag.c
+9bf55b8e 133) return sign_with_header(buffer, get_signing_key());
+
+commit-graph.c
+dc9f0216 62) return; /* should never happen, but be lenient */
+dc9f0216 67) static int commit_pos_cmp(const void *va, const void *vb)
+dc9f0216 69) const struct commit *a = *(const struct commit **)va;
+dc9f0216 70) const struct commit *b = *(const struct commit **)vb;
+dc9f0216 71) return commit_pos_at(&commit_pos, a) -
+dc9f0216 72)        commit_pos_at(&commit_pos, b);
+92667ee9 89) else if (a->date > b->date)
+92667ee9 90) return 1;
+92667ee9 91) return 0;
+282c08a9 328) chunk_repeated = 1;
+282c08a9 335) chunk_repeated = 1;
+282c08a9 342) break;
+282c08a9 371) graph->chunk_bloom_indexes = NULL;
+282c08a9 372) graph->chunk_bloom_data = NULL;
+282c08a9 373) graph->bloom_filter_settings = NULL;
+282c08a9 1087) progress = start_delayed_progress(
+282c08a9 1089) ctx->commits.nr);
+282c08a9 1112) progress = start_delayed_progress(
+282c08a9 1114) ctx->commits.nr);
+282c08a9 1288) progress = start_delayed_progress(
+6bdbf235 1290) ctx->commits.nr);
+92667ee9 1296) QSORT(sorted_by_pos, ctx->commits.nr, commit_pos_cmp);
+5d5916fd 1751) break;
+
+dir.c
+
+fast-import.c
+12373043 1149) insert_mark(marks, mark, e);
+e8356e2d 2183) return -1;
+e8356e2d 3058) return;
+e8356e2d 3316) die_errno("cannot read '%s'", f);
+
+gpg-interface.c
+9bf55b8e 376) return parse_buffer_signed_by_header(buf, size, payload, signature);
+
+help.c
+a6ea0fe2 641) strbuf_addstr(buf, "no commit associated with this build\n");
+
+repository.c
+
+reset.c
+b3137f2e 37) ret = -1;
+b3137f2e 38) goto leave_reset_head;
+b3137f2e 43) goto leave_reset_head;
+b3137f2e 65) goto leave_reset_head;
+b3137f2e 71) goto leave_reset_head;
+b3137f2e 76) goto leave_reset_head;
+b3137f2e 80) ret = -1;
+b3137f2e 81) goto leave_reset_head;
+b3137f2e 89) goto leave_reset_head;
+b3137f2e 108) } else if (old_orig)
+b3137f2e 109) delete_ref(NULL, "ORIG_HEAD", old_orig, 0);
+
+sequencer.c
+fa717471 438) goto done;
+fa717471 444) goto done;
+448bea61 5143) apply_autostash(rebase_path_autostash());
+
+sha1-file.c
+768e30ea 98) static void git_hash_sha256_clone(git_hash_ctx *dst, const git_hash_ctx *src)
+768e30ea 100) git_SHA256_Clone(&dst->sha256, &src->sha256);
+768e30ea 101) }
+768e30ea 118) static void git_hash_unknown_clone(git_hash_ctx *dst, const git_hash_ctx *src)
+
+t/helper/test-bloom.c
+b6d925e7 20) printf("No filter.\n");
+b6d925e7 21) return;
+
+tree-diff.c
+3d2f906e 438) break;
+
+worktree.c
+e02a7141 470) strbuf_release(&err);
+
+Commits introducing uncovered code:
+Benno Evers	f1b15bc8 describe: dont abort too early when searching tags
+brian m. carlson	9bf55b8e tag: store SHA-256 signatures in a header
+brian m. carlson	e02a7141 worktree: allow repository version 1
+brian m. carlson	768e30ea hash: implement and use a context cloning function
+brian m. carlson	94127599 repository: require a build flag to use SHA-256
+brian m. carlson	e8356e2d fast-import: add options for rewriting submodules
+brian m. carlson	12373043 fast-import: permit reading multiple marks files
+brian m. carlson	3c9331a1 builtin/init-db: add environment variable for new repo hash
+brian m. carlson	8b8f7189 builtin/init-db: allow specifying hash algorithm on command line
+brian m. carlson	efa7ae36 init-db: move writing repo version into a function
+Denton Liu	448bea61 sequencer: make apply_rebase() accept a path
+Denton Liu	fa717471 sequencer: use file strbuf for read_oneliner()
+Denton Liu	b3137f2e reset: extract reset_head() from rebase
+Denton Liu	e71223c6 rebase: use apply_autostash() from sequencer.c
+Denton Liu	06ebea5c rebase: generify reset_head()
+Denton Liu	186dbeed rebase: use read_oneliner()
+Derrick Stolee	3d2f906e diff: halt tree-diff early after max_changes
+Derrick Stolee	92667ee9 commit-graph: examine commits by generation number
+Derrick Stolee	8dda180e dir: refactor treat_directory to clarify control flow
+Emily Shaffer	54391444 bugreport: summarize contents of alternates file
+Emily Shaffer	7e925ee2 bugreport: add git-remote-https version
+Emily Shaffer	8edf9c76 bugreport: add uname info
+Emily Shaffer	6c0f5520 bugreport: add config values from safelist
+Emily Shaffer	679ab92c bugreport: add tool to generate debugging info
+Emily Shaffer	13b1ca98 bugreport: collect list of populated hooks
+Emily Shaffer	7a4dc0e0 bugreport: count loose objects
+Emily Shaffer	7a226a68 bugreport: add packed object summary
+Emily Shaffer	6bf7dba7 help: move list_config_help to builtin/help
+Emily Shaffer	b1cdb5e9 bugreport: list contents of $OBJDIR/info
+Emily Shaffer	a6ea0fe2 bugreport: gather git version and build info
+Garima Singh	b6d925e7 bloom: core Bloom filter implementation for changed paths
+Garima Singh	282c08a9 commit-graph: write Bloom filters to commit graph file
+Garima Singh	6bdbf235 commit-graph: compute Bloom filters for changed paths
+Jeff King	dc9f0216 commit-graph: examine changed-path objects in pack order
+Paolo Bonzini	f3b48228 am: support --show-current-patch=raw as a synonym for--show-current-patch
+Paolo Bonzini	e8ef1e8d am: convert "resume" variable to a struct
+Taylor Blau	a599e2c9 builtin/commit-graph.c: introduce '--input=<source>'
+Taylor Blau	5d5916fd builtin/commit-graph.c: support '--split[=<strategy>]'
+
+
+Uncovered code in 'jch' not in 'next'
+--------------------------------------------------------
+
+advice.c
+a423e650 185) return get_config_value(PUSH_UPDATE_REJECTED) &&
+a423e650 186)        get_config_value(PUSH_UPDATE_REJECTED_ALIAS);
+
+builtin/pack-objects.c
+3f83fd5e 1647) if (!in_same_island(&delta->idx.oid, base_oid))
+
+commit.c
+
+pack-bitmap.c
+985e6002 799) nth_packed_object_id(&oid, pack, entry->nr);
+
+pack-check.c
+
+packfile.c
+6ac9760a 1245) return -1;
+6ac9760a 1249) return -1;
+6ac9760a 1253) return -1;
+2fecc48c 1878) return -1;
+
+sequencer.c
+430b75f7 1476)     return -1;
+
+sha1-file.c
+b99b6bcc 1478) oidclr(oi->delta_base_oid);
+
+t/helper/test-advise.c
+
+Commits introducing uncovered code:
+Heba Waly	a423e650 advice: revamp advise API
+Jeff King	3f83fd5e pack-objects: read delta base oid into object_id struct
+Jeff King	63f4a7fc pack-check: push oid lookup into loop
+Jeff King	6ac9760a packed_object_info(): use object_id internally for delta base
+Jeff King	2fecc48c packfile: drop nth_packed_object_sha1()
+Jeff King	b99b6bcc packed_object_info(): use object_id for returning delta base
+Junio C Hamano	985e6002 Merge branch 'jk/nth-packed-object-id' into jch
+Phillip Wood	430b75f7 commit: give correct advice for empty commit during a rebase
+
+
+Uncovered code in 'next' not in 'master'
+--------------------------------------------------------
+
+bisect.c
+45b63708 920) warning_errno(_("could not create file '%s'"),
+6c69f222 1024) return BISECT_FAILED;
+
+builtin/bisect--helper.c
+292731c4 227) res = -1;
+292731c4 233) res = error_errno(_("couldn't open the file '%s'"), git_path_bisect_log());
+bfacfce7 320) return -1;
+bfacfce7 321) return 0;
+292731c4 410) res = -1;
+292731c4 416) res = -1;
+292731c4 582) res = -1;
+292731c4 594) res = -1;
+292731c4 606) res = -1;
+
+builtin/rebase.c
+8a997ed1 695) write_file(state_dir_path("quiet", opts), "%s", "");
+10cdb9f3 1664) if (is_merge(&options))
+
+builtin/receive-pack.c
+4ef34648 998) else if (git_work_tree_cfg)
+4ef34648 999) work_tree = git_work_tree_cfg;
+4ef34648 1001) work_tree = "..";
+4ef34648 1008) git_dir = get_git_dir();
+
+builtin/rev-list.c
+792f8119 401) return -1;
+608d9c93 410) return -1;
+792f8119 444) return -1;
+
+builtin/show-branch.c
+2ce6d075 539) if (strpbrk(av, "*?[")) {
+
+builtin/sparse-checkout.c
+
+pack-bitmap.c
+4eb707eb 626)     (obj->type == OBJ_TAG && !revs->tag_objects))
+4eb707eb 627) continue;
+4f3bd560 732) continue;
+84243da1 799) nth_packed_object_oid(&oid, pack, entry->nr);
+
+sequencer.c
+d48e5e21 1529) return originally_empty;
+e98c4269 2523) opts->keep_redundant_commits = 1;
+
+Commits introducing uncovered code:
+Derrick Stolee	2631dc87 sparse-checkout: create 'add' subcommand
+Derrick Stolee	ef076599 sparse-checkout: work with Windows paths
+Elijah Newren	8a997ed1 rebase, sequencer: remove the broken GIT_QUIET handling
+Elijah Newren	e98c4269 rebase (interactive-backend): fix handling of commits that become empty
+Elijah Newren	10cdb9f3 rebase: rename the two primary rebase backends
+Elijah Newren	8295ed69 rebase: make the backend configurable via config setting
+Elijah Newren	d48e5e21 rebase (interactive-backend): make --keep-empty the default
+Hariom Verma	4ef34648 receive.denyCurrentBranch: respect all worktrees
+Jeff King	792f8119 rev-list: factor out bitmap-optimized routines
+Jeff King	84243da1 pack-bitmap: implement BLOB_LIMIT filtering
+Jeff King	4f3bd560 pack-bitmap: implement BLOB_NONE filtering
+Jeff King	4eb707eb rev-list: allow commit-only bitmap traversals
+Jeff King	55cb10f9 rev-list: make --count work with --objects
+Jeff King	608d9c93 rev-list: allow bitmaps when counting objects
+Pranit Bauva	6c69f222 bisect: libify `bisect_next_all`
+Pranit Bauva	45b63708 bisect: libify `check_good_are_ancestors_of_bad` and its dependents
+René Scharfe	2ce6d075 use strpbrk(3) to search for characters from a given set
+Tanushree Tumane	bfacfce7 bisect--helper: introduce new `decide_next()` function
+Tanushree Tumane	292731c4 bisect--helper: change `retval` to `res`
+
+
+Uncovered code in 'master' not in 'master@{1}'
+--------------------------------------------------------
+
+builtin/remote.c
+1a83068c 287) return 0;
+
+config.c
+f2a2327a 3346) return cf->linenr;
+
+rebase.c
+88f8576e 26) return REBASE_MERGES;
+
+Commits introducing uncovered code:
+Bert Wesarg	1a83068c remote: clean-up by returning early to avoid one indentation
+Bert Wesarg	923d4a5c remote rename/remove: handle branch.<name>.pushRemote config values
+Bert Wesarg	ceff1a13 remote: clean-up config callback
+Bert Wesarg	b3fd6cbf remote rename/remove: gently handle remote.pushDefault config
+Bert Wesarg	f2a2327a config: provide access to the current line number
+Bert Wesarg	88f8576e pull --rebase/remote rename: document and honor single-letter abbreviations rebase types
+
+
