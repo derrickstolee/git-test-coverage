@@ -11,7 +11,7 @@ name="$3"
 
 # put the reports in the correct place
 cp "$dir/report.txt" "reports/$prefix.txt"
-cp "$dir/report.htm" "reports/$prefix.txt"
+cp "$dir/report.htm" "reports/$prefix.htm"
 cp "$dir/commit-report.txt" "reports/$prefix-commits.txt"
 git add reports
 
