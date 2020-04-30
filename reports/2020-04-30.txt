@@ -1,0 +1,1604 @@
+pu	50ce81fe7726b7eea90e201c1d31567158bfe4c1
+jch	a2998880e147321b718420ae805807ef5fb483f3
+next	6140810f5a86d69e4bee74d360b936fb4a8a3b1f
+master	86ab15cb154862b6fa5cc646dac27532f881e1fb
+master@{1}	efe3874640e2e58209ddbb3b072f48f6b7094f34
+
+
+Uncovered code in 'pu' not in 'jch'
+--------------------------------------------------------
+
+builtin/bisect--helper.c
+9aadf776 91) return error_errno(_("cannot open file '%s' in mode '%s'"), path, mode);
+9aadf776 96) fclose(fp);
+9aadf776 97) return error_errno(_("could not write to file '%s'"), path);
+587c9fac 493) return error_errno(_("failed to write to '%s'"), git_path_bisect_log());
+587c9fac 522) return error_errno(_("could not open '%s' for appending"),
+f0bf9482 730) return BISECT_FAILED;
+f0bf9482 751) res = BISECT_FAILED;
+f0bf9482 763) res = BISECT_FAILED;
+f0bf9482 775) res = BISECT_FAILED;
+05a69202 818) fprintf(stderr, _("You need to start by \"git bisect "
+05a69202 821) if (!isatty(STDIN_FILENO))
+05a69202 822) return 1;
+05a69202 829) yesno = git_prompt(_("Do you want me to do it for you "
+05a69202 831) if (starts_with(yesno, _("n")) || starts_with(yesno, _("N")))
+05a69202 832) return 1;
+05a69202 834) return bisect_start(terms, 0, NULL, 0);
+10520dbf 869) return BISECT_FAILED;
+10520dbf 885) oid_array_clear(&revs);
+10520dbf 886) return BISECT_FAILED;
+
+builtin/rebase.c
+cd5e0fd9 834) argv_array_push(&am.args, "--ignore-whitespace");
+cd5e0fd9 836) argv_array_push(&opts->git_am_opts, "--committer-date-is-author-date");
+cd5e0fd9 838) argv_array_push(&opts->git_am_opts, "--ignore-date");
+
+builtin/receive-pack.c
+2c26d674 237) return config_error_nonbool(var);
+bc3e2729 1021) return code;
+bc3e2729 1024) proc.err = 0;
+bc3e2729 1029) if (use_sideband)
+bc3e2729 1030) finish_async(&muxer);
+bc3e2729 1031) return code;
+2c26d674 1814) continue;
+bc3e2729 2245) packet_buf_write(&buf, "ng %s %s%c%s\n",
+bc3e2729 2246)  cmd->ref_name, cmd->error_string,
+
+commit-graph.c
+7cb91802 1591) return -1;
+
+credential-store.c
+555c4709 27) strbuf_reset(&redacted_line);
+
+refs/reftable-backend.c
+427a313b 131)     ref_type(ri->base.refname) != REF_TYPE_PER_WORKTREE)
+427a313b 132) continue;
+427a313b 137) } else if (ri->ref.target != NULL) {
+427a313b 138) int out_flags = 0;
+427a313b 139) const char *resolved = refs_resolve_ref_unsafe(
+427a313b 140) ri->ref_store, ri->ref.ref_name,
+427a313b 142) ri->base.flags = out_flags;
+427a313b 143) if (resolved == NULL &&
+427a313b 144)     !(ri->flags & DO_FOR_EACH_INCLUDE_BROKEN) &&
+427a313b 145)     (ri->base.flags & REF_ISBROKEN)) {
+427a313b 146) continue;
+427a313b 154) continue;
+427a313b 164) return ITER_ERROR;
+427a313b 183) static int reftable_ref_iterator_abort(struct ref_iterator *ref_iterator)
+427a313b 185) struct git_reftable_iterator *ri =
+427a313b 187) reftable_ref_record_clear(&ri->ref);
+427a313b 188) reftable_iterator_destroy(&ri->iter);
+427a313b 189) return 0;
+427a313b 207) ri->err = refs->err;
+427a313b 228) static int reftable_transaction_abort(struct ref_store *ref_store,
+427a313b 232) struct git_reftable_ref_store *refs =
+427a313b 235) return 0;
+427a313b 246) return REFTABLE_LOCK_ERROR;
+427a313b 256) static int ref_update_cmp(const void *a, const void *b)
+427a313b 258) return strcmp(((struct ref_update *)a)->refname,
+427a313b 259)       ((struct ref_update *)b)->refname);
+427a313b 334) goto exit;
+427a313b 352) return refs->err;
+427a313b 380) static int write_delete_refs_table(struct reftable_writer *writer, void *argv)
+427a313b 382) struct write_delete_refs_arg *arg =
+427a313b 384) uint64_t ts = reftable_stack_next_update_index(arg->stack);
+427a313b 385) int err = 0;
+427a313b 386) int i = 0;
+427a313b 388) reftable_writer_set_limits(writer, ts, ts);
+427a313b 389) for (i = 0; i < arg->refnames->nr; i++) {
+427a313b 390) struct reftable_ref_record ref = {
+427a313b 391) .ref_name = (char *)arg->refnames->items[i].string,
+427a313b 394) err = reftable_writer_add_ref(writer, &ref);
+427a313b 395) if (err < 0) {
+427a313b 396) return err;
+427a313b 400) for (i = 0; i < arg->refnames->nr; i++) {
+427a313b 401) struct reftable_log_record log = { NULL };
+427a313b 402) struct reftable_ref_record current = { NULL };
+427a313b 403) fill_reftable_log_record(&log);
+427a313b 404) log.message = xstrdup(arg->logmsg);
+427a313b 405) log.new_hash = NULL;
+427a313b 406) log.old_hash = NULL;
+427a313b 407) log.update_index = ts;
+427a313b 408) log.ref_name = (char *)arg->refnames->items[i].string;
+427a313b 410) if (reftable_stack_read_ref(arg->stack, log.ref_name,
+427a313b 412) log.old_hash = current.value;
+427a313b 414) err = reftable_writer_add_log(writer, &log);
+427a313b 415) log.old_hash = NULL;
+427a313b 416) reftable_ref_record_clear(&current);
+427a313b 418) clear_reftable_log_record(&log);
+427a313b 419) if (err < 0) {
+427a313b 420) return err;
+427a313b 423) return 0;
+427a313b 426) static int reftable_delete_refs(struct ref_store *ref_store, const char *msg,
+427a313b 430) struct git_reftable_ref_store *refs =
+427a313b 432) struct write_delete_refs_arg arg = {
+427a313b 433) .stack = refs->stack,
+427a313b 438) if (refs->err < 0) {
+427a313b 439) return refs->err;
+427a313b 442) return reftable_stack_add(refs->stack, &write_delete_refs_table, &arg);
+427a313b 450) return refs->err;
+427a313b 477) return err;
+427a313b 493) log.old_hash = old_oid.hash;
+427a313b 499) log.new_hash = new_oid.hash;
+427a313b 503) reftable_writer_add_log(writer, &log);
+427a313b 524) return refs->err;
+427a313b 537) static int write_rename_table(struct reftable_writer *writer, void *argv)
+427a313b 539) struct write_rename_arg *arg = (struct write_rename_arg *)argv;
+427a313b 540) uint64_t ts = reftable_stack_next_update_index(arg->stack);
+427a313b 541) struct reftable_ref_record ref = { NULL };
+427a313b 542) int err = reftable_stack_read_ref(arg->stack, arg->oldname, &ref);
+427a313b 544) if (err) {
+427a313b 545) goto exit;
+427a313b 549) if (reftable_stack_read_ref(arg->stack, arg->newname, &ref) == 0) {
+427a313b 550) goto exit;
+427a313b 553) free(ref.ref_name);
+427a313b 554) ref.ref_name = strdup(arg->newname);
+427a313b 555) reftable_writer_set_limits(writer, ts, ts);
+427a313b 556) ref.update_index = ts;
+427a313b 559) struct reftable_ref_record todo[2] = { { NULL } };
+427a313b 560) todo[0].ref_name = (char *)arg->oldname;
+427a313b 561) todo[0].update_index = ts;
+427a313b 563) todo[1] = ref;
+427a313b 564) todo[1].update_index = ts;
+427a313b 566) err = reftable_writer_add_refs(writer, todo, 2);
+427a313b 567) if (err < 0) {
+427a313b 568) goto exit;
+427a313b 572) if (ref.value != NULL) {
+427a313b 573) struct reftable_log_record todo[2] = { { NULL } };
+427a313b 574) fill_reftable_log_record(&todo[0]);
+427a313b 575) fill_reftable_log_record(&todo[1]);
+427a313b 577) todo[0].ref_name = (char *)arg->oldname;
+427a313b 578) todo[0].update_index = ts;
+427a313b 579) todo[0].message = (char *)arg->logmsg;
+427a313b 580) todo[0].old_hash = ref.value;
+427a313b 581) todo[0].new_hash = NULL;
+427a313b 583) todo[1].ref_name = (char *)arg->newname;
+427a313b 584) todo[1].update_index = ts;
+427a313b 585) todo[1].old_hash = NULL;
+427a313b 586) todo[1].new_hash = ref.value;
+427a313b 587) todo[1].message = (char *)arg->logmsg;
+427a313b 589) err = reftable_writer_add_logs(writer, todo, 2);
+427a313b 591) clear_reftable_log_record(&todo[0]);
+427a313b 592) clear_reftable_log_record(&todo[1]);
+427a313b 594) if (err < 0) {
+427a313b 595) goto exit;
+427a313b 603) reftable_ref_record_clear(&ref);
+427a313b 604) return err;
+427a313b 607) static int reftable_rename_ref(struct ref_store *ref_store,
+427a313b 611) struct git_reftable_ref_store *refs =
+427a313b 613) struct write_rename_arg arg = {
+427a313b 614) .stack = refs->stack,
+427a313b 619) if (refs->err < 0) {
+427a313b 620) return refs->err;
+427a313b 623) return reftable_stack_add(refs->stack, &write_rename_table, &arg);
+427a313b 626) static int reftable_copy_ref(struct ref_store *ref_store,
+427a313b 653) return ITER_ERROR;
+427a313b 674) static int reftable_reflog_ref_iterator_peel(struct ref_iterator *ref_iterator,
+427a313b 681) static int reftable_reflog_ref_iterator_abort(struct ref_iterator *ref_iterator)
+427a313b 683) struct reftable_reflog_ref_iterator *ri =
+427a313b 685) reftable_log_record_clear(&ri->log);
+427a313b 686) reftable_iterator_destroy(&ri->iter);
+427a313b 687) return 0;
+427a313b 706) free(ri);
+427a313b 707) return NULL;
+427a313b 730) return refs->err;
+427a313b 759) err = -1;
+427a313b 774) reftable_for_each_reflog_ent_oldest_first(struct ref_store *ref_store,
+427a313b 778) struct reftable_iterator it = { NULL };
+427a313b 779) struct git_reftable_ref_store *refs =
+427a313b 781) struct reftable_merged_table *mt = NULL;
+427a313b 782) struct reftable_log_record *logs = NULL;
+427a313b 783) int cap = 0;
+427a313b 784) int len = 0;
+427a313b 785) int err = 0;
+427a313b 786) int i = 0;
+427a313b 788) if (refs->err < 0) {
+427a313b 789) return refs->err;
+427a313b 791) mt = reftable_stack_merged_table(refs->stack);
+427a313b 792) err = reftable_merged_table_seek_log(mt, &it, refname);
+427a313b 794) while (err == 0) {
+427a313b 795) struct reftable_log_record log = { NULL };
+427a313b 796) err = reftable_iterator_next_log(it, &log);
+427a313b 797) if (err != 0) {
+427a313b 798) break;
+427a313b 801) if (strcmp(log.ref_name, refname)) {
+427a313b 802) break;
+427a313b 805) if (len == cap) {
+427a313b 806) cap = 2 * cap + 1;
+427a313b 807) logs = realloc(logs, cap * sizeof(*logs));
+427a313b 810) logs[len++] = log;
+427a313b 813) for (i = len; i--;) {
+427a313b 814) struct reftable_log_record *log = &logs[i];
+427a313b 817) const char *full_committer = "";
+427a313b 819) hashcpy(old_oid.hash, log->old_hash);
+427a313b 820) hashcpy(new_oid.hash, log->new_hash);
+427a313b 822) full_committer = fmt_ident(log->name, log->email,
+427a313b 825) if (!fn(&old_oid, &new_oid, full_committer, log->time,
+427a313b 826) log->tz_offset, log->message, cb_data)) {
+427a313b 827) err = -1;
+427a313b 828) break;
+427a313b 832) for (i = 0; i < len; i++) {
+427a313b 833) reftable_log_record_clear(&logs[i]);
+427a313b 835) free(logs);
+427a313b 837) reftable_iterator_destroy(&it);
+427a313b 838) if (err > 0) {
+427a313b 839) err = 0;
+427a313b 841) return err;
+427a313b 851) static int reftable_create_reflog(struct ref_store *ref_store,
+427a313b 855) return 0;
+427a313b 858) static int reftable_delete_reflog(struct ref_store *ref_store,
+427a313b 861) return 0;
+427a313b 905) return err;
+427a313b 942) return refs->err;
+427a313b 948) return err;
+427a313b 957) return err;
+427a313b 988) return refs->err;
+427a313b 998) errno = reftable_error_to_errno(err);
+427a313b 999) err = -1;
+427a313b 1000) goto exit;
+427a313b 1010) *type |= REF_ISBROKEN;
+427a313b 1011) errno = EINVAL;
+427a313b 1012) err = -1;
+
+reftable/basics.c
+7dc06b1a 99) next = end;
+7dc06b1a 121) int names_equal(char **a, char **b)
+7dc06b1a 123) while (*a && *b) {
+7dc06b1a 124) if (strcmp(*a, *b)) {
+7dc06b1a 125) return 0;
+7dc06b1a 128) a++;
+7dc06b1a 129) b++;
+7dc06b1a 132) return *a == *b;
+7dc06b1a 139) return "I/O error";
+7dc06b1a 141) return "corrupt reftable file";
+7dc06b1a 143) return "file does not exist";
+7dc06b1a 147) return "misuse of the reftable API";
+7dc06b1a 149) return "zlib failure";
+7dc06b1a 151) return "general error";
+7dc06b1a 153) return "unknown error code";
+7dc06b1a 157) int reftable_error_to_errno(int err) {
+7dc06b1a 158) switch (err) {
+7dc06b1a 160) return EIO;
+7dc06b1a 162) return EFAULT;
+7dc06b1a 164) return ENOENT;
+7dc06b1a 166) return EBUSY;
+7dc06b1a 168) return EINVAL;
+7dc06b1a 170) return EDOM;
+7dc06b1a 172) return ERANGE;
+7dc06b1a 203) void reftable_set_alloc(void *(*malloc)(size_t),
+7dc06b1a 206) reftable_malloc_ptr = malloc;
+7dc06b1a 207) reftable_realloc_ptr = realloc;
+7dc06b1a 208) reftable_free_ptr = free;
+7dc06b1a 209) }
+
+reftable/block.c
+7dc06b1a 27) abort();
+7dc06b1a 36) return 72;
+7dc06b1a 38) abort();
+7dc06b1a 85) goto err;
+7dc06b1a 91) goto err;
+7dc06b1a 97) goto err;
+7dc06b1a 104) slice_clear(&key);
+7dc06b1a 113) restart = false;
+7dc06b1a 120) return -1;
+7dc06b1a 169) slice_clear(&compressed);
+7dc06b1a 170) return REFTABLE_ZLIB_ERROR;
+7dc06b1a 196) return REFTABLE_FORMAT_ERROR;
+7dc06b1a 212) slice_clear(&uncompressed);
+7dc06b1a 213) return REFTABLE_ZLIB_ERROR;
+7dc06b1a 222) full_block_size = sz;
+7dc06b1a 287) a->error = 1;
+7dc06b1a 288) return -1;
+7dc06b1a 322) return -1;
+7dc06b1a 328) return -1;
+7dc06b1a 339) int block_reader_first_key(struct block_reader *br, struct slice *key)
+7dc06b1a 341) struct slice empty = { 0 };
+7dc06b1a 342) int off = br->header_off + 4;
+7dc06b1a 343) struct slice in = {
+7dc06b1a 344) .buf = br->block.data + off,
+7dc06b1a 345) .len = br->block_len - off,
+7dc06b1a 348) byte extra = 0;
+7dc06b1a 349) int n = decode_key(key, &extra, empty, in);
+7dc06b1a 350) if (n < 0) {
+7dc06b1a 351) return n;
+7dc06b1a 353) return 0;
+7dc06b1a 376) return -1;
+7dc06b1a 398) result = -1;
+7dc06b1a 399) goto exit;
+
+reftable/file.c
+7dc06b1a 51) return -1;
+7dc06b1a 71) if (errno == ENOENT) {
+7dc06b1a 72) return REFTABLE_NOT_EXIST_ERROR;
+7dc06b1a 74) return -1;
+7dc06b1a 79) return -1;
+
+reftable/iter.c
+7dc06b1a 74) static void filtering_ref_iterator_close(void *iter_arg)
+7dc06b1a 76) struct filtering_ref_iterator *fri =
+7dc06b1a 78) slice_clear(&fri->oid);
+7dc06b1a 79) reftable_iterator_destroy(&fri->it);
+7dc06b1a 80) }
+7dc06b1a 82) static int filtering_ref_iterator_next(void *iter_arg, struct record rec)
+7dc06b1a 84) struct filtering_ref_iterator *fri =
+7dc06b1a 86) struct reftable_ref_record *ref =
+7dc06b1a 90) int err = reftable_iterator_next_ref(fri->it, ref);
+7dc06b1a 91) if (err != 0) {
+7dc06b1a 92) return err;
+7dc06b1a 95) if (fri->double_check) {
+7dc06b1a 96) struct reftable_iterator it = { 0 };
+7dc06b1a 98) int err = reftable_reader_seek_ref(fri->r, &it,
+7dc06b1a 99)    ref->ref_name);
+7dc06b1a 100) if (err == 0) {
+7dc06b1a 101) err = reftable_iterator_next_ref(it, ref);
+7dc06b1a 104) reftable_iterator_destroy(&it);
+7dc06b1a 106) if (err < 0) {
+7dc06b1a 107) return err;
+7dc06b1a 110) if (err > 0) {
+7dc06b1a 111) continue;
+7dc06b1a 115) if ((ref->target_value != NULL &&
+7dc06b1a 116)      !memcmp(fri->oid.buf, ref->target_value, fri->oid.len)) ||
+7dc06b1a 117)     (ref->value != NULL &&
+7dc06b1a 118)      !memcmp(fri->oid.buf, ref->value, fri->oid.len))) {
+7dc06b1a 119) return 0;
+7dc06b1a 121) }
+7dc06b1a 129) void iterator_from_filtering_ref_iterator(struct reftable_iterator *it,
+7dc06b1a 132) it->iter_arg = fri;
+7dc06b1a 133) it->ops = &filtering_ref_iterator_vtable;
+7dc06b1a 134) }
+7dc06b1a 136) static void indexed_table_ref_iter_close(void *p)
+7dc06b1a 138) struct indexed_table_ref_iter *it = (struct indexed_table_ref_iter *)p;
+7dc06b1a 139) block_iter_close(&it->cur);
+7dc06b1a 140) reader_return_block(it->r, &it->block_reader.block);
+7dc06b1a 141) slice_clear(&it->oid);
+7dc06b1a 142) }
+7dc06b1a 144) static int indexed_table_ref_iter_next_block(struct indexed_table_ref_iter *it)
+7dc06b1a 146) if (it->offset_idx == it->offset_len) {
+7dc06b1a 147) it->finished = true;
+7dc06b1a 148) return 1;
+7dc06b1a 151) reader_return_block(it->r, &it->block_reader.block);
+7dc06b1a 154) uint64_t off = it->offsets[it->offset_idx++];
+7dc06b1a 155) int err = reader_init_block_reader(it->r, &it->block_reader,
+7dc06b1a 157) if (err < 0) {
+7dc06b1a 158) return err;
+7dc06b1a 160) if (err > 0) {
+7dc06b1a 162) return REFTABLE_FORMAT_ERROR;
+7dc06b1a 165) block_reader_start(&it->block_reader, &it->cur);
+7dc06b1a 166) return 0;
+7dc06b1a 169) static int indexed_table_ref_iter_next(void *p, struct record rec)
+7dc06b1a 171) struct indexed_table_ref_iter *it = (struct indexed_table_ref_iter *)p;
+7dc06b1a 172) struct reftable_ref_record *ref =
+7dc06b1a 176) int err = block_iter_next(&it->cur, rec);
+7dc06b1a 177) if (err < 0) {
+7dc06b1a 178) return err;
+7dc06b1a 181) if (err > 0) {
+7dc06b1a 182) err = indexed_table_ref_iter_next_block(it);
+7dc06b1a 183) if (err < 0) {
+7dc06b1a 184) return err;
+7dc06b1a 187) if (it->finished) {
+7dc06b1a 188) return 1;
+7dc06b1a 190) continue;
+7dc06b1a 193) if (!memcmp(it->oid.buf, ref->target_value, it->oid.len) ||
+7dc06b1a 194)     !memcmp(it->oid.buf, ref->value, it->oid.len)) {
+7dc06b1a 195) return 0;
+7dc06b1a 197) }
+7dc06b1a 200) int new_indexed_table_ref_iter(struct indexed_table_ref_iter **dest,
+7dc06b1a 204) struct indexed_table_ref_iter *itr =
+7dc06b1a 206) int err = 0;
+7dc06b1a 208) itr->r = r;
+7dc06b1a 209) slice_resize(&itr->oid, oid_len);
+7dc06b1a 210) memcpy(itr->oid.buf, oid, oid_len);
+7dc06b1a 212) itr->offsets = offsets;
+7dc06b1a 213) itr->offset_len = offset_len;
+7dc06b1a 215) err = indexed_table_ref_iter_next_block(itr);
+7dc06b1a 216) if (err < 0) {
+7dc06b1a 217) reftable_free(itr);
+7dc06b1a 219) *dest = itr;
+7dc06b1a 221) return err;
+7dc06b1a 229) void iterator_from_indexed_table_ref_iter(struct reftable_iterator *it,
+7dc06b1a 232) it->iter_arg = itr;
+7dc06b1a 233) it->ops = &indexed_table_ref_iter_vtable;
+7dc06b1a 234) }
+
+reftable/merged.c
+7dc06b1a 25) return err;
+7dc06b1a 57) return 0;
+7dc06b1a 95) return err;
+7dc06b1a 124) return err;
+7dc06b1a 182) return REFTABLE_FORMAT_ERROR;
+7dc06b1a 185) return REFTABLE_FORMAT_ERROR;
+7dc06b1a 209) void reftable_merged_table_close(struct reftable_merged_table *mt)
+7dc06b1a 211) int i = 0;
+7dc06b1a 212) for (i = 0; i < mt->stack_len; i++) {
+7dc06b1a 213) reftable_reader_free(mt->stack[i]);
+7dc06b1a 215) FREE_AND_NULL(mt->stack);
+7dc06b1a 216) mt->stack_len = 0;
+7dc06b1a 217) }
+7dc06b1a 229) return;
+7dc06b1a 236) reftable_merged_table_max_update_index(struct reftable_merged_table *mt)
+7dc06b1a 238) return mt->max;
+7dc06b1a 242) reftable_merged_table_min_update_index(struct reftable_merged_table *mt)
+7dc06b1a 244) return mt->min;
+7dc06b1a 265) err = e;
+7dc06b1a 272) int i = 0;
+7dc06b1a 273) for (i = 0; i < n; i++) {
+7dc06b1a 274) reftable_iterator_destroy(&iters[i]);
+7dc06b1a 276) reftable_free(iters);
+7dc06b1a 277) return err;
+7dc06b1a 283) merged_iter_close(&merged);
+7dc06b1a 284) return err;
+
+reftable/pq.c
+7dc06b1a 43) void merged_iter_pqueue_check(struct merged_iter_pqueue pq)
+7dc06b1a 45) int i = 0;
+7dc06b1a 46) for (i = 1; i < pq.len; i++) {
+7dc06b1a 47) int parent = (i - 1) / 2;
+7dc06b1a 49) assert(pq_less(pq.heap[parent], pq.heap[i]));
+7dc06b1a 51) }
+
+reftable/reader.c
+7dc06b1a 63) return &r->obj_offsets;
+7dc06b1a 65) abort();
+7dc06b1a 73) return 0;
+7dc06b1a 88) uint32_t reftable_reader_hash_id(struct reftable_reader *r)
+7dc06b1a 90) return r->hash_id;
+7dc06b1a 103) err = REFTABLE_FORMAT_ERROR;
+7dc06b1a 104) goto exit;
+7dc06b1a 109) err = REFTABLE_FORMAT_ERROR;
+7dc06b1a 110) goto exit;
+7dc06b1a 125) r->hash_id = get_be32(f);
+7dc06b1a 126) switch (r->hash_id) {
+7dc06b1a 128) break;
+7dc06b1a 130) break;
+7dc06b1a 132) err = REFTABLE_FORMAT_ERROR;
+7dc06b1a 133) goto exit;
+7dc06b1a 135) f += 4;
+7dc06b1a 159) err = REFTABLE_FORMAT_ERROR;
+7dc06b1a 160) goto exit;
+7dc06b1a 189) err = REFTABLE_IO_ERROR;
+7dc06b1a 190) goto exit;
+7dc06b1a 194) err = REFTABLE_FORMAT_ERROR;
+7dc06b1a 195) goto exit;
+7dc06b1a 199) err = REFTABLE_FORMAT_ERROR;
+7dc06b1a 200) goto exit;
+7dc06b1a 211) err = REFTABLE_IO_ERROR;
+7dc06b1a 212) goto exit;
+7dc06b1a 230) static void table_iter_copy_from(struct table_iter *dest,
+7dc06b1a 233) dest->r = src->r;
+7dc06b1a 234) dest->typ = src->typ;
+7dc06b1a 235) dest->block_off = src->block_off;
+7dc06b1a 236) dest->finished = src->finished;
+7dc06b1a 237) block_iter_copy_from(&dest->bi, &src->bi);
+7dc06b1a 238) }
+7dc06b1a 296) return err;
+7dc06b1a 302) return block_size;
+7dc06b1a 311) reader_return_block(r, &block);
+7dc06b1a 312) err = reader_get_block(r, &block, next_off, block_size);
+7dc06b1a 313) if (err < 0) {
+7dc06b1a 314) return err;
+7dc06b1a 338) if (err != 0) {
+7dc06b1a 339) return err;
+7dc06b1a 343) struct block_reader *brp =
+7dc06b1a 345) *brp = br;
+7dc06b1a 347) dest->finished = false;
+7dc06b1a 348) block_reader_start(brp, &dest->bi);
+7dc06b1a 356) return REFTABLE_API_ERROR;
+7dc06b1a 379) table_iter_copy_from(ti, &next);
+7dc06b1a 380) block_iter_close(&next.bi);
+7dc06b1a 381) }
+7dc06b1a 416) return err;
+7dc06b1a 434) off = offs->index_offset;
+7dc06b1a 435) if (off == 0) {
+7dc06b1a 436) return 1;
+7dc06b1a 438) typ = BLOCK_TYPE_INDEX;
+7dc06b1a 457) goto exit;
+7dc06b1a 464) err = block_reader_first_key(next.bi.br, &got_key);
+7dc06b1a 465) if (err < 0) {
+7dc06b1a 466) goto exit;
+7dc06b1a 469) int cmp = slice_compare(got_key, want_key);
+7dc06b1a 470) if (cmp > 0) {
+7dc06b1a 471) table_iter_block_done(&next);
+7dc06b1a 472) break;
+7dc06b1a 476) table_iter_block_done(ti);
+7dc06b1a 477) table_iter_copy_from(ti, &next);
+7dc06b1a 478) }
+7dc06b1a 482) goto exit;
+7dc06b1a 494) static int reader_seek_indexed(struct reftable_reader *r,
+7dc06b1a 497) struct index_record want_index = { 0 };
+7dc06b1a 498) struct record want_index_rec = { 0 };
+7dc06b1a 499) struct index_record index_result = { 0 };
+7dc06b1a 500) struct record index_result_rec = { 0 };
+7dc06b1a 501) struct table_iter index_iter = { 0 };
+7dc06b1a 502) struct table_iter next = { 0 };
+7dc06b1a 503) int err = 0;
+7dc06b1a 505) record_key(rec, &want_index.last_key);
+7dc06b1a 506) record_from_index(&want_index_rec, &want_index);
+7dc06b1a 507) record_from_index(&index_result_rec, &index_result);
+7dc06b1a 509) err = reader_start(r, &index_iter, record_type(rec), true);
+7dc06b1a 510) if (err < 0) {
+7dc06b1a 511) goto exit;
+7dc06b1a 514) err = reader_seek_linear(r, &index_iter, want_index_rec);
+7dc06b1a 516) err = table_iter_next(&index_iter, index_result_rec);
+7dc06b1a 517) table_iter_block_done(&index_iter);
+7dc06b1a 518) if (err != 0) {
+7dc06b1a 519) goto exit;
+7dc06b1a 522) err = reader_table_iter_at(r, &next, index_result.offset, 0);
+7dc06b1a 523) if (err != 0) {
+7dc06b1a 524) goto exit;
+7dc06b1a 527) err = block_iter_seek(&next.bi, want_index.last_key);
+7dc06b1a 528) if (err < 0) {
+7dc06b1a 529) goto exit;
+7dc06b1a 532) if (next.typ == record_type(rec)) {
+7dc06b1a 533) err = 0;
+7dc06b1a 534) break;
+7dc06b1a 537) if (next.typ != BLOCK_TYPE_INDEX) {
+7dc06b1a 538) err = REFTABLE_FORMAT_ERROR;
+7dc06b1a 539) break;
+7dc06b1a 542) table_iter_copy_from(&index_iter, &next);
+7dc06b1a 543) }
+7dc06b1a 545) if (err == 0) {
+7dc06b1a 546) struct table_iter *malloced =
+7dc06b1a 548) table_iter_copy_from(malloced, &next);
+7dc06b1a 549) iterator_from_table_iter(it, malloced);
+7dc06b1a 552) block_iter_close(&next.bi);
+7dc06b1a 553) table_iter_close(&index_iter);
+7dc06b1a 554) record_clear(want_index_rec);
+7dc06b1a 555) record_clear(index_result_rec);
+7dc06b1a 556) return err;
+7dc06b1a 568) return reader_seek_indexed(r, it, rec);
+7dc06b1a 573) return err;
+7dc06b1a 577) return err;
+7dc06b1a 604) int reftable_reader_seek_ref(struct reftable_reader *r,
+7dc06b1a 607) struct reftable_ref_record ref = {
+7dc06b1a 610) struct record rec = { 0 };
+7dc06b1a 611) record_from_ref(&rec, &ref);
+7dc06b1a 612) return reader_seek(r, it, rec);
+7dc06b1a 615) int reftable_reader_seek_log_at(struct reftable_reader *r,
+7dc06b1a 619) struct reftable_log_record log = {
+7dc06b1a 623) struct record rec = { 0 };
+7dc06b1a 624) record_from_log(&rec, &log);
+7dc06b1a 625) return reader_seek(r, it, rec);
+7dc06b1a 628) int reftable_reader_seek_log(struct reftable_reader *r,
+7dc06b1a 631) uint64_t max = ~((uint64_t)0);
+7dc06b1a 632) return reftable_reader_seek_log_at(r, it, name, max);
+7dc06b1a 650) reftable_free(rd);
+7dc06b1a 661) static int reftable_reader_refs_for_indexed(struct reftable_reader *r,
+7dc06b1a 665) struct obj_record want = {
+7dc06b1a 667) .hash_prefix_len = r->object_id_len,
+7dc06b1a 669) struct record want_rec = { 0 };
+7dc06b1a 670) struct reftable_iterator oit = { 0 };
+7dc06b1a 671) struct obj_record got = { 0 };
+7dc06b1a 672) struct record got_rec = { 0 };
+7dc06b1a 673) int err = 0;
+7dc06b1a 675) record_from_obj(&want_rec, &want);
+7dc06b1a 677) err = reader_seek(r, &oit, want_rec);
+7dc06b1a 678) if (err != 0) {
+7dc06b1a 679) return err;
+7dc06b1a 682) record_from_obj(&got_rec, &got);
+7dc06b1a 683) err = iterator_next(oit, got_rec);
+7dc06b1a 684) reftable_iterator_destroy(&oit);
+7dc06b1a 685) if (err < 0) {
+7dc06b1a 686) return err;
+7dc06b1a 689) if (err > 0 ||
+7dc06b1a 690)     memcmp(want.hash_prefix, got.hash_prefix, r->object_id_len)) {
+7dc06b1a 691) iterator_set_empty(it);
+7dc06b1a 692) return 0;
+7dc06b1a 696) struct indexed_table_ref_iter *itr = NULL;
+7dc06b1a 697) err = new_indexed_table_ref_iter(&itr, r, oid,
+7dc06b1a 700) if (err < 0) {
+7dc06b1a 701) record_clear(got_rec);
+7dc06b1a 702) return err;
+7dc06b1a 704) got.offsets = NULL;
+7dc06b1a 705) record_clear(got_rec);
+7dc06b1a 707) iterator_from_indexed_table_ref_iter(it, itr);
+7dc06b1a 710) return 0;
+7dc06b1a 713) static int reftable_reader_refs_for_unindexed(struct reftable_reader *r,
+7dc06b1a 717) struct table_iter *ti = reftable_calloc(sizeof(struct table_iter));
+7dc06b1a 718) struct filtering_ref_iterator *filter = NULL;
+7dc06b1a 719) int err = reader_start(r, ti, BLOCK_TYPE_REF, false);
+7dc06b1a 720) if (err < 0) {
+7dc06b1a 721) reftable_free(ti);
+7dc06b1a 722) return err;
+7dc06b1a 725) filter = reftable_calloc(sizeof(struct filtering_ref_iterator));
+7dc06b1a 726) slice_resize(&filter->oid, oid_len);
+7dc06b1a 727) memcpy(filter->oid.buf, oid, oid_len);
+7dc06b1a 728) filter->r = r;
+7dc06b1a 729) filter->double_check = false;
+7dc06b1a 730) iterator_from_table_iter(&filter->it, ti);
+7dc06b1a 732) iterator_from_filtering_ref_iterator(it, filter);
+7dc06b1a 733) return 0;
+7dc06b1a 736) int reftable_reader_refs_for(struct reftable_reader *r,
+7dc06b1a 740) if (r->obj_offsets.present) {
+7dc06b1a 741) return reftable_reader_refs_for_indexed(r, it, oid);
+7dc06b1a 743) return reftable_reader_refs_for_unindexed(r, it, oid, oid_len);
+
+reftable/record.c
+7dc06b1a 24) return -1;
+7dc06b1a 31) return -1;
+7dc06b1a 59) return -1;
+7dc06b1a 75) return false;
+7dc06b1a 84) return -1;
+7dc06b1a 88) return -1;
+7dc06b1a 105) return -1;
+7dc06b1a 109) return -1;
+7dc06b1a 125) return -1;
+7dc06b1a 133) return -1;
+7dc06b1a 138) return -1;
+7dc06b1a 154) return -1;
+7dc06b1a 159) return -1;
+7dc06b1a 164) return -1;
+7dc06b1a 172) return -1;
+7dc06b1a 221) static char hexdigit(int c)
+7dc06b1a 223) if (c <= 9) {
+7dc06b1a 224) return '0' + c;
+7dc06b1a 226) return 'a' + (c - 10);
+7dc06b1a 229) static void hex_format(char *dest, byte *src, int hash_size)
+7dc06b1a 231) assert(hash_size > 0);
+7dc06b1a 232) if (src != NULL) {
+7dc06b1a 233) int i = 0;
+7dc06b1a 234) for (i = 0; i < hash_size; i++) {
+7dc06b1a 235) dest[2 * i] = hexdigit(src[i] >> 4);
+7dc06b1a 236) dest[2 * i + 1] = hexdigit(src[i] & 0xf);
+7dc06b1a 238) dest[2 * hash_size] = 0;
+7dc06b1a 240) }
+7dc06b1a 242) void reftable_ref_record_print(struct reftable_ref_record *ref,
+7dc06b1a 245) char hex[SHA256_SIZE + 1] = { 0 };
+7dc06b1a 246) printf("ref{%s(%" PRIu64 ") ", ref->ref_name, ref->update_index);
+7dc06b1a 247) if (ref->value != NULL) {
+7dc06b1a 248) hex_format(hex, ref->value, hash_size(hash_id));
+7dc06b1a 249) printf("%s", hex);
+7dc06b1a 251) if (ref->target_value != NULL) {
+7dc06b1a 252) hex_format(hex, ref->target_value, hash_size(hash_id));
+7dc06b1a 253) printf(" (T %s)", hex);
+7dc06b1a 255) if (ref->target != NULL) {
+7dc06b1a 256) printf("=> %s", ref->target);
+7dc06b1a 258) printf("}\n");
+7dc06b1a 259) }
+7dc06b1a 300) return -1;
+7dc06b1a 306) return -1;
+7dc06b1a 314) return -1;
+7dc06b1a 323) return -1;
+7dc06b1a 343) return n;
+7dc06b1a 357) return -1;
+7dc06b1a 380) return -1;
+7dc06b1a 390) abort();
+7dc06b1a 398) FREE_AND_NULL(r->target_value);
+7dc06b1a 401) FREE_AND_NULL(r->value);
+7dc06b1a 424) static void obj_record_key(const void *r, struct slice *dest)
+7dc06b1a 426) const struct obj_record *rec = (const struct obj_record *)r;
+7dc06b1a 427) slice_resize(dest, rec->hash_prefix_len);
+7dc06b1a 428) memcpy(dest->buf, rec->hash_prefix, rec->hash_prefix_len);
+7dc06b1a 429) }
+7dc06b1a 431) static void obj_record_copy_from(void *rec, const void *src_rec, int hash_size)
+7dc06b1a 433) struct obj_record *ref = (struct obj_record *)rec;
+7dc06b1a 434) const struct obj_record *src = (const struct obj_record *)src_rec;
+7dc06b1a 436) *ref = *src;
+7dc06b1a 437) ref->hash_prefix = reftable_malloc(ref->hash_prefix_len);
+7dc06b1a 438) memcpy(ref->hash_prefix, src->hash_prefix, ref->hash_prefix_len);
+7dc06b1a 441) int olen = ref->offset_len * sizeof(uint64_t);
+7dc06b1a 442) ref->offsets = reftable_malloc(olen);
+7dc06b1a 443) memcpy(ref->offsets, src->offsets, olen);
+7dc06b1a 445) }
+7dc06b1a 447) static void obj_record_clear(void *rec)
+7dc06b1a 449) struct obj_record *ref = (struct obj_record *)rec;
+7dc06b1a 450) FREE_AND_NULL(ref->hash_prefix);
+7dc06b1a 451) FREE_AND_NULL(ref->offsets);
+7dc06b1a 452) memset(ref, 0, sizeof(struct obj_record));
+7dc06b1a 453) }
+7dc06b1a 455) static byte obj_record_val_type(const void *rec)
+7dc06b1a 457) struct obj_record *r = (struct obj_record *)rec;
+7dc06b1a 458) if (r->offset_len > 0 && r->offset_len < 8) {
+7dc06b1a 459) return r->offset_len;
+7dc06b1a 461) return 0;
+7dc06b1a 464) static int obj_record_encode(const void *rec, struct slice s, int hash_size)
+7dc06b1a 466) struct obj_record *r = (struct obj_record *)rec;
+7dc06b1a 467) struct slice start = s;
+7dc06b1a 468) int n = 0;
+7dc06b1a 469) if (r->offset_len == 0 || r->offset_len >= 8) {
+7dc06b1a 470) n = put_var_int(s, r->offset_len);
+7dc06b1a 471) if (n < 0) {
+7dc06b1a 472) return -1;
+7dc06b1a 474) slice_consume(&s, n);
+7dc06b1a 476) if (r->offset_len == 0) {
+7dc06b1a 477) return start.len - s.len;
+7dc06b1a 479) n = put_var_int(s, r->offsets[0]);
+7dc06b1a 480) if (n < 0) {
+7dc06b1a 481) return -1;
+7dc06b1a 483) slice_consume(&s, n);
+7dc06b1a 486) uint64_t last = r->offsets[0];
+7dc06b1a 487) int i = 0;
+7dc06b1a 488) for (i = 1; i < r->offset_len; i++) {
+7dc06b1a 489) int n = put_var_int(s, r->offsets[i] - last);
+7dc06b1a 490) if (n < 0) {
+7dc06b1a 491) return -1;
+7dc06b1a 493) slice_consume(&s, n);
+7dc06b1a 494) last = r->offsets[i];
+7dc06b1a 497) return start.len - s.len;
+7dc06b1a 500) static int obj_record_decode(void *rec, struct slice key, byte val_type,
+7dc06b1a 503) struct slice start = in;
+7dc06b1a 504) struct obj_record *r = (struct obj_record *)rec;
+7dc06b1a 505) uint64_t count = val_type;
+7dc06b1a 506) int n = 0;
+7dc06b1a 507) r->hash_prefix = reftable_malloc(key.len);
+7dc06b1a 508) memcpy(r->hash_prefix, key.buf, key.len);
+7dc06b1a 509) r->hash_prefix_len = key.len;
+7dc06b1a 511) if (val_type == 0) {
+7dc06b1a 512) n = get_var_int(&count, in);
+7dc06b1a 513) if (n < 0) {
+7dc06b1a 514) return n;
+7dc06b1a 517) slice_consume(&in, n);
+7dc06b1a 520) r->offsets = NULL;
+7dc06b1a 521) r->offset_len = 0;
+7dc06b1a 522) if (count == 0) {
+7dc06b1a 523) return start.len - in.len;
+7dc06b1a 526) r->offsets = reftable_malloc(count * sizeof(uint64_t));
+7dc06b1a 527) r->offset_len = count;
+7dc06b1a 529) n = get_var_int(&r->offsets[0], in);
+7dc06b1a 530) if (n < 0) {
+7dc06b1a 531) return n;
+7dc06b1a 533) slice_consume(&in, n);
+7dc06b1a 536) uint64_t last = r->offsets[0];
+7dc06b1a 537) int j = 1;
+7dc06b1a 538) while (j < count) {
+7dc06b1a 539) uint64_t delta = 0;
+7dc06b1a 540) int n = get_var_int(&delta, in);
+7dc06b1a 541) if (n < 0) {
+7dc06b1a 542) return n;
+7dc06b1a 544) slice_consume(&in, n);
+7dc06b1a 546) last = r->offsets[j] = (delta + last);
+7dc06b1a 547) j++;
+7dc06b1a 550) return start.len - in.len;
+7dc06b1a 553) static bool not_a_deletion(const void *p)
+7dc06b1a 555) return false;
+7dc06b1a 569) void reftable_log_record_print(struct reftable_log_record *log,
+7dc06b1a 572) char hex[SHA256_SIZE + 1] = { 0 };
+7dc06b1a 574) printf("log{%s(%" PRIu64 ") %s <%s> %" PRIu64 " %04d\n", log->ref_name,
+7dc06b1a 576)        log->tz_offset);
+7dc06b1a 577) hex_format(hex, log->old_hash, hash_size(hash_id));
+7dc06b1a 578) printf("%s => ", hex);
+7dc06b1a 579) hex_format(hex, log->new_hash, hash_size(hash_id));
+7dc06b1a 580) printf("%s\n\n%s\n}\n", hex, log->message);
+7dc06b1a 581) }
+7dc06b1a 666) oldh = zero;
+7dc06b1a 669) newh = zero;
+7dc06b1a 673) return -1;
+7dc06b1a 682) return -1;
+7dc06b1a 688) return -1;
+7dc06b1a 694) return -1;
+7dc06b1a 699) return -1;
+7dc06b1a 707) return -1;
+7dc06b1a 726) return REFTABLE_FORMAT_ERROR;
+7dc06b1a 740) return REFTABLE_FORMAT_ERROR;
+7dc06b1a 753) goto error;
+7dc06b1a 764) goto error;
+7dc06b1a 775) goto error;
+7dc06b1a 780) goto error;
+7dc06b1a 789) goto error;
+7dc06b1a 800) slice_clear(&dest);
+7dc06b1a 804) static bool null_streq(char *a, char *b)
+7dc06b1a 806) char *empty = "";
+7dc06b1a 807) if (a == NULL) {
+7dc06b1a 808) a = empty;
+7dc06b1a 810) if (b == NULL) {
+7dc06b1a 811) b = empty;
+7dc06b1a 813) return 0 == strcmp(a, b);
+7dc06b1a 816) static bool zero_hash_eq(byte *a, byte *b, int sz)
+7dc06b1a 818) if (a == NULL) {
+7dc06b1a 819) a = zero;
+7dc06b1a 821) if (b == NULL) {
+7dc06b1a 822) b = zero;
+7dc06b1a 824) return !memcmp(a, b, sz);
+7dc06b1a 827) bool reftable_log_record_equal(struct reftable_log_record *a,
+7dc06b1a 830) return null_streq(a->name, b->name) && null_streq(a->email, b->email) &&
+7dc06b1a 831)        null_streq(a->message, b->message) &&
+7dc06b1a 832)        zero_hash_eq(a->old_hash, b->old_hash, hash_size) &&
+7dc06b1a 833)        zero_hash_eq(a->new_hash, b->new_hash, hash_size) &&
+7dc06b1a 834)        a->time == b->time && a->tz_offset == b->tz_offset &&
+7dc06b1a 835)        a->update_index == b->update_index;
+7dc06b1a 867) struct obj_record *r =
+7dc06b1a 869) record_from_obj(&rec, r);
+7dc06b1a 870) return rec;
+7dc06b1a 879) struct index_record *r =
+7dc06b1a 881) record_from_index(&rec, r);
+7dc06b1a 882) return rec;
+7dc06b1a 902) static void index_record_key(const void *r, struct slice *dest)
+7dc06b1a 904) struct index_record *rec = (struct index_record *)r;
+7dc06b1a 905) slice_copy(dest, rec->last_key);
+7dc06b1a 906) }
+7dc06b1a 908) static void index_record_copy_from(void *rec, const void *src_rec,
+7dc06b1a 911) struct index_record *dst = (struct index_record *)rec;
+7dc06b1a 912) struct index_record *src = (struct index_record *)src_rec;
+7dc06b1a 914) slice_copy(&dst->last_key, src->last_key);
+7dc06b1a 915) dst->offset = src->offset;
+7dc06b1a 916) }
+7dc06b1a 918) static void index_record_clear(void *rec)
+7dc06b1a 920) struct index_record *idx = (struct index_record *)rec;
+7dc06b1a 921) slice_clear(&idx->last_key);
+7dc06b1a 922) }
+7dc06b1a 924) static byte index_record_val_type(const void *rec)
+7dc06b1a 926) return 0;
+7dc06b1a 929) static int index_record_encode(const void *rec, struct slice out, int hash_size)
+7dc06b1a 931) const struct index_record *r = (const struct index_record *)rec;
+7dc06b1a 932) struct slice start = out;
+7dc06b1a 934) int n = put_var_int(out, r->offset);
+7dc06b1a 935) if (n < 0) {
+7dc06b1a 936) return n;
+7dc06b1a 939) slice_consume(&out, n);
+7dc06b1a 941) return start.len - out.len;
+7dc06b1a 944) static int index_record_decode(void *rec, struct slice key, byte val_type,
+7dc06b1a 947) struct slice start = in;
+7dc06b1a 948) struct index_record *r = (struct index_record *)rec;
+7dc06b1a 949) int n = 0;
+7dc06b1a 951) slice_copy(&r->last_key, key);
+7dc06b1a 953) n = get_var_int(&r->offset, in);
+7dc06b1a 954) if (n < 0) {
+7dc06b1a 955) return n;
+7dc06b1a 958) slice_consume(&in, n);
+7dc06b1a 959) return start.len - in.len;
+7dc06b1a 1022) void record_from_obj(struct record *rec, struct obj_record *obj_rec)
+7dc06b1a 1024) rec->data = obj_rec;
+7dc06b1a 1025) rec->ops = &obj_record_vtable;
+7dc06b1a 1026) }
+7dc06b1a 1028) void record_from_index(struct record *rec, struct index_record *index_rec)
+7dc06b1a 1030) rec->data = index_rec;
+7dc06b1a 1031) rec->ops = &index_record_vtable;
+7dc06b1a 1032) }
+7dc06b1a 1040) struct reftable_ref_record *record_as_ref(struct record rec)
+7dc06b1a 1042) assert(record_type(rec) == BLOCK_TYPE_REF);
+7dc06b1a 1043) return (struct reftable_ref_record *)rec.data;
+7dc06b1a 1046) struct reftable_log_record *record_as_log(struct record rec)
+7dc06b1a 1048) assert(record_type(rec) == BLOCK_TYPE_LOG);
+7dc06b1a 1049) return (struct reftable_log_record *)rec.data;
+7dc06b1a 1052) static bool hash_equal(byte *a, byte *b, int hash_size)
+7dc06b1a 1054) if (a != NULL && b != NULL) {
+7dc06b1a 1055) return !memcmp(a, b, hash_size);
+7dc06b1a 1058) return a == b;
+7dc06b1a 1061) static bool str_equal(char *a, char *b)
+7dc06b1a 1063) if (a != NULL && b != NULL) {
+7dc06b1a 1064) return 0 == strcmp(a, b);
+7dc06b1a 1067) return a == b;
+7dc06b1a 1070) bool reftable_ref_record_equal(struct reftable_ref_record *a,
+7dc06b1a 1073) assert(hash_size > 0);
+7dc06b1a 1074) return 0 == strcmp(a->ref_name, b->ref_name) &&
+7dc06b1a 1075)        a->update_index == b->update_index &&
+7dc06b1a 1076)        hash_equal(a->value, b->value, hash_size) &&
+7dc06b1a 1077)        hash_equal(a->target_value, b->target_value, hash_size) &&
+7dc06b1a 1078)        str_equal(a->target, b->target);
+7dc06b1a 1081) int reftable_ref_record_compare_name(const void *a, const void *b)
+7dc06b1a 1083) return strcmp(((struct reftable_ref_record *)a)->ref_name,
+7dc06b1a 1084)       ((struct reftable_ref_record *)b)->ref_name);
+7dc06b1a 1093) int reftable_log_record_compare_key(const void *a, const void *b)
+7dc06b1a 1095) struct reftable_log_record *la = (struct reftable_log_record *)a;
+7dc06b1a 1096) struct reftable_log_record *lb = (struct reftable_log_record *)b;
+7dc06b1a 1098) int cmp = strcmp(la->ref_name, lb->ref_name);
+7dc06b1a 1099) if (cmp) {
+7dc06b1a 1100) return cmp;
+7dc06b1a 1102) if (la->update_index > lb->update_index) {
+7dc06b1a 1103) return -1;
+7dc06b1a 1105) return (la->update_index < lb->update_index) ? 1 : 0;
+7dc06b1a 1123) return SHA256_SIZE;
+7dc06b1a 1125) abort();
+
+reftable/slice.c
+7dc06b1a 18) s->len = 0;
+7dc06b1a 19) return;
+7dc06b1a 109) bool slice_equal(struct slice a, struct slice b)
+7dc06b1a 111) if (a.len != b.len) {
+7dc06b1a 112) return 0;
+7dc06b1a 114) return memcmp(a.buf, b.buf, a.len) == 0;
+7dc06b1a 133) int slice_write(struct slice *b, byte *data, int sz)
+7dc06b1a 135) if (b->len + sz > b->cap) {
+7dc06b1a 136) int newcap = 2 * b->cap + 1;
+7dc06b1a 137) if (newcap < b->len + sz) {
+7dc06b1a 138) newcap = (b->len + sz);
+7dc06b1a 140) b->buf = reftable_realloc(b->buf, newcap);
+7dc06b1a 141) b->cap = newcap;
+7dc06b1a 144) memcpy(b->buf + b->len, data, sz);
+7dc06b1a 145) b->len += sz;
+7dc06b1a 146) return sz;
+7dc06b1a 149) int slice_write_void(void *b, byte *data, int sz)
+7dc06b1a 151) return slice_write((struct slice *)b, data, sz);
+7dc06b1a 154) static uint64_t slice_size(void *b)
+7dc06b1a 156) return ((struct slice *)b)->len;
+7dc06b1a 159) static void slice_return_block(void *b, struct reftable_block *dest)
+7dc06b1a 161) memset(dest->data, 0xff, dest->len);
+7dc06b1a 162) reftable_free(dest->data);
+7dc06b1a 163) }
+7dc06b1a 165) static void slice_close(void *b)
+7dc06b1a 167) }
+7dc06b1a 169) static int slice_read_block(void *v, struct reftable_block *dest, uint64_t off,
+7dc06b1a 172) struct slice *b = (struct slice *)v;
+7dc06b1a 173) assert(off + size <= b->len);
+7dc06b1a 174) dest->data = reftable_calloc(size);
+7dc06b1a 175) memcpy(dest->data, b->buf + off, size);
+7dc06b1a 176) dest->len = size;
+7dc06b1a 177) return size;
+7dc06b1a 187) void block_source_from_slice(struct reftable_block_source *bs,
+7dc06b1a 190) bs->ops = &slice_vtable;
+7dc06b1a 191) bs->arg = buf;
+7dc06b1a 192) }
+7dc06b1a 194) static void malloc_return_block(void *b, struct reftable_block *dest)
+7dc06b1a 196) memset(dest->data, 0xff, dest->len);
+7dc06b1a 197) reftable_free(dest->data);
+7dc06b1a 198) }
+
+reftable/stack.c
+7dc06b1a 26) config.hash_id = SHA1_ID;
+7dc06b1a 41) reftable_stack_destroy(p);
+7dc06b1a 54) err = REFTABLE_IO_ERROR;
+7dc06b1a 55) goto exit;
+7dc06b1a 59) err = REFTABLE_IO_ERROR;
+7dc06b1a 60) goto exit;
+7dc06b1a 65) err = REFTABLE_IO_ERROR;
+7dc06b1a 66) goto exit;
+7dc06b1a 87) return REFTABLE_IO_ERROR;
+7dc06b1a 101) void reftable_stack_destroy(struct reftable_stack *st)
+7dc06b1a 103) if (st->merged == NULL) {
+7dc06b1a 104) return;
+7dc06b1a 107) reftable_merged_table_close(st->merged);
+7dc06b1a 108) reftable_merged_table_free(st->merged);
+7dc06b1a 109) st->merged = NULL;
+7dc06b1a 111) FREE_AND_NULL(st->list_file);
+7dc06b1a 112) FREE_AND_NULL(st->reftable_dir);
+7dc06b1a 113) reftable_free(st);
+7dc06b1a 166) goto exit;
+7dc06b1a 182) goto exit;
+7dc06b1a 208) reader_close(new_tables[i]);
+7dc06b1a 217) static int tv_cmp(struct timeval *a, struct timeval *b)
+7dc06b1a 219) time_t diff = a->tv_sec - b->tv_sec;
+7dc06b1a 220) int udiff = a->tv_usec - b->tv_usec;
+7dc06b1a 222) if (diff != 0) {
+7dc06b1a 223) return diff;
+7dc06b1a 226) return udiff;
+7dc06b1a 237) return err;
+7dc06b1a 248) return err;
+7dc06b1a 255) break;
+7dc06b1a 260) free_names(names);
+7dc06b1a 261) return err;
+7dc06b1a 268) if (err != REFTABLE_NOT_EXIST_ERROR) {
+7dc06b1a 269) free_names(names);
+7dc06b1a 270) return err;
+7dc06b1a 277) err2 = read_lines(st->list_file, &names_after);
+7dc06b1a 278) if (err2 < 0) {
+7dc06b1a 279) free_names(names);
+7dc06b1a 280) return err2;
+7dc06b1a 283) if (names_equal(names_after, names)) {
+7dc06b1a 284) free_names(names);
+7dc06b1a 285) free_names(names_after);
+7dc06b1a 286) return err;
+7dc06b1a 288) free_names(names);
+7dc06b1a 289) free_names(names_after);
+7dc06b1a 291) delay = delay + (delay * rand()) / RAND_MAX + 100;
+7dc06b1a 292) usleep(delay);
+7dc06b1a 293) }
+7dc06b1a 312) return err;
+7dc06b1a 317) err = 1;
+7dc06b1a 318) goto exit;
+7dc06b1a 322) err = 1;
+7dc06b1a 323) goto exit;
+7dc06b1a 328) err = 1;
+7dc06b1a 329) goto exit;
+7dc06b1a 355) return 0;
+7dc06b1a 387) if (errno == EEXIST) {
+7dc06b1a 388) err = REFTABLE_LOCK_ERROR;
+7dc06b1a 390) err = REFTABLE_IO_ERROR;
+7dc06b1a 392) goto exit;
+7dc06b1a 396) goto exit;
+7dc06b1a 400) err = REFTABLE_LOCK_ERROR;
+7dc06b1a 401) goto exit;
+7dc06b1a 407) reftable_addition_close(add);
+7dc06b1a 448) goto exit;
+7dc06b1a 464) err = REFTABLE_IO_ERROR;
+7dc06b1a 465) goto exit;
+7dc06b1a 471) err = REFTABLE_IO_ERROR;
+7dc06b1a 472) goto exit;
+7dc06b1a 478) err = REFTABLE_IO_ERROR;
+7dc06b1a 479) goto exit;
+7dc06b1a 489) int reftable_stack_new_addition(struct reftable_addition **dest,
+7dc06b1a 492) int err = 0;
+7dc06b1a 493) *dest = reftable_malloc(sizeof(**dest));
+7dc06b1a 494) err = reftable_stack_init_addition(*dest, st);
+7dc06b1a 495) if (err) {
+7dc06b1a 496) reftable_free(*dest);
+7dc06b1a 497) *dest = NULL;
+7dc06b1a 499) return err;
+7dc06b1a 509) goto exit;
+7dc06b1a 546) err = REFTABLE_IO_ERROR;
+7dc06b1a 547) goto exit;
+7dc06b1a 559) err = 0;
+7dc06b1a 560) goto exit;
+7dc06b1a 563) goto exit;
+7dc06b1a 569) err = REFTABLE_IO_ERROR;
+7dc06b1a 570) goto exit;
+7dc06b1a 574) err = REFTABLE_API_ERROR;
+7dc06b1a 575) goto exit;
+7dc06b1a 588) err = REFTABLE_IO_ERROR;
+7dc06b1a 589) goto exit;
+7dc06b1a 647) goto exit;
+7dc06b1a 651) goto exit;
+7dc06b1a 660) close(tab_fd);
+7dc06b1a 661) tab_fd = 0;
+7dc06b1a 664) unlink(slice_as_string(temp_tab));
+7dc06b1a 665) slice_clear(temp_tab);
+7dc06b1a 697) reftable_free(subtabs);
+7dc06b1a 698) goto exit;
+7dc06b1a 703) goto exit;
+7dc06b1a 713) break;
+7dc06b1a 716) continue;
+7dc06b1a 721) break;
+7dc06b1a 727) goto exit;
+7dc06b1a 737) break;
+7dc06b1a 746)     log.time < config->time) {
+7dc06b1a 747) continue;
+7dc06b1a 751)     log.update_index < config->min_update_index) {
+7dc06b1a 752) continue;
+7dc06b1a 757) break;
+7dc06b1a 806) if (errno == EEXIST) {
+7dc06b1a 807) err = 1;
+7dc06b1a 809) err = REFTABLE_IO_ERROR;
+7dc06b1a 811) goto exit;
+7dc06b1a 816) goto exit;
+7dc06b1a 836) } else if (sublock_file_fd < 0) {
+7dc06b1a 837) if (errno == EEXIST) {
+7dc06b1a 838) err = 1;
+7dc06b1a 840) err = REFTABLE_IO_ERROR;
+7dc06b1a 851) goto exit;
+7dc06b1a 857) goto exit;
+7dc06b1a 867) err = 0;
+7dc06b1a 870) goto exit;
+7dc06b1a 876) if (errno == EEXIST) {
+7dc06b1a 877) err = 1;
+7dc06b1a 879) err = REFTABLE_IO_ERROR;
+7dc06b1a 881) goto exit;
+7dc06b1a 898) err = REFTABLE_IO_ERROR;
+7dc06b1a 899) goto exit;
+7dc06b1a 913) slice_append_string(&ref_list_contents,
+7dc06b1a 914)     st->merged->stack[i]->name);
+7dc06b1a 915) slice_append_string(&ref_list_contents, "\n");
+7dc06b1a 920) err = REFTABLE_IO_ERROR;
+7dc06b1a 921) unlink(slice_as_string(&new_table_path));
+7dc06b1a 922) goto exit;
+7dc06b1a 927) err = REFTABLE_IO_ERROR;
+7dc06b1a 928) unlink(slice_as_string(&new_table_path));
+7dc06b1a 929) goto exit;
+7dc06b1a 934) err = REFTABLE_IO_ERROR;
+7dc06b1a 935) unlink(slice_as_string(&new_table_path));
+7dc06b1a 936) goto exit;
+7dc06b1a 962) close(lock_file_fd);
+7dc06b1a 963) lock_file_fd = 0;
+7dc06b1a 966) unlink(slice_as_string(&lock_file_name));
+7dc06b1a 988) st->stats.failures++;
+7dc06b1a 1096) reftable_stack_compaction_stats(struct reftable_stack *st)
+7dc06b1a 1098) return &st->stats;
+7dc06b1a 1108) goto exit;
+7dc06b1a 1127) int reftable_stack_read_log(struct reftable_stack *st, const char *refname,
+7dc06b1a 1130) struct reftable_iterator it = { 0 };
+7dc06b1a 1131) struct reftable_merged_table *mt = reftable_stack_merged_table(st);
+7dc06b1a 1132) int err = reftable_merged_table_seek_log(mt, &it, refname);
+7dc06b1a 1133) if (err) {
+7dc06b1a 1134) goto exit;
+7dc06b1a 1137) err = reftable_iterator_next_log(it, log);
+7dc06b1a 1138) if (err) {
+7dc06b1a 1139) goto exit;
+7dc06b1a 1142) if (strcmp(log->ref_name, refname) ||
+7dc06b1a 1143)     reftable_log_record_is_deletion(log)) {
+7dc06b1a 1144) err = 1;
+7dc06b1a 1145) goto exit;
+7dc06b1a 1149) reftable_iterator_destroy(&it);
+7dc06b1a 1150) return err;
+
+reftable/tree.c
+7dc06b1a 58) return;
+
+reftable/writer.c
+7dc06b1a 26) return &w->stats.obj_stats;
+7dc06b1a 28) return &w->stats.idx_stats;
+7dc06b1a 32) assert(false);
+7dc06b1a 43) byte *zeroed = reftable_calloc(w->pending_padding);
+7dc06b1a 44) int n = w->write(w->write_arg, zeroed, w->pending_padding);
+7dc06b1a 45) if (n < 0) {
+7dc06b1a 46) return n;
+7dc06b1a 49) w->pending_padding = 0;
+7dc06b1a 50) reftable_free(zeroed);
+7dc06b1a 56) return n;
+7dc06b1a 69) opts->hash_id = SHA1_ID;
+7dc06b1a 72) opts->block_size = DEFAULT_BLOCK_SIZE;
+7dc06b1a 91) put_be32(dest + 24, w->opts.hash_id);
+7dc06b1a 119) abort();
+7dc06b1a 194) goto exit;
+7dc06b1a 209) err = writer_flush_block(w);
+7dc06b1a 210) if (err < 0) {
+7dc06b1a 211) result = err;
+7dc06b1a 212) goto exit;
+7dc06b1a 215) writer_reinit_block_writer(w, record_type(rec));
+7dc06b1a 216) err = block_writer_add(w->block_writer, rec);
+7dc06b1a 217) if (err < 0) {
+7dc06b1a 218) result = err;
+7dc06b1a 219) goto exit;
+7dc06b1a 222) result = 0;
+7dc06b1a 236) return REFTABLE_API_ERROR;
+7dc06b1a 240) return REFTABLE_API_ERROR;
+7dc06b1a 247) return err;
+7dc06b1a 268) int reftable_writer_add_refs(struct reftable_writer *w,
+7dc06b1a 271) int err = 0;
+7dc06b1a 272) int i = 0;
+7dc06b1a 273) QSORT(refs, n, reftable_ref_record_compare_name);
+7dc06b1a 274) for (i = 0; err == 0 && i < n; i++) {
+7dc06b1a 275) err = reftable_writer_add_ref(w, &refs[i]);
+7dc06b1a 277) return err;
+7dc06b1a 284) return REFTABLE_API_ERROR;
+7dc06b1a 291) return err;
+7dc06b1a 307) int reftable_writer_add_logs(struct reftable_writer *w,
+7dc06b1a 310) int err = 0;
+7dc06b1a 311) int i = 0;
+7dc06b1a 312) QSORT(logs, n, reftable_log_record_compare_key);
+7dc06b1a 313) for (i = 0; err == 0 && i < n; i++) {
+7dc06b1a 314) err = reftable_writer_add_log(w, &logs[i]);
+7dc06b1a 316) return err;
+7dc06b1a 329) return err;
+7dc06b1a 333) struct index_record *idx = NULL;
+7dc06b1a 334) int idx_len = 0;
+7dc06b1a 336) max_level++;
+7dc06b1a 337) index_start = w->next;
+7dc06b1a 338) writer_reinit_block_writer(w, BLOCK_TYPE_INDEX);
+7dc06b1a 340) idx = w->index;
+7dc06b1a 341) idx_len = w->index_len;
+7dc06b1a 343) w->index = NULL;
+7dc06b1a 344) w->index_len = 0;
+7dc06b1a 345) w->index_cap = 0;
+7dc06b1a 346) for (i = 0; i < idx_len; i++) {
+7dc06b1a 347) struct record rec = { 0 };
+7dc06b1a 348) record_from_index(&rec, idx + i);
+7dc06b1a 349) if (block_writer_add(w->block_writer, rec) == 0) {
+7dc06b1a 350) continue;
+7dc06b1a 354) int err = writer_flush_block(w);
+7dc06b1a 355) if (err < 0) {
+7dc06b1a 356) return err;
+7dc06b1a 360) writer_reinit_block_writer(w, BLOCK_TYPE_INDEX);
+7dc06b1a 362) err = block_writer_add(w->block_writer, rec);
+7dc06b1a 363) assert(err == 0);
+7dc06b1a 365) for (i = 0; i < idx_len; i++) {
+7dc06b1a 366) slice_clear(&idx[i].last_key);
+7dc06b1a 368) reftable_free(idx);
+7dc06b1a 375) return err;
+7dc06b1a 398) static void update_common(void *void_arg, void *key)
+7dc06b1a 400) struct common_prefix_arg *arg = (struct common_prefix_arg *)void_arg;
+7dc06b1a 401) struct obj_index_tree_node *entry = (struct obj_index_tree_node *)key;
+7dc06b1a 402) if (arg->last != NULL) {
+7dc06b1a 403) int n = common_prefix_size(entry->hash, *arg->last);
+7dc06b1a 404) if (n > arg->max) {
+7dc06b1a 405) arg->max = n;
+7dc06b1a 408) arg->last = &entry->hash;
+7dc06b1a 409) }
+7dc06b1a 416) static void write_object_record(void *void_arg, void *key)
+7dc06b1a 418) struct write_record_arg *arg = (struct write_record_arg *)void_arg;
+7dc06b1a 419) struct obj_index_tree_node *entry = (struct obj_index_tree_node *)key;
+7dc06b1a 420) struct obj_record obj_rec = {
+7dc06b1a 421) .hash_prefix = entry->hash.buf,
+7dc06b1a 422) .hash_prefix_len = arg->w->stats.object_id_len,
+7dc06b1a 423) .offsets = entry->offsets,
+7dc06b1a 424) .offset_len = entry->offset_len,
+7dc06b1a 426) struct record rec = { 0 };
+7dc06b1a 427) if (arg->err < 0) {
+7dc06b1a 428) goto exit;
+7dc06b1a 431) record_from_obj(&rec, &obj_rec);
+7dc06b1a 432) arg->err = block_writer_add(arg->w->block_writer, rec);
+7dc06b1a 433) if (arg->err == 0) {
+7dc06b1a 434) goto exit;
+7dc06b1a 437) arg->err = writer_flush_block(arg->w);
+7dc06b1a 438) if (arg->err < 0) {
+7dc06b1a 439) goto exit;
+7dc06b1a 442) writer_reinit_block_writer(arg->w, BLOCK_TYPE_OBJ);
+7dc06b1a 443) arg->err = block_writer_add(arg->w->block_writer, rec);
+7dc06b1a 444) if (arg->err == 0) {
+7dc06b1a 445) goto exit;
+7dc06b1a 447) obj_rec.offset_len = 0;
+7dc06b1a 448) arg->err = block_writer_add(arg->w->block_writer, rec);
+7dc06b1a 451) assert(arg->err == 0);
+7dc06b1a 454) }
+7dc06b1a 465) static int writer_dump_object_index(struct reftable_writer *w)
+7dc06b1a 467) struct write_record_arg closure = { .w = w };
+7dc06b1a 468) struct common_prefix_arg common = { 0 };
+7dc06b1a 469) if (w->obj_index_tree != NULL) {
+7dc06b1a 470) infix_walk(w->obj_index_tree, &update_common, &common);
+7dc06b1a 472) w->stats.object_id_len = common.max + 1;
+7dc06b1a 474) writer_reinit_block_writer(w, BLOCK_TYPE_OBJ);
+7dc06b1a 476) if (w->obj_index_tree != NULL) {
+7dc06b1a 477) infix_walk(w->obj_index_tree, &write_object_record, &closure);
+7dc06b1a 480) if (closure.err < 0) {
+7dc06b1a 481) return closure.err;
+7dc06b1a 483) return writer_finish_section(w);
+7dc06b1a 492) return 0;
+7dc06b1a 498) return err;
+7dc06b1a 502) err = writer_dump_object_index(w);
+7dc06b1a 503) if (err < 0) {
+7dc06b1a 504) return err;
+7dc06b1a 525) goto exit;
+7dc06b1a 531) int n = writer_write_header(w, header);
+7dc06b1a 532) err = padded_write(w, header, n, 0);
+7dc06b1a 533) if (err < 0) {
+7dc06b1a 534) goto exit;
+7dc06b1a 556) goto exit;
+7dc06b1a 560) err = REFTABLE_EMPTY_TABLE_ERROR;
+7dc06b1a 561) goto exit;
+7dc06b1a 596) return raw_bytes;
+7dc06b1a 613) fprintf(stderr, "block %c off %" PRIu64 " sz %d (%d)\n", typ,
+7dc06b1a 615) get_be24(w->block + w->block_writer->header_off + 1));
+7dc06b1a 624) return err;
+7dc06b1a 658) const struct reftable_stats *writer_stats(struct reftable_writer *w)
+7dc06b1a 660) return &w->stats;
+
+reftable/zlib-compat.c
+7dc06b1a 53)         left = 1;
+7dc06b1a 54)         dest = buf;
+7dc06b1a 84)     else if (stream.total_out && err == Z_BUF_ERROR)
+7dc06b1a 85)         left = 1;
+7dc06b1a 89)            err == Z_NEED_DICT ? Z_DATA_ERROR  :
+7dc06b1a 90)            err == Z_BUF_ERROR && left + stream.avail_out ? Z_DATA_ERROR :
+
+remote.c
+d131afc3 2362) return;
+
+sequencer.c
+cd5e0fd9 877) return NULL;
+cd5e0fd9 1394) goto out;
+cd5e0fd9 1398) goto out;
+cd5e0fd9 1474) res = -1;
+cd5e0fd9 1475) goto out;
+
+t/helper/test-proc-receive.c
+bc3e2729 127) usage_msg_opt("Too many arguments.", proc_receive_usage, options);
+bc3e2729 167) *p = '\0';
+bc3e2729 168) p += 2;
+bc3e2729 169) packet_write_fmt(1, "%s%c%s\n", item->string, '\0', p);
+
+transport-helper.c
+d131afc3 756) status = REF_STATUS_UPTODATE;
+d131afc3 757) FREE_AND_NULL(msg);
+d131afc3 764) status = REF_STATUS_REJECT_ALREADY_EXISTS;
+d131afc3 765) FREE_AND_NULL(msg);
+d131afc3 768) status = REF_STATUS_REJECT_FETCH_FIRST;
+d131afc3 769) FREE_AND_NULL(msg);
+d131afc3 772) status = REF_STATUS_REJECT_NEEDS_FORCE;
+d131afc3 773) FREE_AND_NULL(msg);
+d131afc3 776) status = REF_STATUS_REJECT_STALE;
+d131afc3 777) FREE_AND_NULL(msg);
+d131afc3 780) forced = 1;
+
+Commits introducing uncovered code:
+Carlo Marcelo Arenas Belón	555c4709 credential-store: warn instead of fatal for bogus lines from store
+Han-Wen Nienhuys	427a313b Reftable support for git-core
+Han-Wen Nienhuys	7dc06b1a Add reftable library
+Jiang Xin	2c26d674 receive-pack: new config receive.procReceiveRefs
+Jiang Xin	bc3e2729 receive-pack: add new proc-receive hook
+Jiang Xin	d131afc3 send-pack: extension for client-side status report
+Miriam Rubio	9aadf776 bisect--helper: introduce new `write_in_file()` function
+Miriam Rubio	36b543b5 bisect--helper: fix `cmd_*()` function switch default return
+Phillip Wood	cd5e0fd9 Revert "Revert "Merge branch 'ra/rebase-i-more-options'""
+Pranit Bauva	587c9fac bisect--helper: reimplement `bisect_next` and `bisect_auto_next` shell functions in C
+Pranit Bauva	f0bf9482 bisect--helper: finish porting `bisect_start()` to C
+Pranit Bauva	05a69202 bisect--helper: reimplement `bisect_autostart` shell function in C
+Pranit Bauva	10520dbf bisect--helper: reimplement `bisect_state` & `bisect_head` shell functions in C
+Taylor Blau	7cb91802 commit-graph.c: ensure graph layers respect core.sharedRepository
+
+
+Uncovered code in 'jch' not in 'next'
+--------------------------------------------------------
+
+remote.c
+812a5889 1638) return NULL;
+812a5889 1645) return branch->refname;
+812a5889 1660) return NULL;
+812a5889 1774) return NULL;
+
+urlmatch.c
+12294990 581) retval = 0;
+
+Commits introducing uncovered code:
+Damien Robert	812a5889 remote.c: fix handling of %(push:remoteref)
+Johannes Schindelin	12294990 credential: handle `credential.<partial-URL>.<key>` again
+
+
+Uncovered code in 'next' not in 'master'
+--------------------------------------------------------
+
+blame.c
+0906ac2b 1281) return 1;
+0906ac2b 1302) bd->alloc *= 2;
+0906ac2b 1303) REALLOC_ARRAY(bd->keys, bd->alloc);
+0906ac2b 2899) return;
+
+bloom.c
+ed591feb 172) return NULL;
+ed591feb 246) for (i = 0; i < diff_queued_diff.nr; i++)
+ed591feb 247) diff_free_filepair(diff_queued_diff.queue[i]);
+ed591feb 248) filter->data = NULL;
+ed591feb 249) filter->len = 0;
+a56b9464 266) return -1;
+
+bugreport.c
+1411914a 18) strbuf_addf(sys_info, _("uname() failed with error '%s' (%d)\n"),
+1411914a 20)     errno);
+
+builtin/commit-graph.c
+
+builtin/help.c
+709df95b 123) puts(var);
+709df95b 124) continue;
+
+builtin/rebase.c
+efcf6cf0 625) } else if (!read_oneliner(&buf, state_dir_path("head", opts),
+f213f069 880) reset_head(the_repository, &opts->orig_head, "checkout",
+f213f069 881)    opts->head_name, 0,
+86ed00af 1041) apply_autostash(state_dir_path("autostash", opts));
+
+builtin/receive-pack.c
+37b9dcab 896) rollback_shallow_file(the_repository, &shallow_lock);
+
+builtin/update-ref.c
+a65b8ac2 419) continue;
+
+commit-graph.c
+d21ee7d1 76) return; /* should never happen, but be lenient */
+d21ee7d1 81) static int commit_pos_cmp(const void *va, const void *vb)
+d21ee7d1 83) const struct commit *a = *(const struct commit **)va;
+d21ee7d1 84) const struct commit *b = *(const struct commit **)vb;
+d21ee7d1 85) return commit_pos_at(&commit_pos, a) -
+d21ee7d1 86)        commit_pos_at(&commit_pos, b);
+76ffbca7 338) chunk_repeated = 1;
+76ffbca7 345) chunk_repeated = 1;
+76ffbca7 352) break;
+76ffbca7 1094) progress = start_delayed_progress(
+76ffbca7 1096) ctx->commits.nr);
+76ffbca7 1119) progress = start_delayed_progress(
+76ffbca7 1121) ctx->commits.nr);
+f97b9325 1298) progress = start_delayed_progress(
+f97b9325 1300) ctx->commits.nr);
+3d112755 1306) QSORT(sorted_commits, ctx->commits.nr, commit_pos_cmp);
+fdbde82f 1780) break;
+
+date.c
+c933b28d 521) return -1;
+c933b28d 532) return -1;
+4f89f4fc 553) return -1;
+
+dir.c
+16846444 1924) FREE_AND_NULL(dir->entries[i]);
+defd7c7b 2177) return path_none;
+
+help.c
+617d5719 641) strbuf_addstr(buf, "no commit associated with this build\n");
+
+refs/files-backend.c
+edc30691 2572) strbuf_release(&err);
+
+reset.c
+b309a971 37) ret = -1;
+b309a971 38) goto leave_reset_head;
+b309a971 43) goto leave_reset_head;
+b309a971 66) goto leave_reset_head;
+b309a971 72) goto leave_reset_head;
+b309a971 77) goto leave_reset_head;
+b309a971 81) ret = -1;
+b309a971 82) goto leave_reset_head;
+b309a971 90) goto leave_reset_head;
+b309a971 109) } else if (old_orig)
+b309a971 110) delete_ref(NULL, "ORIG_HEAD", old_orig, 0);
+
+revision.c
+8918e379 658) return 1;
+8918e379 662) return 1;
+a56b9464 721) return -1;
+
+sequencer.c
+5b2f6d9c 431) warning_errno(_("could not read '%s'"), path);
+65c425a2 2557) goto done_rebase_i;
+be1bb600 5203) apply_autostash(rebase_path_autostash());
+
+t/helper/test-bloom.c
+f1294eaf 25) printf("No filter.\n");
+f1294eaf 26) return;
+1b4c57fa 54) usage(bloom_usage);
+1b4c57fa 59) usage(bloom_usage);
+1b4c57fa 71) usage(bloom_usage);
+1b4c57fa 85) usage(bloom_usage);
+
+tree-diff.c
+e3696980 438) break;
+
+unpack-trees.c
+7af7a258 1846) ret = UPDATE_SPARSITY_WORKTREE_UPDATE_FAILURES;
+
+Commits introducing uncovered code:
+Denton Liu	be1bb600 sequencer: make apply_autostash() accept a path
+Denton Liu	65c425a2 sequencer: stop leaking buf
+Denton Liu	5b2f6d9c sequencer: make file exists check more efficient
+Denton Liu	efcf6cf0 rebase: use read_oneliner()
+Denton Liu	f213f069 rebase: generify reset_head()
+Denton Liu	86ed00af rebase: use apply_autostash() from sequencer.c
+Denton Liu	b309a971 reset: extract reset_head() from rebase
+Derrick Stolee	e3696980 diff: halt tree-diff early after max_changes
+Derrick Stolee	8918e379 revision: complicated pathspecs disable filters
+Derrick Stolee	0bbd0e8b dir: refactor treat_directory to clarify control flow
+Derrick Stolee	0906ac2b blame: use changed-path Bloom filters
+Đoàn Trần Công Danh	c933b28d date.c: s/is_date/set_date/
+Đoàn Trần Công Danh	4f89f4fc date.c: validate and set time in a helper function
+Elijah Newren	7af7a258 unpack-trees: add a new update_sparsity() function
+Elijah Newren	16846444 dir: include DIR_KEEP_UNTRACKED_CONTENTS handling in treat_directory()
+Elijah Newren	a35413c3 rebase: display an error if --root and --fork-point are both provided
+Emily Shaffer	238b439d bugreport: add tool to generate debugging info
+Emily Shaffer	617d5719 bugreport: gather git version and build info
+Emily Shaffer	709df95b help: move list_config_help to builtin/help
+Emily Shaffer	1411914a bugreport: add uname info
+Garima Singh	f97b9325 commit-graph: compute Bloom filters for changed paths
+Garima Singh	ed591feb bloom.c: core Bloom filter implementation for changed paths.
+Garima Singh	76ffbca7 commit-graph: write Bloom filters to commit graph file
+Garima Singh	a56b9464 revision.c: use Bloom filters to speed up path based revision walks
+Garima Singh	3d112755 commit-graph: examine commits by generation number
+Garima Singh	f1294eaf bloom.c: introduce core Bloom filter constructs
+Jeff King	d21ee7d1 commit-graph: examine changed-path objects in pack order
+Jeff King	1b4c57fa test-bloom: check that we have expected arguments
+Karsten Blees	defd7c7b dir.c: git-status --ignored: don't scan the work tree three times
+Patrick Steinhardt	e48cf33b update-ref: implement interactive transaction handling
+Patrick Steinhardt	de0e0d65 update-ref: move transaction handling into `update_refs_stdin()`
+Patrick Steinhardt	edc30691 refs: fix segfault when aborting empty transaction
+Patrick Steinhardt	a65b8ac2 update-ref: organize commands in an array
+Taylor Blau	37b9dcab shallow.c: use '{commit,rollback}_shallow_file'
+Taylor Blau	fdbde82f builtin/commit-graph.c: introduce split strategy 'no-merge'
+
+
+Uncovered code in 'master' not in 'master@{1}'
+--------------------------------------------------------
+
+builtin/rebase.c
+
+builtin/receive-pack.c
+edc6dccf 568) retval = NONCE_BAD;
+edc6dccf 569) goto leave;
+
+config.c
+348482de 537) cf->eof = 1;
+348482de 538) return 0;
+
+credential.c
+
+diff.c
+
+diffcore-rename.c
+95acf11a 137) static void prefetch(void *prefetch_options)
+95acf11a 139) struct prefetch_options *options = prefetch_options;
+95acf11a 141) struct oid_array to_fetch = OID_ARRAY_INIT;
+95acf11a 143) for (i = 0; i < rename_dst_nr; i++) {
+95acf11a 144) if (rename_dst[i].pair)
+95acf11a 149) continue; /* already found exact match */
+95acf11a 150) diff_add_if_missing(options->repo, &to_fetch,
+95acf11a 151)     rename_dst[i].two);
+95acf11a 153) for (i = 0; i < rename_src_nr; i++) {
+95acf11a 154) if (options->skip_unmodified &&
+95acf11a 155)     diff_unmodified_pair(rename_src[i].p))
+95acf11a 160) continue;
+95acf11a 161) diff_add_if_missing(options->repo, &to_fetch,
+95acf11a 162)     rename_src[i].p->one);
+95acf11a 164) promisor_remote_get_direct(options->repo, to_fetch.oid, to_fetch.nr);
+95acf11a 165) oid_array_clear(&to_fetch);
+95acf11a 166) }
+
+fast-import.c
+d8410a81 60) e2 = container_of(entry_or_key, const struct object_entry, ent);
+d8410a81 61) return oidcmp(&e1->idx.oid, &e2->idx.oid);
+
+fmt-merge-msg.c
+ce6521e4 24) use_branch_desc = git_config_bool(key, value);
+ce6521e4 75) continue;
+ce6521e4 107) return 1;
+ce6521e4 113) return 2;
+ce6521e4 117) return 3;
+ce6521e4 126) line[len - 1] = 0;
+ce6521e4 167) origin = src;
+ce6521e4 168) string_list_append(&src_data->generic, line);
+ce6521e4 169) src_data->head_status |= 2;
+ce6521e4 188) return;
+ce6521e4 201) static void add_branch_desc(struct strbuf *out, const char *name)
+ce6521e4 203) struct strbuf desc = STRBUF_INIT;
+ce6521e4 205) if (!read_branch_desc(&desc, name)) {
+ce6521e4 206) const char *bp = desc.buf;
+ce6521e4 207) while (*bp) {
+ce6521e4 208) const char *ep = strchrnul(bp, '\n');
+ce6521e4 209) if (*ep)
+ce6521e4 210) ep++;
+ce6521e4 211) strbuf_addf(out, "  : %.*s", (int)(ep - bp), bp);
+ce6521e4 212) bp = ep;
+ce6521e4 214) strbuf_complete_line(out);
+ce6521e4 216) strbuf_release(&desc);
+ce6521e4 217) }
+ce6521e4 231) return;
+ce6521e4 239) return;
+ce6521e4 276) else if (people->nr)
+ce6521e4 277) strbuf_addf(out, "%s (%d) and others",
+ce6521e4 278)     people->items[0].string,
+ce6521e4 279)     (int)util_as_integral(&people->items[0]));
+ce6521e4 342) return;
+ce6521e4 355) if (opts->credit_people)
+ce6521e4 356) record_person('c', &committers, commit);
+ce6521e4 372) string_list_append(&subjects,
+ce6521e4 373)    oid_to_hex(&commit->object.oid));
+ce6521e4 387) add_branch_desc(out, name);
+ce6521e4 425) subsep = ", ";
+ce6521e4 426) strbuf_addstr(out, "HEAD");
+ce6521e4 446) strbuf_addstr(out, subsep);
+ce6521e4 447) print_joined("commit ", "commits ", &src_data->generic,
+56a1d9ca 498) strbuf_addstr(&sig, "gpg verification failed.\n");
+ce6521e4 507) if (tag_number == 2) {
+ce6521e4 508) struct strbuf tagline = STRBUF_INIT;
+ce6521e4 509) strbuf_addch(&tagline, '\n');
+ce6521e4 510) strbuf_add_commented_lines(&tagline,
+ce6521e4 511) origins.items[first_tag].string,
+ce6521e4 512) strlen(origins.items[first_tag].string));
+ce6521e4 513) strbuf_insert(&tagbuf, 0, tagline.buf,
+ce6521e4 515) strbuf_release(&tagline);
+ce6521e4 517) strbuf_addch(&tagbuf, '\n');
+ce6521e4 518) strbuf_add_commented_lines(&tagbuf,
+ce6521e4 519) origins.items[i].string,
+ce6521e4 520) strlen(origins.items[i].string));
+ce6521e4 521) fmt_tag_signature(&tagbuf, &sig, buf, len);
+ce6521e4 566) continue;
+
+http.c
+24036686 582) cert_auth.host = xstrdup("");
+
+log-tree.c
+c9f7a793 94)     (!*rest || *rest == '/'))
+
+oid-array.c
+5cc044e0 56) return ret;
+16ddcd40 76) return ret;
+
+prune-packed.c
+9460fd48 26) printf("rm -f %s\n", path);
+9460fd48 35) progress = start_delayed_progress(_("Removing duplicate objects"), 256);
+
+range-diff.c
+8cf51561 115) string_list_clear(list, 1);
+8cf51561 116) strbuf_release(&buf);
+8cf51561 117) strbuf_release(&contents);
+8cf51561 118) finish_command(&cp);
+8cf51561 119) return -1;
+
+sequencer.c
+b9cbd295 4674) continue;
+
+t/helper/test-oid-array.c
+910650d2 29) oid_array_clear(&array);
+
+trace2/tr2_cfg.c
+3d3adaad 63) return tr2_cfg_env_vars_count;
+
+wrapper.c
+7cd54d37 221) len = MAX_IO_SIZE;
+7cd54d37 243) len = MAX_IO_SIZE;
+
+Commits introducing uncovered code:
+Ævar Arnfjörð Bjarmason	5cc044e0 get_short_oid: sort ambiguous objects by type, then SHA-1
+brian m. carlson	edc6dccf builtin/receive-pack: use constant-time comparison for HMAC value
+brian m. carlson	910650d2 Rename sha1_array to oid_array
+Denton Liu	7cd54d37 wrapper: indent with tabs
+Denton Liu	9460fd48 Lib-ify prune-packed
+Denton Liu	ce6521e4 Lib-ify fmt-merge-msg
+Derrick Stolee	c9f7a793 log-tree: make ref_filter_match() a helper method
+Elijah Newren	b9cbd295 rebase: reinstate --no-keep-empty
+Elijah Newren	50ed7614 rebase: fix an incompatible-options error message
+Jeff King	24036686 credential: parse URL without host as empty host, not unset
+Jeff King	16ddcd40 sha1_array: let callbacks interrupt iteration
+Jeff King	8ba8ed56 credential: refuse to operate when missing host or protocol
+Jeff King	ed4b804e test-tool: rename sha1-array to oid-array
+Jeff King	348482de config: reject parsing of files over INT_MAX
+Jeff King	d8410a81 fast-import: replace custom hash with hashmap.c
+Jonathan Tan	95acf11a diff: restrict when prefetching occurs
+Jonathan Tan	c14b6f83 diff: refactor object read
+Josh Steadmon	3d3adaad trace2: teach Git to log environment variables
+Junio C Hamano	56a1d9ca Merge branch 'dl/libify-a-few'
+Vasil Dimov	8cf51561 range-diff: fix a crash in parsing git-log output
+Vasil Dimov	8d1675eb range-diff: avoid negative string precision
+
+
