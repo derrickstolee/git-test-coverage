@@ -1,0 +1,404 @@
+seen	b7146bf30c83769335da13066b0da61108b30007
+jch	71d209e8bc45f628170b4ea4657bfb92ce634974
+next	f9edc3c819edc268d3a429d06d1efb8fa957866b
+master	bd42bbe1a46c0fe486fc33e82969275e27e4dc19
+master@{1}	refs/tags/v2.27.0
+
+
+Uncovered code in 'seen' not in 'jch'
+--------------------------------------------------------
+
+builtin/gc.c
+960ccd7e 483) ret = error_errno(_("cannot stat '%s'"), gc_log_path.buf);
+960ccd7e 492) ret = error_errno(_("cannot read '%s'"), gc_log_path.buf);
+cb8f7d8c 741) oid = &peeled;
+cb8f7d8c 743) return 0;
+cb8f7d8c 747) return 0;
+cb8f7d8c 749) return 0;
+cb8f7d8c 768) result = 1;
+cb8f7d8c 769) break;
+cb8f7d8c 788) return 0;
+cb8f7d8c 790) return 1;
+e208bb03 842) return 0;
+e208bb03 847) return 1;
+e208bb03 855) chain_path = get_commit_graph_chain_filename(r->objects->odb);
+e208bb03 856) if (unlink(chain_path)) {
+e208bb03 860) free(chain_path);
+e208bb03 862) if (!run_write_commit_graph(r))
+e208bb03 863) return 0;
+e208bb03 866) return 1;
+d725db15 907) result = 1;
+d725db15 908) goto cleanup;
+dcc90e44 984) return 0;
+dcc90e44 986) return 1;
+b57485fd 1044) result = 1;
+b57485fd 1045) goto cleanup;
+b57485fd 1062) result = 1;
+c8c9f860 1085) return 0;
+c8c9f860 1091) return 0;
+c8c9f860 1093) return 1;
+f2ef843c 1121) static int rewrite_multi_pack_index(struct repository *r)
+f2ef843c 1123) char *midx_name = get_midx_filename(r->objects->odb->path);
+f2ef843c 1125) unlink(midx_name);
+f2ef843c 1126) free(midx_name);
+f2ef843c 1128) if (multi_pack_index_write(r)) {
+f2ef843c 1130) return 1;
+f2ef843c 1133) return 0;
+84d81b4f 1204) result_size = TWO_GIGABYTES;
+f2ef843c 1231) result = rewrite_multi_pack_index(r);
+f2ef843c 1241) return 1;
+f2ef843c 1246) return rewrite_multi_pack_index(r);
+f2ef843c 1251) return 1;
+f2ef843c 1256) return rewrite_multi_pack_index(r);
+f2ef843c 1261) return 1;
+13979639 1421) return 1;
+
+builtin/grep.c
+e26e8bfc 579) if (file_exists(sparse_file)) {
+e26e8bfc 583) free(sparse_file);
+e26e8bfc 584) free(patterns);
+e26e8bfc 585) return NULL;
+
+builtin/hook.c
+933f1b2e 42) printf(_("no commands configured for hook '%s'\n"),
+933f1b2e 44) return 0;
+
+builtin/receive-pack.c
+2dd1150a 239) return config_error_nonbool(var);
+1e58de8c 1046) return code;
+1e58de8c 1054) if (use_sideband)
+1e58de8c 1055) finish_async(&muxer);
+1e58de8c 1056) return code;
+1e58de8c 1542) cmd->report.error_message = "broken symref";
+1e58de8c 1727) cmd->report.error_message = "transaction failed to start";
+2dd1150a 1839) continue;
+1e58de8c 1866) if (!cmd->report.error_message)
+1e58de8c 1867) cmd->report.error_message = "unable to migrate objects to permanent storage";
+38a81b4e 2283) send_sideband(1, 1, buf.buf, buf.len, use_sideband);
+
+hook.c
+933f1b2e 83) return NULL;
+
+list-objects-filter-options.c
+2129af73 23) break;
+2129af73 36) break;
+
+midx.c
+111a6e62 977) progress = start_delayed_progress(_("Writing chunks to multi-pack-index"),
+
+remote.c
+812a5889 1638) return NULL;
+812a5889 1645) return branch->refname;
+812a5889 1660) return NULL;
+812a5889 1774) return NULL;
+
+send-pack.c
+5e4553bd 182)        if (new_options) {
+5e4553bd 184) new_options = 0;
+5e4553bd 186) ret = -1;
+5e4553bd 187) continue;
+5e4553bd 223) ret = -1;
+5e4553bd 224) break;
+5e4553bd 241)     hint->status != REF_STATUS_OK &&
+5e4553bd 242)     hint->status != REF_STATUS_REMOTE_REJECT) {
+5e4553bd 435) else if (server_supports("report-status"))
+
+sequencer.c
+86696a9d 893) return NULL;
+e12c40fd 1395) goto out;
+e12c40fd 1399) goto out;
+86696a9d 1477) res = -1;
+86696a9d 1478) goto out;
+
+t/helper/test-config.c
+a2371e32 103) goto print_usage_error;
+92bca22f 109) goto print_usage_error;
+92bca22f 114) fprintf(stderr, "Cannot use --submodule with read_early_config\n");
+92bca22f 115) return TC_USAGE_ERROR;
+92bca22f 130) fprintf(stderr, "Invalid argument to --submodule: '%s'\n",
+92bca22f 132) free(subrepo);
+92bca22f 133) ret = TC_USAGE_ERROR;
+92bca22f 134) goto out;
+a2371e32 160) printf("Value not found for \"%s\"\n", argv[1]);
+b77651be 161) ret = TC_VALUE_NOT_FOUND;
+a2371e32 167) printf("Value not found for \"%s\"\n", argv[1]);
+b77651be 168) ret = TC_VALUE_NOT_FOUND;
+a2371e32 175) printf("Value not found for \"%s\"\n", argv[1]);
+b77651be 176) ret = TC_VALUE_NOT_FOUND;
+92bca22f 187) fprintf(stderr, "Cannot use --submodule with configset_get_value\n");
+92bca22f 188) ret = TC_USAGE_ERROR;
+92bca22f 189) goto out;
+a2371e32 205) printf("Value not found for \"%s\"\n", argv[1]);
+b77651be 206) ret = TC_VALUE_NOT_FOUND;
+92bca22f 210) fprintf(stderr, "Cannot use --submodule with configset_get_value_multi\n");
+92bca22f 211) ret = TC_USAGE_ERROR;
+92bca22f 212) goto out;
+b77651be 218) ret = TC_CONFIG_FILE_ERROR;
+b77651be 219) goto out;
+a2371e32 232) printf("Value not found for \"%s\"\n", argv[1]);
+b77651be 233) ret = TC_VALUE_NOT_FOUND;
+92bca22f 239) fprintf(stderr, "Invalid syntax. Usage: test-tool config"
+b77651be 241) ret = TC_USAGE_ERROR;
+
+t/helper/test-proc-receive.c
+1e58de8c 133) usage_msg_opt("Too many arguments.", proc_receive_usage, options);
+
+transport-helper.c
+5e4553bd 837) hint = NULL;
+5e4553bd 856) (*ref)->report.message = msg;
+
+Commits introducing uncovered code:
+Damien Robert	812a5889 remote.c: fix handling of %(push:remoteref)
+Derrick Stolee	960ccd7e gc: drop the_repository in log location
+Derrick Stolee	111a6e62 midx: use start_delayed_progress()
+Derrick Stolee	13979639 maintenance: add --task option
+Derrick Stolee	84d81b4f maintenance: auto-size pack-files batch
+Derrick Stolee	f2ef843c maintenance: add pack-files task
+Derrick Stolee	b57485fd maintenance: add loose-objects task
+Derrick Stolee	cb8f7d8c maintenance: add auto condition for commit-graph task
+Derrick Stolee	c8c9f860 maintenance: add pack-files auto condition
+Derrick Stolee	d725db15 maintenance: add fetch task
+Derrick Stolee	e208bb03 maintenance: add commit-graph task
+Derrick Stolee	dcc90e44 maintenance: create auto condition for loose-objects
+Emily Shaffer	933f1b2e hook: add list command
+Jiang Xin	1e58de8c receive-pack: add new proc-receive hook
+Jiang Xin	5e4553bd New capability "report-status-v2" for git-push
+Jiang Xin	2dd1150a receive-pack: new config receive.procReceiveRefs
+Matheus Tavares	e26e8bfc grep: honor sparse checkout patterns
+Matheus Tavares	a2371e32 t/helper/test-config: facilitate addition of new cli options
+Matheus Tavares	92bca22f config: correctly read worktree configs in submodules
+Matheus Tavares	b77651be t/helper/test-config: return exit codes consistently
+Phillip Wood	86696a9d rebase -i: support --ignore-date
+Phillip Wood	e12c40fd rebase -i: support --committer-date-is-author-date
+Shawn O. Pearce	38a81b4e receive-pack: Wrap status reports inside side-band-64k
+Taylor Blau	2129af73 list_objects_filter_options: introduce 'list_object_filter_config_name'
+
+
+Uncovered code in 'jch' not in 'next'
+--------------------------------------------------------
+
+hex.c
+
+revision.c
+ea3f7e59 1062) if (repo_parse_commit(revs->repo, p) < 0)
+
+Commits introducing uncovered code:
+Matheus Tavares	2bf74f31 hex: make hash_to_hex_algop() and friends thread-safe
+Michael Forney	ea3f7e59 revision: use repository from rev_info when parsing commits
+
+
+Uncovered code in 'next' not in 'master'
+--------------------------------------------------------
+
+commit-graph.c
+17e6275f 1766) return -1;
+
+Commits introducing uncovered code:
+SZEDER Gábor	17e6275f commit-graph: simplify chunk writes into loop
+
+
+Uncovered code in 'master' not in 'master@{1}'
+--------------------------------------------------------
+
+add-patch.c
+
+bugreport.c
+f64b6a1f 184) die_errno(_("unable to write to %s"), report_path.buf);
+
+builtin/clean.c
+
+builtin/diff.c
+8bfcb3a6 329) usage(builtin_diff_usage);
+
+builtin/fast-export.c
+a0f65641 149) b = container_of(entry_or_key, const struct anonymized_entry, hash);
+a0f65641 150) return strcmp(a->orig, b->orig);
+65b5d9fa 177) ret = NULL;
+750bb325 731)        anonymize_oid(oid_to_hex(&obj->oid)) :
+
+builtin/fetch-pack.c
+9da69a65 246) pack_lockfiles.items[i].string);
+
+builtin/index-pack.c
+
+builtin/init-db.c
+
+builtin/pack-objects.c
+
+builtin/receive-pack.c
+bb095d08 1644) hash = hash_algos[GIT_HASH_SHA1].name;
+bb095d08 1645) len = strlen(hash);
+
+builtin/show-index.c
+88a09a55 29) hash_algo = hash_algo_by_name(hash_name);
+88a09a55 30) if (hash_algo == GIT_HASH_UNKNOWN)
+88a09a55 32) repo_set_hash_algo(the_repository, hash_algo);
+
+builtin/sparse-checkout.c
+
+builtin/submodule--helper.c
+
+builtin/worktree.c
+c9b77f2c 105) strbuf_addf(reason, _("unable to read gitdir file (%s)"),
+916133ef 166) return -1;
+
+bundle.c
+6161ce7b 33) return NULL;
+6161ce7b 70) status = -1;
+6161ce7b 71) break;
+
+commit-graph.c
+4844812b 1350) data->generation = GENERATION_NUMBER_MAX;
+
+connect.c
+1349ffed 98) return 0;
+9de0dd36 477) reader->hash_algo = &hash_algos[GIT_HASH_SHA1];
+122037c2 566) hash = hash_algos[GIT_HASH_SHA1].name;
+122037c2 567) len = strlen(hash);
+122037c2 573) hash = next_server_feature_value("object-format", &len, &offset);
+
+dir.c
+
+fetch-pack.c
+4b831208 1212)     the_hash_algo->name, hash_name);
+4b831208 1214) } else if (hash_algo_by_ptr(the_hash_algo) != GIT_HASH_SHA1) {
+4b831208 1216)     the_hash_algo->name);
+
+http-fetch.c
+8e6adb69 30) walker_targets_free(commits, commit_id, write_ref);
+8e6adb69 33) fprintf(stderr,
+8d5d2a34 128) commits = walker_targets_stdin(&commit_id, &write_ref);
+
+line-log.c
+f32dde8c 1159) return 1;
+f32dde8c 1166) return 0;
+
+pkt-line.c
+0181b600 106) die_errno(_("unable to write stateless separator packet"));
+
+protocol.c
+3697caf4 35) return protocol_v2;
+
+refs.c
+67541597 2047) return ret;
+67541597 2061) if (errno != EPIPE)
+67541597 2062) ret = -1;
+67541597 2063) break;
+
+remote-curl.c
+7f605017 199) algo = hash_algo_by_name(value);
+7f605017 200) if (algo == GIT_HASH_UNKNOWN)
+7f605017 202) options.hash_algo = &hash_algos[algo];
+ac093d07 264) return NULL;
+ac093d07 282)     transport_anonymize_url(url.buf));
+
+repo-settings.c
+b5651a20 60) UPDATE_DEFAULT_BOOL(r->settings.fetch_negotiation_algorithm, FETCH_NEGOTIATION_SKIPPING);
+
+send-pack.c
+
+serve.c
+
+t/helper/test-pkt-line.c
+0181b600 50) printf("0002\n");
+0181b600 51) break;
+
+t/helper/test-regex.c
+aba8187e 53) goto usage;
+aba8187e 59) goto usage;
+aba8187e 61) if (!strcmp(*argv, "--silent")) {
+aba8187e 62) silent = 1;
+aba8187e 64) argc--;
+aba8187e 66) if (!argc)
+aba8187e 67) goto usage;
+aba8187e 69) pat = *argv++;
+aba8187e 70) if (argc == 1)
+aba8187e 71) str = NULL;
+aba8187e 73) str = *argv++;
+aba8187e 74) while (*argv) {
+aba8187e 76) for (rf = reg_flags; rf->name; rf++)
+aba8187e 77) if (!strcmp(*argv, rf->name)) {
+aba8187e 78) flags |= rf->flag;
+aba8187e 79) break;
+aba8187e 81) if (!rf->name)
+aba8187e 83) argv++;
+aba8187e 88) ret = regcomp(&r, pat, flags);
+aba8187e 89) if (ret) {
+aba8187e 90) if (silent)
+aba8187e 91) return ret;
+aba8187e 96) if (!str)
+aba8187e 97) return 0;
+aba8187e 99) ret = regexec(&r, str, 1, m, 0);
+aba8187e 100) if (ret) {
+aba8187e 101) if (silent || ret == REG_NOMATCH)
+aba8187e 102) return ret;
+
+transport-helper.c
+8b85ee4f 1113) exit(128);
+
+upload-pack.c
+acaaca7d 210) return readsz;
+acaaca7d 438) send_client_data(1, output_state.buffer, output_state.used,
+e9d882b8 1029) data->multi_ack = MULTI_ACK;
+f8edd1ca 1039) data->use_sideband = DEFAULT_PACKET_MAX;
+b5a2068c 1076) data->no_progress = 1;
+f203a88c 1193) data->keepalive = git_config_int(var, value);
+f203a88c 1194) if (!data->keepalive)
+f203a88c 1195) data->keepalive = -1;
+dd4b732d 1412) string_list_clear(&data->uri_protocols, 0);
+
+wrapper.c
+14570dc6 112) return res;
+
+wt-status.c
+051df3cf 1491) return;
+
+Commits introducing uncovered code:
+Abhishek Kumar	4844812b commit-graph: introduce commit_graph_data_slab
+brian m. carlson	82db03ab send-pack: detect when the server doesn't support our hash
+brian m. carlson	ac093d07 remote-curl: detect algorithm for dumb HTTP by size
+brian m. carlson	7f605017 remote-curl: implement object-format extensions
+brian m. carlson	4b831208 fetch-pack: parse and advertise the object-format capability
+brian m. carlson	122037c2 connect: add function to detect supported v1 hash functions
+brian m. carlson	9de0dd36 serve: advertise object-format capability for protocol v2
+brian m. carlson	1349ffed connect: add function to fetch value of a v2 server capability
+brian m. carlson	6161ce7b bundle: detect hash algorithm when reading refs
+brian m. carlson	14570dc6 wrapper: add function to compare strings with different NUL termination
+brian m. carlson	88a09a55 builtin/show-index: provide options to determine hash algo
+brian m. carlson	8b85ee4f transport-helper: implement object-format extensions
+brian m. carlson	586740aa builtin/index-pack: add option to specify hash algorithm
+brian m. carlson	bb095d08 builtin/receive-pack: detect when the server doesn't support our hash
+Carlo Marcelo Arenas Belón	aba8187e t/helper: teach test-regex to report pattern errors (like REG_ILLSEQ)
+Chris Torek	8bfcb3a6 git diff: improve range handling
+Christian Couder	f203a88c upload-pack: move keepalive to upload_pack_data
+Christian Couder	ea2c6e60 upload-pack: refactor common code into do_got_oid()
+Christian Couder	e9d882b8 upload-pack: change multi_ack to an enum
+Christian Couder	f8edd1ca upload-pack: move use_sideband to upload_pack_data
+Denton Liu	0181b600 pkt-line: define PACKET_READ_RESPONSE_END
+Derrick Stolee	f32dde8c line-log: integrate with changed-path Bloom filters
+Don Goodman-Wilson	8747ebb7 init: allow setting the default for the initial branch name via the config
+Elijah Newren	351ea1c3 dir, clean: avoid disallowed behavior
+Elijah Newren	f7f5c6c0 clean: consolidate handling of ignored parameters
+Elijah Newren	051df3cf wt-status: show sparse checkout status as well
+Eric Sunshine	d179af67 worktree: generalize candidate worktree path validation
+Eric Sunshine	916133ef worktree: prune linked worktree referencing main worktree path
+Eric Sunshine	c9b77f2c worktree: factor out repeated string literal
+Jeff King	b5a2068c upload-pack: actually use some upload_pack_data bitfields
+Jeff King	65b5d9fa fast-export: allow seeding the anonymized mapping
+Jeff King	750bb325 fast-export: store anonymized oids as hex strings
+Jeff King	a0f65641 fast-export: stop storing lengths in anonymized hashmaps
+Johannes Schindelin	2c8bd847 checkout -p: handle new files correctly
+Johannes Schindelin	32ba12da init: allow specifying the initial branch name for the new repository
+Jonathan Nieder	b5651a20 experimental: default to fetch.writeCommitGraph=false
+Jonathan Nieder	3697caf4 config: let feature.experimental imply protocol.version=2
+Jonathan Tan	dd4b732d upload-pack: send part of packfile response as uri
+Jonathan Tan	8d5d2a34 http-fetch: support fetching packfiles by URL
+Jonathan Tan	9da69a65 fetch-pack: support more than one pack lockfile
+Jonathan Tan	acaaca7d upload-pack: refactor reading of pack-objects out
+Jonathan Tan	8e6adb69 http-fetch: refactor into function
+Patrick Steinhardt	67541597 refs: implement reference transaction hook
+Randall S. Becker	f64b6a1f bugreport.c: replace strbuf_write_fd with write_in_full
+Shourya Shukla	2964d6e5 submodule: port subcommand 'set-branch' from shell to C
+Xin Li	98564d80 sparse-checkout: upgrade repository to version 1 when enabling extension
+
+
