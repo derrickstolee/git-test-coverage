@@ -1,10 +1,485 @@
-target	fork/v2.30.0-rc1
+target	fork/master
 base	v2.29.2
 
 
 Uncovered code in 'target' not in 'base'
 --------------------------------------------------------
 
+bisect.c
+0afcea70 133) return 1;
+
+blame.c
+db7d07f6 2704) if (!obj || obj->type != OBJ_COMMIT)
+
+builtin/bisect--helper.c
+88ad372f 744) return BISECT_FAILED;
+88ad372f 761) res = BISECT_FAILED;
+88ad372f 773) res = BISECT_FAILED;
+88ad372f 785) res = BISECT_FAILED;
+27257bc4 846) return BISECT_FAILED;
+27257bc4 893) oid_array_clear(&revs);
+27257bc4 894) return BISECT_FAILED;
+
+builtin/blame.c
+db7d07f6 824) return -1;
+
+builtin/clone.c
+552955ed 873) return apply_failed;
+aab179d9 1299) goto cleanup;
+aab179d9 1348) goto cleanup;
+
+builtin/credential-store.c
+df7f915f 66) die_errno(_("unable to get credential storage lock in %d ms"), timeout_ms);
+
+builtin/diff-tree.c
+
+builtin/diff.c
+3d09c228 183) usage(builtin_diff_usage);
+
+builtin/fast-import.c
+3f018ec7 1147) insert_mark(&marks, mark, e);
+
+builtin/for-each-repo.c
+
+builtin/gc.c
+b08ff1fe 722) return SCHEDULE_NONE;
+28cb5e66 902) result = 1;
+28cb5e66 903) goto cleanup;
+3e220e60 971) return 0;
+3e220e60 973) return 1;
+252cfb7c 1025) return 1;
+252cfb7c 1042) result = 1;
+e841a79a 1062) return 0;
+e841a79a 1068) return 0;
+e841a79a 1070) return 1;
+a13e3d0e 1151) result_size = TWO_GIGABYTES;
+52fe41ff 1182) return 0;
+52fe41ff 1186) return 1;
+52fe41ff 1188) return 1;
+52fe41ff 1190) return 1;
+0c18b700 1462)       : the_repository->gitdir,
+0c18b700 1476)       : the_repository->gitdir,
+0c18b700 1490)       : the_repository->gitdir,
+2fec604f 1516) crontab_name = "crontab";
+2fec604f 1526) goto cleanup;
+2fec604f 1545) goto cleanup;
+2fec604f 1551) goto done_editing;
+2fec604f 1561) in_old_region = 0;
+2fec604f 1593) goto cleanup;
+
+builtin/grep.c
+e30b1525 675) const char *name = list->objects[i].name;
+e30b1525 677) if (!name) {
+e30b1525 678) oid_to_hex_r(hex, &list->objects[i].item->oid);
+e30b1525 679) name = hex;
+
+builtin/log.c
+3baf58bf 1861) fmt_patch_name_max = strlen("0000-") + strlen(fmt_patch_suffix);
+
+builtin/merge.c
+14c4586c 170)     !strcmp(default_strategy, "ort") &&
+14c4586c 171)     !strcmp(name, "recursive")) {
+14c4586c 172) name = "ort";
+14c4586c 746) clean = merge_ort_recursive(&o, head, remoteheads->item,
+14c4586c 1284) pull_twohead = "ort";
+
+builtin/push.c
+3b990aa6 337) return;
+3b990aa6 532) *flags &= ~TRANSPORT_PUSH_FORCE_IF_INCLUDES;
+
+builtin/rebase.c
+14c4586c 143) replay.strategy = replay.default_strategy;
+14c4586c 144) replay.default_strategy = NULL;
+14c4586c 1783) options.strategy = xstrdup(getenv("GIT_TEST_MERGE_ALGORITHM"));
+
+builtin/receive-pack.c
+f65003b4 1224) break;
+f65003b4 1229) strbuf_addstr(&errmsg, "fail to write commands to proc-receive hook");
+f65003b4 1230) goto cleanup;
+f65003b4 1240) break;
+f65003b4 1245) strbuf_addstr(&errmsg,
+f65003b4 1247) goto cleanup;
+
+builtin/remote.c
+9144ba4c 1522) exit(2);
+9144ba4c 1578) exit(2);
+9144ba4c 1648) exit(2);
+
+builtin/repack.c
+2fcb03b5 488) die_errno(_("could not unlink: %s"), fname);
+
+builtin/rev-parse.c
+9033addf 677) if (++i >= argc)
+9033addf 679) if ((filter & DO_FLAGS) && (filter & DO_REVS)) {
+9033addf 680) show(arg);
+9033addf 681) show(argv[i]);
+9033addf 683) continue;
+9033addf 686) if ((filter & DO_FLAGS) && (filter & DO_REVS))
+9033addf 687) show(arg);
+
+builtin/revert.c
+14c4586c 176) opts->strategy = opts->default_strategy;
+14c4586c 177) opts->default_strategy = NULL;
+14c4586c 211) opts->strategy = xstrdup(getenv("GIT_TEST_MERGE_ALGORITHM"));
+
+builtin/send-pack.c
+99a1f9ae 75) res = "error";
+99a1f9ae 76) msg = "remote ref updated since checkout";
+99a1f9ae 77) break;
+3b990aa6 311) cas.use_force_if_includes = 1;
+
+builtin/shortlog.c
+449a9009 250)     strset_add(&dups, ident.buf))
+
+builtin/stash.c
+
+builtin/update-ref.c
+
+config.c
+247e2f82 2835) FREE_AND_NULL(store.value_pattern);
+
+diff-lib.c
+
+hashmap.c
+33f20d82 191) void hashmap_partial_clear_(struct hashmap *map, ssize_t entry_offset)
+33f20d82 195) if (entry_offset >= 0)  /* called by hashmap_clear_entries */
+33f20d82 196) free_individual_entries(map, entry_offset);
+33f20d82 197) memset(map->table, 0, map->tablesize * sizeof(struct hashmap_entry *));
+33f20d82 198) map->shrink_at = 0;
+33f20d82 199) map->private_size = 0;
+
+help.c
+644bb953 484) return config_error_nonbool(var);
+
+imap-send.c
+50212361 958) static struct imap_store *imap_open_store(struct imap_server_conf *srvc, const char *folder)
+50212361 1341) static int git_imap_config(const char *var, const char *val, void *cb)
+50212361 1344) if (!strcmp("imap.sslverify", var))
+50212361 1345) server.ssl_verify = git_config_bool(var, val);
+50212361 1346) else if (!strcmp("imap.preformattedhtml", var))
+50212361 1347) server.use_html = git_config_bool(var, val);
+50212361 1348) else if (!strcmp("imap.folder", var))
+50212361 1349) return git_config_string(&server.folder, var, val);
+50212361 1350) else if (!strcmp("imap.user", var))
+50212361 1351) return git_config_string(&server.user, var, val);
+50212361 1352) else if (!strcmp("imap.pass", var))
+50212361 1353) return git_config_string(&server.pass, var, val);
+50212361 1354) else if (!strcmp("imap.tunnel", var))
+50212361 1355) return git_config_string(&server.tunnel, var, val);
+50212361 1356) else if (!strcmp("imap.authmethod", var))
+50212361 1357) return git_config_string(&server.auth_method, var, val);
+50212361 1358) else if (!strcmp("imap.port", var))
+50212361 1359) server.port = git_config_int(var, val);
+50212361 1360) else if (!strcmp("imap.host", var)) {
+50212361 1375) return git_default_config(var, val, cb);
+50212361 1377) return 0;
+50212361 1550) git_config(git_imap_config, NULL);
+
+list-objects-filter-options.c
+
+merge-ort-wrappers.c
+47b1e890 7) static int unclean(struct merge_options *opt, struct tree *head)
+47b1e890 10) struct strbuf sb = STRBUF_INIT;
+47b1e890 12) if (head && repo_index_has_changes(opt->repo, head, &sb)) {
+47b1e890 13) fprintf(stderr, _("Your local changes to the following files would be overwritten by merge:\n  %s"),
+47b1e890 15) strbuf_release(&sb);
+47b1e890 16) return -1;
+47b1e890 19) return 0;
+47b1e890 22) int merge_ort_nonrecursive(struct merge_options *opt,
+47b1e890 29) if (unclean(opt, head))
+47b1e890 30) return -1;
+47b1e890 32) if (oideq(&merge_base->object.oid, &merge->object.oid)) {
+47b1e890 33) printf(_("Already up to date!"));
+47b1e890 34) return 1;
+47b1e890 37) memset(&result, 0, sizeof(result));
+47b1e890 38) merge_incore_nonrecursive(opt, merge_base, head, merge, &result);
+47b1e890 39) merge_switch_to_result(opt, head, &result, 1, 1);
+47b1e890 41) return result.clean;
+47b1e890 44) int merge_ort_recursive(struct merge_options *opt,
+47b1e890 50) struct tree *head = repo_get_commit_tree(opt->repo, side1);
+47b1e890 53) if (unclean(opt, head))
+47b1e890 54) return -1;
+47b1e890 56) memset(&tmp, 0, sizeof(tmp));
+47b1e890 57) merge_incore_recursive(opt, merge_bases, side1, side2, &tmp);
+47b1e890 58) merge_switch_to_result(opt, head, &tmp, 1, 1);
+47b1e890 59) *result = NULL;
+47b1e890 61) return tmp.clean;
+
+merge-ort.c
+17e5574b 20) void merge_switch_to_result(struct merge_options *opt,
+17e5574b 30) void merge_finalize(struct merge_options *opt,
+17e5574b 36) void merge_incore_nonrecursive(struct merge_options *opt,
+17e5574b 45) void merge_incore_recursive(struct merge_options *opt,
+
+midx.c
+efdd2f0d 982) progress = start_delayed_progress(_("Writing chunks to multi-pack-index"),
+
+pkt-line.c
+
+remote-curl.c
+3b990aa6 136) if (!strcmp(value, "true"))
+3b990aa6 137) options.force_if_includes = 1;
+3b990aa6 138) else if (!strcmp(value, "false"))
+3b990aa6 139) options.force_if_includes = 0;
+3b990aa6 141) return -1;
+3b990aa6 142) return 0;
+3b990aa6 1331) strvec_push(&args, "--force-if-includes");
+
+remote.c
+99a1f9ae 2476) goto cleanup_return;
+99a1f9ae 2500) size = MERGE_BASES_BATCH_SIZE;
+99a1f9ae 2519) return;
+
+sequencer.c
+14c4586c 209) int ret = git_config_string((const char**)&opts->default_strategy, k, v);
+14c4586c 210) if (ret == 0) {
+14c4586c 215) char *tmp = strchr(opts->default_strategy, ' ');
+14c4586c 216) if (tmp)
+14c4586c 217) *tmp = '\0';
+14c4586c 219) return ret;
+14c4586c 639) memset(&result, 0, sizeof(result));
+14c4586c 640) merge_incore_nonrecursive(&o, base_tree, head_tree, next_tree,
+14c4586c 642) show_output = !is_rebase_i(opts) || !result.clean;
+14c4586c 651) merge_switch_to_result(&o, head_tree, &result, 1, show_output);
+14c4586c 652) clean = result.clean;
+14c4586c 3769) ret = merge_ort_recursive(&o,
+
+sideband.c
+
+strmap.c
+ae20bf1a 26) void strmap_init(struct strmap *map)
+a208ec1f 28) strmap_init_with_options(map, NULL, 1);
+ae20bf1a 29) }
+ae20bf1a 31) void strmap_init_with_options(struct strmap *map,
+ae20bf1a 35) hashmap_init(&map->map, cmp_strmap_entry, NULL, 0);
+a208ec1f 36) map->pool = pool;
+ae20bf1a 37) map->strdup_strings = strdup_strings;
+ae20bf1a 38) }
+ae20bf1a 46) return;
+a208ec1f 50) return;
+ae20bf1a 61) free(e->value);
+6ccdfc2a 73) void strmap_partial_clear(struct strmap *map, int free_values)
+6ccdfc2a 75) strmap_free_entries_(map, free_values);
+6ccdfc2a 76) hashmap_partial_clear(&map->map);
+6ccdfc2a 77) }
+23a276a9 89) size_t len = st_add(strlen(str), 1); /* include NUL */
+23a276a9 90) entry = mem_pool_alloc(map->pool,
+23a276a9 92) memcpy(entry + 1, str, len);
+23a276a9 95) } else if (!map->pool) {
+23a276a9 96) entry = xmalloc(sizeof(*entry));
+23a276a9 98) entry = mem_pool_alloc(map->pool, sizeof(*entry));
+23a276a9 102) entry->key = str;
+ae20bf1a 107) void *strmap_put(struct strmap *map, const char *str, void *data)
+ae20bf1a 109) struct strmap_entry *entry = find_strmap_entry(map, str);
+ae20bf1a 111) if (entry) {
+6abd2206 112) void *old = entry->value;
+ae20bf1a 113) entry->value = data;
+6abd2206 114) return old;
+6abd2206 117) entry = create_entry(map, str, data);
+6abd2206 118) hashmap_add(&map->map, &entry->ent);
+6abd2206 119) return NULL;
+b70c82e6 122) struct strmap_entry *strmap_get_entry(struct strmap *map, const char *str)
+b70c82e6 124) return find_strmap_entry(map, str);
+ae20bf1a 127) void *strmap_get(struct strmap *map, const char *str)
+ae20bf1a 129) struct strmap_entry *entry = find_strmap_entry(map, str);
+ae20bf1a 130) return entry ? entry->value : NULL;
+ae20bf1a 133) int strmap_contains(struct strmap *map, const char *str)
+ae20bf1a 135) return find_strmap_entry(map, str) != NULL;
+b70c82e6 138) void strmap_remove(struct strmap *map, const char *str, int free_value)
+b70c82e6 141) hashmap_entry_init(&entry.ent, strhash(str));
+b70c82e6 142) entry.key = str;
+b70c82e6 143) ret = hashmap_remove_entry(&map->map, &entry, ent, NULL);
+b70c82e6 144) if (!ret)
+b70c82e6 145) return;
+b70c82e6 146) if (free_value)
+b70c82e6 147) free(ret->value);
+23a276a9 148) if (!map->pool)
+a208ec1f 149) free(ret);
+4fa1d501 152) void strintmap_incr(struct strintmap *map, const char *str, intptr_t amt)
+4fa1d501 154) struct strmap_entry *entry = find_strmap_entry(&map->map, str);
+4fa1d501 155) if (entry) {
+4fa1d501 156) intptr_t *whence = (intptr_t*)&entry->value;
+4fa1d501 157) *whence += amt;
+4fa1d501 160) strintmap_set(map, str, map->default_value + amt);
+4fa1d501 161) }
+
+t/helper/test-crontab.c
+
+t/helper/test-fast-rebase.c
+fe1a21d5 26) static const char *short_commit_name(struct commit *commit)
+fe1a21d5 28) return find_unique_abbrev(&commit->object.oid, DEFAULT_ABBREV);
+fe1a21d5 31) static struct commit *peel_committish(const char *name)
+fe1a21d5 36) if (get_oid(name, &oid))
+fe1a21d5 37) return NULL;
+fe1a21d5 38) obj = parse_object(the_repository, &oid);
+fe1a21d5 39) return (struct commit *)peel_to_type(name, 0, obj, OBJ_COMMIT);
+fe1a21d5 42) static char *get_author(const char *message)
+fe1a21d5 47) a = find_commit_header(message, "author", &len);
+fe1a21d5 48) if (a)
+fe1a21d5 49) return xmemdupz(a, len);
+fe1a21d5 51) return NULL;
+fe1a21d5 54) static struct commit *create_commit(struct tree *tree,
+fe1a21d5 60) struct commit_list *parents = NULL;
+fe1a21d5 62) char *sign_commit = NULL;
+fe1a21d5 64) struct strbuf msg = STRBUF_INIT;
+fe1a21d5 65) const char *out_enc = get_commit_output_encoding();
+fe1a21d5 66) const char *message = logmsg_reencode(based_on, NULL, out_enc);
+fe1a21d5 67) const char *orig_message = NULL;
+fe1a21d5 68) const char *exclude_gpgsig[] = { "gpgsig", NULL };
+fe1a21d5 70) commit_list_insert(parent, &parents);
+fe1a21d5 71) extra = read_commit_extra_headers(based_on, exclude_gpgsig);
+fe1a21d5 72) find_commit_subject(message, &orig_message);
+fe1a21d5 73) strbuf_addstr(&msg, orig_message);
+fe1a21d5 74) author = get_author(message);
+fe1a21d5 75) reset_ident_date();
+fe1a21d5 76) if (commit_tree_extended(msg.buf, msg.len, &tree->object.oid, parents,
+fe1a21d5 79) return NULL;
+fe1a21d5 81) free(author);
+fe1a21d5 82) strbuf_release(&msg);
+fe1a21d5 84) obj = parse_object(the_repository, &ret);
+fe1a21d5 85) return (struct commit *)obj;
+fe1a21d5 88) int cmd__fast_rebase(int argc, const char **argv)
+fe1a21d5 91) struct commit *last_commit = NULL, *last_picked_commit = NULL;
+fe1a21d5 93) struct lock_file lock = LOCK_INIT;
+fe1a21d5 94) int clean = 1;
+fe1a21d5 95) struct strvec rev_walk_args = STRVEC_INIT;
+fe1a21d5 101) struct strbuf reflog_msg = STRBUF_INIT;
+fe1a21d5 102) struct strbuf branch_name = STRBUF_INIT;
+fe1a21d5 108) setup_git_directory();
+fe1a21d5 110) if (argc == 2 && !strcmp(argv[1], "-h")) {
+fe1a21d5 111) printf("Sorry, I am not a psychiatrist; I can not give you the help you need.  Oh, you meant usage...\n");
+fe1a21d5 112) exit(129);
+fe1a21d5 115) if (argc != 5 || strcmp(argv[1], "--onto"))
+fe1a21d5 118) onto = peel_committish(argv[2]);
+fe1a21d5 119) strbuf_addf(&branch_name, "refs/heads/%s", argv[4]);
+fe1a21d5 122) if (get_oid("HEAD", &head))
+fe1a21d5 124) assert(oideq(&onto->object.oid, &head));
+fe1a21d5 126) hold_locked_index(&lock, LOCK_DIE_ON_ERROR);
+fe1a21d5 127) assert(repo_read_index(the_repository) >= 0);
+fe1a21d5 129) repo_init_revisions(the_repository, &revs, NULL);
+fe1a21d5 130) revs.verbose_header = 1;
+fe1a21d5 131) revs.max_parents = 1;
+fe1a21d5 132) revs.cherry_mark = 1;
+fe1a21d5 133) revs.limited = 1;
+fe1a21d5 134) revs.reverse = 1;
+fe1a21d5 135) revs.right_only = 1;
+fe1a21d5 136) revs.sort_order = REV_SORT_IN_GRAPH_ORDER;
+fe1a21d5 137) revs.topo_order = 1;
+fe1a21d5 138) strvec_pushl(&rev_walk_args, "", argv[4], "--not", argv[3], NULL);
+fe1a21d5 140) if (setup_revisions(rev_walk_args.nr, rev_walk_args.v, &revs, NULL) > 1)
+fe1a21d5 143) strvec_clear(&rev_walk_args);
+fe1a21d5 145) if (prepare_revision_walk(&revs) < 0)
+fe1a21d5 148) init_merge_options(&merge_opt, the_repository);
+fe1a21d5 149) memset(&result, 0, sizeof(result));
+fe1a21d5 150) merge_opt.show_rename_progress = 1;
+fe1a21d5 151) merge_opt.branch1 = "HEAD";
+fe1a21d5 152) head_tree = get_commit_tree(onto);
+fe1a21d5 153) result.tree = head_tree;
+fe1a21d5 154) last_commit = onto;
+fe1a21d5 155) while ((commit = get_revision(&revs))) {
+fe1a21d5 158) fprintf(stderr, "Rebasing %s...\r",
+fe1a21d5 159) oid_to_hex(&commit->object.oid));
+fe1a21d5 160) assert(commit->parents && !commit->parents->next);
+fe1a21d5 161) base = commit->parents->item;
+fe1a21d5 163) next_tree = get_commit_tree(commit);
+fe1a21d5 164) base_tree = get_commit_tree(base);
+fe1a21d5 166) merge_opt.branch2 = short_commit_name(commit);
+fe1a21d5 167) merge_opt.ancestor = xstrfmt("parent of %s", merge_opt.branch2);
+fe1a21d5 169) merge_incore_nonrecursive(&merge_opt,
+fe1a21d5 175) free((char*)merge_opt.ancestor);
+fe1a21d5 176) merge_opt.ancestor = NULL;
+fe1a21d5 177) if (!result.clean)
+fe1a21d5 179) last_picked_commit = commit;
+fe1a21d5 180) last_commit = create_commit(result.tree, commit, last_commit);
+fe1a21d5 182) fprintf(stderr, "\nDone.\n");
+fe1a21d5 184) memset(&revs, 0, sizeof(revs));
+fe1a21d5 186) merge_switch_to_result(&merge_opt, head_tree, &result, 1, !result.clean);
+fe1a21d5 188) if (result.clean < 0)
+fe1a21d5 189) exit(128);
+fe1a21d5 191) strbuf_addf(&reflog_msg, "finish rebase %s onto %s",
+fe1a21d5 192)     oid_to_hex(&last_picked_commit->object.oid),
+fe1a21d5 193)     oid_to_hex(&last_commit->object.oid));
+fe1a21d5 194) if (update_ref(reflog_msg.buf, branch_name.buf,
+fe1a21d5 195)        &last_commit->object.oid,
+fe1a21d5 196)        &last_picked_commit->object.oid,
+fe1a21d5 201) if (create_symref("HEAD", branch_name.buf, reflog_msg.buf) < 0)
+fe1a21d5 203) strbuf_release(&reflog_msg);
+fe1a21d5 204) strbuf_release(&branch_name);
+fe1a21d5 206) prime_cache_tree(the_repository, the_repository->index, result.tree);
+fe1a21d5 207) if (write_locked_index(&the_index, &lock,
+fe1a21d5 210) return (clean == 0);
+
+t/helper/test-hashmap.c
+6da1a258 113) hashmap_clear(&map);
+6da1a258 133) hashmap_clear(&map);
+
+t/helper/test-proc-receive.c
+
+transport-helper.c
+99a1f9ae 831) status = REF_STATUS_REJECT_REMOTE_UPDATED;
+99a1f9ae 832) FREE_AND_NULL(msg);
+3b990aa6 942) if (set_helper_option(transport, TRANS_OPT_FORCE_IF_INCLUDES, "true") != 0)
+
+xdiff/xhistogram.c
+ec7967cf 239) memset(&xpparam, 0, sizeof(xpparam));
+
+xdiff/xpatience.c
+ec7967cf 322) memset(&xpp, 0, sizeof(xpp));
+
 Commits introducing uncovered code:
+Ævar Arnfjörð Bjarmason	9144ba4c remote: add meaningful exit code on missing/existing
+Denton Liu	177a8302 diff-lib: define diff_get_merge_base()
+Denton Liu	3d09c228 builtin/diff-tree: learn --merge-base
+Derrick Stolee	e841a79a maintenance: add incremental-repack auto condition
+Derrick Stolee	0c18b700 maintenance: add [un]register subcommands
+Derrick Stolee	52fe41ff maintenance: add incremental-repack task
+Derrick Stolee	a13e3d0e maintenance: auto-size incremental-repack batch
+Derrick Stolee	252cfb7c maintenance: add loose-objects task
+Derrick Stolee	3e220e60 maintenance: create auto condition for loose-objects
+Derrick Stolee	28cb5e66 maintenance: add prefetch task
+Derrick Stolee	4950b2a2 for-each-repo: run subcommands on configured repos
+Derrick Stolee	2fec604f maintenance: add start/stop subcommands
+Derrick Stolee	247e2f82 config: replace 'value_regex' with 'value_pattern'
+Derrick Stolee	efdd2f0d midx: use start_delayed_progress()
+Derrick Stolee	b08ff1fe maintenance: add --schedule option and config
+Drew DeVault	644bb953 help.c: help.autocorrect=never means "do not compute suggestions"
+Elijah Newren	6ccdfc2a strmap: enable faster clearing and reusing of strmaps
+Elijah Newren	33f20d82 hashmap: introduce a new hashmap_partial_clear()
+Elijah Newren	a208ec1f strmap: enable allocations to come from a mem_pool
+Elijah Newren	47b1e890 merge-ort-wrappers: new convience wrappers to mimic the old merge API
+Elijah Newren	14c4586c merge,rebase,revert: select ort or recursive by config or environment
+Elijah Newren	ae20bf1a strmap: new utility functions
+Elijah Newren	17e5574b merge-ort: barebones API of new merge strategy with empty implementation
+Elijah Newren	6abd2206 strmap: split create_entry() out of strmap_put()
+Elijah Newren	b70c82e6 strmap: add more utility functions
+Elijah Newren	4fa1d501 strmap: add functions facilitating use as a string->int map
+Elijah Newren	fe1a21d5 fast-rebase: demonstrate merge-ort's API via new test-tool command
+Elijah Newren	6da1a258 hashmap: provide deallocation function names
+Elijah Newren	23a276a9 strmap: take advantage of FLEXPTR_ALLOC_STR when relevant
+Elijah Newren	449a9009 shortlog: use strset from strmap.h
+Jeff King	9033addf rev-parse: put all options under the "-" check
+Jeff King	3a1f91cf rev-parse: handle --end-of-options
+Jeff King	3f018ec7 fast-import: fix over-allocation of marks storage
+Jeff King	af22a63c sideband: diagnose more sideband anomalies
+Jiang Xin	f65003b4 receive-pack: gently write messages to proc-receive
+Jiang Xin	80ffeb94 receive-pack: use default version 0 for proc-receive
+Johannes Schindelin	8e86cf65 sideband: report unhandled incomplete sideband messages as bugs
+Junio C Hamano	3baf58bf format-patch: make output filename configurable
+Kyle Meyer	eaf53415 stash: add missing space to an error message
+Martin Ågren	5a923bb1 list-objects-filter-options: fix function name in BUG
+Michał Kępień	ec7967cf merge-base, xdiff: zero out xpparam_t structures
+Nicolas Morey-Chaisemartin	50212361 imap-send: parse default git config
+Patrick Steinhardt	262a4d28 update-ref: allow creation of multiple transactions
+Pranit Bauva	27257bc4 bisect--helper: reimplement `bisect_state` & `bisect_head` shell functions in C
+Pranit Bauva	88ad372f bisect--helper: finish porting `bisect_start()` to C
+René Scharfe	e30b1525 grep: handle deref_tag() returning NULL
+René Scharfe	db7d07f6 blame: handle deref_tag() returning NULL
+Sean Barag	552955ed clone: use more conventional config/option layering
+Simão Afonso	df7f915f crendential-store: use timeout when locking file
+Srinidhi Kaushik	3b990aa6 push: parse and set flag for "--force-if-includes"
+Srinidhi Kaushik	99a1f9ae push: add reflog check for "--force-if-includes"
+SZEDER Gábor	0afcea70 bisect: loosen halfway() check for a large number of commits
+Taylor Blau	2fcb03b5 builtin/repack.c: don't move existing packs out of the way
+Taylor Blau	aab179d9 builtin/clone.c: don't ignore transport_fetch_refs() errors
 
 
